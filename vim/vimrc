@@ -1,0 +1,312 @@
+" Santiago Mok (santiago.mok@gmail.com)
+" .vimrc - Vim configuration file
+
+" Plugin and Reload settings
+"------------------------------------------------------------
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-fugitive'
+Plugin 'itchyny/lightline.vim'
+Plugin 'lifepillar/vim-solarized8'
+Plugin 'mileszs/ack.vim'
+Plugin 'scrooloose/NERDTree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'ngemily/vim-vp4'
+Plugin 'majutsushi/tagbar'
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/ycmd'
+
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+
+" Put your non-Plugin stuff after this line
+"------------------------------------------------------------
+
+" Reload setting
+"------------------------------------------------------------
+" Auto reload .vimrc on save 
+autocmd! bufwritepost .vimrc source % 
+
+" Automatically change the current directory to the file editing
+set autochdir
+autocmd BufEnter * silent! lcd %:p:h
+
+" Restore cursor to last known position
+function! ResCur()
+  if line("'\"") <= line("$")
+    normal! g`"
+    return 1
+  endif
+endfunction
+augroup resCur
+  autocmd!
+  autocmd BufWinEnter * call ResCur()
+augroup END
+
+" CtrlP setting
+"------------------------------------------------------------
+let g:ctrlp_root_markers = ['buildinfo.pm']
+
+" Lightline and colors setting
+"------------------------------------------------------------
+if !has("gui_running")
+    set t_Co=256
+endif
+if exists('g:lightline')
+	let g:lightline = {
+	    \ 'colorscheme': 'solarized',
+	    \ }
+endif
+"let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+set background=dark
+colorscheme solarized8
+
+" Search color highlight
+set hlsearch
+augroup color_overrirde
+    autocmd!
+    autocmd ColorScheme * highlight Search ctermfg=LightCyan
+                    \   | highlight IncSearch ctermfg=Cyan
+augroup END
+
+" Indentation settings 
+"------------------------------------------------------------
+" Define <TAB> column width
+set tabstop=4
+
+" Affect what happen when <TAB> or <BS> is pressed.
+set softtabstop=4
+
+" Convert \t into spaces when used with softtabstop.
+set expandtab
+
+" Affect what happen for <<, >>, or == keys. Must be same as tabstop
+" Also affects how automatic indentation works.
+set shiftwidth=4
+
+" Automatically inserts one extra level of indentation in some cases.
+set smartindent
+
+" Search settings 
+"------------------------------------------------------------
+" Use case insensitive search, except when using capital letters
+set ignorecase
+set smartcase
+
+" Usability options
+"------------------------------------------------------------
+
+" Stop certain movements from always going to the first character of a line.
+" While this behaviour deviates from that of Vi, it does what most users
+" coming from other editors would expect.
+set nostartofline
+
+" Instead of failing a command because of unsaved changes, instead raise a
+" dialogue asking if you wish to save changed files.
+set confirm
+
+" Use visual bell instead of beeping when doing something wrong
+set visualbell
+
+" And reset the terminal code for the visual bell.  If visualbell is set, and
+" this line is also included, vim will neither flash nor beep.  If visualbell
+" is unset, this does nothing.
+set t_vb=
+
+" Enable use of the mouse for all modes
+set mouse=a
+
+" Make yank copy to the global system clipboard
+set clipboard=unnamed 
+
+" Set the command window height to 2 lines, to avoid many cases of having to
+" "press <Enter> to continue"
+set cmdheight=2
+
+" Display line numbers on the left
+set number
+
+" Quickly time out on keycodes, but never time out on mappings
+set notimeout ttimeout ttimeoutlen=200
+
+" Use <F2> to toggle between 'paste' and 'nopaste'
+" Disable formatting when pasting large chunks of code
+set pastetoggle=<F2>
+
+" FZF plugin
+"set rtp+=/usr/local/opt/fzf
+
+" Key Mappings
+"------------------------------------------------------------
+" Rebind <Leader> key
+let mapleader = ","
+
+" Bind Ctrl+<movement> keys to move around the windows, instead of using
+" Ctrl+w + <movement>
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
+noremap <c-h> <c-w>h
+
+noremap <Leader>n <esc>:tabprevious<CR>
+noremap <Leader>m <esc>:tabnext<CR>
+vnoremap <Leader>s :sort<CR>
+
+" Remove highlighting after search
+nnoremap <silent> <Leader>h :noh<CR>
+
+" Search word under cursor from current directory recursively
+map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+
+" Custom mappings
+"------------------------------------------------------------
+vnoremap < <gv  " better indentation
+vnoremap > >gv  " better indentation
+map <Leader>a ggVG  " select all
+
+" Insert date
+map <F6> a<C-R>=strftime('%m/%d/%Y')<CR><Esc>
+
+" YouCompleteMe setting
+"------------------------------------------------------------
+let g:ycm_python_binary_path = 'python3'
+
+" Powerline setting
+"------------------------------------------------------------
+"let g:Powerline_symbols = 'unicode'
+"python3 from powerline.vim import setup as powerline_setup
+"python3 powerline_setup()
+"python3 del powerline_setup
+"set guifont=Roboto\ Mono\ Light\ For\ Powerline
+"let g:Powerline_symbols='fancy'
+
+" NERDTree settings
+"------------------------------------------------------------
+" 
+" Open a NERDTree automatically when vim starts up
+"autocmd vimenter * NERDTree
+
+" Open a NERDTree automatically when vim starts up if no files were specified
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Open NERDTree automatically when vim starts up on opening a directory
+" This window is tab-specific, meaning it's used by all windows in the tab. 
+" This trick also prevents NERDTree from hiding when first selecting a file.
+"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+
+" Close vim if the only window left open is a NERDTree
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Use Ctrl-n to open NERDTree
+map <Leader>t <esc>:NERDTreeToggle<CR>
+
+" Ctags 
+"------------------------------------------------------------
+" With autochdir, tags are search from current directory of file upward
+set tags=tags;,$ACDS_DEST_ROOT/quartus/common/not_shipped/tags
+set tagstack
+"set notagrelative
+
+nnoremap <leader>. :CtrlPTag<CR>
+
+""------------------------------------------------------------
+"" Windows Behavior
+""source $VIMRUNTIME/mswin.vim
+""behave mswin
+"
+""------------------------------------------------------------
+"" Must have options {{{1
+""
+"" These are highly recommended options.
+"
+"" One of the most important options to activate. Allows you to switch from an
+"" unsaved buffer without saving it first. Also allows you to keep an undo
+"" history for multiple files. Vim will complain if you try to quit without
+"" saving, and swap files will keep you safe if your computer crashes.
+"set hidden
+"
+"" Show partial commands in the last line of the screen
+"set showcmd
+"
+"" Modelines have historically been a source of security vulnerabilities.  As
+"" such, it may be a good idea to disable them and use the securemodelines
+"" script, <http://www.vim.org/scripts/script.php?script_id=1876>.
+"" set nomodeline
+"
+"" Highlight chars that go over the 80-column limit, trucate at 80 chars
+"":highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
+"":match OverLength '\%81v.*'
+"
+""------------------------------------------------------------
+"" Split Windows
+"" set splitright
+"
+""------------------------------------------------------------
+"" Startup Windows Size {{{1
+"" GUI is running
+"if has("gui_running")
+"	set lines=60 columns=116
+"endif
+"
+""------------------------------------------------------------
+"" Comment Box and Separators
+":ab #l ###############################################################################
+":ab #b /******************************************************************************
+":ab #e ******************************************************************************/
+"
+"------------------------------------------------------------
+" Filetype
+"------------------------------------------------------------
+"autocmd BufNewFile,BufRead alias set filetype=sh
+
+"------------------------------------------------------------
+" SCONS
+"autocmd BufNewFile,BufReadPre SConstruct set filetype=python
+"autocmd BufNewFile,BufReadPre SConscript set filetype=python
+
+"------------------------------------------------------------
+" JSON
+"au BufRead,BufNewFile *.json set filetype=json
+"au! Syntax json source ~/.vim/ftplugin/json.vim
+

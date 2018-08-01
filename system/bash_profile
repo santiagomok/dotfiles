@@ -1,0 +1,6 @@
+
+# Need this since the .bashrc is not sourced
+# for login shells (unlike csh)
+if [ -f ~/.bashrc ]; then
+    . ~/.bashrc;
+fi

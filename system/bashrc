@@ -1,0 +1,29 @@
+# $Header: $
+# $Date: $
+# User: Santiago Mok (smok@altera.com)
+
+export PS1="\h:\w\$ "
+export EDITOR="vim"
+
+# To fix terminal resize issues while command-line apps are running
+# http://bugs.gentoo.org/48632
+# shopt -s checkwinsize
+
+function mcd() {
+        mkdir -p $*
+        cd $*
+}
+export -f mcd
+
+function title {
+	export PS1
+	echo -en "\033]2;$1\007"
+}
+
+function add_to_path {
+	if [ -z `echo $PATH |grep $1` ]; then
+		export PATH=$2:${PATH}
+	fi
+}
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
