@@ -26,9 +26,6 @@ alias ...="cd ../../.."
 alias ....="cd ../../../.."
 # Print each PATH entry on a separate line
 alias path="echo -e ${PATH//:/\\n}"
-alias dot="cd ~/dotfiles/sh"
-alias lwd="cd $lwd"
-alias wd="cd $wd"
 
 # ------------------------------------------------------------------------------ 
 
