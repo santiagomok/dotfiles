@@ -6,9 +6,11 @@
 
 # SHELL
 alias passwd="yppasswd"
-alias ls="ls --color=auto"
-alias ll="ls -alh"
-alias ldir="ls -l | grep \"^d\""
+alias ls="ls --color=always"
+alias ll="ls --color=always -alh"
+alias lsd="ls --color=always -l  | grep -e '^d'"
+alias lsl="ls --color=always -al | grep -e '->'"
+alias lsh="ls -ald .*"
 alias sl="ls"
 alias grep="grep -in --color=auto"
 alias datemd="date +%b%d"
