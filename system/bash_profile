@@ -1,6 +1,9 @@
 
-# Need this since the .bashrc is not sourced
-# for login shells (unlike csh)
-if [ -f ~/.bashrc ]; then
-    . ~/.bashrc;
+[ -f "${HOME}/.local/dotfiles/system/bash_profile" ] && source "${HOME}/.local/dotfiles/system/bash_profile"
+
+# ~/.bashrc should source ~/.system/bashrc if exists
+if [ -f "${HOME}/.bashrc" ]; then
+    source  "${HOME}/.bashrc";
+elif [ -f "${HOME}/.system/bashrc" ] ; then
+    source "${HOME}/.system/bashrc";
 fi
