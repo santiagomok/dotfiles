@@ -6,12 +6,11 @@
 
 script_path="$(dirname "${BASH_SOURCE[0]}")"
 
-[ -f "${script_path}/env.sh" ] && source "${script_path}/env.sh"
-[ -f "${script_path}/function.sh" ] && source "${script_path}/function.sh"
-[ -f "${script_path}/export.sh" ] && source "${script_path}/export.sh"
-[ -f "${script_path}/alias.sh" ] && source "${script_path}/alias.sh"
-[ -f "${HOME}/.local/dotfiles/system/bashrc" ] && source "${HOME}/.local/dotfiles/system/bashrc"
-[ -f "${HOME}/.fzf.bash" ] && source "${HOME}/.fzf.bash"
+[ -f "${script_path}/env.sh" ] && source "${script_path}/env.sh";
+[ -f "${script_path}/function.sh" ] && source "${script_path}/function.sh";
+[ -f "${script_path}/export.sh" ] && source "${script_path}/export.sh";
+[ -f "${script_path}/alias.sh" ] && source "${script_path}/alias.sh";
+[ -f "${HOME}/.fzf.bash" ] && source "${HOME}/.fzf.bash";
 
 # Add powerline
 #source_sh ${HOME}/.local/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh

@@ -6,8 +6,7 @@
 
 # Trim workdir path (\w) in PS1 to last 'n' path  dir
 PROMPT_DIRTRIM=3
-export BASEPS1="\h:\w\$ "
-export PS1="\[\033]2;\$PERFORCE_LABEL (\$ACDS_DEST_ROOT)\007\]$BASEPS1"
+export PS1="\h:\w\$ "
 export EDITOR=vim
 export VISUAL=$EDITOR
 export TERM=xterm-256color
@@ -24,3 +23,6 @@ shopt -s checkwinsize
 shopt -s nocaseglob # case-insensitive globbing
 
 shopt -s histappend # append to bash history file, rather than overwrite
+
+HISTSIZE=1000
+HISTFILESIZE=2000

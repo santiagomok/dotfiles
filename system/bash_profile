@@ -1,5 +1,6 @@
-
-[ -f "${HOME}/.local/dotfiles/system/bash_profile" ] && source "${HOME}/.local/dotfiles/system/bash_profile"
+# ------------------------------------------------------------------------------ 
+# File: bash_profile
+# ------------------------------------------------------------------------------ 
 
 # ~/.bashrc should source ~/.system/bashrc if exists
 if [ -f "${HOME}/.bashrc" ]; then
