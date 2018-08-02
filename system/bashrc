@@ -1,29 +1,24 @@
-# $Header: $
-# $Date: $
-# User: Santiago Mok (smok@altera.com)
+# ------------------------------------------------------------------------------ 
+# File: bashrc
+# ------------------------------------------------------------------------------ 
 
-export PS1="\h:\w\$ "
-export EDITOR="vim"
+# ------------------------------------------------------------------------------ 
 
-# To fix terminal resize issues while command-line apps are running
-# http://bugs.gentoo.org/48632
-# shopt -s checkwinsize
+script_path="$(dirname "${BASH_SOURCE[0]}")"
 
-function mcd() {
-        mkdir -p $*
-        cd $*
-}
-export -f mcd
+[ -f "${script_path}/env.sh" ] && source "${script_path}/env.sh"
+[ -f "${script_path}/function.sh" ] && source "${script_path}/function.sh"
+[ -f "${script_path}/export.sh" ] && source "${script_path}/export.sh"
+[ -f "${script_path}/alias.sh" ] && source "${script_path}/alias.sh"
+[ -f "${HOME}/.local/dotfiles/system/bashrc" ] && source "${HOME}/.local/dotfiles/system/bashrc"
+[ -f "${HOME}/.fzf.bash" ] && source "${HOME}/.fzf.bash"
 
-function title {
-	export PS1
-	echo -en "\033]2;$1\007"
-}
+# Add powerline
+#source_sh ${HOME}/.local/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
 
-function add_to_path {
-	if [ -z `echo $PATH |grep $1` ]; then
-		export PATH=$2:${PATH}
-	fi
-}
+# Powerline
+#python_repository_root="/usr/local/lib/python3.6/dist-packages"
+#if [[ -r $python_repository_root/powerline/bindings/bash/powerline.sh ]]; then
+#    . $python_repository_root/powerline/bindings/bash/powerline.sh
+#fi
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -2,6 +2,19 @@
 # File: function.sh
 # ------------------------------------------------------------------------------ 
 
+# ------------------------------------------------------------------------------ 
+function mcd() {
+        mkdir -p $*
+        cd $*
+}
+export -f mcd
+
+function add_to_path {
+	if [ -z `echo $PATH |grep $1` ]; then
+		export PATH=$2:${PATH}
+	fi
+}
+
 function psgrep() {
     ps -ef | { 
         read -r;
