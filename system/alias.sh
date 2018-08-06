@@ -4,9 +4,16 @@
 
 # ------------------------------------------------------------------------------ 
 
+# Colored ls
+if [ -x /usr/bin/dircolors ]; then
+  eval "`dircolors -b`"
+  alias ls='ls --color=auto'
+elif [ "$PLATFORM" = Darwin ]; then
+  alias ls='ls -G'
+fi
+
 # SHELL
 alias passwd="yppasswd"
-alias ls="ls --color=always"
 alias ll="ls --color=always -alh"
 alias lsd="ls --color=always -l  | grep -e '^d'"
 alias lsl="ls --color=always -al | grep -e '->'"
@@ -15,15 +22,17 @@ alias sl="ls"
 alias grep="grep -in --color=auto"
 alias datemd="date +%b%d"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
+alias hc="history -c"
 
 # ------------------------------------------------------------------------------ 
 
 # PATH
 # Navigating paths ., .., ..., ....
-alias .="cd .."
-alias ..="cd ../.."
-alias ...="cd ../../.."
-alias ....="cd ../../../.."
+alias ..="cd .."
+alias 2..="cd ../.."
+alias 3..="cd ../../.."
+alias 4..="cd ../../../.."
+alias 5..="cd ../../../../.."
 # Print each PATH entry on a separate line
 alias path="echo -e ${PATH//:/\\n}"
 
@@ -39,7 +48,6 @@ alias tmls="tmux ls"
 # TOOL
 alias gfs="gnome-open"
 alias py="python3"
-alias v="vim"
 alias vi="vim"
 
 # ------------------------------------------------------------------------------ 
