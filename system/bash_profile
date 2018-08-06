@@ -8,3 +8,5 @@ if [ -f "${HOME}/.bashrc" ]; then
 elif [ -f "${HOME}/.system/bashrc" ] ; then
     source "${HOME}/.system/bashrc";
 fi
+
+[ -r "${HOME}/.inputrc" ] && bind -f "${HOME}/.inputrc";
