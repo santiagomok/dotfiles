@@ -34,14 +34,16 @@ alias 3..="cd ../../.."
 alias 4..="cd ../../../.."
 alias 5..="cd ../../../../.."
 # Print each PATH entry on a separate line
-alias path="echo -e ${PATH//:/\\n}"
+alias path="echo ${PATH} | tr -s ':' '\n' | sort -u"
+alias manpath="echo ${MANPATH} | tr -s ':' '\n' | sort -u"
 
 # ------------------------------------------------------------------------------ 
 
 # TMUX 
-alias tm="tmux a"
-alias tmc="tmux new -s"
-alias tmr="tmux a -t"
+alias tmux="tmux -2"
+alias tm="tmux -2 a"
+alias tmc="tmux -2 new -s"
+alias tmr="tmux -2 a -t"
 alias tmk="tmux kill-session -t"
 alias tmls="tmux ls"
 
@@ -54,7 +56,9 @@ alias vi="vim"
 
 # SSH
 # Pipe my public key to my clipboard.
-alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+alias cb="xclip"
+[ "$PLATFORM" = Darwin ] && alias cb="pbcopy"
+alias pubkey="more ~/.ssh/id_rsa.pub | cb | echo '=> Public key copied to pasteboard.'"
 
 # ------------------------------------------------------------------------------ 
 

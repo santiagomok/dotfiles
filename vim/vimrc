@@ -185,7 +185,7 @@ set t_vb=
 set mouse=a
 
 " Make yank copy to the global system clipboard
-set clipboard=unnamed 
+set clipboard=unnamedplus
 
 " Set the command window height to 2 lines, to avoid many cases of having to
 " "press <Enter> to continue"
