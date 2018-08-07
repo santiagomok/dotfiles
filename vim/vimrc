@@ -284,9 +284,10 @@ endif
 " Ctags 
 "------------------------------------------------------------
 " With autochdir, tags are search from current directory of file upward
-set tags=tags;,$ACDS_DEST_ROOT/quartus/common/not_shipped/tags
+set tags=tags;
 set tagstack
 "set notagrelative
+let g:tagbar_ctags_bin='/usr/bin/ctags'
 
 
 ""------------------------------------------------------------

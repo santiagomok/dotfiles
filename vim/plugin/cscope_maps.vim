@@ -35,7 +35,11 @@ if has("cscope")
 
     " check cscope for definition of a symbol before checking ctags: set to 1
     " if you want the reverse search order.
-    set csto=0
+    set csto=1
+
+    if exists("$ACDS_SRC_ROOT")
+        set cscoperelative 
+    endif
 
     " add any cscope database in current directory
     if filereadable("cscope.out")
