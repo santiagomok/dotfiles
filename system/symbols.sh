@@ -1,0 +1,25 @@
+larrow='←' # 2190
+rarrow='→' # 2192
+uarrow='↑' # 2191
+darrow='↓' # 2193
+bharrow='↔' # 2194
+bvarrow='↕' # 2195
+bh2arrow='⇄' 
+bv2arrow='⇅'
+bold_larrow='⇦' # 21E6
+bold_rarrow='⇨' # 21E8
+bold_uarrow='⇧' # 21E7
+bold_darrow='⇩' # 21E9
+lfinter='☚' # 261A
+rfinger='☛' # 261B
+ufinger='☝' # 261D
+moon='☾'    # 263E
+sun='☀'     # 2600
+cloud='☁'   # 2601
+star='★'    # 2605
+warning='⚠'     #26A0
+lightning='⚡'   # 26A1
+x='✗'
+check='✓'
+keyboard='⌨'
+
