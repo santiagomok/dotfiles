@@ -6,17 +6,18 @@
 
 # Colored ls
 if [ -x /usr/bin/dircolors ]; then
-  eval "`dircolors -b`"
-  alias ls='ls --color=auto'
+    eval "`dircolors -b`"
+    alias ls='ls --color=auto'
+    alias ll="ls --color=always -alh"
 elif [ "$PLATFORM" = Darwin ]; then
-  alias ls='ls -G'
+    alias ls='ls -G'
+    alias ll="ls -G -alh"
 fi
 
 # SHELL
 alias passwd="yppasswd"
-alias ll="ls --color=always -alh"
-alias lsd="ls --color=always -l  | grep -e '^d'"
-alias lsl="ls --color=always -al | grep -e '->'"
+alias lsd="ls -l  | grep -e '^d'"
+alias lsl="ls -al | grep -e '->'"
 alias lsh="ls -ald .*"
 alias sl="ls"
 alias grep="grep -in --color=auto"
