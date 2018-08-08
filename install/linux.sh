@@ -52,6 +52,17 @@ sub_fd() {
     echo -e "${GREEN}... Success!${NC}"
 }
 
+sub_go() {
+    
+    GOPATH="${PREFIX}/go"; mkdir -p ${GOPATH}
+    GOROOT="${PREFIX}/lib/go/packages"; mkdir -p ${GOROOT}
+    version="1.10.1"
+    os="linux"
+    arch="amd64"
+    cd ${GOPATH} && wget -nc https://storage.googleapis.com/golang/go${version}.${os}-${arch}.tar.gz
+    tar -xvzf go${version}.${os}-${arch}.tar.gz --strip-components 1
+}
+
 
 case $COMMAND_NAME in
     "" | "-h" | "--help")

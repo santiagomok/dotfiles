@@ -19,10 +19,14 @@ export LC_ALL=en_US.UTF-8
 # ------------------------------------------------------------------------------ 
 
 # GOLANG
-export GOPATH=$HOME/Code/go
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
+if [ "$PLATFORM" = Linux ]; then
+    export GOPATH=${HOME}/.local/lib/go/packages
+    export GOROOT=${HOME}/.local/go
+elif [ "$PLATFORM" = Darwin ]; then
+    export GOPATH=${HOME}/Code/go
+    export GOROOT=/usr/local/opt/go/libexec
+fi
+export PATH=$PATH:$GOROOT/bin:${GOPATH}
 
 # ------------------------------------------------------------------------------ 
 
@@ -33,8 +37,8 @@ export FZF_CTRL_T_COMMAND='fd --type f --type d --hidden --follow --exclude .git
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse-list --border'
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --header 'Press CTRL-Y to copy command into clipboard' --border"
-if [ -x ${HOME}/.vim/bundle/fzf.vim/bin/preview.rb ]; then
-    export FZF_CTRL_T_OPTS="--preview '${HOME}/.vim/bundle/fzf.vim/bin/preview.rb {} | head -200'"
+if [ -x ${HOME}/.vim/bundle/fzf.vim/bin/preview.sh ]; then
+    export FZF_CTRL_T_OPTS="--preview '${HOME}/.vim/bundle/fzf.vim/bin/preview.sh {} | head -200'"
 fi
 
 # ------------------------------------------------------------------------------ 
