@@ -11,13 +11,21 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 WHITE='\033[0;97m'
 LIGHT_BLUE='\033[0;94m'
+LIGHT_CYAN='\033[0;96m'
 LIGHT_BLUE_BG='\033[0;104m'
 NC='\033[0m'
+RIGHT_ARROW='→'
 
 # Trim workdir path (\w) in PS1 to last 'n' path  dir
-#PROMPT_DIRTRIM=3
-export PS1="${GREEN}\h${NC}: ${BLUE}\w${NC}\n\$ "
-#if [ "$PLATFORM" = Linux ]; then
+if [ "$PLATFORM" = Darwin ]; then
+    PS1="${WHITE}\t${NC} |"
+    if [ "$(id -u)" = "0" ]; then
+        PS1+="${RED}\u\@"
+    fi
+    PS1+="${LIGHT_CYAN} \h${NC} | ${LIGHT_BLUE}\w${NC}\n"
+    PS1+="${WHITE}${rarrow}${NC} "
+    export PS1
+fi
 #  PS1="\[\e[1;38m\]\u\[\e[1;34m\]@\[\e[1;31m\]\h\[\e[1;30m\]:"
 #  PS1="$PS1\[\e[0;38m\]\w\[\e[1;35m\]> \[\e[0m\]"
 #else
@@ -29,10 +37,10 @@ export PS1="${GREEN}\h${NC}: ${BLUE}\w${NC}\n\$ "
 #  PS1='\[\e[34m\]\u\[\e[1;32m\]@\[\e[0;33m\]\h\[\e[35m\]:\[\e[m\]\w\[\e[1;30m\]$(__git_ps1)\[\e[1;31m\]> \[\e[0m\]'
 #fi
 
-function title {
-	export PS1
-	echo -en "\033]2;$1\007"
-}
+#function title {
+#	export PS1
+#	echo -en "\033]2;$1\007"
+#}
 
 # To fix terminal resize issues while command-line apps are running
 # http://bugs.gentoo.org/48632

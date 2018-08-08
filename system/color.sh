@@ -49,10 +49,12 @@ BACKGROUND_COLORS=(
 )
 echo "FOREGROUND COLORS:"	
 for color in "${!FOREGROUND_COLORS[@]}"; do
-    echo -e "${FOREGROUND_COLORS[$color]}${color}${NC}";
+    echo -ne "${FOREGROUND_COLORS[$color]}${color}${NC}";
+    echo " | ${FOREGROUND_COLORS[$color]}";
 done
-
+echo "---------------------------------------------------"
 echo "BACKGROUND COLORS:"	
 for color in "${!BACKGROUND_COLORS[@]}"; do
-    echo -e "${BACKGROUND_COLORS[$color]}${color}${NC}";
+    echo -ne "${BACKGROUND_COLORS[$color]}${color}${NC}";
+    echo " | ${BACKGROUND_COLORS[$color]}";
 done
