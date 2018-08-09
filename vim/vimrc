@@ -32,6 +32,7 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'lifepillar/vim-solarized8'
 Plugin 'junegunn/seoul256.vim'
 Plugin 'guns/xterm-color-table.vim'
+Plugin 'edkolev/tmuxline.vim'
 
 " Search
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
