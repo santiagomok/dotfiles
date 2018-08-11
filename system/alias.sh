@@ -30,13 +30,13 @@ alias hc="history -c"
 # PATH
 # Navigating paths ., .., ..., ....
 alias ..="cd .."
-alias 2..="cd ../.."
-alias 3..="cd ../../.."
-alias 4..="cd ../../../.."
-alias 5..="cd ../../../../.."
+alias ..2="cd ../.."
+alias ..3="cd ../../.."
+alias ..4="cd ../../../.."
+alias ..5="cd ../../../../.."
 # Print each PATH entry on a separate line
-alias path="echo ${PATH} | tr -s ':' '\n' | sort -u"
-alias manpath="echo ${MANPATH} | tr -s ':' '\n' | sort -u"
+alias path="echo ${PATH} | tr -s ':' '\n' | uniq" 
+alias manpath="echo ${MANPATH} | tr -s ':' '\n' | uniq"
 
 # ------------------------------------------------------------------------------ 
 
@@ -50,8 +50,15 @@ alias tmls="tmux ls"
 
 # TOOL
 alias gfs="gnome-open"
+alias g=git
+alias l=less
 alias py="python3"
 alias vi="vim"
+
+# List all files larger than a given size (e.g. llfs +10k)
+alias llfs='find_by_size(){ find . -type f -size "$1" -exec ls --color --classify --human-readable -l {} \; ; }; find_by_size'
+
+alias gll='fzf_git_log'
 
 # ------------------------------------------------------------------------------ 
 

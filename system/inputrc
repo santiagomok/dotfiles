@@ -2,22 +2,33 @@
 set editing-mode vi
 set keymap vi
 
+# Disable beeps
+set bell-style none
+set echo-control-characters off
+
+# Enable colors when completing filenames and directories
+set colored-stats on
+set colored-completion-prefix on
+
 # Make Tab autocomplete regardless of filename case
 set completion-ignore-case on
+
+# Treat hyphens and underscores as equivalent
+set completion-map-case on
 
 # List all matches in case multiple possible completions are possible
 set show-all-if-ambiguous on
 
-set menu-complete-display-prefix on
 # Make Tab cycle between possible completions
 # Tab: cycle forward
 # Shift-Tab: cycle backward
 # Ctrl-q: display list of possible completions
-"\t": menu-complete
+set menu-complete-display-prefix on
+TAB: menu-complete
 "\e[Z": menu-complete-backward
 Control-q: complete
 
-# Immediately add a trailing slash when autocompleting symlinks to directories
+# Immediately add a trailing slash / when autocompleting symlinks to directories
 set mark-symlinked-directories on
 
 # Use the text that has already been typed as the prefix for searching through

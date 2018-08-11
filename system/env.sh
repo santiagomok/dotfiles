@@ -10,20 +10,31 @@ GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 WHITE='\033[0;97m'
-LIGHT_BLUE='\033[0;94m'
+LIGHT_BLUE='\033[1;94m'
 LIGHT_CYAN='\033[0;96m'
-LIGHT_BLUE_BG='\033[0;104m'
 NC='\033[0m'
-RIGHT_ARROW='→'
+lightning='⚡ '  # 26A1
 
 # Trim workdir path (\w) in PS1 to last 'n' path  dir
 if [ "$PLATFORM" = Darwin ]; then
-    PS1="${WHITE}\t${NC} |"
+    PS1="${WHITE}\h${NC} | ${LIGHT_BLUE}\w${NC}\n"
     if [ "$(id -u)" = "0" ]; then
-        PS1+="${RED}\u\@"
+        PS1+="${RED}\u${NC} | "
     fi
-    PS1+="${LIGHT_CYAN} \h${NC} | ${LIGHT_BLUE}\w${NC}\n"
-    PS1+="${WHITE}${rarrow}${NC} "
+
+    if [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
+      GIT_PROMPT_PATH="/usr/local/etc/bash_completion.d/git-prompt.sh"
+    elif [ -f /etc/bash_completion.d/git-prompt ]; then
+      GIT_PROMPT_PATH="/etc/bash_completion.d/git-prompt"
+    else
+      GIT_PROMPT_PATH="/usr/share/git-core/contrib/completion/git-prompt.sh"
+    fi
+    GIT_PS1_SHOWUPSTREAM="auto"
+    GIT_PS1_SHOWSTASHSTATE=1
+    . $GIT_PROMPT_PATH
+    #PS1+="\$(__git_ps1) "
+
+    PS1+="${lightning} "
     export PS1
 fi
 #  PS1="\[\e[1;38m\]\u\[\e[1;34m\]@\[\e[1;31m\]\h\[\e[1;30m\]:"
@@ -42,14 +53,29 @@ fi
 #	echo -en "\033]2;$1\007"
 #}
 
-# To fix terminal resize issues while command-line apps are running
-# http://bugs.gentoo.org/48632
-shopt -s checkwinsize
+# Powerline
+#python_repository_root="/usr/local/lib/python3.6/dist-packages"
+#if [[ -r $python_repository_root/powerline/bindings/bash/powerline.sh ]]; then
+#    . $python_repository_root/powerline/bindings/bash/powerline.sh
+#fi
 
+# Bash completion
+if [ "$PLATFORM" = Darwin ]; then
+    [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion 
+elif [ "$PLATFORM" = Linux ]; then
+    [ -f /etc/bash_completion ] && . /etc/bash_completion
+fi
+
+shopt -s checkwinsize # auto resize window size
 shopt -s nocaseglob # case-insensitive globbing
-
+shopt -s autocd # cd when typing a directory name
+shopt -s direxpand dirspell # auto-expand directory globs and fix directory name typos
+shopt -s cdspell # auto-fix directory name typos
+#shopt -s globstar # **/*.txt globstar recursive pattern in file and directory expansions
 shopt -s histappend # append to bash history file, rather than overwrite
 
-export HISTSIZE=1000
-export HISTFILESIZE=2000
+export HISTCONTROL='erasedups:ignoreboth'
+export HISTSIZE=5000
+export HISTFILESIZE=5000
 export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S:"
+bind Space:magic-space # !!<SPACE> expand to last command

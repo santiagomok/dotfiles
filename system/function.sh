@@ -91,3 +91,12 @@ fs() {
     fzf --height 40% --reverse --query="$1" --select-1 --exit-0) &&
   tmux switch-client -t "$session"
 }
+
+# Display compact log list in fuzzy finder
+fzf_git_log() {
+    git ll --color=always "$@" \
+    | fzf --ansi --no-sort --height 100% \
+          --preview "echo {} | grep -o '[a-f0-9]\{7\}' | head -1 |
+                       xargs -I@ sh -c 'git show --color=always @'"
+}
+

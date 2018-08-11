@@ -5,9 +5,6 @@
 export PLATFORM=$(uname -s) # Switch for Macos and Linux
 # ------------------------------------------------------------------------------ 
 
-# Bash completion
-[ -f /etc/bash_completion ] && . /etc/bash_completion
-
 set -o vi
 
 script_path="$(dirname "${BASH_SOURCE[0]}")"
@@ -17,10 +14,4 @@ script_path="$(dirname "${BASH_SOURCE[0]}")"
 [ -f "${script_path}/export.sh" ] && source "${script_path}/export.sh";
 [ -f "${script_path}/alias.sh" ] && source "${script_path}/alias.sh";
 [ -f "${HOME}/.fzf.bash" ] && source "${HOME}/.fzf.bash";
-
-# Powerline
-#python_repository_root="/usr/local/lib/python3.6/dist-packages"
-#if [[ -r $python_repository_root/powerline/bindings/bash/powerline.sh ]]; then
-#    . $python_repository_root/powerline/bindings/bash/powerline.sh
-#fi
 
