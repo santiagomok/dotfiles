@@ -60,6 +60,9 @@ alias llfs='find_by_size(){ find . -type f -size "$1" -exec ls --color --classif
 
 alias gll='fzf_git_log'
 
+# download audio only
+alias ytda="youtube-dl -i --extract-audio --audio-format mp3"
+alias ytdaf="youtube-dl -i --extract-audio --audio-format mp3 -a"
 # ------------------------------------------------------------------------------ 
 
 # SSH

@@ -24,7 +24,7 @@ set show-all-if-ambiguous on
 # Shift-Tab: cycle backward
 # Ctrl-q: display list of possible completions
 set menu-complete-display-prefix on
-TAB: menu-complete
+Tab: menu-complete
 "\e[Z": menu-complete-backward
 Control-q: complete
 

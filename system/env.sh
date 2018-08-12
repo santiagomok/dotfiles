@@ -64,13 +64,13 @@ if [ "$PLATFORM" = Darwin ]; then
     [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion 
 elif [ "$PLATFORM" = Linux ]; then
     [ -f /etc/bash_completion ] && . /etc/bash_completion
+    shopt -s autocd # cd when typing a directory name
+    shopt -s direxpand dirspell # auto-expand directory globs and fix directory name typos
+    shopt -s cdspell # auto-fix directory name typos
 fi
 
 shopt -s checkwinsize # auto resize window size
 shopt -s nocaseglob # case-insensitive globbing
-shopt -s autocd # cd when typing a directory name
-shopt -s direxpand dirspell # auto-expand directory globs and fix directory name typos
-shopt -s cdspell # auto-fix directory name typos
 #shopt -s globstar # **/*.txt globstar recursive pattern in file and directory expansions
 shopt -s histappend # append to bash history file, rather than overwrite
 
