@@ -31,6 +31,10 @@ alias rgcode="rg -i -n -t{c,cpp,make,java,py,tcl,json,perl,protobuf,sh,swig,xml}
 
 # PATH
 # Navigating paths ., .., ..., ....
+alias fc="fzf_change_dir"
+alias fe="fzf_edit_file"
+alias fge="fzf_grep_edit_file"
+alias fs="fzf_switch_tmux_session"
 alias ..="cd .."
 alias ..2="cd ../.."
 alias ..3="cd ../../.."

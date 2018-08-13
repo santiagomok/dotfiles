@@ -1,7 +1,39 @@
-# File: README.md
-# Author: Santiago Mok (santiago.mok@gmail.com)
+# Dotfiles
+* Author: Santiago Mok (santiago.mok@gmail.com)
 
-My personal home set-up configuration. 
+My personal home configuration.
+
+## Key Bindings
+### Bash
+| Alias & Key | Description |
+| :---: | :---  |
+| fc          | Change to directory found with fzf                               |
+| fe          | Search and vim edit file found with fzf                          |
+| fge         | Grep for pattern and vim edit file found with fzf                |
+| fs          | Switch to selected (with fzf) tmux session                       |
+| rgcode      | Grep for pattern in source code {cpp,java,python,tcl,etc..}      |
+
+### Vim
+| Key | Description |
+| :---: | :---  |
+| Ctrl+s    | Save |
+| Ctrl+h    | Switch to pane left |
+| Ctrl+l    | Switch to pane: right |
+| Ctrl+k    | Switch to pane: up |
+| Ctrl+j    | Switch to pane: down |
+| ,[        | Switch to next tab |
+| ,]        | Switch to previous tab |
+| Ctrl+w T  | Open new tab |
+| ,/        | Start grep command |
+| ,\*       | Start grep for word under cursor |
+| ,a        | Select all |
+| ,s        | Sort |
+| <         | Shift indent left |
+| >         | Shift indent right |
+| ,h        | Clear highlight |
+| <F9>      | Toggle NERDTree |
+| <F10>     | Toggle tagbar (for ctags) |
+
 
 ## Vim 
 mkdir -p ~/.vim/bundle

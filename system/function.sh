@@ -47,21 +47,6 @@ v() {
           done | fzf-tmux -d -m -q "$*" -1) && vim ${files//\~/$HOME}
 }
 
-# vf - fuzzy open with vim from anywhere
-# ex: vf word1 word2 ... (even part of a file name)
-# zsh autoload function
-vf() {
-  local files
-
-  files=(${(f)"$(locate -Ai -0 $@ | grep -z -vE '~$' | fzf --read0 -0 -1 -m)"})
-
-  if [[ -n $files ]]
-  then
-     vim -- $files
-     print -l $files[1]
-  fi
-}
-
 # ftags - search ctags
 ftags() {
   local line
@@ -73,21 +58,30 @@ ftags() {
                                       -c "silent tag $(cut -f2 <<< "$line")"
 }
 
-# Search directory and cd to selection with fuzzy finder
-fc() {
+fzf_change_dir() {
     local dir
-    dir=$(fd --type d --hidden --follow --exclude .git . ${1:-.} 2> /dev/null | fzf +m) \
+    dir=$(fd --type d --hidden --follow --exclude .git . ${1:-.} 2> /dev/null | fzf -i +m) \
     && cd $dir
 }
 
-# fe [FUZZY PATTERN] - Open the selected file with the default editor
-#   - Bypass fuzzy finder if there's only one match (--select-1)
-#   - Exit if there's no match (--exit-0)
-fe() {
-  local file
-  file=$(fzf-tmux --query="$1" --select-1 --exit-0)
-  [ -n "$file" ] && ${EDITOR:-vim} "$file"
+fzf_edit_file() {
+    local files
+    files=$(fd --type f --hidden --follow --exclude .git . ${1:-.} 2> /dev/null | fzf -i +m) \
+    && [ -f "$files" ]  \
+    && vim "$files"
 }
+
+# fuzzy grep with ripgrep
+fzf_grep_edit_file() {
+    local file
+    # $1 +$2: filename + line-number
+    file="$(rg --no-heading --vimgrep $@ | fzf -0 -1 | awk -F: '{print $1 " +" $2}')"
+    if [[ -n $file ]]; then
+        vim $file
+    fi
+}
+
+
 
 # Modified version where you can press
 #   - CTRL-O to open with `open` command,
@@ -106,8 +100,7 @@ fo() {
   fi
 }
 
-# Switch tmux-sessions
-fs() {
+fzf_switch_tmux_session() {
   local session
   session=$(tmux list-sessions -F "#{session_name}" | \
     fzf --height 40% --reverse --query="$1" --select-1 --exit-0) &&
@@ -135,17 +128,5 @@ ftm() {
      tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
   fi
   session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
-}
-
-# fuzzy grep with ripgrep
-vrg() {
-    local file
-
-    # $1 +$2: filename + line-number
-    file="$(rg --no-heading --vimgrep $@ | fzf -0 -1 | awk -F: '{print $1 " +" $2}')"
-    
-    if [[ -n $file ]]; then
-        vim $file
-    fi
 }
 
