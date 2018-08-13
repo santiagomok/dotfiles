@@ -27,12 +27,12 @@ My personal home configuration.
 | ,/        | Start grep command |
 | ,\*       | Start grep for word under cursor |
 | ,a        | Select all |
+| ,h        | Clear highlight |
 | ,s        | Sort |
 | <         | Shift indent left |
 | >         | Shift indent right |
-| ,h        | Clear highlight |
-| <F9>      | Toggle NERDTree |
-| <F10>     | Toggle tagbar (for ctags) |
+| \<F9\>    | Toggle NERDTree |
+| \<F10\>   | Toggle tagbar (for ctags) |
 
 
 ## Vim 
