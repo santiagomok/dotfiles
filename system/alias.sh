@@ -24,6 +24,8 @@ alias grep="grep -in --color=auto"
 alias datemd="date +%b%d"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias hc="history -c"
+alias rg="rg --line-number --no-heading --ignore-case"
+alias rgcode="rg -i -n -t{c,cpp,make,java,py,tcl,json,perl,protobuf,sh,swig,xml}"
 
 # ------------------------------------------------------------------------------ 
 
@@ -54,6 +56,7 @@ alias g=git
 alias l=less
 alias py="python3"
 alias vi="vim"
+alias viplugin="source ${HOME}/github.com/santiagomok/dotfiles/install/vim.s"
 
 # List all files larger than a given size (e.g. llfs +10k)
 alias llfs='find_by_size(){ find . -type f -size "$1" -exec ls --color --classify --human-readable -l {} \; ; }; find_by_size'

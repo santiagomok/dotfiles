@@ -63,10 +63,15 @@ fi
 if [ "$PLATFORM" = Darwin ]; then
     [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion 
 elif [ "$PLATFORM" = Linux ]; then
-    [ -f /etc/bash_completion ] && . /etc/bash_completion
+    if [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    elif [ -f ${HOME}/.local/etc/profile.d/bash_completion.sh ]; then
+        . ${HOME}/.local/etc/profile.d/bash_completion.sh
+    fi
     shopt -s autocd # cd when typing a directory name
-    shopt -s direxpand dirspell # auto-expand directory globs and fix directory name typos
+    shopt -s dirspell # fix directory name typos
     shopt -s cdspell # auto-fix directory name typos
+    # shopt -s direxpand # auto-expand directory globs
 fi
 
 shopt -s checkwinsize # auto resize window size

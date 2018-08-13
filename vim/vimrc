@@ -3,7 +3,7 @@
 
 " Plugin and Reload settings
 "------------------------------------------------------------
-set nocompatible              " be iMproved, required
+set nocompatible              " not compatible with vi
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -38,6 +38,7 @@ Plugin 'edkolev/tmuxline.vim'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
+Plugin 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plugin 'scrooloose/NERDTree', { 'on': 'NERDTreeToggle' }
 augroup nerd_loader
   autocmd!
@@ -52,6 +53,7 @@ augroup END
 
 " Code
 Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+Plugin 'vim-scripts/Conque-GDB'
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'Valloric/ycmd'
 "Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -94,7 +96,7 @@ filetype plugin indent on    " required
 " Reload setting
 "------------------------------------------------------------
 " Auto reload .vimrc on save 
-autocmd! bufwritepost .vimrc source % 
+" autocmd! bufwritepost .vimrc source % 
 
 " Automatically change the current directory to the file editing
 set autochdir
@@ -187,7 +189,7 @@ set t_vb=
 set mouse=a
 
 " Make yank copy to the global system clipboard
-set clipboard=unnamedplus
+"set clipboard=unnamedplus
 
 " Set the command window height to 2 lines, to avoid many cases of having to
 " "press <Enter> to continue"
@@ -221,8 +223,12 @@ noremap <c-k> <c-w>k
 noremap <c-l> <c-w>l
 noremap <c-h> <c-w>h
 
-noremap <Leader>n <esc>:tabprevious<CR>
-noremap <Leader>m <esc>:tabnext<CR>
+" tab navigation
+noremap <c-w>T <esc>:tabnew<CR>
+noremap <Leader>[ <esc>:tabprevious<CR>
+noremap <Leader>] <esc>:tabnext<CR>
+
+" Sort
 vnoremap <Leader>s :sort<CR>
 
 " Remove highlighting after search
@@ -231,8 +237,25 @@ nnoremap <silent> <Leader>h :noh<CR>
 " Search word under cursor from current directory recursively
 map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
 
-" Custom mappings
-"------------------------------------------------------------
+" Grep 
+" ,gr: user rg for search
+noremap <leader>/ :Grepper<CR>
+noremap <leader>* :Grepper -cword -noprompt<CR>
+" nmap gs <plug>(GrepperOperator)
+" xmap gs <plug>(GrepperOperator)
+
+nnoremap <leader>. :CtrlPTag<CR>
+
+" <F9> NERDTree toggle
+map <F9> <esc>:NERDTreeToggle<CR>
+
+" <F10> Tagbar toogle
+if v:version >= 703
+  inoremap <F10> <esc>:TagbarToggle<cr>
+  nnoremap <F10> :TagbarToggle<cr>
+  let g:tagbar_sort = 0
+endif
+
 vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
 map <Leader>a ggVG  " select all
@@ -243,6 +266,19 @@ map <F6> a<C-R>=strftime('%m/%d/%Y')<CR><Esc>
 " YouCompleteMe setting
 "------------------------------------------------------------
 let g:ycm_python_binary_path = 'python3'
+
+" Vim-Grepper
+"------------------------------------------------------------
+let g:grepper           = {}
+let g:grepper.quickfix  = 1
+let g:grepper.open      = 1
+let g:grepper.switch    = 1
+let g:grepper.prompt    = 1
+let g:grepper.tools     = ['rg', 'git', 'grep', 'ack']
+let g:grepper.stop      = 500
+"let g:grepper.repo      = ['builtins.gmake']
+"let g:grepper.dir       = 'repo,file'
+let g:grepper.highlight = 1
 
 " Powerline setting
 "------------------------------------------------------------
@@ -271,17 +307,6 @@ let g:ycm_python_binary_path = 'python3'
 " Close vim if the only window left open is a NERDTree
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Use Ctrl-n to open NERDTree
-map <Leader>t <esc>:NERDTreeToggle<CR>
-
-nnoremap <leader>. :CtrlPTag<CR>
-
-" <F11> | Tagbar
-if v:version >= 703
-  inoremap <F11> <esc>:TagbarToggle<cr>
-  nnoremap <F11> :TagbarToggle<cr>
-  let g:tagbar_sort = 0
-endif
 
 " Ctags 
 "------------------------------------------------------------

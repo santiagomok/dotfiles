@@ -62,11 +62,6 @@ vf() {
   fi
 }
 
-fcd() {
-    local dir
-    dir=$(fd --type d --hidden --follow --exclude .git . ${1:-.} 2> /dev/null | fzf +m) \
-    && cd $dir
-}
 # ftags - search ctags
 ftags() {
   local line
@@ -76,6 +71,13 @@ ftags() {
     cut -c1-$COLUMNS | fzf --nth=2 --tiebreak=begin \
   ) && $EDITOR $(cut -f3 <<< "$line") -c "set nocst" \
                                       -c "silent tag $(cut -f2 <<< "$line")"
+}
+
+# Search directory and cd to selection with fuzzy finder
+fc() {
+    local dir
+    dir=$(fd --type d --hidden --follow --exclude .git . ${1:-.} 2> /dev/null | fzf +m) \
+    && cd $dir
 }
 
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
@@ -134,3 +136,16 @@ ftm() {
   fi
   session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
 }
+
+# fuzzy grep with ripgrep
+vrg() {
+    local file
+
+    # $1 +$2: filename + line-number
+    file="$(rg --no-heading --vimgrep $@ | fzf -0 -1 | awk -F: '{print $1 " +" $2}')"
+    
+    if [[ -n $file ]]; then
+        vim $file
+    fi
+}
+
