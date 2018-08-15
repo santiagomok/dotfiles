@@ -5,14 +5,16 @@
 # ------------------------------------------------------------------------------ 
 
 # Color Table
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-BLUE='\033[0;34m'
-WHITE='\033[0;97m'
-LIGHT_BLUE='\033[1;94m'
-LIGHT_CYAN='\033[0;96m'
-NC='\033[0m'
+OB='\['
+CB='\]'
+RED="${OB}\033[0;31m${CB}"
+GREEN="${OB}\033[0;32m${CB}"
+YELLOW="${OB}\033[0;33m${CB}"
+BLUE="${OB}\033[0;34m${CB}"
+WHITE="${OB}\033[0;97m${CB}"
+LIGHT_BLUE="${OB}\033[1;94m${CB}"
+LIGHT_CYAN="${OB}\033[0;96m${CB}"
+NC="${OB}\033[0m${CB}"
 lightning='⚡ '  # 26A1
 
 # Trim workdir path (\w) in PS1 to last 'n' path  dir
@@ -36,6 +38,9 @@ if [ "$PLATFORM" = Darwin ]; then
 
     PS1+="${lightning} "
     export PS1
+else
+    PS1="${WHITE}\h | \w${NC}\n"
+    PS1+="${lightning}"
 fi
 #  PS1="\[\e[1;38m\]\u\[\e[1;34m\]@\[\e[1;31m\]\h\[\e[1;30m\]:"
 #  PS1="$PS1\[\e[0;38m\]\w\[\e[1;35m\]> \[\e[0m\]"

@@ -55,9 +55,11 @@ alias tmk="tmux kill-session -t"
 alias tmls="tmux ls"
 
 # TOOL
+alias g="git"
+alias gs="git status"
+alias gr="git remote -v"
 alias gfs="gnome-open"
-alias g=git
-alias l=less
+alias l="less"
 alias py="python3"
 alias vi="vim"
 alias viplugin="source ${HOME}/github.com/santiagomok/dotfiles/install/vim.s"
