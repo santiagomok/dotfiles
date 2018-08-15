@@ -116,7 +116,7 @@ if has("cscope")
     nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>	
     nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>	
     nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>	
-    nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
+    nmap <C-@>i :scs find i <C-R>=expand("<cfile>")<CR>$<CR>	
     nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>	
 
 

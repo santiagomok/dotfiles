@@ -53,7 +53,7 @@ augroup END
 
 " Code
 Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plugin 'vim-scripts/Conque-GDB'
+"Plugin 'vim-scripts/Conque-GDB', { 'on': 'Conque-gdb' }
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'Valloric/ycmd'
 "Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -245,6 +245,9 @@ noremap <leader>* :Grepper -cword -noprompt<CR>
 " xmap gs <plug>(GrepperOperator)
 
 nnoremap <leader>. :CtrlPTag<CR>
+
+" <F6> ConqueGDB toggle
+map <F6> <esc>:ConqueGdb<CR>
 
 " <F9> NERDTree toggle
 map <F9> <esc>:NERDTreeToggle<CR>
