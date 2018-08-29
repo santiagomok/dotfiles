@@ -53,7 +53,7 @@ augroup END
 
 " Code
 Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-"Plugin 'vim-scripts/Conque-GDB', { 'on': 'Conque-gdb' }
+Plugin 'vim-scripts/Conque-GDB'
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'Valloric/ycmd'
 "Plugin 'octol/vim-cpp-enhanced-highlight'

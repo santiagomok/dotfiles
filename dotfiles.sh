@@ -21,9 +21,16 @@ sub_help () {
     echo "Commands:"
     echo "   help             This help message"
     echo "   update           Update packages and pkg managers (OS, brew, node, npm, yarn, commposer)"
-    echo "   clean            Clean up caches (brew, npm, yarn, composer)"
-    echo "   symlinks         Run symlinks script"
+    echo "   symlinks         Create symlinks to rc (bashrc, vimrc)"
+    echo "   install          Install package and application"
     echo "   brew             Run brew script"
+    echo "   clean            Clean up caches (brew, npm, yarn, composer)"
+}
+
+sub_install () {
+    {DOTFILES}/install/linux.sh
+    {DOTFILES}/install/vim.sh
+    echo -e "${GREEN} Success! Install command finished.${NC}"
 }
 
 sub_update () {
