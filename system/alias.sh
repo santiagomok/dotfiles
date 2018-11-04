@@ -62,6 +62,7 @@ alias gfs="gnome-open"
 alias l="less"
 alias py="python3"
 alias vi="vim"
+alias vif="vim -u NONE"
 alias viplugin="source ${HOME}/github.com/santiagomok/dotfiles/install/vim.s"
 
 # List all files larger than a given size (e.g. llfs +10k)
