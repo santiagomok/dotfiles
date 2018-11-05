@@ -40,20 +40,20 @@ Plugin 'junegunn/fzf.vim'
 " Plugin 'mileszs/ack.vim'
 Plugin 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 " Plugin 'scrooloose/NERDTree', { 'on': 'NERDTreeToggle' }
-augroup nerd_loader
-  autocmd!
-  autocmd VimEnter * silent! autocmd! FileExplorer
-  autocmd BufEnter,BufNew *
-        \  if isdirectory(expand('<amatch>'))
-        \|   call plug#load('nerdtree')
-        \|   execute 'autocmd! nerd_loader'
-        \| endif
-augroup END
+" augroup nerd_loader
+"   autocmd!
+"   autocmd VimEnter * silent! autocmd! FileExplorer
+"   autocmd BufEnter,BufNew *
+"         \  if isdirectory(expand('<amatch>'))
+"         \|   call plug#load('nerdtree')
+"         \|   execute 'autocmd! nerd_loader'
+"         \| endif
+" augroup END
 "Plugin 'kien/ctrlp.vim'
 
 " Code
 " Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plugin 'vim-scripts/Conque-GDB'
+" Plugin 'vim-scripts/Conque-GDB'
 "
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'Valloric/ycmd'
@@ -96,6 +96,10 @@ filetype plugin indent on    " required
 
 " Put your non-Plugin stuff after this line
 "------------------------------------------------------------
+
+if v:version >= 800
+    packadd termdebug
+endif
 
 " Reload setting
 "------------------------------------------------------------
@@ -197,6 +201,8 @@ set mouse=a
 
 " Make yank copy to the global system clipboard
 "set clipboard=unnamedplus
+" Do not use X clipboard to speed up start up time
+set clipboard=exclude:.*
 
 " Set the command window height to 2 lines, to avoid many cases of having to
 " press <Enter> to continue
