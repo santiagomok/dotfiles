@@ -61,9 +61,12 @@ alias gr="git remote -v"
 alias gfs="gnome-open"
 alias l="less"
 alias py="python3"
+
+# ViM
 alias vi="vim"
-alias vif="vim -u NONE"
-alias viplugin="source ${HOME}/github.com/santiagomok/dotfiles/install/vim.s"
+alias vi_plugin_install="source ${HOME}/github.com/santiagomok/dotfiles/install/vim.sh"
+alias vnone="vim -u NONE"
+alias vdebug="vim_term_debug"
 
 # List all files larger than a given size (e.g. llfs +10k)
 alias llfs='find_by_size(){ find . -type f -size "$1" -exec ls --color --classify --human-readable -l {} \; ; }; find_by_size'

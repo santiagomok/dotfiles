@@ -29,6 +29,11 @@ function du10() {
     du -shx $1 | sort -rh | head -10
 }
 
+# ViM
+vim_term_debug() {
+    vim -c "Termdebug ${1:-}"
+}
+
 # Fuzzy 
 # fd - cd to selected directory
 #function fd() {
