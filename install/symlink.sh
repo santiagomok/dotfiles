@@ -8,9 +8,9 @@ DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd)"
 [ ! -d ${HOME}/.vim ] && mkdir ${HOME}/.vim
 [ ! -d ${HOME}/.tmux ] && mkdir ${HOME}/.tmux
 
-echo "[ -f ${HOME}/.system/bashrc ] && . ${HOME}/.system/bashrc" >> ~/.bashrc
-#ln -svf ${DOTFILES_DIR}/system/bash_profile ${HOME}/.bash_profile
-#ln -svf ${DOTFILES_DIR}/system/bashrc ${HOME}/.bashrc
+echo '[ -f ${HOME}/.system/bash_profile ] && . ${HOME}/.system/bash_profile' >> ~/.bash_profile
+echo '[ -f ${HOME}/.system/bashrc ] && . ${HOME}/.system/bashrc' >> ~/.bashrc
+
 ln -svf ${DOTFILES_DIR}/system 			${HOME}/.system
 ln -svf ${DOTFILES_DIR}/vim/vimrc 		${HOME}/.vimrc
 ln -svf ${DOTFILES_DIR}/vim/plugin 		${HOME}/.vim/plugin
