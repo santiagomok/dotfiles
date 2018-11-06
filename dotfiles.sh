@@ -27,6 +27,12 @@ sub_help () {
     echo "   brew             Run brew script"
 }
 
+sub_install () {
+    {DOTFILES}/install/linux.sh
+    {DOTFILES}/install/vim.sh
+    echo -e "${GREEN} Success! Install command finished.${NC}"
+}
+
 sub_update () {
     sudo softwareupdate -i -a
     nvm install --lts --latest-npm # install last lts node instance

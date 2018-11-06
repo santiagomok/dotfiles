@@ -27,33 +27,34 @@ Plugin 'tpope/vim-commentary'
 Plugin 'ngemily/vim-vp4'
 Plugin 'christoomey/vim-tmux-navigator'
 
-" Color
+" " Color
 Plugin 'itchyny/lightline.vim'
 Plugin 'lifepillar/vim-solarized8'
-Plugin 'junegunn/seoul256.vim'
-Plugin 'guns/xterm-color-table.vim'
+" Plugin 'junegunn/seoul256.vim'
+" Plugin 'guns/xterm-color-table.vim'
 Plugin 'edkolev/tmuxline.vim'
 
-" Search
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" " Search
+" Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
-Plugin 'mileszs/ack.vim'
+" Plugin 'mileszs/ack.vim'
 Plugin 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-Plugin 'scrooloose/NERDTree', { 'on': 'NERDTreeToggle' }
-augroup nerd_loader
-  autocmd!
-  autocmd VimEnter * silent! autocmd! FileExplorer
-  autocmd BufEnter,BufNew *
-        \  if isdirectory(expand('<amatch>'))
-        \|   call plug#load('nerdtree')
-        \|   execute 'autocmd! nerd_loader'
-        \| endif
-augroup END
+" Plugin 'scrooloose/NERDTree', { 'on': 'NERDTreeToggle' }
+" augroup nerd_loader
+"   autocmd!
+"   autocmd VimEnter * silent! autocmd! FileExplorer
+"   autocmd BufEnter,BufNew *
+"         \  if isdirectory(expand('<amatch>'))
+"         \|   call plug#load('nerdtree')
+"         \|   execute 'autocmd! nerd_loader'
+"         \| endif
+" augroup END
 "Plugin 'kien/ctrlp.vim'
 
 " Code
-Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-"Plugin 'vim-scripts/Conque-GDB', { 'on': 'Conque-gdb' }
+" Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+" Plugin 'vim-scripts/Conque-GDB'
+"
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'Valloric/ycmd'
 "Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -62,6 +63,9 @@ Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
+
+" Perforce
+"Plugin 'vim-scripts/perforce.vim'
 
 " Git plugin not hosted on GitHub
 "Plugin 'git://git.wincent.com/command-t.git'
@@ -92,6 +96,10 @@ filetype plugin indent on    " required
 
 " Put your non-Plugin stuff after this line
 "------------------------------------------------------------
+
+if v:version >= 800
+    packadd termdebug
+endif
 
 " Reload setting
 "------------------------------------------------------------
@@ -168,6 +176,9 @@ set smartcase
 " Usability options
 "------------------------------------------------------------
 
+"set splitbelow
+"set splitright
+
 " Stop certain movements from always going to the first character of a line.
 " While this behaviour deviates from that of Vi, it does what most users
 " coming from other editors would expect.
@@ -190,9 +201,11 @@ set mouse=a
 
 " Make yank copy to the global system clipboard
 "set clipboard=unnamedplus
+" Do not use X clipboard to speed up start up time
+set clipboard=exclude:.*
 
 " Set the command window height to 2 lines, to avoid many cases of having to
-" "press <Enter> to continue"
+" press <Enter> to continue
 set cmdheight=2
 
 " Display line numbers on the left
@@ -233,6 +246,8 @@ vnoremap <Leader>s :sort<CR>
 
 " Remove highlighting after search
 nnoremap <silent> <Leader>h :noh<CR>
+
+noremap <Leader>e <esc>:Vp4Edit<CR>
 
 " Search word under cursor from current directory recursively
 map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
@@ -347,10 +362,6 @@ let g:tagbar_ctags_bin='/usr/bin/ctags'
 "" Highlight chars that go over the 80-column limit, trucate at 80 chars
 "":highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
 "":match OverLength '\%81v.*'
-"
-""------------------------------------------------------------
-"" Split Windows
-"" set splitright
 "
 ""------------------------------------------------------------
 "" Startup Windows Size {{{1
