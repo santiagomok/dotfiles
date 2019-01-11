@@ -26,6 +26,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
 Plugin 'ngemily/vim-vp4'
 Plugin 'christoomey/vim-tmux-navigator'
+" Plugin 'scrooloose/nerdcommenter'
 
 " " Color
 Plugin 'itchyny/lightline.vim'
@@ -60,6 +61,7 @@ Plugin 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 "Plugin 'octol/vim-cpp-enhanced-highlight'
 "Plugin 'lyuts/vim-rtags', { 'for': ['c', 'cpp'] }
 "Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plugin 'jiangmiao/auto-pairs'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -141,37 +143,26 @@ let g:solarized_termtrans=1
 set background=dark
 colorscheme solarized8
 
-" Search color highlight
-set hlsearch
-augroup color_overrirde
-    autocmd!
-    autocmd ColorScheme * highlight Search ctermfg=LightCyan
-                    \   | highlight IncSearch ctermfg=Cyan
-augroup END
-
 " Indentation settings 
 "------------------------------------------------------------
-" Define <TAB> column width
-set tabstop=4
-
-" Affect what happen when <TAB> or <BS> is pressed.
-set softtabstop=4
-
-" Convert \t into spaces when used with softtabstop.
-set expandtab
-
-" Affect what happen for <<, >>, or == keys. Must be same as tabstop
-" Also affects how automatic indentation works.
-set shiftwidth=4
-
-" Automatically inserts one extra level of indentation in some cases.
-set smartindent
+set tabstop=4       " Define <TAB> column width
+set softtabstop=4   " Affect what happen when <TAB> or <BS> is pressed.
+set shiftwidth=4    " Affect what happen for <<, >>, or == keys. Must be same as tabstop
+set expandtab       " Convert \t into spaces when used with softtabstop.
+set smartindent     " Automatically inserts one extra level of indentation in some cases.
 
 " Search settings 
 "------------------------------------------------------------
 " Use case insensitive search, except when using capital letters
 set ignorecase
 set smartcase
+set hlsearch        " Search color highlight
+augroup color_overrirde
+    autocmd!
+    autocmd ColorScheme * highlight Search ctermfg=LightCyan
+                    \   | highlight IncSearch ctermfg=Cyan
+augroup END
+
 
 " Usability options
 "------------------------------------------------------------
