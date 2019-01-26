@@ -15,7 +15,7 @@ WHITE="${OB}\033[0;97m${CB}"
 LIGHT_BLUE="${OB}\033[1;94m${CB}"
 LIGHT_CYAN="${OB}\033[0;96m${CB}"
 NC="${OB}\033[0m${CB}"
-lightning='⚡ '  # 26A1
+lightning='⚡'  # 26A1
 
 # Trim workdir path (\w) in PS1 to last 'n' path  dir
 if [ "$PLATFORM" = Darwin ]; then

@@ -21,10 +21,10 @@ sub_help () {
     echo "Commands:"
     echo "   help             This help message"
     echo "   update           Update packages and pkg managers (OS, brew, node, npm, yarn, commposer)"
-    echo "   symlinks         Create symlinks to rc (bashrc, vimrc)"
-    echo "   install          Install package and application"
-    echo "   brew             Run brew script"
     echo "   clean            Clean up caches (brew, npm, yarn, composer)"
+    echo "   install          Create symbolic links, install applications"
+    echo "   symlink          Create symbolic link to rc files (bashrc, vimrc, tmux.conf)"
+    echo "   brew             Run brew script"
 }
 
 sub_install () {
@@ -45,6 +45,14 @@ sub_clean () {
     brew cleanup
     brew cask cleanup
     echo -e "${GREEN} Success! Clean command finished.${NC}"
+}
+
+sub_symlink () {
+    . "$DOTFILES_DIR/install/symlink.sh
+    echo -e "${GREEN} Success! Symbolic links created.${NC}"
+}
+
+sub_install() {
 }
 
 sub_defaults () {
