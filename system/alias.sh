@@ -68,6 +68,9 @@ alias vi_plugin_install="source ${HOME}/github.com/santiagomok/dotfiles/install/
 alias vnone="vim -u NONE"
 alias vdebug="vim_term_debug"
 
+# CMake
+alias export_cc_var="export CC=`which gcc`; export CXX=`which g++`"
+
 # List all files larger than a given size (e.g. llfs +10k)
 alias llfs='find_by_size(){ find . -type f -size "$1" -exec ls --color --classify --human-readable -l {} \; ; }; find_by_size'
 
