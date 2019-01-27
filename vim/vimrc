@@ -26,7 +26,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
 Plugin 'ngemily/vim-vp4'
 Plugin 'christoomey/vim-tmux-navigator'
-" Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdcommenter'
 
 " Color
 Plugin 'edkolev/tmuxline.vim'
@@ -50,11 +50,14 @@ Plugin 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 "         \|   execute 'autocmd! nerd_loader'
 "         \| endif
 " augroup END
-"Plugin 'kien/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 
 " Code
 " Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-" Plugin 'vim-scripts/Conque-GDB'
+Plugin 'vim-scripts/Conque-GDB'
+" Conflict with tmux-navigator
+" Plugin 'LucHermitte/lh-vim-lib' 
+" Plugin 'LucHermitte/lh-brackets'
 "
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'Valloric/ycmd'
@@ -191,7 +194,8 @@ set t_vb=
 set mouse=a
 
 " Make yank copy to the global system clipboard
-set clipboard=unnamedplus
+set clipboard=unnamed
+" set clipboard=unnamedplus
 " Do not use X clipboard to speed up start up time
 " set clipboard=exclude:.*
 
