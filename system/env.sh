@@ -15,7 +15,7 @@ WHITE="${OB}\033[0;97m${CB}"
 LIGHT_BLUE="${OB}\033[1;94m${CB}"
 LIGHT_CYAN="${OB}\033[0;96m${CB}"
 NC="${OB}\033[0m${CB}"
-lightning='⚡'  # 26A1
+rarrow='→' # 2192
 
 # Trim workdir path (\w) in PS1 to last 'n' path  dir
 if [ "$PLATFORM" = Darwin ]; then
@@ -24,23 +24,23 @@ if [ "$PLATFORM" = Darwin ]; then
         PS1+="${RED}\u${NC} | "
     fi
 
-    if [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
-      GIT_PROMPT_PATH="/usr/local/etc/bash_completion.d/git-prompt.sh"
-    elif [ -f /etc/bash_completion.d/git-prompt ]; then
-      GIT_PROMPT_PATH="/etc/bash_completion.d/git-prompt"
-    else
-      GIT_PROMPT_PATH="/usr/share/git-core/contrib/completion/git-prompt.sh"
-    fi
-    GIT_PS1_SHOWUPSTREAM="auto"
-    GIT_PS1_SHOWSTASHSTATE=1
-    . $GIT_PROMPT_PATH
+    #if [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
+      # GIT_PROMPT_PATH="/usr/local/etc/bash_completion.d/git-prompt.sh"
+    # elif [ -f /etc/bash_completion.d/git-prompt ]; then
+      # GIT_PROMPT_PATH="/etc/bash_completion.d/git-prompt"
+    # else
+      # GIT_PROMPT_PATH="/usr/share/git-core/contrib/completion/git-prompt.sh"
+    # fi
+    # GIT_PS1_SHOWUPSTREAM="auto"
+    # GIT_PS1_SHOWSTASHSTATE=1
+    # . $GIT_PROMPT_PATH
     #PS1+="\$(__git_ps1) "
 
-    PS1+="${lightning} "
+    PS1+="${rarrow} "
     export PS1
 else
     PS1="${WHITE}\h | \w${NC}\n"
-    PS1+="${lightning}"
+    PS1+="${rarrow} "
 fi
 #  PS1="\[\e[1;38m\]\u\[\e[1;34m\]@\[\e[1;31m\]\h\[\e[1;30m\]:"
 #  PS1="$PS1\[\e[0;38m\]\w\[\e[1;35m\]> \[\e[0m\]"
