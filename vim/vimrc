@@ -36,35 +36,22 @@ Plugin 'lifepillar/vim-solarized8'
 Plugin 'edkolev/tmuxline.vim'
 
 " " Search
-" Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 " Plugin 'mileszs/ack.vim'
 Plugin 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-" Plugin 'scrooloose/NERDTree', { 'on': 'NERDTreeToggle' }
-" augroup nerd_loader
-"   autocmd!
-"   autocmd VimEnter * silent! autocmd! FileExplorer
-"   autocmd BufEnter,BufNew *
-"         \  if isdirectory(expand('<amatch>'))
-"         \|   call plug#load('nerdtree')
-"         \|   execute 'autocmd! nerd_loader'
-"         \| endif
-" augroup END
 Plugin 'kien/ctrlp.vim'
 
 " Code
-" Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+Plugin 'jiangmiao/auto-pairs'
 Plugin 'vim-scripts/Conque-GDB'
-" Conflict with tmux-navigator
-" Plugin 'LucHermitte/lh-vim-lib' 
-" Plugin 'LucHermitte/lh-brackets'
+" Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 "
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'Valloric/ycmd'
 "Plugin 'octol/vim-cpp-enhanced-highlight'
 "Plugin 'lyuts/vim-rtags', { 'for': ['c', 'cpp'] }
 "Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plugin 'jiangmiao/auto-pairs'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -99,6 +86,13 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 
+" Create a base autogroup that resets itself upon sourcing of the vimrc. 
+" This means all autocmds that are in this group are cleared when the vimrc is 
+" sourced, preventing them from piling up and slowing Vim down. 
+augroup vimrc   
+    autocmd!
+augroup END
+
 " Put your non-Plugin stuff after this line
 "------------------------------------------------------------
 
@@ -127,8 +121,11 @@ augroup resCur
   autocmd BufWinEnter * call ResCur()
 augroup END
 
-" CtrlP setting
+" Plugin settings
 "------------------------------------------------------------
+let g:AutoPairsFlyMode = 1
+let g:AutoPairsShortcutBackInsert = '<M-b>'
+let g:NERDSpaceDelims = 1
 let g:ctrlp_root_markers = ['buildinfo.pm']
 
 " Lightline and colors setting
@@ -153,12 +150,14 @@ set softtabstop=4   " Affect what happen when <TAB> or <BS> is pressed.
 set shiftwidth=4    " Affect what happen for <<, >>, or == keys. Must be same as tabstop
 set expandtab       " Convert \t into spaces when used with softtabstop.
 set smartindent     " Automatically inserts one extra level of indentation in some cases.
+set shiftround
 
 " Search settings 
 "------------------------------------------------------------
 " Use case insensitive search, except when using capital letters
 set ignorecase
 set smartcase
+set incsearch
 set hlsearch        " Search color highlight
 augroup color_overrirde
     autocmd!
@@ -170,8 +169,11 @@ augroup END
 " Usability options
 "------------------------------------------------------------
 
-"set splitbelow
-"set splitright
+set backspace=indent,eol,start
+set wildignorecase
+set wildmenu
+set autoread
+set history=10000
 
 " Stop certain movements from always going to the first character of a line.
 " While this behaviour deviates from that of Vi, it does what most users
@@ -194,7 +196,7 @@ set t_vb=
 set mouse=a
 
 " Make yank copy to the global system clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 " Do not use X clipboard to speed up start up time
 " set clipboard=exclude:.*
 
@@ -208,6 +210,15 @@ set number
 " Quickly time out on keycodes, but never time out on mappings
 set notimeout ttimeout ttimeoutlen=200
 
+" One of the most important options to activate. Allows you to switch from an
+" unsaved buffer without saving it first. Also allows you to keep an undo
+" history for multiple files. Vim will complain if you try to quit without
+" saving, and swap files will keep you safe if your computer crashes.
+set hidden
+
+" Show partial commands in the last line of the screen
+set showcmd
+
 " Use <F2> to toggle between 'paste' and 'nopaste'
 " Disable formatting when pasting large chunks of code
 set pastetoggle=<F2>
@@ -215,12 +226,20 @@ set pastetoggle=<F2>
 " FZF plugin
 set rtp+=~/.fzf/bin/fzf
 
+" Wrapping and scrolling
+"------------------------------------------------------------
+let &showbreak = '...'
+set breakindent
+set breakindentopt=sbr
+set colorcolumn=+1
+
+
 " Key Mappings
 "------------------------------------------------------------
 " Rebind <Leader> key
 let mapleader = ","
 
-" Save
+" Save - Ctrl+s
 nnoremap <C-s>     :update<cr>
 
 " Bind Ctrl+<movement> keys to move around the windows, instead of using
@@ -230,36 +249,35 @@ noremap <c-k> <c-w>k
 noremap <c-l> <c-w>l
 noremap <c-h> <c-w>h
 
+" buffers navigation
+nnoremap <leader>b :ls<CR>:buffer<Space>
+nnoremap <leader>sb :ls<CR>:sbuffer<Space>
+nnoremap <leader>vb :ls<CR>:vert sbuffer<Space>
+nnoremap <leader>tb :tabnew<CR>:ls<CR>:buffer<Space>
+nnoremap <leader>bn :bnext<CR>
+
 " tab navigation
-noremap <c-w>T <esc>:tabnew<CR>
-noremap <Leader>[ <esc>:tabprevious<CR>
-noremap <Leader>] <esc>:tabnext<CR>
+noremap <leader>tt <esc>:tabnew<CR>
+noremap <leader>tp <esc>:tabprevious<CR>
+noremap <leader>tn <esc>:tabnext<CR>
+noremap <leader>tf <esc>:tabfind<Space>
+
+" file navigation
+noremap <leader>ff :vert sfind<Space>
+noremap <leader>fs :split<Space>
+noremap <leader>fv :vsplit<Space>
+noremap <leader>ft :tabnew<Space>
 
 " Sort
-vnoremap <Leader>s :sort<CR>
+vnoremap <leader>s :sort<CR>
 
-" Remove highlighting after search
-nnoremap <silent> <Leader>h :noh<CR>
 
-noremap <Leader>e <esc>:Vp4Edit<CR>
-
-" Search word under cursor from current directory recursively
-map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
-
-" Grep 
-" ,gr: user rg for search
-noremap <leader>/ :Grepper<CR>
-noremap <leader>* :Grepper -cword -noprompt<CR>
-" nmap gs <plug>(GrepperOperator)
-" xmap gs <plug>(GrepperOperator)
+noremap <leader>e <esc>:Vp4Edit<CR>
 
 nnoremap <leader>. :CtrlPTag<CR>
 
 " <F6> ConqueGDB toggle
 map <F6> <esc>:ConqueGdb<CR>
-
-" <F9> NERDTree toggle
-map <F9> <esc>:NERDTreeToggle<CR>
 
 " <F10> Tagbar toogle
 if v:version >= 703
@@ -273,11 +291,20 @@ vnoremap > >gv  " better indentation
 map <Leader>a ggVG  " select all
 
 " Insert date
-map <F6> a<C-R>=strftime('%m/%d/%Y')<CR><Esc>
+map <F12> a<C-R>=strftime('%m/%d/%Y')<CR><Esc>
 
-" YouCompleteMe setting
-"------------------------------------------------------------
-let g:ycm_python_binary_path = 'python3'
+"" Remove highlighting after search
+nnoremap <silent> <leader>h :noh<CR>
+
+" Grep
+"" Search word under cursor from current directory recursively
+map <F5> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+
+" Grep 
+noremap <leader>/ :Grepper<CR>
+noremap <leader>* :Grepper -cword -noprompt<CR>
+" nmap gs <plug>(GrepperOperator)
+" xmap gs <plug>(GrepperOperator)
 
 " Vim-Grepper
 "------------------------------------------------------------
@@ -292,6 +319,11 @@ let g:grepper.stop      = 500
 "let g:grepper.dir       = 'repo,file'
 let g:grepper.highlight = 1
 
+" YouCompleteMe setting
+"------------------------------------------------------------
+let g:ycm_python_binary_path = 'python3'
+
+
 " Powerline setting
 "------------------------------------------------------------
 "let g:Powerline_symbols = 'unicode'
@@ -300,24 +332,6 @@ let g:grepper.highlight = 1
 "python3 del powerline_setup
 "set guifont=Roboto\ Mono\ Light\ For\ Powerline
 "let g:Powerline_symbols='fancy'
-
-" NERDTree settings
-"------------------------------------------------------------
-" 
-" Open a NERDTree automatically when vim starts up
-"autocmd vimenter * NERDTree
-
-" Open a NERDTree automatically when vim starts up if no files were specified
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" Open NERDTree automatically when vim starts up on opening a directory
-" This window is tab-specific, meaning it's used by all windows in the tab. 
-" This trick also prevents NERDTree from hiding when first selecting a file.
-"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-
-" Close vim if the only window left open is a NERDTree
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
 " Ctags 
@@ -339,14 +353,6 @@ let g:tagbar_ctags_bin='/usr/bin/ctags'
 ""
 "" These are highly recommended options.
 "
-"" One of the most important options to activate. Allows you to switch from an
-"" unsaved buffer without saving it first. Also allows you to keep an undo
-"" history for multiple files. Vim will complain if you try to quit without
-"" saving, and swap files will keep you safe if your computer crashes.
-"set hidden
-"
-"" Show partial commands in the last line of the screen
-"set showcmd
 "
 "" Modelines have historically been a source of security vulnerabilities.  As
 "" such, it may be a good idea to disable them and use the securemodelines
