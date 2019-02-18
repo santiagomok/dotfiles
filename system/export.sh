@@ -23,7 +23,7 @@ if [ "$PLATFORM" = Linux ]; then
     export GOPATH=${HOME}/.local/lib/go/packages
     export GOROOT=${HOME}/.local/go
 elif [ "$PLATFORM" = Darwin ]; then
-    export GOPATH=${HOME}/Code/go
+    export GOPATH=${HOME}/Dev/go
     export GOROOT=/usr/local/opt/go/libexec
 fi
 export PATH=$PATH:$GOROOT/bin:${GOPATH}

@@ -28,18 +28,36 @@ Plugin 'ngemily/vim-vp4'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'scrooloose/nerdcommenter'
 
-" " Color
+" Color
+Plugin 'edkolev/tmuxline.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'lifepillar/vim-solarized8'
 " Plugin 'junegunn/seoul256.vim'
 " Plugin 'guns/xterm-color-table.vim'
-Plugin 'edkolev/tmuxline.vim'
 
+<<<<<<< HEAD
 " " Search
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+=======
+" Search
+>>>>>>> 81c0b1c842d194f1bb2e4a1a943deef8a4e26410
 Plugin 'junegunn/fzf.vim'
-" Plugin 'mileszs/ack.vim'
 Plugin 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
+<<<<<<< HEAD
+=======
+" Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plugin 'mileszs/ack.vim'
+" Plugin 'scrooloose/NERDTree', { 'on': 'NERDTreeToggle' }
+" augroup nerd_loader
+"   autocmd!
+"   autocmd VimEnter * silent! autocmd! FileExplorer
+"   autocmd BufEnter,BufNew *
+"         \  if isdirectory(expand('<amatch>'))
+"         \|   call plug#load('nerdtree')
+"         \|   execute 'autocmd! nerd_loader'
+"         \| endif
+" augroup END
+>>>>>>> 81c0b1c842d194f1bb2e4a1a943deef8a4e26410
 Plugin 'kien/ctrlp.vim'
 
 " Code
@@ -196,7 +214,12 @@ set t_vb=
 set mouse=a
 
 " Make yank copy to the global system clipboard
+<<<<<<< HEAD
 set clipboard=unnamedplus
+=======
+set clipboard=unnamed
+" set clipboard=unnamedplus
+>>>>>>> 81c0b1c842d194f1bb2e4a1a943deef8a4e26410
 " Do not use X clipboard to speed up start up time
 " set clipboard=exclude:.*
 

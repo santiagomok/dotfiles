@@ -4,10 +4,15 @@
 
 # ------------------------------------------------------------------------------ 
 function mcd() {
-        mkdir -p $*
-        cd $*
+    mkdir -p $*
+    cd $*
 }
 export -f mcd
+
+function bcd() {
+    # ${PWD##*/}: trims path up to and including the last slash
+    while [[ ${PWD} != '/' && ${PWD##*/} != "$1" ]]; do cd ..; done
+}
 
 function add_to_path {
 	if [ -z `echo $PATH |grep $1` ]; then
