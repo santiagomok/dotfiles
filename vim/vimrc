@@ -37,6 +37,7 @@ Plugin 'lifepillar/vim-solarized8'
 
 " Search
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
 Plugin 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plugin 'kien/ctrlp.vim'
 
@@ -44,7 +45,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'vim-scripts/Conque-GDB'
 " Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-"
+
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'Valloric/ycmd'
 "Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -270,13 +271,14 @@ noremap <leader>ee :Explore<CR>
 noremap <leader>se :Sexplore<CR>
 noremap <leader>ve :Vexplore<CR>
 
-" Sort
+" sort
 vnoremap <leader>s :sort<CR>
 
-" Perforce
+" perforce
 nnoremap <leader>e :Vp4Edit<CR>
 
-nnoremap <leader>. :CtrlPTag<CR>
+" tag
+nnoremap <leader>] :CtrlPTag<CR>
 
 " ConqueGDB 
 nnoremap <leader>cg :ConqueGdb<Space>
@@ -288,6 +290,7 @@ if v:version >= 703
   let g:tagbar_sort = 0
 endif
 
+" shift and selection
 vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
 map <Leader>a ggVG  " select all
@@ -298,7 +301,7 @@ nnoremap <leader>dt a<C-R>=strftime('%m/%d/%Y')<CR><Esc>
 "" Remove highlighting after search
 nnoremap <silent> <leader>h :noh<CR>
 
-" Grep
+" grep
 noremap <leader>/ :Grepper<CR>
 noremap <leader>* :Grepper -cword -noprompt<CR>
 " nmap gs <plug>(GrepperOperator)
