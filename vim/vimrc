@@ -246,17 +246,18 @@ noremap <c-l> <c-w>l
 noremap <c-h> <c-w>h
 
 " buffers navigation
-nnoremap <leader>b :ls<CR>:buffer<Space>
+nnoremap <leader>bb :ls<CR>:buffer<Space>
 nnoremap <leader>sb :ls<CR>:sbuffer<Space>
 nnoremap <leader>vb :ls<CR>:vert sbuffer<Space>
 nnoremap <leader>tb :tabnew<CR>:ls<CR>:buffer<Space>
 nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprevious<CR>
 
 " tab navigation
-noremap <leader>tt <esc>:tabnew<CR>
-noremap <leader>tp <esc>:tabprevious<CR>
-noremap <leader>tn <esc>:tabnext<CR>
-noremap <leader>tf <esc>:tabfind<Space>
+noremap <leader>tt :tabnew<CR>
+noremap <leader>tf :tabfind<Space>
+noremap <leader>tn :tabnext<CR>
+noremap <leader>tp :tabprevious<CR>
 
 " file navigation
 noremap <leader>ff :vert sfind<Space>
@@ -264,16 +265,21 @@ noremap <leader>fs :split<Space>
 noremap <leader>fv :vsplit<Space>
 noremap <leader>ft :tabnew<Space>
 
+" explorer
+noremap <leader>ee :Explore<CR>
+noremap <leader>se :Sexplore<CR>
+noremap <leader>ve :Vexplore<CR>
+
 " Sort
 vnoremap <leader>s :sort<CR>
 
-
-noremap <leader>e <esc>:Vp4Edit<CR>
+" Perforce
+nnoremap <leader>e :Vp4Edit<CR>
 
 nnoremap <leader>. :CtrlPTag<CR>
 
-" <F6> ConqueGDB toggle
-map <F6> <esc>:ConqueGdb<CR>
+" ConqueGDB 
+nnoremap <leader>cg :ConqueGdb<Space>
 
 " <F10> Tagbar toogle
 if v:version >= 703
@@ -286,23 +292,20 @@ vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
 map <Leader>a ggVG  " select all
 
-" Insert date
-map <F12> a<C-R>=strftime('%m/%d/%Y')<CR><Esc>
+" date
+nnoremap <leader>dt a<C-R>=strftime('%m/%d/%Y')<CR><Esc>
 
 "" Remove highlighting after search
 nnoremap <silent> <leader>h :noh<CR>
 
 " Grep
-"" Search word under cursor from current directory recursively
-map <F5> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
-
-" Grep 
 noremap <leader>/ :Grepper<CR>
 noremap <leader>* :Grepper -cword -noprompt<CR>
 " nmap gs <plug>(GrepperOperator)
 " xmap gs <plug>(GrepperOperator)
-
-" Vim-Grepper
+"" Search word under cursor from current directory recursively
+" map <F5> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+" Vim-Grepper setting
 "------------------------------------------------------------
 let g:grepper           = {}
 let g:grepper.quickfix  = 1
@@ -315,20 +318,16 @@ let g:grepper.stop      = 500
 "let g:grepper.dir       = 'repo,file'
 let g:grepper.highlight = 1
 
+" Netrw setting
+"------------------------------------------------------------
+let g:netrw_banner          = 0
+let g:netrw_browse_split    = 0     " re-use same windows
+let g:netrw_winsize         = 10    " 10% of page
+let g:netrw_liststyle       = 3     
+
 " YouCompleteMe setting
 "------------------------------------------------------------
-let g:ycm_python_binary_path = 'python3'
-
-
-" Powerline setting
-"------------------------------------------------------------
-"let g:Powerline_symbols = 'unicode'
-"python3 from powerline.vim import setup as powerline_setup
-"python3 powerline_setup()
-"python3 del powerline_setup
-"set guifont=Roboto\ Mono\ Light\ For\ Powerline
-"let g:Powerline_symbols='fancy'
-
+" let g:ycm_python_binary_path = 'python3'
 
 " Ctags 
 "------------------------------------------------------------
