@@ -3,6 +3,12 @@
 
 My personal home configuration.
 
+# New Device Provision
+- Instal homebrew
+- Install pre-requesite app
+- Clone and Configure dotfiles
+- Install optional app
+
 ## Key Bindings
 ### Bash
 | Alias & Key | Description |

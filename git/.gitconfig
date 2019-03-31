@@ -1,0 +1,67 @@
+# Local/private config goes in the include
+[user]
+	name = Santiago Mok
+	email = santiago.mok@gmail.com
+[include]
+    path = ~/.gitconfig.local
+[hub]
+    protocol = https
+[alias]
+    bv = branch -vv
+    bd = branch -d
+    ci = commit -m
+    unci = reset --soft HEAD~1
+    co = checkout
+    cob = checkout -b
+    count   = !git shortlog -sn
+	di = difftool
+	dis = difftool --staged
+    vdi = difftool -t vd
+    vdis = difftool -t vd --staged
+    ll = log --graph --format=format:"%C(yellow)%h%C(red)%d%C(reset) - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)"
+    llm = !git ll master..HEAD
+    llom = !git ll origin/master..HEAD
+    mg = 'merge'
+    mgs = 'merge --squash'
+    promote = !$ZSH/bin/git-promote
+    rank-contributors = !$ZSH/bin/git-rank-contributors
+    rv = remote -v
+    rso = remote show origin
+    rsu = remote show upstream
+    reset = reset HEAD
+    sg  = !git add . -N && git add -p
+    st  = status --short --branch
+    sta = !sh -c "git stash apply stash@{$1}"
+    std = !sh -c "git stash drop  stash@{$1}"
+    stl = stash list
+    sts = stash save
+    wtf = !$ZSH/bin/git-wtf
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    ui = auto
+[core]
+    excludesfile = ~/.gitignore
+    editor = vim
+	pager = diff-so-fancy | less --tabs=4 -RFX
+	autocrlf = input
+[apply]
+    whitespace = nowarn
+[help]
+    autocorrect = 1
+[push]
+	default = simple # only push the current branch, not multiple branches
+[merge]
+    tool = meld
+[mergetool]
+    keepBackup = false
+[diff]
+    tool = vimdiff
+	algorithm = histogram
+[difftool]
+    prompt = false
+[difftool "vd"]
+    cmd = vim -d "$LOCAL" "$REMOTE"
+[advice]
+	waitingForEditor = false
