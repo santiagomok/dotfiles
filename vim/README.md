@@ -1,10 +1,12 @@
 # ViM Configuration
 
 ## Install Plugin
-$ stow -v .
-$ mkdir -p ~/.vim/bundle
-$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-$ vim +PluginInstall +qall
+```bash
+ $ stow -v .
+ $ mkdir -p ~/.vim/bundle
+ $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+ $ vim +PluginInstall +qall
+ ```
 
 ## Key Bindings
 | Key | Description |
