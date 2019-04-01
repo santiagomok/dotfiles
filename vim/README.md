@@ -11,32 +11,48 @@
 ## Key Bindings
 | Key | Description |
 | :---: | :---  |
-| Pane Navigation | |
+| *Pane Navigation* | |
 | Ctrl+h    | Switch to pane: left |
 | Ctrl+l    | Switch to pane: right |
 | Ctrl+k    | Switch to pane: up |
 | Ctrl+j    | Switch to pane: down |
 | --- | |
 | Buffers Navigation | |
-| ,bb    | List buffers |
-| ,sb    | Hsplit buffer | 
-| ,vb    | Vsplit buffer | 
-| ,tb    | Open buffer in new tab | 
-| ,bn    | Next buffer |
-| ,bp    | Previous buffer |
+| ,bb       | List buffers |
+| ,sb       | Hsplit buffer | 
+| ,vb       | Vsplit buffer | 
+| ,tb       | Open buffer in new tab | 
+| ,bn       | Next buffer |
+| ,bp       | Previous buffer |
 | --- | |
-| ,[        | Switch to next tab |
-| ,]        | Switch to previous tab |
+| Tab Navigation | |
+| ,tt       | New tab |
+| ,tf       | Tab find | 
+| ,tn       | Next tab | 
+| ,tp       | previous tab | 
+| --- | |
+| File Navigation | |
+| ,ff       | Vsplit file search|
+| ,fs       | Hsplit | 
+| ,fv       | Vsplit |
+| ,ft       | New tab | 
+| --- | |
+| Explore | |
+| ,ee       | Explore directory of current file |
+| ,se       | HSplit and explore | 
+| ,ve       | Vsplit and explore |
+| --- | |
 | Ctrl+s    | Save |
-| Ctrl+w T  | Open new tab |
+| ,]        | Ctrl+P Tag |
 | ,/        | Start grep command |
 | ,\*       | Start grep for word under cursor |
 | ,a        | Select all |
+| ,cg       | Run ConqueGDB |
+| ,e        | Vp4 Edit |
 | ,h        | Clear highlight |
 | ,s        | Sort |
 | <         | Shift indent left |
 | >         | Shift indent right |
-| \<F9\>    | Toggle NERDTree |
 | \<F10\>   | Toggle tagbar (for ctags) |
 
 
