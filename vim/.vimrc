@@ -43,7 +43,7 @@ Plugin 'kien/ctrlp.vim'
 
 " Code
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'vim-scripts/Conque-GDB'
+" Plugin 'vim-scripts/Conque-GDB'
 " Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
 "Plugin 'Valloric/YouCompleteMe'
@@ -195,7 +195,7 @@ set t_vb=
 set mouse=a
 
 " Make yank copy to the global system clipboard
-set clipboard=unnamedplus
+set clipboard=unnamed
 " Do not use X clipboard to speed up start up time
 " set clipboard=exclude:.*
 
