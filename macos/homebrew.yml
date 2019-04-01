@@ -1,4 +1,0 @@
----
-homebrew_install_packages:
-    - stow
-...
