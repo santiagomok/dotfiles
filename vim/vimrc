@@ -102,7 +102,7 @@ endif
 " Reload setting
 "------------------------------------------------------------
 " Auto reload .vimrc on save 
-" autocmd! bufwritepost .vimrc source % 
+"autocmd! bufwritepost .vimrc source % 
 
 " Automatically change the current directory to the file editing
 set autochdir
@@ -129,6 +129,11 @@ let g:ctrlp_root_markers = ['buildinfo.pm']
 
 " Lightline and colors setting
 "------------------------------------------------------------
+" Startup Windows Size for GUI
+"if has("gui_running")
+"	set lines=80 columns=130
+"endif
+"
 if !has("gui_running")
     set t_Co=256
 endif
@@ -141,6 +146,10 @@ endif
 let g:solarized_termtrans=1
 set background=dark
 colorscheme solarized8
+
+"" Highlight chars that go over the 120-column limit, trucate at 120 chars
+"highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
+"match OverLength '\%121v.*'
 
 " Indentation settings 
 "------------------------------------------------------------
@@ -195,7 +204,7 @@ set t_vb=
 set mouse=a
 
 " Make yank copy to the global system clipboard
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
 " Do not use X clipboard to speed up start up time
 " set clipboard=exclude:.*
 
@@ -227,7 +236,7 @@ set rtp+=~/.fzf/bin/fzf
 
 " Wrapping and scrolling
 "------------------------------------------------------------
-let &showbreak = '...'
+let &showbreak = '... '
 set breakindent
 set breakindentopt=sbr
 
@@ -236,8 +245,12 @@ set breakindentopt=sbr
 " Rebind <Leader> key
 let mapleader = ","
 
-" Save - Ctrl+s
-nnoremap <C-s>     :update<cr>
+" Save 
+nnoremap <leader>s  :update<cr>
+nnoremap <leader>wa :wa<cr>
+
+" Edit ~/.vimrc
+nnoremap <leader>rc :tabnew $MYVIMRC<cr>
 
 " Bind Ctrl+<movement> keys to move around the windows, instead of using
 " Ctrl+w + <movement>
@@ -272,7 +285,7 @@ noremap <leader>se :Sexplore<CR>
 noremap <leader>ve :Vexplore<CR>
 
 " sort
-vnoremap <leader>s :sort<CR>
+vnoremap <leader>st :sort<CR>
 
 " perforce
 nnoremap <leader>e :Vp4Edit<CR>
@@ -298,7 +311,7 @@ map <Leader>a ggVG  " select all
 " date
 nnoremap <leader>dt a<C-R>=strftime('%m/%d/%Y')<CR><Esc>
 
-"" Remove highlighting after search
+" Remove highlighting after search
 nnoremap <silent> <leader>h :noh<CR>
 
 " grep
@@ -324,8 +337,8 @@ let g:grepper.highlight = 1
 " Netrw setting
 "------------------------------------------------------------
 let g:netrw_banner          = 0
-let g:netrw_browse_split    = 0     " re-use same windows
-let g:netrw_winsize         = 10    " 10% of page
+let g:netrw_browse_split    = 4     " re-use same windows
+let g:netrw_winsize         = 25    " 25% of page
 let g:netrw_liststyle       = 3     
 
 " YouCompleteMe setting
@@ -340,33 +353,10 @@ set tagstack
 "set notagrelative
 let g:tagbar_ctags_bin='/usr/bin/ctags'
 
-
 ""------------------------------------------------------------
 "" Windows Behavior
 ""source $VIMRUNTIME/mswin.vim
 ""behave mswin
-"
-""------------------------------------------------------------
-"" Must have options {{{1
-""
-"" These are highly recommended options.
-"
-"
-"" Modelines have historically been a source of security vulnerabilities.  As
-"" such, it may be a good idea to disable them and use the securemodelines
-"" script, <http://www.vim.org/scripts/script.php?script_id=1876>.
-"" set nomodeline
-"
-"" Highlight chars that go over the 80-column limit, trucate at 80 chars
-"":highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
-"":match OverLength '\%81v.*'
-"
-""------------------------------------------------------------
-"" Startup Windows Size {{{1
-"" GUI is running
-"if has("gui_running")
-"	set lines=60 columns=116
-"endif
 "
 ""------------------------------------------------------------
 "" Comment Box and Separators
