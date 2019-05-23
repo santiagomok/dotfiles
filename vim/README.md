@@ -42,7 +42,8 @@
 | ,se       | HSplit and explore | 
 | ,ve       | Vsplit and explore |
 | --- | |
-| Ctrl+s    | Save |
+| ,s        | Update |
+| ,wa       | Write All |
 | ,]        | Ctrl+P Tag |
 | ,/        | Start grep command |
 | ,\*       | Start grep for word under cursor |
@@ -50,7 +51,7 @@
 | ,cg       | Run ConqueGDB |
 | ,e        | Vp4 Edit |
 | ,h        | Clear highlight |
-| ,s        | Sort |
+| ,st       | Sort |
 | <         | Shift indent left |
 | >         | Shift indent right |
 | \<F10\>   | Toggle tagbar (for ctags) |
