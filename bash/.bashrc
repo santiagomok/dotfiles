@@ -7,7 +7,7 @@ export PLATFORM=$(uname -s) # Switch for Macos and Linux
 
 set -o vi
 
-script_path="$(dirname "${BASH_SOURCE[0]}")"
+script_path="${HOME}/.bash_config"
 
 [ -f "${script_path}/env.sh" ] && source "${script_path}/env.sh";
 [ -f "${script_path}/function.sh" ] && source "${script_path}/function.sh";

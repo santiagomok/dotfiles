@@ -43,7 +43,7 @@ Plugin 'kien/ctrlp.vim'
 
 " Code
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'vim-scripts/Conque-GDB'
+" Plugin 'vim-scripts/Conque-GDB'
 " Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
 "Plugin 'Valloric/YouCompleteMe'
