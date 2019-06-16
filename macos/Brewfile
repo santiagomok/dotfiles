@@ -1,33 +1,38 @@
 cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
-tap 'puma/puma'
 
-# Install brews
-brew 'ack'
-brew 'bash'
-brew 'bash-completion'
-brew 'boost'
-brew 'coreutils'
-brew 'diff-so-fancy'
-brew 'gdb'
-brew 'go'
-brew 'grc'
-brew 'libgit2'
-brew 'openssl'
-brew 'node'
-brew 'readline'
-brew 'renameutils'
-brew 'python'
+# core apps
+brew 'git'
+brew 'zsh'
+brew 'fasd'
+brew 'fzf'
 brew 'ripgrep'
-brew 'spark'
-brew 'thrift'
-brew 'wget'
-brew 'youtube-dl'
-brew 'z'
-#brew 'zsh'
+brew 'stow'
+brew 'vim --with-python3'
 
-# Install Casks
+# tools
+#brew 'bash'
+#brew 'bash-completion'
+#brew 'tree'
+#brew 'wget'
+#brew 'youtube-dl'
+#brew 'z'
+
+# development
+#brew 'coreutils'
+#brew 'renameutils'
+#brew 'boost'
+#brew 'gdb'
+#brew 'go'
+#brew 'thrift'
+#brew 'node'
+#brew 'openssl'
+#brew 'python'
+#brew 'libgit2'
+
+# casks
+cask 'iterm2'
 #cask '1password'
 #cask 'dropbox'
 #cask 'google-chrome'
