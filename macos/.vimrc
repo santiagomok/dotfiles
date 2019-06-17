@@ -21,7 +21,6 @@ Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-commentary'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'christoomey/vim-tmux-navigator'
 
@@ -36,10 +35,15 @@ Plugin 'lifepillar/vim-solarized8'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " Code
-Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-endwise'
+Plugin 'rstacruz/vim-closer'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'ajh17/VimCompletesMe'
+Plugin 'w0rp/ale'
+" Plugin 'jiangmiao/auto-pairs'
 " Plugin 'vim-scripts/Conque-GDB'
 " Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
@@ -63,15 +67,12 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 
-" Create a base autogroup that resets itself upon sourcing of the vimrc. 
-" This means all autocmds that are in this group are cleared when the vimrc is 
-" sourced, preventing them from piling up and slowing Vim down. 
-augroup vimrc   
-    autocmd!
-augroup END
-
 " Put your non-Plugin stuff after this line
 "------------------------------------------------------------
+"------------------------------------------------------------
+"------------------------------------------------------------
+" FZF plugin
+set rtp+=~/.fzf/bin/fzf
 
 if v:version >= 800
     packadd termdebug
@@ -79,6 +80,14 @@ endif
 
 " Reload setting
 "------------------------------------------------------------
+
+" Create a base autogroup that resets itself upon sourcing of the vimrc. 
+" This means all autocmds that are in this group are cleared when the vimrc is 
+" sourced, preventing them from piling up and slowing Vim down. 
+augroup vimrc   
+    autocmd!
+augroup END
+
 " Auto reload .vimrc on save 
 "autocmd! bufwritepost .vimrc source % 
 
@@ -97,13 +106,6 @@ augroup resCur
   autocmd!
   autocmd BufWinEnter * call ResCur()
 augroup END
-
-" Plugin settings
-"------------------------------------------------------------
-let g:AutoPairsFlyMode = 1
-let g:AutoPairsShortcutBackInsert = '<M-b>'
-let g:NERDSpaceDelims = 1
-let g:ctrlp_root_markers = ['buildinfo.pm']
 
 " Lightline and colors setting
 "------------------------------------------------------------
@@ -138,6 +140,12 @@ set expandtab       " Convert \t into spaces when used with softtabstop.
 set smartindent     " Automatically inserts one extra level of indentation in some cases.
 set shiftround
 
+" Wrapping and scrolling
+"------------------------------------------------------------
+let &showbreak = '... '
+set breakindent
+set breakindentopt=sbr
+
 " Search settings 
 "------------------------------------------------------------
 " Use case insensitive search, except when using capital letters
@@ -151,44 +159,22 @@ augroup color_overrirde
                     \   | highlight IncSearch ctermfg=Cyan
 augroup END
 
-
 " Usability options
 "------------------------------------------------------------
-
+set number
 set wildignorecase
 set history=10000
-
-" Stop certain movements from always going to the first character of a line.
-" While this behaviour deviates from that of Vi, it does what most users
-" coming from other editors would expect.
-set nostartofline
-
-" Instead of failing a command because of unsaved changes, instead raise a
-" dialogue asking if you wish to save changed files.
-set confirm
-
-" Use visual bell instead of beeping when doing something wrong
+set confirm                 
+set nostartofline           
 set visualbell
-
-" And reset the terminal code for the visual bell.  If visualbell is set, and
-" this line is also included, vim will neither flash nor beep.  If visualbell
-" is unset, this does nothing.
-set t_vb=
-
-" Enable use of the mouse for all modes
-set mouse=a
+set t_vb=                   
+set mouse=a                                            
+set cmdheight=2
 
 " Make yank copy to the global system clipboard
 " set clipboard=unnamedplus
 " Do not use X clipboard to speed up start up time
 " set clipboard=exclude:.*
-
-" Set the command window height to 2 lines, to avoid many cases of having to
-" press <Enter> to continue
-set cmdheight=2
-
-" Display line numbers on the left
-set number
 
 " Quickly time out on keycodes, but never time out on mappings
 set notimeout ttimeout ttimeoutlen=200
@@ -201,19 +187,6 @@ set hidden
 
 " Show partial commands in the last line of the screen
 set showcmd
-
-" Use <F2> to toggle between 'paste' and 'nopaste'
-" Disable formatting when pasting large chunks of code
-set pastetoggle=<F2>
-
-" FZF plugin
-set rtp+=~/.fzf/bin/fzf
-
-" Wrapping and scrolling
-"------------------------------------------------------------
-let &showbreak = '... '
-set breakindent
-set breakindentopt=sbr
 
 " Key Mappings
 "------------------------------------------------------------
@@ -261,9 +234,6 @@ noremap <leader>ve :Vexplore<CR>
 
 " sort
 vnoremap <leader>st :sort<CR>
-
-" perforce
-nnoremap <leader>e :Vp4Edit<CR>
 
 " tag
 nnoremap <leader>] :CtrlPTag<CR>
@@ -316,6 +286,10 @@ let g:netrw_browse_split    = 4     " re-use same windows
 let g:netrw_winsize         = 25    " 25% of page
 let g:netrw_liststyle       = 3     
 
+" VimCompletesMe setting
+"------------------------------------------------------------
+autocmd FileType vim let b:vcm_tab_complete = 'vim'
+
 " YouCompleteMe setting
 "------------------------------------------------------------
 " let g:ycm_python_binary_path = 'python3'
@@ -327,12 +301,17 @@ set tags=tags;
 set tagstack
 "set notagrelative
 let g:tagbar_ctags_bin='/usr/bin/ctags'
+" let g:ctrlp_root_markers = ['buildinfo.pm']
 
-""------------------------------------------------------------
-"" Windows Behavior
-""source $VIMRUNTIME/mswin.vim
-""behave mswin
-"
+" AutoPair settings
+"------------------------------------------------------------
+let g:AutoPairsFlyMode = 1
+let g:AutoPairsShortcutBackInsert = '<M-b>'
+
+" NerdCommenter settings
+"------------------------------------------------------------
+let g:NERDSpaceDelims = 1
+
 ""------------------------------------------------------------
 "" Comment Box and Separators
 ":ab #l ###############################################################################
