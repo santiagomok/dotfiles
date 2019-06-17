@@ -305,8 +305,8 @@ let g:tagbar_ctags_bin='/usr/bin/ctags'
 
 " AutoPair settings
 "------------------------------------------------------------
-let g:AutoPairsFlyMode = 1
-let g:AutoPairsShortcutBackInsert = '<M-b>'
+" let g:AutoPairsFlyMode = 1
+" let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 " NerdCommenter settings
 "------------------------------------------------------------
