@@ -172,23 +172,16 @@ set visualbell
 set t_vb=
 set mouse=a
 set cmdheight=2
-
-" Make yank copy to the global system clipboard
-" set clipboard=unnamedplus
-" Do not use X clipboard to speed up start up time
-" set clipboard=exclude:.*
-
-" Quickly time out on keycodes, but never time out on mappings
-set notimeout ttimeout ttimeoutlen=200
+set showcmd                 " Show partial commands in the last line of the screen
+set clipboard=unnamedplus   " Make yank copy to the global system clipboard
+" set clipboard=exclude:.*  " Do not use X clipboard to speed up start up time
+set notimeout ttimeout ttimeoutlen=200 " Quickly time out on keycodes, but never time out on mappings
 
 " One of the most important options to activate. Allows you to switch from an
 " unsaved buffer without saving it first. Also allows you to keep an undo
 " history for multiple files. Vim will complain if you try to quit without
 " saving, and swap files will keep you safe if your computer crashes.
 set hidden
-
-" Show partial commands in the last line of the screen
-set showcmd
 
 " Key Mappings
 "------------------------------------------------------------
@@ -229,10 +222,11 @@ noremap <leader>fs :split<Space>
 noremap <leader>fv :vsplit<Space>
 noremap <leader>ft :tabnew<Space>
 
-" explorer
-noremap <leader>ee :Explore<CR>
-noremap <leader>se :Sexplore<CR>
-noremap <leader>ve :Vexplore<CR>
+" explorer - [N]% of page
+noremap <leader>fe :15Lexplore<CR> 
+noremap <leader>ee :15Explore<CR>
+noremap <leader>se :15Sexplore<CR>
+noremap <leader>ve :15Vexplore<CR>
 
 " sort
 vnoremap <leader>st :sort<CR>
@@ -288,8 +282,12 @@ let g:grepper.highlight = 1
 "------------------------------------------------------------
 let g:netrw_banner          = 0
 let g:netrw_browse_split    = 4     " re-use same windows
-let g:netrw_winsize         = 25    " 25% of page
 let g:netrw_liststyle       = 3     
+let g:netrw_altv            = 1     " vsplit right     
+let g:netrw_preview         = 1     " vsplit preview 
+"let g:netrw_alto            = 0     " control preview to topleft
+let g:netrw_winsize         = 25    " 25% of page
+let g:netrw_usetab          = 1
 
 " VimCompletesMe setting
 "------------------------------------------------------------
