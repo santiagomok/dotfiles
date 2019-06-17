@@ -43,6 +43,7 @@ alias tmk="tmux kill-session -t"
 alias tmls="tmux ls"
 
 # GIT
+alias ga="git add"
 alias gs="git status"
 alias gr="git remote -v"
 alias gll='fzf_git_log'
