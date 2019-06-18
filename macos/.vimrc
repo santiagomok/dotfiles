@@ -24,6 +24,8 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'roxma/vim-tmux-clipboard'
+Plugin 'melonmanchan/vim-tmux-resizer'
 
 " Color
 Plugin 'edkolev/tmuxline.vim'
