@@ -45,6 +45,7 @@ Plugin 'rstacruz/vim-closer'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'ajh17/VimCompletesMe'
 Plugin 'w0rp/ale'
+Plugin 'junegunn/vim-easy-align'
 " Plugin 'jiangmiao/auto-pairs'
 " Plugin 'vim-scripts/Conque-GDB'
 " Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
@@ -257,6 +258,10 @@ endif
 vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
 map <Leader>a ggVG  " select all
+
+" vim-easy-align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " date
 nnoremap <leader>dt a<C-R>=strftime('%m/%d/%Y')<CR><Esc>
