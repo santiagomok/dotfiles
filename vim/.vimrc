@@ -321,6 +321,11 @@ let g:ctrlp_root_markers = ['buildinfo.pm']
 "------------------------------------------------------------
 let g:NERDSpaceDelims = 1
 
+" ALE-cpp settings
+"------------------------------------------------------------
+let g:ale_linters = {'cpp': ['gcc']}
+let g:ale_cpp_gcc_options="-std=c++14 -I$ACDS_SRC_ROOT/quartus/h -I$ACDS_DEST_ROOT/quartus/h -I$ACDS_DEST_ROOT/quartus/h/boost"
+
 ""------------------------------------------------------------
 "" Windows Behavior
 ""source $VIMRUNTIME/mswin.vim
