@@ -3,7 +3,6 @@
 # ------------------------------------------------------------------------------ 
 
 # ------------------------------------------------------------------------------ 
-
 # SHELL
 alias ll="ls -alh"
 alias lsd="ls -alF  | grep -e '^d'"
@@ -16,17 +15,19 @@ alias l="less"
 alias py="python3"
 
 # ------------------------------------------------------------------------------ 
-
 # PATH
-alias fc="fzf_change_dir"
-alias fe="fzf_edit_file"
-alias fge="fzf_grep_edit_file"
-alias fts="fzf_switch_tmux_session"
+alias fcd="_fzf_change_dir"
+alias mcd="_mcd"
+alias bcd="_bcd"
 alias ..="cd .."
 alias ..2="../.."
 alias ..3="..2/.."
 alias ..4="..3/.."
 alias ..5="..4/.."
+
+# File
+alias fvi="_fzf_edit_file"
+alias frg="_fzf_grep_edit_file"
 
 # Print each PATH entry on a separate line
 alias path="echo ${PATH} | tr -s ':' '\n' | uniq" 
@@ -41,6 +42,7 @@ alias tmc="tmux -2 new -s"
 alias tmr="tmux -2 a -t"
 alias tmk="tmux kill-session -t"
 alias tmls="tmux ls"
+alias ftm="_fzf_switch_tmux_session"
 
 # GIT
 alias ga="git add"
