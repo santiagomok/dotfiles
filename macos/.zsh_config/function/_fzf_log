@@ -1,0 +1,6 @@
+# function: _fzf_log
+
+local hash
+hash=$(git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" | \
+     fzf | awk '{print $1}') echo "$hash" | xclip \
+     && git showtool "$hash"

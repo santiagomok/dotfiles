@@ -1,0 +1,3 @@
+# Show directory size sorted from largest
+# Usage: du10 dir/\* (asterisk need escape)
+du -shx "$1" | sort -rh | head -"$2"
