@@ -48,6 +48,10 @@ Plugin 'sheerun/vim-polyglot'
 Plugin 'ajh17/VimCompletesMe'
 Plugin 'w0rp/ale'
 Plugin 'junegunn/vim-easy-align'
+vmap <Enter> <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
 " Plugin 'jiangmiao/auto-pairs'
 " Plugin 'vim-scripts/Conque-GDB'
 " Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
@@ -176,8 +180,8 @@ set t_vb=
 set mouse=a
 set cmdheight=2
 set showcmd                 " Show partial commands in the last line of the screen
-set clipboard=unnamedplus   " Make yank copy to the global system clipboard
-" set clipboard=exclude:.*  " Do not use X clipboard to speed up start up time
+" set clipboard=unnamed       " Make yank copy to the global system clipboard
+set clipboard=exclude:.*  " Do not use X clipboard to speed up start up time
 set notimeout ttimeout ttimeoutlen=200 " Quickly time out on keycodes, but never time out on mappings
 
 " One of the most important options to activate. Allows you to switch from an
@@ -254,10 +258,6 @@ endif
 vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
 map <Leader>a ggVG  " select all
-
-" vim-easy-align
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
 
 " date
 nnoremap <leader>dt a<C-R>=strftime('%m/%d/%Y')<CR><Esc>
