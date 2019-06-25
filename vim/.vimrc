@@ -38,6 +38,12 @@ Plugin 'lifepillar/vim-solarized8'
 " Search
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
+let g:fzf_action = {
+    \ 'ctrl-t': 'tab split',
+    \ 'ctrl-k': 'split',
+    \ 'ctrl-l': 'vsplit' }
+
+
 Plugin 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plugin 'ctrlpvim/ctrlp.vim'
 
@@ -49,8 +55,8 @@ Plugin 'ajh17/VimCompletesMe'
 Plugin 'w0rp/ale'
 Plugin 'junegunn/vim-easy-align'
 vmap <Enter> <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 
 " Plugin 'jiangmiao/auto-pairs'
 " Plugin 'vim-scripts/Conque-GDB'
@@ -210,6 +216,7 @@ noremap <c-l> <c-w>l
 noremap <c-h> <c-w>h
 
 " buffers navigation
+nnoremap <leader>B  :Buffers<CR>
 nnoremap <leader>bb :ls<CR>:buffer<Space>
 nnoremap <leader>sb :ls<CR>:sbuffer<Space>
 nnoremap <leader>vb :ls<CR>:vert sbuffer<Space>
@@ -218,22 +225,26 @@ nnoremap <leader>bn :bnext<CR>
 nnoremap <leader>bp :bprevious<CR>
 
 " tab navigation
-noremap <leader>tt :tabnew<CR>
-noremap <leader>tf :tabfind<Space>
-noremap <leader>tn :tabnext<CR>
-noremap <leader>tp :tabprevious<CR>
+nnoremap <leader>tt :tabnew<CR>
+nnoremap <leader>tf :tabfind<Space>
+nnoremap <leader>tn :tabnext<CR>
+nnoremap <leader>tp :tabprevious<CR>
 
 " file navigation
-noremap <leader>ff :vert sfind<Space>
-noremap <leader>fs :split<Space>
-noremap <leader>fv :vsplit<Space>
-noremap <leader>ft :tabnew<Space>
+nnoremap <leader>F  :Files<CR>
+nnoremap <leader>ff :Files<Space>
+nnoremap <leader>fs :split<Space>
+nnoremap <leader>fv :vsplit<Space>
+nnoremap <leader>ft :tabnew<Space>
 
 " explorer - [N]% of page
-noremap <leader>fe :15Lexplore<CR> 
-noremap <leader>ee :15Explore<CR>
-noremap <leader>se :15Sexplore<CR>
-noremap <leader>ve :15Vexplore<CR>
+nnoremap <leader>fe :15Lexplore<CR> 
+nnoremap <leader>ee :15Explore<CR>
+nnoremap <leader>se :15Sexplore<CR>
+nnoremap <leader>ve :15Vexplore<CR>
+
+" Command History
+nnoremap <leader>H :History:<CR>
 
 " sort
 vnoremap <leader>st :sort<CR>
