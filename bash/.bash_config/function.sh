@@ -3,13 +3,12 @@
 # ------------------------------------------------------------------------------ 
 
 # ------------------------------------------------------------------------------ 
-function mcd() {
+function _mcd() {
     mkdir -p $*
     cd $*
 }
-export -f mcd
 
-function bcd() {
+function _bcd() {
     # ${PWD##*/}: trims path up to and including the last slash
     while [[ ${PWD} != '/' && ${PWD##*/} != "$1" ]]; do cd ..; done
 }
@@ -58,7 +57,7 @@ v() {
 }
 
 # ftags - search ctags
-ftags() {
+_fzf_tags() {
   local line
   [ -e tags ] &&
   line=$(
@@ -68,21 +67,14 @@ ftags() {
                                       -c "silent tag $(cut -f2 <<< "$line")"
 }
 
-fzf_change_dir() {
+_fzf_change_dir() {
     local dir
-    dir=$(fd --type d --hidden --follow --exclude .git . ${1:-.} 2> /dev/null | fzf -i +m) \
+    dir=$(fd --type d --hidden --follow --exclude .git . ${1:-.} 2> /dev/null | fzf -i --preview 'tree -C {} | head -200') \
     && cd $dir
 }
 
-fzf_edit_file() {
-    local files
-    files=$(fd --type f --hidden --follow --exclude .git . ${1:-.} 2> /dev/null | fzf -i +m) \
-    && [ -f "$files" ]  \
-    && vim "$files"
-}
-
 # fuzzy grep with ripgrep
-fzf_grep_edit_file() {
+_fzf_grep_edit_file() {
     local file
     # $1 +$2: filename + line-number
     file="$(rg --no-heading --vimgrep $@ | fzf -0 -1 | awk -F: '{print $1 " +" $2}')"
@@ -110,12 +102,22 @@ fo() {
   fi
 }
 
-fzf_switch_tmux_session() {
+_fzf_switch_tmux_session() {
   local session
   session=$(tmux list-sessions -F "#{session_name}" | \
     fzf --height 40% --reverse --query="$1" --select-1 --exit-0) &&
   tmux switch-client -t "$session"
 }
+
+# Open FZF to select session
+_fzf_tmux_select_session() {
+  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+  if [ $1 ]; then
+     tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
+  fi
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
+}
+
 
 # Display compact log list in fuzzy finder
 fzf_git_log() {
@@ -129,14 +131,5 @@ fzf_log() {
   hash=$(git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |  fzf | awk '{print $1}')
   echo $hash | xclip
   git showtool $hash
-}
-
-# Open FZF to select session
-ftm() {
-  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
-  if [ $1 ]; then
-     tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
-  fi
-  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
 }
 

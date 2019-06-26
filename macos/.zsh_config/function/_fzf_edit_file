@@ -1,8 +1,0 @@
-# function: _fzf_edit_file
-# search file and open selected file with $EDITOR
-
-local files
-files=$(fd --type f --hidden --follow --exclude .git . ${1:-.} 2> /dev/null | fzf -i +m) \
-        && [ -f "$files" ]  \
-        && $EDITOR "$files"
-

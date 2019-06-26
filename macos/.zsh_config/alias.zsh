@@ -25,10 +25,6 @@ alias ..3="..2/.."
 alias ..4="..3/.."
 alias ..5="..4/.."
 
-# File
-alias fvi="_fzf_edit_file"
-alias frg="_fzf_grep_edit_file"
-
 # Print each PATH entry on a separate line
 alias path="echo ${PATH} | tr -s ':' '\n' | uniq" 
 alias manpath="echo ${MANPATH} | tr -s ':' '\n' | uniq"
@@ -45,15 +41,17 @@ alias tmls="tmux ls"
 alias ftm="_fzf_switch_tmux_session"
 
 # GIT
+alias g="git"
 alias ga="git add"
 alias gs="git status"
 alias gr="git remote -v"
-alias gll='fzf_git_log'
+alias gll='_fzf_git_log'
 
 # VIM
 alias vi="vim"
 alias vi_plugin_install="source ${HOME}/github.com/santiagomok/dotfiles/install/vim.sh"
-alias vnone="vim -u NONE"
+alias vrg="_fzf_grep_edit_file"
+alias v0="vim -u NONE"
 alias vdebug="vim_term_debug"
 
 # RIPGREP
