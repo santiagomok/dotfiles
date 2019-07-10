@@ -21,7 +21,10 @@ export LC_ALL=en_US.UTF-8
 # GOLANG
 export GOPATH=${HOME}/Dev/go
 export GOROOT=/usr/local/opt/go/libexec
-export PATH="$GOROOT/bin:${GOPATH}:$PATH"
+export PATH="$PATH:$GOROOT/bin:${GOPATH}"
+
+#Qt
+export PATH="$PATH:$(brew --prefix)/opt/qt/bin"
 
 # ------------------------------------------------------------------------------ 
 
@@ -37,8 +40,4 @@ fi
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --header 'Press CTRL-Y to copy command into clipboard' --border"
 
 # ------------------------------------------------------------------------------ 
-
-# RUST
-export CARGO_HOME="${HOME}/.local"
-export RUSTUP_HOME="${HOME}/.local"
 
