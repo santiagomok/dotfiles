@@ -21,9 +21,7 @@ alias mcd="_mcd"
 alias bcd="_bcd"
 alias ..="cd .."
 alias ..2="../.."
-alias ..3="..2/.."
-alias ..4="..3/.."
-alias ..5="..4/.."
+alias ..3="../../.."
 
 # Print each PATH entry on a separate line
 alias path="echo ${PATH} | tr -s ':' '\n' | uniq" 
