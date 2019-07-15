@@ -23,6 +23,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdcommenter'
+let g:NERDSpaceDelims = 1
+
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'roxma/vim-tmux-clipboard'
 Plugin 'melonmanchan/vim-tmux-resizer'
@@ -37,6 +39,11 @@ Plugin 'lifepillar/vim-solarized8'
 " Search
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
+let g:fzf_action = {
+    \ 'ctrl-t': 'tab split',
+    \ 'ctrl-k': 'split',
+    \ 'ctrl-l': 'vsplit' }
+
 Plugin 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plugin 'ctrlpvim/ctrlp.vim'
 
@@ -45,14 +52,41 @@ Plugin 'tpope/vim-endwise'
 Plugin 'rstacruz/vim-closer'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'ajh17/VimCompletesMe'
+autocmd FileType vim let b:vcm_tab_complete = 'vim'
+
 Plugin 'w0rp/ale'
+" ALE-cpp settings
+"------------------------------------------------------------
+let g:ale_linters = {'cpp': ['clang']}
+let g:ale_cpp_gcc_options="-std=c++14 -I$LOCALPATH/include -I$HOME/Dev/boost"
+
 Plugin 'junegunn/vim-easy-align'
+vmap <Enter> <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+
+Plugin 'rust-lang/rust.vim'
+
 " Plugin 'jiangmiao/auto-pairs'
+" let g:AutoPairsFlyMode = 1
+" let g:AutoPairsShortcutBackInsert = '<M-b>'
+
 " Plugin 'vim-scripts/Conque-GDB'
 " Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+" Ctags 
+"------------------------------------------------------------
+" With autochdir, tags are search from current directory of file upward
+set tags=tags;
+set tagstack
+"set notagrelative
+let g:tagbar_ctags_bin='/usr/bin/ctags'
 
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'Valloric/ycmd'
+" YouCompleteMe setting
+"------------------------------------------------------------
+" let g:ycm_python_binary_path = 'python3'
+
 "Plugin 'octol/vim-cpp-enhanced-highlight'
 "Plugin 'lyuts/vim-rtags', { 'for': ['c', 'cpp'] }
 "Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
@@ -213,22 +247,26 @@ nnoremap <leader>bn :bnext<CR>
 nnoremap <leader>bp :bprevious<CR>
 
 " tab navigation
-noremap <leader>tt :tabnew<CR>
-noremap <leader>tf :tabfind<Space>
-noremap <leader>tn :tabnext<CR>
-noremap <leader>tp :tabprevious<CR>
+nnoremap <leader>tt :tabnew<CR>
+nnoremap <leader>tf :tabfind<Space>
+nnoremap <leader>tn :tabnext<CR>
+nnoremap <leader>tp :tabprevious<CR>
 
 " file navigation
-noremap <leader>ff :vert sfind<Space>
-noremap <leader>fs :split<Space>
-noremap <leader>fv :vsplit<Space>
-noremap <leader>ft :tabnew<Space>
+nnoremap <leader>F  :Files<CR>
+nnoremap <leader>ff :Files<Space>
+nnoremap <leader>fs :split<Space>
+nnoremap <leader>fv :vsplit<Space>
+nnoremap <leader>ft :tabnew<Space>
 
 " explorer - [N]% of page
-noremap <leader>fe :15Lexplore<CR> 
-noremap <leader>ee :15Explore<CR>
-noremap <leader>se :15Sexplore<CR>
-noremap <leader>ve :15Vexplore<CR>
+nnoremap <leader>fe :15Lexplore<CR> 
+nnoremap <leader>ee :15Explore<CR>
+nnoremap <leader>se :15Sexplore<CR>
+nnoremap <leader>ve :15Vexplore<CR>
+
+" Command History
+nnoremap <leader>H :History:<CR>
 
 " sort
 vnoremap <leader>st :sort<CR>
@@ -250,10 +288,6 @@ endif
 vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
 map <Leader>a ggVG  " select all
-
-" vim-easy-align
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
 
 " date
 nnoremap <leader>dt a<C-R>=strftime('%m/%d/%Y')<CR><Esc>
@@ -291,32 +325,6 @@ let g:netrw_preview         = 1     " vsplit preview
 "let g:netrw_alto            = 0     " control preview to topleft
 let g:netrw_winsize         = 25    " 25% of page
 let g:netrw_usetab          = 1
-
-" VimCompletesMe setting
-"------------------------------------------------------------
-autocmd FileType vim let b:vcm_tab_complete = 'vim'
-
-" YouCompleteMe setting
-"------------------------------------------------------------
-" let g:ycm_python_binary_path = 'python3'
-
-" Ctags 
-"------------------------------------------------------------
-" With autochdir, tags are search from current directory of file upward
-set tags=tags;
-set tagstack
-"set notagrelative
-let g:tagbar_ctags_bin='/usr/bin/ctags'
-" let g:ctrlp_root_markers = ['buildinfo.pm']
-
-" AutoPair settings
-"------------------------------------------------------------
-" let g:AutoPairsFlyMode = 1
-" let g:AutoPairsShortcutBackInsert = '<M-b>'
-
-" NerdCommenter settings
-"------------------------------------------------------------
-let g:NERDSpaceDelims = 1
 
 ""------------------------------------------------------------
 "" Comment Box and Separators

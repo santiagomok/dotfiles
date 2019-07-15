@@ -23,6 +23,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdcommenter'
+let g:NERDSpaceDelims = 1
+
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'ngemily/vim-vp4'
 Plugin 'roxma/vim-tmux-clipboard'
@@ -52,18 +54,42 @@ Plugin 'tpope/vim-endwise'
 Plugin 'rstacruz/vim-closer'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'ajh17/VimCompletesMe'
+autocmd FileType vim let b:vcm_tab_complete = 'vim'
+
 Plugin 'w0rp/ale'
+" ALE-cpp settings
+"------------------------------------------------------------
+let g:ale_linters = {'cpp': ['gcc']}
+let g:ale_cpp_gcc_options="-std=c++14 -I$ACDS_SRC_ROOT/quartus/h -I$ACDS_DEST_ROOT/quartus/h -I$ACDS_DEST_ROOT/quartus/h/boost"
+
 Plugin 'junegunn/vim-easy-align'
 vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
+Plugin 'rust-lang/rust.vim'
+
 " Plugin 'jiangmiao/auto-pairs'
+" let g:AutoPairsFlyMode = 1
+" let g:AutoPairsShortcutBackInsert = '<M-b>'
+
 " Plugin 'vim-scripts/Conque-GDB'
 " Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+" Ctags 
+"------------------------------------------------------------
+" With autochdir, tags are search from current directory of file upward
+set tags=tags;
+set tagstack
+"set notagrelative
+let g:tagbar_ctags_bin='/usr/bin/ctags'
+let g:ctrlp_root_markers = ['buildinfo.pm']
 
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'Valloric/ycmd'
+" YouCompleteMe setting
+"------------------------------------------------------------
+" let g:ycm_python_binary_path = 'python3'
+
 "Plugin 'octol/vim-cpp-enhanced-highlight'
 "Plugin 'lyuts/vim-rtags', { 'for': ['c', 'cpp'] }
 "Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
@@ -306,36 +332,6 @@ let g:netrw_preview         = 1     " vsplit preview
 "let g:netrw_alto            = 0     " control preview to topleft
 let g:netrw_winsize         = 25    " 25% of page
 let g:netrw_usetab          = 1
-
-" VimCompletesMe setting
-"------------------------------------------------------------
-autocmd FileType vim let b:vcm_tab_complete = 'vim'
-
-" YouCompleteMe setting
-"------------------------------------------------------------
-" let g:ycm_python_binary_path = 'python3'
-
-" Ctags 
-"------------------------------------------------------------
-" With autochdir, tags are search from current directory of file upward
-set tags=tags;
-set tagstack
-"set notagrelative
-let g:tagbar_ctags_bin='/usr/bin/ctags'
-let g:ctrlp_root_markers = ['buildinfo.pm']
-" AutoPair settings
-"------------------------------------------------------------
-" let g:AutoPairsFlyMode = 1
-" let g:AutoPairsShortcutBackInsert = '<M-b>'
-
-" NerdCommenter settings
-"------------------------------------------------------------
-let g:NERDSpaceDelims = 1
-
-" ALE-cpp settings
-"------------------------------------------------------------
-let g:ale_linters = {'cpp': ['gcc']}
-let g:ale_cpp_gcc_options="-std=c++14 -I$ACDS_SRC_ROOT/quartus/h -I$ACDS_DEST_ROOT/quartus/h -I$ACDS_DEST_ROOT/quartus/h/boost"
 
 ""------------------------------------------------------------
 "" Windows Behavior
