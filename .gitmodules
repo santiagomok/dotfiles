@@ -1,0 +1,6 @@
+[submodule "gdb/Boost-Pretty-Printer"]
+	path = gdb/Boost-Pretty-Printer
+	url = https://github.com/ruediger/Boost-Pretty-Printer.git
+[submodule "gdb/gdb-dashboard"]
+	path = gdb/gdb-dashboard
+	url = https://github.com/cyrus-and/gdb-dashboard.git
