@@ -17,6 +17,8 @@ LIGHT_CYAN="${OB}\033[0;96m${CB}"
 NC="${OB}\033[0m${CB}"
 rarrow='→' # 2192
 
+set TERM=xterm-256color
+
 # Trim workdir path (\w) in PS1 to last 'n' path  dir
 if [ "$PLATFORM" = Darwin ]; then
     PS1="${WHITE}\h${NC} | ${LIGHT_BLUE}\w${NC}\n"

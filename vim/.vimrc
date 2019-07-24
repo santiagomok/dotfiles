@@ -193,12 +193,13 @@ set breakindentopt=sbr
 set ignorecase
 set smartcase
 set incsearch
-set hlsearch        " Search color highlight
-augroup color_overrirde
-    autocmd!
-    autocmd ColorScheme * highlight Search ctermfg=LightCyan
-                    \   | highlight IncSearch ctermfg=Cyan
-augroup END
+set hlsearch        
+" Search color highlight
+" augroup color_overrirde
+    " autocmd!
+    " autocmd ColorScheme * highlight Search ctermfg=LightCyan
+                    " \   | highlight IncSearch ctermfg=Cyan
+" augroup END
 
 " Usability options
 "------------------------------------------------------------
