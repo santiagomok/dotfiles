@@ -66,6 +66,8 @@ nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
 Plugin 'rust-lang/rust.vim'
+let g:rustfmt_autosave = 1
+let g:rust_clip_command = 'pbcopy'
 
 " Plugin 'jiangmiao/auto-pairs'
 " let g:AutoPairsFlyMode = 1
