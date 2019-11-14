@@ -3,100 +3,86 @@
 
 " Plugin and Reload settings
 "------------------------------------------------------------
-set nocompatible              " not compatible with vi
-filetype off                  " required
+call plug#begin('~/.vim/plugged')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" Plug 'tpope/vim-sensible'
+" Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-repeat'
+" Plug 'tpope/vim-surround'
+" Plug 'scrooloose/nerdcommenter'
+" let g:NERDSpaceDelims = 1
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" Plug 'christoomey/vim-tmux-navigator'
+" Plug 'roxma/vim-tmux-clipboard'
+" Plug 'melonmanchan/vim-tmux-resizer'
 
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-" Edit
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/nerdcommenter'
-let g:NERDSpaceDelims = 1
+" " Color
+Plug 'edkolev/tmuxline.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'lifepillar/vim-solarized8'
+let laststatus=2
+" " Plugin 'junegunn/seoul256.vim'
+" " Plugin 'guns/xterm-color-table.vim'
 
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'roxma/vim-tmux-clipboard'
-Plugin 'melonmanchan/vim-tmux-resizer'
-
-" Color
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'itchyny/lightline.vim'
-Plugin 'lifepillar/vim-solarized8'
-" Plugin 'junegunn/seoul256.vim'
-" Plugin 'guns/xterm-color-table.vim'
-
-" Search
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
+" " Search
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-k': 'split',
     \ 'ctrl-l': 'vsplit' }
 
-Plugin 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-Plugin 'ctrlpvim/ctrlp.vim'
+" Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
+" Plug 'ctrlpvim/ctrlp.vim'
 
-" Code
-Plugin 'tpope/vim-endwise'
-Plugin 'rstacruz/vim-closer'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'ajh17/VimCompletesMe'
-autocmd FileType vim let b:vcm_tab_complete = 'vim'
+" " Code
+" Plug 'tpope/vim-endwise'
+" Plug 'rstacruz/vim-closer'
+" Plug 'sheerun/vim-polyglot'
+" Plug 'ajh17/VimCompletesMe'
+" autocmd FileType vim let b:vcm_tab_complete = 'vim'
 
-Plugin 'w0rp/ale'
-" ALE-cpp settings
-"------------------------------------------------------------
-let g:ale_linters = {'cpp': ['clang']}
-let g:ale_cpp_gcc_options="-std=c++14 -I$LOCALPATH/include -I$HOME/Dev/boost"
+" " ALE-cpp 
+" Plug 'w0rp/ale'
+" let g:ale_linters = {'cpp': ['clang']}
+" let g:ale_cpp_gcc_options="-std=c++14 -I$LOCALPATH/include -I$HOME/Dev/boost"
 
-Plugin 'junegunn/vim-easy-align'
-vmap <Enter> <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
+" Plugin 'junegunn/vim-easy-align'
+" vmap <Enter> <Plug>(EasyAlign)
+" nmap ga <Plug>(EasyAlign)
+" xmap ga <Plug>(EasyAlign)
 
-Plugin 'rust-lang/rust.vim'
-let g:rustfmt_autosave = 1
-let g:rust_clip_command = 'pbcopy'
+" Plugin 'rust-lang/rust.vim'
+" let g:rustfmt_autosave = 1
+" let g:rust_clip_command = 'pbcopy'
 
-Plugin 'fatih/vim-go'
+" " Plugin 'jiangmiao/auto-pairs'
+" " let g:AutoPairsFlyMode = 1
+" " let g:AutoPairsShortcutBackInsert = '<M-b>'
 
-" Plugin 'jiangmiao/auto-pairs'
-" let g:AutoPairsFlyMode = 1
-" let g:AutoPairsShortcutBackInsert = '<M-b>'
+" " Plugin 'vim-scripts/Conque-GDB'
+" " Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+" " Ctags 
+" "------------------------------------------------------------
+" " With autochdir, tags are search from current directory of file upward
+" set tags=tags;
+" set tagstack
+" "set notagrelative
+" let g:tagbar_ctags_bin='/usr/bin/ctags'
 
-" Plugin 'vim-scripts/Conque-GDB'
-" Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-" Ctags 
-"------------------------------------------------------------
-" With autochdir, tags are search from current directory of file upward
-set tags=tags;
-set tagstack
-"set notagrelative
-let g:tagbar_ctags_bin='/usr/bin/ctags'
+" "Plugin 'Valloric/YouCompleteMe'
+" "Plugin 'Valloric/ycmd'
+" " YouCompleteMe setting
+" "------------------------------------------------------------
+" " let g:ycm_python_binary_path = 'python3'
 
-"Plugin 'Valloric/YouCompleteMe'
-"Plugin 'Valloric/ycmd'
-" YouCompleteMe setting
-"------------------------------------------------------------
-" let g:ycm_python_binary_path = 'python3'
+" "Plugin 'octol/vim-cpp-enhanced-highlight'
+" "Plugin 'lyuts/vim-rtags', { 'for': ['c', 'cpp'] }
+" "Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
-"Plugin 'octol/vim-cpp-enhanced-highlight'
-"Plugin 'lyuts/vim-rtags', { 'for': ['c', 'cpp'] }
-"Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+" " All of your Plugins must be added before the following line
+call plug#end()            " required
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -114,7 +100,7 @@ filetype plugin indent on    " required
 "------------------------------------------------------------
 "------------------------------------------------------------
 " FZF plugin
-set rtp+=~/.fzf/bin/fzf
+" set rtp+=~/.fzf/bin/fzf
 
 if v:version >= 800
     packadd termdebug
@@ -159,15 +145,15 @@ augroup END
 if !has("gui_running")
     set t_Co=256
 endif
-if exists('g:lightline')
-	let g:lightline = {
-	    \ 'colorscheme': 'solarized',
-	    \ }
-endif
-"let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-set background=dark
-colorscheme solarized8
+" let g:lightline = {
+"    \ 'colorscheme': 'solarized',
+"    \ }
+" if exists('g:lightline')
+" endif
+" let g:solarized_termcolors=256
+" let g:solarized_termtrans=1
+" set background=dark
+" colorscheme solarized8
 
 "" Highlight chars that go over the 120-column limit, trucate at 120 chars
 "highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white

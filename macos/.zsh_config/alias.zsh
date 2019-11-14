@@ -38,6 +38,9 @@ alias tmk="tmux kill-session -t"
 alias tmls="tmux ls"
 alias ftm="_fzf_switch_tmux_session"
 
+# GDB
+alias tgdb="tmux new gdb -x $HOME/.tgdbinit"
+
 # GIT
 alias g="git"
 alias ga="git add"
