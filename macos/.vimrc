@@ -58,7 +58,7 @@ Plug 'rust-lang/rust.vim'
 let g:rustfmt_autosave = 1
 let g:rust_clip_command = 'pbcopy'
 
-Plugin 'fatih/vim-go'
+" Plugin 'fatih/vim-go'
 
 " Plugin 'jiangmiao/auto-pairs'
 " let g:AutoPairsFlyMode = 1
