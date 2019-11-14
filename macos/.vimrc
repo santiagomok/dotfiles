@@ -1,71 +1,60 @@
 " Santiago Mok (santiago.mok@gmail.com)
 " File: .vimrc - ViM configuration file
+"
+call plug#begin()
 
-" Plugin and Reload settings
-"------------------------------------------------------------
-set nocompatible              " not compatible with vi
-filetype off                  " required
+" Colors
+Plug 'lifepillar/vim-solarized8'
+Plug 'joshdick/onedark.vim'
+Plug 'chriskempson/base16-vim'
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+Plug 'edkolev/tmuxline.vim'
+Plug 'itchyny/lightline.vim'
+if exists('g:lightline')
+    let g:lightline = {
+        \ 'colorscheme': 'solarized',
+	    \ }
+endif
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-" Edit
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/nerdcommenter'
-let g:NERDSpaceDelims = 1
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'roxma/vim-tmux-clipboard'
+Plug 'melonmanchan/vim-tmux-resizer'
 
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'roxma/vim-tmux-clipboard'
-Plugin 'melonmanchan/vim-tmux-resizer'
-
-" Color
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'itchyny/lightline.vim'
-Plugin 'lifepillar/vim-solarized8'
-" Plugin 'junegunn/seoul256.vim'
-" Plugin 'guns/xterm-color-table.vim'
-
-" Search
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/heytmux'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-k': 'split',
     \ 'ctrl-l': 'vsplit' }
 
-Plugin 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-Plugin 'ctrlpvim/ctrlp.vim'
-
 " Code
-Plugin 'tpope/vim-endwise'
-Plugin 'rstacruz/vim-closer'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'ajh17/VimCompletesMe'
-autocmd FileType vim let b:vcm_tab_complete = 'vim'
+Plug 'scrooloose/nerdcommenter'
+let g:NERDSpaceDelims = 1
 
-Plugin 'w0rp/ale'
-" ALE-cpp settings
+Plug 'tpope/vim-endwise'
+Plug 'rstacruz/vim-closer'
+Plug 'sheerun/vim-polyglot'
+" Plugin 'ajh17/VimCompletesMe'
+" autocmd FileType vim let b:vcm_tab_complete = 'vim'
+" 
+" Linter - ALE-cpp settings
 "------------------------------------------------------------
+Plug 'w0rp/ale'
 let g:ale_linters = {'cpp': ['clang']}
 let g:ale_cpp_gcc_options="-std=c++14 -I$LOCALPATH/include -I$HOME/Dev/boost"
-
-Plugin 'junegunn/vim-easy-align'
-vmap <Enter> <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
-
-Plugin 'rust-lang/rust.vim'
+" 
+" Plugin 'junegunn/vim-easy-align'
+" vmap <Enter> <Plug>(EasyAlign)
+" nmap ga <Plug>(EasyAlign)
+" xmap ga <Plug>(EasyAlign)
+" 
+Plug 'rust-lang/rust.vim'
 let g:rustfmt_autosave = 1
 let g:rust_clip_command = 'pbcopy'
 
@@ -76,9 +65,10 @@ Plugin 'fatih/vim-go'
 " let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 " Plugin 'vim-scripts/Conque-GDB'
-" Plugin 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+
 " Ctags 
 "------------------------------------------------------------
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 " With autochdir, tags are search from current directory of file upward
 set tags=tags;
 set tagstack
@@ -95,30 +85,15 @@ let g:tagbar_ctags_bin='/usr/bin/ctags'
 "Plugin 'lyuts/vim-rtags', { 'for': ['c', 'cpp'] }
 "Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-
-" Put your non-Plugin stuff after this line
-"------------------------------------------------------------
-"------------------------------------------------------------
-"------------------------------------------------------------
-" FZF plugin
-set rtp+=~/.fzf/bin/fzf
+call plug#end()
 
 if v:version >= 800
     packadd termdebug
 endif
+
+"------------------------------------------------------------
+" FZF plugin
+set rtp+=~/.fzf/bin/fzf
 
 " Reload setting
 "------------------------------------------------------------
@@ -151,27 +126,19 @@ augroup END
 
 " Lightline and colors setting
 "------------------------------------------------------------
-" Startup Windows Size for GUI
-"if has("gui_running")
-"	set lines=80 columns=130
-"endif
-"
-if !has("gui_running")
-    set t_Co=256
-endif
-if exists('g:lightline')
-	let g:lightline = {
-	    \ 'colorscheme': 'solarized',
-	    \ }
-endif
-"let g:solarized_termcolors=256
-let g:solarized_termtrans=1
+" if has("termguicolors")
+    " set termguicolors
+" endif
+set laststatus=2
 set background=dark
 colorscheme solarized8
+" colorscheme onedark
+" colorscheme base16-default-dark
 
-"" Highlight chars that go over the 120-column limit, trucate at 120 chars
-"highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
-"match OverLength '\%121v.*'
+" if !has('gui_running')
+    " set t_Co=256
+" endif
+" let g:solarized_termtrans=1
 
 " Indentation settings 
 "------------------------------------------------------------
@@ -230,10 +197,11 @@ let mapleader = ","
 
 " Save 
 nnoremap <leader>s  :update<cr>
-nnoremap <leader>wa :wa<cr>
+nnoremap <leader>W  :wa<cr>
 
 " Edit ~/.vimrc
 nnoremap <leader>rc :tabnew $MYVIMRC<cr>
+nnoremap <leader>R  :source $MYVIMRC<cr>
 
 " Bind Ctrl+<movement> keys to move around the windows, instead of using
 " Ctrl+w + <movement>
@@ -270,23 +238,22 @@ nnoremap <leader>se :15Sexplore<CR>
 nnoremap <leader>ve :15Vexplore<CR>
 
 " Command History
-nnoremap <leader>H :History:<CR>
+nnoremap <leader>H :History<CR>
+nnoremap <F1> :Helptags<CR>
 
 " sort
 vnoremap <leader>st :sort<CR>
 
 " tag
-nnoremap <leader>] :CtrlPTag<CR>
+" nnoremap <leader>] :CtrlPTag<CR>
 
 " ConqueGDB 
-nnoremap <leader>cg :ConqueGdb<Space>
+" nnoremap <leader>cg :ConqueGdb<Space>
 
 " <F10> Tagbar toogle
-if v:version >= 703
-  inoremap <F10> <esc>:TagbarToggle<cr>
-  nnoremap <F10> :TagbarToggle<cr>
-  let g:tagbar_sort = 0
-endif
+inoremap <F10> <esc>:TagbarToggle<cr>
+nnoremap <F10> :TagbarToggle<cr>
+let g:tagbar_sort = 0
 
 " shift and selection
 vnoremap < <gv  " better indentation

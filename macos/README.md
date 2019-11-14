@@ -32,14 +32,18 @@ dscl . -read /Users/$USER UserShell
 sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
 ```
 
-## [Powerline Fonts](https://github.com/powerline/fonts)
-- clone: git clone https://github.com/powerline/fonts.git --depth=1 $HOME/dev
+## Fonts
+### [Powerline Fonts](https://github.com/powerline/fonts)
+- clone: git clone https://github.com/powerline/fonts.git --depth=1 ~Dev/local/theme
 - install: cd fonts && ./install.sh
 - clean: cd .. && rm -rf fonts
 
+## BASE16
+- git clone https://github.com/martinlindhe/base16-iterm2.git ~/Dev/local/theme
+
 ## iTerm2
 Source: 
-Color: Tango Dark
+Color: base16-tomorrow-night-256
 Font: Incosolata-dz for Powerline
 Size: 12
 
