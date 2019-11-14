@@ -16,8 +16,8 @@ brew 'tmux'
 # tools
 #brew 'bash'
 #brew 'bash-completion'
-#brew 'tree'
-#brew 'wget'
+brew 'tree'
+brew 'wget'
 #brew 'youtube-dl'
 #brew 'z'
 

@@ -7,3 +7,4 @@ macos/.vim/plugged
 macos/.vim/view
 macos/.vim/.netrwhist
 tmux/.tmux/plugins
+*.lock.json
