@@ -1,26 +1,27 @@
 # MacOS
 
 ## New Device Provision
-*ssh keygen*
-[Connecting to github with SSH](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh)
+* SSH keygen: [Connecting to github with SSH](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh)
 
-*Clone dotfiles*
+* Clone dotfiles
 ```bash
 git clone git@github.com:santiagomok/dotfiles.git ~/local/dev/dotfiles
 ```
 
-*Install [Homebrew](https://brew.sh)*
-* /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-* Install brew bundle command
-  * brew tap Homebrew/bundle
-* Install apps
-  * brew bundle ~/local/dev/dotfiles/macos/Brewfile
+* Install [Homebrew](https://brew.sh)*
+```bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# Install brew bundle command
+brew tap Homebrew/bundle
+# Install apps
+brew bundle ~/local/dev/dotfiles/macos/Brewfile
 
-*Configure dotfiles*
+# Configure dotfiles
 stow -v macos/.stow*
 stow -v macos tmux git gdb
+```
 
-*Install VIM Plugin*
+* Install VIM Plugin 
 ```bash
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +PlugInstall
