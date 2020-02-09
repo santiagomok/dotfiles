@@ -1,0 +1,3 @@
+#Data		    -fstype=smbfs	://Santiago:<password>@DS415.local/Data
+#Video		    -fstype=smbfs	://Santiago:<password>@DS415.local/Video
+

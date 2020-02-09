@@ -1,0 +1,4 @@
+Backup      	-fstype=nfs,resvport,soft,intr,retrans=3,proto=tcp,locallocks DS415.local:/volume1/Backup
+Data		    -fstype=nfs,resvport,soft,intr,retrans=3,proto=tcp DS415.local:/volume1/Data
+Red\ Keep     	-fstype=nfs,resvport,soft,intr,retrans=3,proto=tcp DS415.local:"/volume1/Red Keep"
+Video		    -fstype=nfs,resvport,soft,intr,retrans=3,proto=tcp DS415.local:/volume1/Video
