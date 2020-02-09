@@ -5,3 +5,6 @@
 .*.example
 ^/@.*
 README.*
+Brewfile 
+com.demo.daemon.plist 
+set-defaults.sh
