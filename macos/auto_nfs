@@ -1,4 +1,4 @@
-Backup      	-fstype=nfs,resvport,soft,intr,retrans=3,proto=tcp,locallocks DS415.local:/volume1/Backup
-Data		    -fstype=nfs,resvport,soft,intr,retrans=3,proto=tcp DS415.local:/volume1/Data
-Red\ Keep     	-fstype=nfs,resvport,soft,intr,retrans=3,proto=tcp DS415.local:"/volume1/Red Keep"
-Video		    -fstype=nfs,resvport,soft,intr,retrans=3,proto=tcp DS415.local:/volume1/Video
+/System/Volumes/Data/mnt/backup      	-fstype=nfs,noowners,resvport,soft,intr,retrans=3,proto=tcp,locallocks DS415.local:/volume1/Backup
+/System/Volumes/Data/mnt/Data		    -fstype=nfs,noowners,resvport,soft,intr,retrans=3,proto=tcp DS415.local:/volume1/Data
+/System/Volumes/Data/mnt/Red\ Keep     	-fstype=nfs,noowners,resvport,soft,intr,retrans=3,proto=tcp DS415.local:"/volume1/Red Keep"
+/System/Volumes/Data/mnt/Video		    -fstype=nfs,noowners,resvport,soft,intr,retrans=3,proto=tcp DS415.local:/volume1/Video

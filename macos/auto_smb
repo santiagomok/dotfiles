@@ -1,3 +1,4 @@
-#Data		    -fstype=smbfs	://Santiago:<password>@DS415.local/Data
-#Video		    -fstype=smbfs	://Santiago:<password>@DS415.local/Video
+/System/Volumes/Data/mnt/backup		    -fstype=smbfs,soft,noowners,nosuid,rw   ://Santiago:<password>@DS415.local/Backup
+/System/Volumes/Data/mnt/data           -fstype=smbfs,soft,noowners,nosuid,rw   ://Santiago:<password>@DS415.local/Data
+/System/Volumes/Data/mnt/video          -fstype=smbfs,soft,noowners,nosuid,rw   ://Santiago:<password>@DS415.local/Video
 
