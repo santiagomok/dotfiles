@@ -117,6 +117,7 @@ set rtp+=~/.fzf/bin/fzf
 
 if v:version >= 800
     packadd termdebug
+    let g:termdebug_wide=1
 endif
 
 " Reload setting
@@ -163,7 +164,7 @@ if exists('g:lightline')
 	    \ 'colorscheme': 'solarized',
 	    \ }
 endif
-"let g:solarized_termcolors=256
+" let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 set background=dark
 colorscheme solarized8
@@ -296,6 +297,7 @@ endif
 vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
 map <Leader>a ggVG  " select all
+nnoremap <leader>V <c-v> " vertical visual selection
 
 " date
 nnoremap <leader>dt a<C-R>=strftime('%m/%d/%Y')<CR><Esc>

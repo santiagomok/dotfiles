@@ -25,7 +25,7 @@ alias datemd="date +%b%d"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias hc="history -c"
 alias rg="rg --line-number --no-heading --ignore-case"
-alias rgcode="rg -i -n -t{c,cpp,make,java,py,tcl,json,perl,protobuf,sh,swig,xml}"
+alias rgdev="rg -i -n -t{c,cpp,make,java,py,tcl,json,perl,protobuf,sh,swig,xml}"
 
 # ------------------------------------------------------------------------------ 
 
@@ -34,10 +34,8 @@ alias fcd="_fzf_change_dir"
 alias mcd="_mcd"
 alias bcd="_bcd"
 alias ..="cd .."
-alias ..2="../.."
-alias ..3="..2/.."
-alias ..4="..3/.."
-alias ..5="..4/.."
+alias ..2="cd ../.."
+alias ..3="cd ../../.."
 
 # Print each PATH entry on a separate line
 alias path="echo ${PATH} | tr -s ':' '\n' | uniq" 
