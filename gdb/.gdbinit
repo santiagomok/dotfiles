@@ -3,7 +3,6 @@ set print elements 0
 set auto-load safe-path /
 
 source $PSG_SWIP/udm/gdbinit
-
 source $HOME/.local/dotfiles/gdb/gdb-dashboard/.gdbinit
 
 # Alias ------------------------------------------------------------------------

@@ -1,5 +1,10 @@
 vim/.vim/bundle/
 vim/.vim/.netrwhist
 vim/.vim/.netrwbook
+macos/.vim/autoload
 macos/.vim/bundle
+macos/.vim/plugged
+macos/.vim/view
 macos/.vim/.netrwhist
+tmux/.tmux/plugins
+*.lock.json
