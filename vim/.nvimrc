@@ -1,0 +1,425 @@
+" vim: set foldmethod=marker foldlevel=0 nomodeline:
+" ============================================================================
+
+let s:darwin = has('mac')
+
+augroup vimrc   
+    autocmd!
+augroup END
+
+
+" ============================================================================
+" PLUG PACKAGES {{{
+" ============================================================================
+call plug#begin('~/.vim/plugged')
+
+" Color
+Plug 'edkolev/tmuxline.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'lifepillar/vim-solarized8'
+Plug 'chriskempson/base16-vim'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'tomasr/molokai'
+Plug 'morhetz/gruvbox'
+  let g:gruvbox_contrast_dark = 'soft'
+Plug 'junegunn/seoul256.vim'
+" Plug 'guns/xterm-color-table.vim'
+
+" Search and browse
+Plug 'christoomey/vim-tmux-navigator'
+" Plug 'roxma/vim-tmux-clipboard'
+" Plug 'melonmanchan/vim-tmux-resizer'
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+let g:fzf_action = {
+    \ 'ctrl-t': 'tab split',
+    \ 'ctrl-k': 'split',
+    \ 'ctrl-l': 'vsplit' }
+
+" Code
+" Plug 'ngemily/vim-vp4'
+Plug 'scrooloose/nerdcommenter'
+let g:NERDSpaceDelims = 1
+
+Plug 'octol/vim-cpp-enhanced-highlight'
+
+if v:version >= 800
+  " Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
+endif
+
+" Lint
+Plug 'w0rp/ale'
+    " ALE-cpp settings
+    "------------------------------------------------------------
+    let g:ale_linters = {'cpp': ['gcc']}
+    let g:ale_cpp_gcc_options="-std=c++14 -I$ACDS_SRC_ROOT/quartus/h -I$ACDS_DEST_ROOT/quartus/h -I$ACDS_DEST_ROOT/quartus/h/boost"
+    let g:ale_lint_delay = 1000
+    nmap ]a <Plug>(ale_next_wrap)
+    nmap [a <Plug>(ale_previous_wrap)
+
+call plug#end()
+
+" }}}
+
+" ============================================================================
+" PLUGIN SETTINGS {{{
+" ============================================================================
+" FZF plugin
+set rtp+=~/.fzf/bin/fzf
+
+if v:version >= 800
+    packadd termdebug
+    let g:termdebug_wide=1
+endif
+
+" Lightline and colors setting
+"------------------------------------------------------------
+" Startup Windows Size for GUI
+"if has("gui_running")
+"	set lines=80 columns=130
+"endif
+"
+if has('termguicolors')
+    set termguicolors
+endif 
+
+if has('nvim')
+    let base16colorspace=256  " Access colors present in 256 colorspace
+    " colorscheme base16-monokai
+    colorscheme base16-helios
+else
+    if !has("gui_running")
+    set t_Co=256
+    endif
+    if exists('g:lightline')
+        let g:lightline = {
+            \ 'colorscheme': 'solarized',
+            \ }
+    endif
+
+    " let g:solarized_termcolors=256
+    " let g:solarized_termtrans=1
+    set background=dark
+    colorscheme solarized8
+endif
+
+"" Highlight chars that go over the 120-column limit, trucate at 120 chars
+"highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
+"match OverLength '\%121v.*'
+
+" ----------------------------------------------------------------------------
+" vimawesome.com
+" ----------------------------------------------------------------------------
+function! VimAwesomeComplete() abort
+  let prefix = matchstr(strpart(getline('.'), 0, col('.') - 1), '[.a-zA-Z0-9_/-]*$')
+  echohl WarningMsg
+  echo 'Downloading plugin list from VimAwesome'
+  echohl None
+ruby << EOF
+  require 'json'
+  require 'open-uri'
+
+  query = VIM::evaluate('prefix').gsub('/', '%20')
+  items = 1.upto(max_pages = 3).map do |page|
+    Thread.new do
+      url  = "http://vimawesome.com/api/plugins?page=#{page}&query=#{query}"
+      data = open(url).read
+      json = JSON.parse(data, symbolize_names: true)
+      json[:plugins].map do |info|
+        pair = info.values_at :github_owner, :github_repo_name
+        next if pair.any? { |e| e.nil? || e.empty? }
+        {word: pair.join('/'),
+         menu: info[:category].to_s,
+         info: info.values_at(:short_desc, :author).compact.join($/)}
+      end.compact
+    end
+  end.each(&:join).map(&:value).inject(:+)
+  VIM::command("let cands = #{JSON.dump items}")
+EOF
+  if !empty(cands)
+    inoremap <buffer> <c-v> <c-n>
+    augroup _VimAwesomeComplete
+      autocmd!
+      autocmd CursorMovedI,InsertLeave * iunmap <buffer> <c-v>
+            \| autocmd! _VimAwesomeComplete
+    augroup END
+
+    call complete(col('.') - strchars(prefix), cands)
+  endif
+  return ''
+endfunction
+
+autocmd vimrc FileType vim inoremap <buffer> <c-x><c-v> <c-r>=VimAwesomeComplete()<cr>
+
+" ----------------------------------------------------------------------------
+" coc.nvim
+" ----------------------------------------------------------------------------
+if has_key(g:plugs, 'coc.nvim')
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+  function! s:show_documentation()
+    if (index(['vim', 'help'], &filetype) >= 0)
+      execute 'h' expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+  let g:coc_global_extensions = ['coc-github', 'coc-yaml', 'coc-solargraph',
+    \ 'coc-r-lsp', 'coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-html',
+    \ 'coc-prettier', 'coc-eslint', 'coc-tsserver', 'coc-emoji', 'coc-java']
+  command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+  let g:go_doc_keywordprg_enabled = 0
+
+  augroup coc-config
+    autocmd!
+    autocmd VimEnter * nmap <silent> gd <Plug>(coc-definition)
+    autocmd VimEnter * nmap <silent> g? <Plug>(coc-references)
+  augroup END
+endif
+
+
+" }}}
+
+" ============================================================================
+" APPEARANCE SETTINGS {{{
+" ============================================================================
+set tabstop=4       " Define <TAB> column width
+set softtabstop=4   " Affect what happen when <TAB> or <BS> is pressed.
+set shiftwidth=4    " Affect what happen for <<, >>, or == keys. Must be same as tabstop
+set expandtab       " Convert \t into spaces when used with softtabstop.
+set smartindent     " Automatically inserts one extra level of indentation in some cases.
+set shiftround
+
+" Wrapping and scrolling
+"------------------------------------------------------------
+let &showbreak = '... '
+set breakindent
+set breakindentopt=sbr
+
+" Search settings 
+"------------------------------------------------------------
+" Use case insensitive search, except when using capital letters
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch        
+" Search color highlight
+" augroup color_overrirde
+    " autocmd!
+    " autocmd ColorScheme * highlight Search ctermfg=LightCyan
+                    " \   | highlight IncSearch ctermfg=Cyan
+" augroup END
+
+" Usability options
+"------------------------------------------------------------
+set number
+set backspace=indent,eol,start
+set wildignorecase
+set history=10000
+set confirm
+set encoding=utf-8
+set nostartofline
+set visualbell
+set t_vb=
+set mouse=a
+set cmdheight=2
+set showcmd                 " Show partial commands in the last line of the screen
+set clipboard=unnamed       " Make yank copy to the global system clipboard
+" set clipboard=exclude:.*  " Do not use X clipboard to speed up start up time
+set notimeout ttimeout ttimeoutlen=200 " Quickly time out on keycodes, but never time out on mappings
+set nrformats=hex
+
+" One of the most important options to activate. Allows you to switch from an
+" unsaved buffer without saving it first. Also allows you to keep an undo
+" history for multiple files. Vim will complain if you try to quit without
+" saving, and swap files will keep you safe if your computer crashes.
+set hidden
+
+" }}}
+
+" ============================================================================
+" RELOAD SETTINGS {{{
+" ============================================================================
+" Create a base autogroup that resets itself upon sourcing of the vimrc. 
+" This means all autocmds that are in this group are cleared when the vimrc is 
+" sourced, preventing them from piling up and slowing Vim down. 
+augroup vimrc
+    " Auto reload .vimrc on save 
+    " autocmd! bufwritepost .vimrc source % 
+    au BufWritePost vimrc,.vimrc nested if expand('%') !~ 'fugitive' | source % | endif
+
+    " Automatically change the current directory to the file editing
+    set autochdir
+    autocmd BufEnter * silent! lcd %:p:h
+
+    " File types
+    " au BufNewFile,BufRead *.icc               set filetype=cpp
+    " au BufNewFile,BufRead *.pde               set filetype=java
+    " au BufNewFile,BufRead *.coffee-processing set filetype=coffee
+    " au BufNewFile,BufRead Dockerfile*         set filetype=dockerfile
+
+    " Included syntax
+    " au FileType,ColorScheme * call <SID>file_type_handler()
+
+    " Fugitive
+    " au FileType gitcommit setlocal completefunc=emoji#complete
+    " au FileType gitcommit nnoremap <buffer> <silent> cd :<C-U>Gcommit --amend --date="$(date)"<CR>
+
+    " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+    " au BufNewFile,BufRead,InsertLeave * silent! match ExtraWhitespace /\s\+$/
+    " au InsertEnter * silent! match ExtraWhitespace /\s\+\%#\@<!$/
+
+    " Unset paste on InsertLeave
+    au InsertLeave * silent! set nopaste
+
+    " Close preview window
+    " if exists('##CompleteDone')
+        " au CompleteDone * pclose
+    " else
+        " au InsertLeave * if !pumvisible() && (!exists('*getcmdwintype') || empty(getcmdwintype())) | pclose | endif
+    " endif
+
+    " Automatic rename of tmux window
+    if exists('$TMUX') && !exists('$NORENAME')
+        au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
+        au VimLeave * call system('tmux set-window automatic-rename on')
+    endif
+augroup END
+
+" Restore cursor to last known position
+function! ResCur()
+  if line("'\"") <= line("$")
+    normal! g`"
+    return 1
+  endif
+endfunction
+augroup resCur
+  autocmd!
+  autocmd BufWinEnter * call ResCur()
+augroup END
+" }}}
+
+" ============================================================================
+" KEY MAPPINGS {{{
+" ============================================================================
+" Rebind <Leader> key
+let mapleader = ","
+
+" Save 
+nnoremap <leader>s  :update<cr>
+nnoremap <leader>wa :wa<cr>
+
+" Edit ~/.vimrc
+nnoremap <leader>rc :tabnew $MYVIMRC<cr>
+
+" Bind Ctrl+<movement> keys to move around the windows, instead of using
+" Ctrl+w + <movement>
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
+noremap <c-h> <c-w>h
+
+" buffers navigation
+nnoremap <leader>B  :Buffers<CR>
+nnoremap <leader>bb :ls<CR>:buffer<Space>
+nnoremap <leader>sb :ls<CR>:sbuffer<Space>
+nnoremap <leader>vb :ls<CR>:vert sbuffer<Space>
+nnoremap <leader>tb :tabnew<CR>:ls<CR>:buffer<Space>
+nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprevious<CR>
+
+" tab navigation
+nnoremap <leader>tt :tabnew<CR>
+nnoremap <leader>tf :tabfind<Space>
+nnoremap <leader>tn :tabnext<CR>
+nnoremap <leader>tp :tabprevious<CR>
+
+" file navigation
+nnoremap <leader>F  :Files<CR>
+nnoremap <leader>ff :Files<Space>
+nnoremap <leader>fs :split<Space>
+nnoremap <leader>fv :vsplit<Space>
+nnoremap <leader>ft :tabnew<Space>
+
+" explorer - [N]% of page
+nnoremap <leader>fe :15Lexplore<CR> 
+nnoremap <leader>ee :15Explore<CR>
+nnoremap <leader>se :15Sexplore<CR>
+nnoremap <leader>ve :15Vexplore<CR>
+
+" Command History
+nnoremap <leader>H :History:<CR>
+
+" sort
+vnoremap <leader>st :sort<CR>
+
+" perforce
+nnoremap <leader>e :Vp4Edit<CR>
+
+" tag
+nnoremap <leader>] :CtrlPTag<CR>
+
+" ConqueGDB 
+nnoremap <leader>cg :ConqueGdb<Space>
+
+" <F10> Tagbar toogle
+if v:version >= 703
+  inoremap <F10> <esc>:TagbarToggle<cr>
+  nnoremap <F10> :TagbarToggle<cr>
+  let g:tagbar_sort = 0
+endif
+
+" shift and selection
+vnoremap < <gv  " better indentation
+vnoremap > >gv  " better indentation
+map <Leader>a ggVG  " select all
+nnoremap <leader>V <c-v> " vertical visual selection
+
+" date
+nnoremap <leader>dt a<C-R>=strftime('%m/%d/%Y')<CR><Esc>
+
+" Remove highlighting after search
+nnoremap <silent> <leader>h :noh<CR>
+
+" ----------------------------------------------------------------------------
+" <F2> | Paste toggle
+" ----------------------------------------------------------------------------
+set pastetoggle=<F2>
+
+" ----------------------------------------------------------------------------
+" <F8> | Color scheme selector
+" ----------------------------------------------------------------------------
+function! s:colors(...)
+  return filter(map(filter(split(globpath(&rtp, 'colors/*.vim'), "\n"),
+        \                  'v:val !~ "^/usr/"'),
+        \           'fnamemodify(v:val, ":t:r")'),
+        \       '!a:0 || stridx(v:val, a:1) >= 0')
+endfunction
+
+function! s:rotate_colors()
+  if !exists('s:colors')
+    let s:colors = s:colors()
+  endif
+  let name = remove(s:colors, 0)
+  call add(s:colors, name)
+  execute 'colorscheme' name
+  redraw
+  echo name
+endfunction
+nnoremap <silent> <F8> :call <SID>rotate_colors()<cr>
+
+" }}}

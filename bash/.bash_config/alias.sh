@@ -62,6 +62,7 @@ alias l="less"
 alias py="python3"
 
 # ViM
+alias v="nvim"
 alias vi="vim"
 alias vi_plugin_install="source ${HOME}/github.com/santiagomok/dotfiles/install/vim.sh"
 alias vrg="_fzf_grep_edit_file"
