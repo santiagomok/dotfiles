@@ -53,7 +53,7 @@ v() {
   files=$(grep '^>' ~/.viminfo | cut -c3- |
           while read line; do
             [ -f "${line/\~/$HOME}" ] && echo "$line"
-          done | fzf-tmux -d -m -q "$*" -1) && vim ${files//\~/$HOME}
+          done | fzf-tmux -d -m -q "$*" -1) && $EDITOR ${files//\~/$HOME}
 }
 
 # ftags - search ctags
@@ -79,7 +79,7 @@ _fzf_grep_edit_file() {
     # $1 +$2: filename + line-number
     file="$(rg --no-heading --vimgrep $@ | fzf -0 -1 | awk -F: '{print $1 " +" $2}')"
     if [[ -n $file ]]; then
-        vim $file
+        $EDITOR $file
     fi
 }
 

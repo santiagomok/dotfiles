@@ -15,5 +15,3 @@ script_path="${HOME}/.bash_config"
 [ -f "${script_path}/alias.sh" ] && source "${script_path}/alias.sh";
 [ -f "${HOME}/.fzf.bash" ] && source "${HOME}/.fzf.bash";
 
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash

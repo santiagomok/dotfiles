@@ -23,13 +23,22 @@ Plug 'tomasr/molokai'
 Plug 'morhetz/gruvbox'
   let g:gruvbox_contrast_dark = 'soft'
 Plug 'junegunn/seoul256.vim'
+Plug 'w0ng/vim-hybrid'
+Plug 'AlessandroYorba/Despacio'
 " Plug 'guns/xterm-color-table.vim'
+Plug 'junegunn/vim-journal'
 
-" Search and browse
+" Distraction free editing
+" Plug 'junegunn/goyo.vim'
+" Plug 'junegunn/limelight.vim'
+
+" Tmux
+Plug 'junegunn/heytmux'
 Plug 'christoomey/vim-tmux-navigator'
-" Plug 'roxma/vim-tmux-clipboard'
-" Plug 'melonmanchan/vim-tmux-resizer'
+Plug 'roxma/vim-tmux-clipboard'
+Plug 'melonmanchan/vim-tmux-resizer'
 
+" Find
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 let g:fzf_action = {
@@ -37,15 +46,43 @@ let g:fzf_action = {
     \ 'ctrl-k': 'split',
     \ 'ctrl-l': 'vsplit' }
 
+" Edit
+Plug 'rstacruz/vim-closer'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-endwise'
+" Plug 'tpope/vim-commentary'
+  " map  gc  <Plug>Commentary
+  " nmap gcc <Plug>CommentaryLine
+  "
+Plug 'junegunn/vim-easy-align'
+vmap <Enter> <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+
+
 " Code
-" Plug 'ngemily/vim-vp4'
+Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
+" Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'sheerun/vim-polyglot'
+
 Plug 'scrooloose/nerdcommenter'
 let g:NERDSpaceDelims = 1
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+  augroup nerd_loader
+    autocmd!
+    autocmd VimEnter * silent! autocmd! FileExplorer
+    autocmd BufEnter,BufNew *
+          \  if isdirectory(expand('<amatch>'))
+          \|   call plug#load('nerdtree')
+          \|   execute 'autocmd! nerd_loader'
+          \| endif
+  augroup END
 
 Plug 'octol/vim-cpp-enhanced-highlight'
 
 if v:version >= 800
-  " Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
+  Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
 endif
 
 " Lint
@@ -57,6 +94,32 @@ Plug 'w0rp/ale'
     let g:ale_lint_delay = 1000
     nmap ]a <Plug>(ale_next_wrap)
     nmap [a <Plug>(ale_previous_wrap)
+
+
+" Go
+" if v:version >= 800
+  " Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+" endif
+
+" Rust
+" Plug 'rust-lang/rust.vim'
+
+Plug 'chrisbra/unicode.vim', { 'for': 'journal' }
+
+" Version control
+Plug 'ngemily/vim-vp4'
+" Plug 'tpope/vim-fugitive'
+  " nmap     <Leader>g :Gstatus<CR>gg<c-n>
+  " nnoremap <Leader>d :Gdiff<CR>
+" Plug 'junegunn/gv.vim'
+  " function! s:gv_expand()
+    " let line = getline('.')
+    " GV --name-status
+    " call search('\V'.line, 'c')
+    " normal! zz
+  " endfunction
+  " autocmd! FileType GV nnoremap <buffer> <silent> + :call <sid>gv_expand()<cr>
+
 
 call plug#end()
 
@@ -156,39 +219,54 @@ autocmd vimrc FileType vim inoremap <buffer> <c-x><c-v> <c-r>=VimAwesomeComplete
 " coc.nvim
 " ----------------------------------------------------------------------------
 if has_key(g:plugs, 'coc.nvim')
-  function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-  endfunction
+    
+    " Some servers have issues with backup files, see #649
+    set nobackup
+    set nowritebackup
 
-  inoremap <silent><expr> <TAB>
-        \ pumvisible() ? "\<C-n>" :
-        \ <SID>check_back_space() ? "\<TAB>" :
-        \ coc#refresh()
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+    " You will have bad experience for diagnostic messages when it's default
+    " 4000.
+    set updatetime=300 
 
-  function! s:show_documentation()
-    if (index(['vim', 'help'], &filetype) >= 0)
-      execute 'h' expand('<cword>')
-    else
-      call CocAction('doHover')
-    endif
-  endfunction
+    " don't give |ins-completion-menu| messages
+    set shortmess+=c
 
-  nnoremap <silent> K :call <SID>show_documentation()<CR>
+    " always show signcolumns
+    set signcolumn=yes
 
-  let g:coc_global_extensions = ['coc-github', 'coc-yaml', 'coc-solargraph',
-    \ 'coc-r-lsp', 'coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-html',
-    \ 'coc-prettier', 'coc-eslint', 'coc-tsserver', 'coc-emoji', 'coc-java']
-  command! -nargs=0 Prettier :CocCommand prettier.formatFile
+    function! s:check_back_space() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
 
-  let g:go_doc_keywordprg_enabled = 0
+    inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-  augroup coc-config
-    autocmd!
-    autocmd VimEnter * nmap <silent> gd <Plug>(coc-definition)
-    autocmd VimEnter * nmap <silent> g? <Plug>(coc-references)
-  augroup END
+    function! s:show_documentation()
+        if (index(['vim', 'help'], &filetype) >= 0)
+        execute 'h' expand('<cword>')
+        else
+        call CocAction('doHover')
+        endif
+    endfunction
+
+    nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+    let g:coc_global_extensions = ['coc-github', 'coc-yaml', 'coc-solargraph',
+        \ 'coc-r-lsp', 'coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-html',
+        \ 'coc-prettier', 'coc-eslint', 'coc-tsserver', 'coc-emoji', 'coc-java']
+    command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+    let g:go_doc_keywordprg_enabled = 0
+
+    augroup coc-config
+        autocmd!
+        autocmd VimEnter * nmap <silent> gd <Plug>(coc-definition)
+        autocmd VimEnter * nmap <silent> g? <Plug>(coc-references)
+    augroup END
 endif
 
 
@@ -204,11 +282,13 @@ set expandtab       " Convert \t into spaces when used with softtabstop.
 set smartindent     " Automatically inserts one extra level of indentation in some cases.
 set shiftround
 
-" Wrapping and scrolling
+" startline, Wrapping and scrolling
 "------------------------------------------------------------
 let &showbreak = '... '
 set breakindent
 set breakindentopt=sbr
+set list
+set listchars=tab:\|\ ,
 
 " Search settings 
 "------------------------------------------------------------
@@ -395,6 +475,9 @@ nnoremap <leader>dt a<C-R>=strftime('%m/%d/%Y')<CR><Esc>
 " Remove highlighting after search
 nnoremap <silent> <leader>h :noh<CR>
 
+" <leader>n | NERD Tree
+nnoremap <leader>n :NERDTreeToggle<cr>
+
 " ----------------------------------------------------------------------------
 " <F2> | Paste toggle
 " ----------------------------------------------------------------------------
@@ -421,5 +504,36 @@ function! s:rotate_colors()
   echo name
 endfunction
 nnoremap <silent> <F8> :call <SID>rotate_colors()<cr>
+
+" Grepper
+noremap <leader>/ :Grepper<CR>
+noremap <leader>* :Grepper -cword -noprompt<CR>
+" nmap gs <plug>(GrepperOperator)
+" xmap gs <plug>(GrepperOperator)
+"" Search word under cursor from current directory recursively
+" map <F5> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+" Vim-Grepper setting
+"------------------------------------------------------------
+let g:grepper           = {}
+let g:grepper.quickfix  = 1
+let g:grepper.open      = 1
+let g:grepper.switch    = 1
+let g:grepper.prompt    = 1
+let g:grepper.tools     = ['rg', 'git', 'grep', 'ack']
+let g:grepper.stop      = 500
+"let g:grepper.repo      = ['builtins.gmake']
+"let g:grepper.dir       = 'repo,file'
+let g:grepper.highlight = 1
+
+" Netrw setting
+"------------------------------------------------------------
+let g:netrw_banner          = 0
+let g:netrw_browse_split    = 4     " re-use same windows
+let g:netrw_liststyle       = 3     
+let g:netrw_altv            = 1     " vsplit right     
+let g:netrw_preview         = 1     " vsplit preview 
+"let g:netrw_alto            = 0     " control preview to topleft
+let g:netrw_winsize         = 25    " 25% of page
+let g:netrw_usetab          = 1
 
 " }}}
