@@ -27,6 +27,7 @@ Plug 'w0ng/vim-hybrid'
 Plug 'AlessandroYorba/Despacio'
 " Plug 'guns/xterm-color-table.vim'
 Plug 'junegunn/vim-journal'
+Plug 'arzg/vim-colors-xcode'
 
 " Distraction free editing
 " Plug 'junegunn/goyo.vim'
@@ -54,7 +55,6 @@ Plug 'tpope/vim-endwise'
 " Plug 'tpope/vim-commentary'
   " map  gc  <Plug>Commentary
   " nmap gcc <Plug>CommentaryLine
-  "
 Plug 'junegunn/vim-easy-align'
 vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
@@ -232,7 +232,7 @@ if has_key(g:plugs, 'coc.nvim')
     set shortmess+=c
 
     " always show signcolumns
-    set signcolumn=yes
+    " set signcolumn=yes
 
     function! s:check_back_space() abort
         let col = col('.') - 1
@@ -427,6 +427,7 @@ nnoremap <leader>tt :tabnew<CR>
 nnoremap <leader>tf :tabfind<Space>
 nnoremap <leader>tn :tabnext<CR>
 nnoremap <leader>tp :tabprevious<CR>
+nnoremap <leader>tm :tabmove<Space>
 
 " file navigation
 nnoremap <leader>F  :Files<CR>
@@ -477,6 +478,9 @@ nnoremap <silent> <leader>h :noh<CR>
 
 " <leader>n | NERD Tree
 nnoremap <leader>n :NERDTreeToggle<cr>
+
+" Esc from insert mode in terminal
+tnoremap <Esc> <C-\><C-n>
 
 " ----------------------------------------------------------------------------
 " <F2> | Paste toggle
