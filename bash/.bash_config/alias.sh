@@ -62,13 +62,14 @@ alias l="less"
 alias py="python3"
 
 # ViM
-alias v="nvim"
-alias vi="vim"
-alias vi_plugin_install="source ${HOME}/github.com/santiagomok/dotfiles/install/vim.sh"
+alias v="VIMRUNTIME= nvim"
 alias vf="_fzf_find_edit_file"
 alias vrg="_fzf_grep_edit_file"
-alias v0="vim -u NONE"
-alias vdebug="vim_term_debug"
+alias v0="v --noplugin"
+alias vi="vim"
+alias vi_plugin_install="source ${HOME}/github.com/santiagomok/dotfiles/install/vim.sh"
+# alias v0="vim -u NONE"
+# alias vdebug="vim_term_debug"
 
 # CMake
 alias export_cc_var="export CC=`which gcc`; export CXX=`which g++`"

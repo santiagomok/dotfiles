@@ -86,7 +86,7 @@ _fzf_grep_edit_file() {
 # editor open with fuzzy find
 _fzf_find_edit_file() {
     local file
-    file="$(fd --type f ${1:-.} ${2:-.} | fzf -i -m --exit-0)"
+    file="$(fd --type f ${1:-.} ${2:-.} | fzf --multi --exit-0)"
     if [[ -n $file ]]; then
         $EDITOR -p $file
     fi

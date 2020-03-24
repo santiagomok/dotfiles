@@ -85,6 +85,11 @@ if v:version >= 800
   Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
 endif
 
+if has('nvim')
+    Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
+endif
+
+
 " Lint
 Plug 'w0rp/ale'
     " ALE-cpp settings
@@ -479,8 +484,17 @@ nnoremap <silent> <leader>h :noh<CR>
 " <leader>n | NERD Tree
 nnoremap <leader>n :NERDTreeToggle<cr>
 
+" ----------------------------------------------------------------------------
+" <Esc>  
+" ----------------------------------------------------------------------------
 " Esc from insert mode in terminal
 tnoremap <Esc> <C-\><C-n>
+if has("nvim")
+    " Esc inside a FZF terminal window should exit the terminal window 
+    " rather than going into the terminal's normal mode
+    autocmd FileType fzf tnoremap <buffer> <Esc> <Esc>
+endif
+
 
 " ----------------------------------------------------------------------------
 " <F2> | Paste toggle
