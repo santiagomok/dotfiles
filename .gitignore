@@ -9,3 +9,4 @@ macos/.vim/view
 macos/.vim/.netrwhist
 tmux/.tmux/plugins
 *.lock.json
+gdb/.gdb_history
