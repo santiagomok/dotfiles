@@ -502,7 +502,7 @@ endif
 set pastetoggle=<F2>
 
 " ----------------------------------------------------------------------------
-" <F8> | Color scheme selector
+" <F3> | Color scheme selector
 " ----------------------------------------------------------------------------
 function! s:colors(...)
   return filter(map(filter(split(globpath(&rtp, 'colors/*.vim'), "\n"),
@@ -521,7 +521,7 @@ function! s:rotate_colors()
   redraw
   echo name
 endfunction
-nnoremap <silent> <F8> :call <SID>rotate_colors()<cr>
+nnoremap <silent> <F3> :call <SID>rotate_colors()<cr>
 
 " Grepper
 noremap <leader>/ :Grepper<CR>
