@@ -39,7 +39,7 @@ let g:NERDSpaceDelims = 1
 
 Plug 'tpope/vim-endwise'
 Plug 'rstacruz/vim-closer'
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 " Plugin 'ajh17/VimCompletesMe'
 " autocmd FileType vim let b:vcm_tab_complete = 'vim'
 " 

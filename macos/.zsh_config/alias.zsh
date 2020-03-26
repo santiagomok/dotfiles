@@ -20,8 +20,8 @@ alias fcd="_fzf_change_dir"
 alias mcd="_mcd"
 alias bcd="_bcd"
 alias ..="cd .."
-alias ..2="../.."
-alias ..3="../../.."
+alias ..2="cd ../.."
+alias ..3="cd ../../.."
 
 # Print each PATH entry on a separate line
 alias path="echo ${PATH} | tr -s ':' '\n' | uniq" 
@@ -49,6 +49,7 @@ alias gr="git remote -v"
 alias gll='_fzf_git_log'
 
 # VIM
+alias v="nvim"
 alias vi="vim"
 alias vi_plugin_install="source ${HOME}/github.com/santiagomok/dotfiles/install/vim.sh"
 alias vrg="_fzf_grep_edit_file"
