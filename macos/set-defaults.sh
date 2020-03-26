@@ -22,3 +22,8 @@ defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 # Run the screensaver if we're in the bottom-left hot corner.
 #defaults write com.apple.dock wvous-bl-corner -int 5
 #defaults write com.apple.dock wvous-bl-modifier -int 0
+
+# Set Directory Service Login Window Binding timeout (seconds)
+defaults write /Library/Preferences/com.apple.loginwindow DSBindTimeout -int 20
+# Turn OD debug mode - log at /var/log/opendirectoryd
+# odutil set log <debug|default>
