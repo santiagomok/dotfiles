@@ -14,6 +14,12 @@ elif [ "$PLATFORM" = Darwin ]; then
     alias ll="ls -G -alh"
 fi
 
+
+# RC editing
+alias brc="v ${HOME}/.bashrc"
+alias trc="v ${HOME}/.tmux.conf" 
+alias vrc="v ${HOME}/.vimrc" 
+
 # SHELL
 alias passwd="yppasswd"
 alias lsd="ls -l  | grep -e '^d'"
@@ -65,9 +71,10 @@ alias py="python3"
 alias v="VIMRUNTIME= nvim"
 alias vf="_fzf_find_edit_file"
 alias vrg="_fzf_grep_edit_file"
+alias vgdb="_nvim_gdb_start"
 alias v0="v --noplugin"
 alias vi="vim"
-alias vi_plugin_install="source ${HOME}/github.com/santiagomok/dotfiles/install/vim.sh"
+# alias vi_plugin_install="source ${HOME}/github.com/santiagomok/dotfiles/install/vim.sh"
 # alias v0="vim -u NONE"
 # alias vdebug="vim_term_debug"
 

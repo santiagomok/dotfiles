@@ -51,7 +51,7 @@
 [help]
     autocorrect = 1
 [push]
-	default = simple # only push the current branch, not multiple branches
+	default = current # only push the current branch, not multiple branches
 [merge]
     tool = meld
 [mergetool]

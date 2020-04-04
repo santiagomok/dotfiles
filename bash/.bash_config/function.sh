@@ -140,3 +140,7 @@ fzf_log() {
   git showtool $hash
 }
 
+_nvim_gdb_start() {
+    local debug_bin=$1 
+    v +'GdbStart gdb -q $debug_bin'
+}

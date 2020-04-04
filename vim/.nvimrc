@@ -27,7 +27,6 @@ Plug 'w0ng/vim-hybrid'
 Plug 'AlessandroYorba/Despacio'
 " Plug 'guns/xterm-color-table.vim'
 Plug 'junegunn/vim-journal'
-Plug 'arzg/vim-colors-xcode'
 
 " Distraction free editing
 " Plug 'junegunn/goyo.vim'
@@ -81,25 +80,58 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 Plug 'octol/vim-cpp-enhanced-highlight'
 
+Plug 'ajh17/VimCompletesMe'
+
+Plug 'natebosch/vim-lsc'
+    " vim-lsc settings
+    " ----------------------------------------------------------
+    set completeopt=menu,menuone,noinsert,noselect
+    let g:lsc_server_commands = {
+    \ 'cpp': {
+    \    'command': 'ccls',
+    \    'message_hooks': {
+    \        'initialize': {
+    \            'initializationOptions': {'cache': {'directory': '/p/psg/data/moksanti/tmp/ccls'}},
+    \            'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(findfile('compile_commands.json', expand('%:p') . ';'), ':p:h'))}
+    \        },
+    \    },
+    \  },   
+    \}
+    let g:lsc_auto_map = {
+    \  'GoToDefinition': 'gd',
+    \  'FindReferences': 'gr',
+    \  'Rename': 'gR',
+    \  'ShowHover': 'K',
+    \  'FindCodeActions': 'ga',
+    \  'Completion': 'omnifunc',
+    \}
+    let g:lsc_enable_autocomplete  = v:true
+    let g:lsc_enable_diagnostics   = v:false
+    let g:lsc_reference_highlights = v:false
+    let g:lsc_trace_level          = 'off' 
+    
+
 if v:version >= 800
-  Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
+    Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
 endif
 
+" Lint
+" Plug 'dense-analysis/ale'
+    " ALE-cpp settings
+    " ------------------------------------------------------------
+    " let g:ale_cpp_ccls_init_options = {
+    " \   'cacheDirectory': '/p/psg/data/moksanti/tmp/ccls'
+    " \ }
+    " let g:ale_linters = {'cpp': ['gcc']}
+    " let g:ale_cpp_gcc_options="-std=c++14 -I$ACDS_SRC_ROOT/quartus/h -I$ACDS_DEST_ROOT/quartus/h -I$ACDS_DEST_ROOT/quartus/h/boost"
+    " let g:ale_lint_delay = 1000
+    " nmap ]a <Plug>(ale_next_wrap)
+    " nmap [a <Plug>(ale_previous_wrap)
+
+" Debug
 if has('nvim')
     Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 endif
-
-
-" Lint
-Plug 'w0rp/ale'
-    " ALE-cpp settings
-    "------------------------------------------------------------
-    let g:ale_linters = {'cpp': ['gcc']}
-    let g:ale_cpp_gcc_options="-std=c++14 -I$ACDS_SRC_ROOT/quartus/h -I$ACDS_DEST_ROOT/quartus/h -I$ACDS_DEST_ROOT/quartus/h/boost"
-    let g:ale_lint_delay = 1000
-    nmap ]a <Plug>(ale_next_wrap)
-    nmap [a <Plug>(ale_previous_wrap)
-
 
 " Go
 " if v:version >= 800
@@ -333,6 +365,13 @@ set nrformats=hex
 " history for multiple files. Vim will complain if you try to quit without
 " saving, and swap files will keep you safe if your computer crashes.
 set hidden
+set relativenumber
+augroup every
+    autocmd!
+    " Set norelativenumber when in Insert mode
+    au InsertEnter * set norelativenumber
+    au InsertLeave * set relativenumber
+augroup END
 
 " }}}
 
@@ -487,12 +526,13 @@ nnoremap <leader>n :NERDTreeToggle<cr>
 " ----------------------------------------------------------------------------
 " <Esc>  
 " ----------------------------------------------------------------------------
-" Esc from insert mode in terminal
-tnoremap <Esc> <C-\><C-n>
 if has("nvim")
+    " Esc from insert mode in terminal
+    au TermOpen * tnoremap <Esc> <C-\><C-n>
     " Esc inside a FZF terminal window should exit the terminal window 
     " rather than going into the terminal's normal mode
-    autocmd FileType fzf tnoremap <buffer> <Esc> <Esc>
+    " au FileType fzf tnoremap <buffer> <Esc> <Esc>
+    au FileType fzf tunmap <Esc>
 endif
 
 
