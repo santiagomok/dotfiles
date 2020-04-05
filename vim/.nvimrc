@@ -37,13 +37,14 @@ Plug 'junegunn/heytmux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'melonmanchan/vim-tmux-resizer'
+Plug 'benmills/vimux'
 
 " Find
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
-    \ 'ctrl-k': 'split',
+    \ 'ctrl-s': 'split',
     \ 'ctrl-l': 'vsplit' }
 
 " Edit
@@ -131,12 +132,11 @@ endif
 " Debug
 if has('nvim')
     Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
+    Plug 'voldikss/vim-floaterm'
 endif
 
 " Go
-" if v:version >= 800
-  " Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-" endif
+" Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 " Rust
 " Plug 'rust-lang/rust.vim'
@@ -457,6 +457,10 @@ noremap <c-k> <c-w>k
 noremap <c-l> <c-w>l
 noremap <c-h> <c-w>h
 
+" Split
+nnoremap <leader>vv <c-w>v
+nnoremap <leader>ss <c-w>s
+
 " buffers navigation
 nnoremap <leader>B  :Buffers<CR>
 nnoremap <leader>bb :ls<CR>:buffer<Space>
@@ -522,6 +526,14 @@ nnoremap <silent> <leader>h :noh<CR>
 
 " <leader>n | NERD Tree
 nnoremap <leader>n :NERDTreeToggle<cr>
+
+" ----------------------------------------------------------------------------
+" Vimux key bindings
+" ----------------------------------------------------------------------------
+map <leader>rr :VimuxPromptCommand<CR>
+map <leader>rl :VimuxRunLastCommand<CR>
+map <leader>rs :VimuxInspectRunner<CR>
+map <leader>rz :VimuxZoomRunner<CR>
 
 " ----------------------------------------------------------------------------
 " <Esc>  

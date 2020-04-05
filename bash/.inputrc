@@ -1,6 +1,10 @@
 # Use Vi
 set editing-mode vi
 set keymap vi
+$if mode=vi
+    set keymap vi-insert
+    ",n": vi-movement-mode # remap <esc>
+$endif
 
 # Disable beeps
 set bell-style none
