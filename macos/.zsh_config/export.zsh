@@ -11,7 +11,7 @@ export MANPATH="LOCALPATH/share/man:$MANPATH"
 # ------------------------------------------------------------------------------ 
 
 # EDITOR 
-export EDITOR=vim
+export EDITOR=nvim
 export VISUAL=$EDITOR
 export TERM=xterm-256color
 export LANG=en_US.UTF-8
