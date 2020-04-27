@@ -151,7 +151,7 @@ Plug 'chrisbra/unicode.vim', { 'for': 'journal' }
 
 " Version control
 Plug 'ngemily/vim-vp4'
-" Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
   " nmap     <Leader>g :Gstatus<CR>gg<c-n>
   " nnoremap <Leader>d :Gdiff<CR>
 " Plug 'junegunn/gv.vim'

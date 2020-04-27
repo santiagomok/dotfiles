@@ -43,7 +43,7 @@
     ui = auto
 [core]
     excludesfile = ~/.gitignore
-    editor = vim
+    editor = nvim
     # pager = diff-so-fancy | less --tabs=4 -RFX
 	autocrlf = input
 [apply]
@@ -52,16 +52,19 @@
     autocorrect = 1
 [push]
 	default = current # only push the current branch, not multiple branches
+[mergetool "nvim"]
+    # define command which will be used when "nvim" is set as a merge tool
+    cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 [merge]
-    tool = meld
+    tool = nvim
 [mergetool]
-    keepBackup = false
+    prompt = false
 [diff]
     tool = vimdiff
 	algorithm = histogram
 [difftool]
     prompt = false
-[difftool "vd"]
+[difftool "vimdiff"]
     cmd = vim -d "$LOCAL" "$REMOTE"
 [advice]
 	waitingForEditor = false
