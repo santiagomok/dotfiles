@@ -87,12 +87,13 @@ Plug 'natebosch/vim-lsc'
     " vim-lsc settings
     " ----------------------------------------------------------
     set completeopt=menu,menuone,noinsert,noselect
+    set shortmess-=F
     let g:lsc_server_commands = {
     \ 'cpp': {
     \    'command': 'ccls',
     \    'message_hooks': {
     \        'initialize': {
-    \            'initializationOptions': {'cache': {'directory': '~/.local/tmp/ccls'}},
+    \            'initializationOptions': {'cache': {'directory': $HOME.'/.local/tmp/ccls'}},
     \            'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(findfile('compile_commands.json', expand('%:p') . ';'), ':p:h'))}
     \        },
     \    },
