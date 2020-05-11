@@ -92,7 +92,7 @@ Plug 'natebosch/vim-lsc'
     \    'command': 'ccls',
     \    'message_hooks': {
     \        'initialize': {
-    \            'initializationOptions': {'cache': {'directory': '/p/psg/data/moksanti/tmp/ccls'}},
+    \            'initializationOptions': {'cache': {'directory': '~/.local/tmp/ccls'}},
     \            'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(findfile('compile_commands.json', expand('%:p') . ';'), ':p:h'))}
     \        },
     \    },
@@ -142,7 +142,7 @@ if has('nvim')
 endif
 
 " Go
-" Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 " Rust
 " Plug 'rust-lang/rust.vim'
