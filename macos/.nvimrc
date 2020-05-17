@@ -137,7 +137,7 @@ if has('nvim')
 endif
 
 " Go
-" Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Rust
 " Plug 'rust-lang/rust.vim'
