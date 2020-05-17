@@ -87,12 +87,13 @@ Plug 'natebosch/vim-lsc'
     " vim-lsc settings
     " ----------------------------------------------------------
     set completeopt=menu,menuone,noinsert,noselect
+    set shortmess-=F
     let g:lsc_server_commands = {
     \ 'cpp': {
     \    'command': 'ccls',
     \    'message_hooks': {
     \        'initialize': {
-    \            'initializationOptions': {'cache': {'directory': '/p/psg/data/moksanti/tmp/ccls'}},
+    \            'initializationOptions': {'cache': {'directory': $HOME.'/.local/tmp/ccls'}},
     \            'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(findfile('compile_commands.json', expand('%:p') . ';'), ':p:h'))}
     \        },
     \    },
@@ -112,9 +113,9 @@ Plug 'natebosch/vim-lsc'
     let g:lsc_trace_level          = 'off' 
     
 
-if v:version >= 800
-    Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
-endif
+" if v:version >= 800
+    " Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
+" endif
 
 " Lint
 " Plug 'dense-analysis/ale'
@@ -133,10 +134,16 @@ endif
 if has('nvim')
     Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
     Plug 'voldikss/vim-floaterm'
+    " floaterm key mappings
+    " ------------------------------------------------------------
+    let g:floaterm_keymap_new   = '<leader>fr'
+    let g:floaterm_keymap_prev  = '<leader>fp'
+    let g:floaterm_keymap_next  = '<leader>fn'
+    let g:floaterm_keymap_togle = '<leader>ft'
 endif
 
 " Go
-" Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 " Rust
 " Plug 'rust-lang/rust.vim'
@@ -145,7 +152,7 @@ Plug 'chrisbra/unicode.vim', { 'for': 'journal' }
 
 " Version control
 Plug 'ngemily/vim-vp4'
-" Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
   " nmap     <Leader>g :Gstatus<CR>gg<c-n>
   " nnoremap <Leader>d :Gdiff<CR>
 " Plug 'junegunn/gv.vim'
@@ -334,6 +341,8 @@ set ignorecase
 set smartcase
 set incsearch
 set hlsearch        
+set path+=**        " Searches current directory recursively.
+
 " Search color highlight
 " augroup color_overrirde
     " autocmd!
@@ -364,6 +373,7 @@ set nrformats=hex
 " unsaved buffer without saving it first. Also allows you to keep an undo
 " history for multiple files. Vim will complain if you try to quit without
 " saving, and swap files will keep you safe if your computer crashes.
+
 set hidden
 set relativenumber
 augroup every
@@ -372,6 +382,12 @@ augroup every
     au InsertEnter * set norelativenumber
     au InsertLeave * set relativenumber
 augroup END
+
+" Split options
+"------------------------------------------------------------
+set splitbelow splitright
+" Remove pipes | that act as separators on splits
+" set fillchars+=vert:\
 
 " }}}
 
@@ -443,6 +459,10 @@ augroup END
 " Rebind <Leader> key
 let mapleader = ","
 
+" Mode
+" exit insert-mode
+imap ii <Esc>
+
 " Save 
 nnoremap <leader>s  :update<cr>
 nnoremap <leader>wa :wa<cr>
@@ -460,6 +480,10 @@ noremap <c-h> <c-w>h
 " Split
 nnoremap <leader>vv <c-w>v
 nnoremap <leader>ss <c-w>s
+nnoremap <silent> <C-Left>  :vertical resize +3<CR>
+nnoremap <silent> <C-Right> :vertical resize -3<CR>
+nnoremap <silent> <C-Up>    :resize +3<CR>
+nnoremap <silent> <C-Down>  :resize -3<CR>
 
 " buffers navigation
 nnoremap <leader>B  :Buffers<CR>
@@ -482,7 +506,7 @@ nnoremap <leader>F  :Files<CR>
 nnoremap <leader>ff :Files<Space>
 nnoremap <leader>fs :split<Space>
 nnoremap <leader>fv :vsplit<Space>
-nnoremap <leader>ft :tabnew<Space>
+" nnoremap <leader>ft :tabnew<Space>
 
 " explorer - [N]% of page
 nnoremap <leader>fe :15Lexplore<CR> 
