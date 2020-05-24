@@ -27,7 +27,6 @@ Plug 'w0ng/vim-hybrid'
 Plug 'AlessandroYorba/Despacio'
 " Plug 'guns/xterm-color-table.vim'
 Plug 'junegunn/vim-journal'
-Plug 'ryanoasis/vim-devicons'
 
 " Distraction free editing
 " Plug 'junegunn/goyo.vim'
@@ -158,6 +157,8 @@ Plug 'chrisbra/unicode.vim', { 'for': 'journal' }
   " endfunction
   " autocmd! FileType GV nnoremap <buffer> <silent> + :call <sid>gv_expand()<cr>
 
+
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 

@@ -26,10 +26,14 @@ alias lsd="ls -l  | grep -e '^d'"
 alias lsl="ls -al | grep -e '->'"
 alias lsh="ls -ald .*"
 alias sl="ls"
-alias grep="grep -in --color=auto"
 alias datemd="date +%b%d"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias hc="history -c"
+alias l="less"
+alias py="python3"
+
+# GREP
+alias grep="grep -in --color=auto"
 alias rg="rg --line-number --no-heading --ignore-case"
 alias rgdev="rg -i -n -t{c,cpp,make,java,py,tcl,json,perl,protobuf,sh,swig,xml}"
 
@@ -64,8 +68,6 @@ alias ga="git add"
 alias gs="git status"
 alias gr="git remote -v"
 alias gfs="gnome-open"
-alias l="less"
-alias py="python3"
 
 # ViM
 alias v="VIMRUNTIME= nvim"
