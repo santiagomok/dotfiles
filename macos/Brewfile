@@ -1,6 +1,7 @@
 cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
+tap 'homebrew/cask-fonts'
 
 # core apps
 brew 'bat'
@@ -30,7 +31,7 @@ brew 'go'
 brew 'libgit2'
 brew 'qt'
 brew 'rust'
-brew 'macvim'
+#brew 'macvim'
 #brew 'coreutils'
 #brew 'renameutils'
 #brew 'node'
@@ -39,6 +40,7 @@ brew 'macvim'
 
 # casks
 cask 'iterm2'
+cask 'font-hack-nerd-font'
 #cask '1password'
 #cask 'dropbox'
 #cask 'google-chrome'

@@ -42,6 +42,10 @@ vim +PlugInstall
 ### BASE16
 - git clone https://github.com/martinlindhe/base16-iterm2.git ~/local/theme/base16-iterm2
 
+## Theme
+### Tomorrow Night
+- git clone https://github.com/chriskempson/tomorrow-theme.git
+
 ## iTerm2
 Source: 
 Color: base16-tomorrow-night-256

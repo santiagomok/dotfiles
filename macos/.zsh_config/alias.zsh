@@ -1,6 +1,13 @@
 # ------------------------------------------------------------------------------ 
 # File: alias.zsh
 # ------------------------------------------------------------------------------ 
+#
+# ------------------------------------------------------------------------------ 
+# RC editing
+alias brc="v ${HOME}/.bashrc"
+alias trc="v ${HOME}/.tmux.conf" 
+alias vrc="v ${HOME}/.vimrc" 
+alias zrc="v ${HOME}/.zsh_config/alias.zsh" 
 
 # ------------------------------------------------------------------------------ 
 # SHELL
@@ -8,11 +15,15 @@ alias ll="ls -alh"
 alias lsd="ls -alF  | grep -e '^d'"
 alias lsl="ls -alF | grep -e '->'"
 alias lsh="ls -ald .*"
-alias grep="grep --color=auto"
 alias datemd="date +%b%d"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias l="less"
 alias py="python3"
+
+# GREP
+alias grep="grep --color=auto"
+alias rg="rg --line-number --no-heading --ignore-case"
+alias rgdev="rg -i -n -t{c,cpp,make,java,py,tcl,json,perl,protobuf,sh,swig,xml}"
 
 # ------------------------------------------------------------------------------ 
 # PATH
@@ -38,9 +49,6 @@ alias tmk="tmux kill-session -t"
 alias tmls="tmux ls"
 alias ftm="_fzf_switch_tmux_session"
 
-# GDB
-alias tgdb="tmux new gdb -x $HOME/.tgdbinit"
-
 # GIT
 alias g="git"
 alias ga="git add"
@@ -50,15 +58,13 @@ alias gll='_fzf_git_log'
 
 # VIM
 alias v="nvim"
-alias vi="vim"
-alias vi_plugin_install="source ${HOME}/github.com/santiagomok/dotfiles/install/vim.sh"
+alias vf="_fzf_find_edit_file"
 alias vrg="_fzf_grep_edit_file"
-alias v0="vim -u NONE"
-alias vdebug="vim_term_debug"
-
-# RIPGREP
-alias rg="rg --line-number --no-heading --ignore-case"
-alias rgcode="rg -i -n -t{c,cpp,make,java,py,tcl,json,perl,protobuf,sh,swig,xml}"
+alias vgdb="_nvim_gdb_start"
+alias v0="v --noplugin"
+alias vi="vim"
+# alias v0="vim -u NONE"
+# alias vdebug="vim_term_debug"
 
 # CMAKE
 alias export_cc_var="export CC=`which gcc`; export CXX=`which g++`"
