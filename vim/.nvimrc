@@ -376,16 +376,16 @@ set nrformats=hex
 
 set hidden
 set relativenumber
-augroup every
+augroup numbertoggle
     autocmd!
     " Set norelativenumber when in Insert mode
-    au InsertEnter * set norelativenumber
-    au InsertLeave * set relativenumber
+    au BufEnter,FocusGained,InsertLeave * set relativenumber
+    au BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
 " Split options
 "------------------------------------------------------------
-set splitbelow splitright
+" set splitbelow 
 " Remove pipes | that act as separators on splits
 " set fillchars+=vert:\
 
@@ -461,7 +461,7 @@ let mapleader = ","
 
 " Mode
 " exit insert-mode
-imap ii <Esc>
+imap <leader>i <Esc>
 
 " Save 
 nnoremap <leader>s  :update<cr>
@@ -469,6 +469,8 @@ nnoremap <leader>wa :wa<cr>
 
 " Edit ~/.vimrc
 nnoremap <leader>rc :tabnew $MYVIMRC<cr>
+" disable recording
+nnoremap q <Nop>
 
 " Bind Ctrl+<movement> keys to move around the windows, instead of using
 " Ctrl+w + <movement>
