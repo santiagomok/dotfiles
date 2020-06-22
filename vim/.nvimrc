@@ -144,6 +144,9 @@ endif
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+" Markdown
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 " Rust
 " Plug 'rust-lang/rust.vim'
@@ -459,16 +462,13 @@ augroup END
 " Rebind <Leader> key
 let mapleader = ","
 
-" Mode
-" exit insert-mode
-imap <leader>i <Esc>
-
 " Save 
 nnoremap <leader>s  :update<cr>
 nnoremap <leader>wa :wa<cr>
 
 " Edit ~/.vimrc
-nnoremap <leader>rc :tabnew $MYVIMRC<cr>
+" nnoremap <leader>vrc :tabnew $MYVIMRC<cr>
+nnoremap <leader>vrc :tabnew $HOME/.vimrc<cr>
 " disable recording
 nnoremap q <Nop>
 
@@ -482,10 +482,10 @@ noremap <c-h> <c-w>h
 " Split
 nnoremap <leader>vv <c-w>v
 nnoremap <leader>ss <c-w>s
-nnoremap <silent> <C-Left>  :vertical resize +3<CR>
-nnoremap <silent> <C-Right> :vertical resize -3<CR>
-nnoremap <silent> <C-Up>    :resize +3<CR>
-nnoremap <silent> <C-Down>  :resize -3<CR>
+nnoremap <silent> <C-Left>  :vertical resize -5<CR>
+nnoremap <silent> <C-Right> :vertical resize +5<CR>
+nnoremap <silent> <C-Up>    :resize -5<CR>
+nnoremap <silent> <C-Down>  :resize +5<CR>
 
 " buffers navigation
 nnoremap <leader>B  :Buffers<CR>
@@ -505,7 +505,7 @@ nnoremap <leader>tm :tabmove<Space>
 
 " file navigation
 nnoremap <leader>F  :Files<CR>
-nnoremap <leader>ff :Files<Space>
+nnoremap <leader>ff :Files ../<Space>
 nnoremap <leader>fs :split<Space>
 nnoremap <leader>fv :vsplit<Space>
 " nnoremap <leader>ft :tabnew<Space>
@@ -518,6 +518,14 @@ nnoremap <leader>ve :15Vexplore<CR>
 
 " Command History
 nnoremap <leader>H :History:<CR>
+
+" replace the current word and all its occurrences
+nnoremap <leader>rw :%s/\<<C-r><C-w>\>/
+vnoremap <leader>rw y:%s/<C-r>"/
+" replace the current word and all its occurrences
+" pre-fill target word
+nnoremap <leader>cw :%s/\<<C-r><C-w>\>/<C-r><C-w>
+vnoremap <leader>cw y:%s/<C-r>"/<C-r>"
 
 " sort
 vnoremap <leader>st :sort<CR>
@@ -552,6 +560,13 @@ nnoremap <silent> <leader>h :noh<CR>
 
 " <leader>n | NERD Tree
 nnoremap <leader>n :NERDTreeToggle<cr>
+
+" Insert Mode
+" Exit insert-mode
+imap <leader>i <Esc>
+" Ctrl-e jump to the end of line in insert mode
+inoremap <C-e> <C-o>$ 
+
 
 " ----------------------------------------------------------------------------
 " Vimux key bindings
