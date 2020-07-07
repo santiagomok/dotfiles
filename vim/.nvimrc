@@ -1,8 +1,13 @@
 " vim: set foldmethod=marker foldlevel=0 nomodeline:
 " ============================================================================
+" Santiago Mok (santiago.mok@gmail.com)
+" .nvimrc - NeoVim configuration file
 
 let s:darwin = has('mac')
 
+" Create a base autogroup that resets itself upon sourcing of the vimrc. 
+" This means all autocmds that are in this group are cleared when the vimrc is 
+" sourced, preventing them from piling up and slowing Vim down. 
 augroup vimrc   
     autocmd!
 augroup END
@@ -468,7 +473,7 @@ nnoremap <leader>wa :wa<cr>
 
 " Edit ~/.vimrc
 " nnoremap <leader>vrc :tabnew $MYVIMRC<cr>
-nnoremap <leader>vrc :tabnew $HOME/.vimrc<cr>
+nnoremap <leader>vrc :tabnew $HOME/.nvimrc<cr>
 " disable recording
 nnoremap q <Nop>
 
