@@ -532,6 +532,8 @@ vnoremap <leader>st :sort<CR>
 
 " perforce
 nnoremap <leader>e :Vp4Edit<CR>
+nnoremap <leader>R :Vp4Revert<CR>
+nnoremap <leader>vp :Vp4
 
 " tag
 nnoremap <leader>] :CtrlPTag<CR>

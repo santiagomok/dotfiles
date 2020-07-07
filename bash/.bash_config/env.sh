@@ -44,6 +44,7 @@ else
     PS1="${WHITE}\h | \w${NC}\n"
     PS1+="${rarrow} "
 fi
+
 #  PS1="\[\e[1;38m\]\u\[\e[1;34m\]@\[\e[1;31m\]\h\[\e[1;30m\]:"
 #  PS1="$PS1\[\e[0;38m\]\w\[\e[1;35m\]> \[\e[0m\]"
 #else
@@ -75,10 +76,13 @@ elif [ "$PLATFORM" = Linux ]; then
     elif [ -f ${HOME}/.local/etc/profile.d/bash_completion.sh ]; then
         . ${HOME}/.local/etc/profile.d/bash_completion.sh
     fi
-    shopt -s autocd # cd when typing a directory name
-    shopt -s dirspell # fix directory name typos
-    shopt -s cdspell # auto-fix directory name typos
-    # shopt -s direxpand # auto-expand directory globs
+    
+    if [ -f /etc/redhat-release ]; then
+        shopt -s autocd # cd when typing a directory name
+        shopt -s dirspell # fix directory name typos
+        shopt -s cdspell # auto-fix directory name typos
+        # shopt -s direxpand # auto-expand directory globs
+    fi
 fi
 
 shopt -s checkwinsize # auto resize window size
