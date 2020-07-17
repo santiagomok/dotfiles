@@ -1,8 +1,13 @@
 " vim: set foldmethod=marker foldlevel=0 nomodeline:
 " ============================================================================
+" Santiago Mok (santiago.mok@gmail.com)
+" .nvimrc - NeoVim configuration file
 
 let s:darwin = has('mac')
 
+" Create a base autogroup that resets itself upon sourcing of the vimrc. 
+" This means all autocmds that are in this group are cleared when the vimrc is 
+" sourced, preventing them from piling up and slowing Vim down. 
 augroup vimrc   
     autocmd!
 augroup END
@@ -133,10 +138,19 @@ Plug 'ajh17/VimCompletesMe'
 if has('nvim')
     Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
     Plug 'voldikss/vim-floaterm'
+    " floaterm key mappings
+    " ------------------------------------------------------------
+    let g:floaterm_keymap_new   = '<leader>fr'
+    let g:floaterm_keymap_prev  = '<leader>fp'
+    let g:floaterm_keymap_next  = '<leader>fn'
+    let g:floaterm_keymap_togle = '<leader>ft'
 endif
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Markdown
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 " Rust
 " Plug 'rust-lang/rust.vim'
@@ -336,6 +350,7 @@ set ignorecase
 set smartcase
 set incsearch
 set hlsearch        
+set path+=**        " Searches current directory recursively.
 " Search color highlight
 " augroup color_overrirde
     " autocmd!
@@ -368,12 +383,18 @@ set nrformats=hex
 " saving, and swap files will keep you safe if your computer crashes.
 set hidden
 set relativenumber
-augroup every
+augroup numbertoggle
     autocmd!
     " Set norelativenumber when in Insert mode
-    au InsertEnter * set norelativenumber
-    au InsertLeave * set relativenumber
+    au BufEnter,FocusGained,InsertLeave * set relativenumber
+    au BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
+
+" Split options
+"------------------------------------------------------------
+" set splitbelow 
+" Remove pipes | that act as separators on splits
+" set fillchars+=vert:\
 
 " }}}
 
@@ -450,14 +471,25 @@ nnoremap <leader>s  :update<cr>
 nnoremap <leader>wa :wa<cr>
 
 " Edit ~/.vimrc
-nnoremap <leader>rc :tabnew $MYVIMRC<cr> 
-" Bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement> noremap <c-j> <c-w>j noremap <c-k> <c-w>k
+" nnoremap <leader>vrc :tabnew $MYVIMRC<cr>
+nnoremap <leader>vrc :tabnew $HOME/.nvimrc<cr>
+" disable recording
+nnoremap q <Nop>
+
+" Bind Ctrl+<movement> keys to move around the windows, instead of using 
+" Ctrl+w + <movement> 
+noremap <c-j> <c-w>j 
+noremap <c-k> <c-w>k
 noremap <c-l> <c-w>l
 noremap <c-h> <c-w>h
 
 " Split
 nnoremap <leader>vv <c-w>v
 nnoremap <leader>ss <c-w>s
+nnoremap <silent> <C-Left>  :vertical resize -5<CR>
+nnoremap <silent> <C-Right> :vertical resize +5<CR>
+nnoremap <silent> <C-Up>    :resize -5<CR>
+nnoremap <silent> <C-Down>  :resize +5<CR>
 
 " buffers navigation
 nnoremap <leader>B  :Buffers<CR>
@@ -477,10 +509,10 @@ nnoremap <leader>tm :tabmove<Space>
 
 " file navigation
 nnoremap <leader>F  :Files<CR>
-nnoremap <leader>ff :Files<Space>
+nnoremap <leader>ff :Files ../
 nnoremap <leader>fs :split<Space>
 nnoremap <leader>fv :vsplit<Space>
-nnoremap <leader>ft :tabnew<Space>
+" nnoremap <leader>ft :tabnew<Space>
 
 " explorer - [N]% of page
 nnoremap <leader>fe :15Lexplore<CR> 
@@ -491,11 +523,17 @@ nnoremap <leader>ve :15Vexplore<CR>
 " Command History
 nnoremap <leader>H :History:<CR>
 
+" replace the current word and all its occurrences
+nnoremap <leader>rw :%s/\<<C-r><C-w>\>/
+vnoremap <leader>rw y:%s/<C-r>"/
+" replace the current word and all its occurrences
+" pre-fill target word
+nnoremap <leader>cw :%s/\<<C-r><C-w>\>/<C-r><C-w>
+vnoremap <leader>cw y:%s/<C-r>"/<C-r>"
+
 " sort
 vnoremap <leader>st :sort<CR>
 
-" perforce
-nnoremap <leader>e :Vp4Edit<CR>
 
 " tag
 nnoremap <leader>] :CtrlPTag<CR>
@@ -524,6 +562,12 @@ nnoremap <silent> <leader>h :noh<CR>
 
 " <leader>n | NERD Tree
 nnoremap <leader>n :NERDTreeToggle<cr>
+
+" Insert Mode
+" Exit insert-mode
+" imap <leader>i <Esc>
+" Ctrl-e jump to the end of line in insert mode
+inoremap <C-e> <C-o>$ 
 
 " Insert quotes words separated by comma (AB,BC,CD -> "AB","BC","CD")
 nnoremap <leader>riq :%s/\([^,]\+\)/"\1"/g

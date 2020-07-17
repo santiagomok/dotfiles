@@ -510,7 +510,7 @@ nnoremap <leader>tm :tabmove<Space>
 
 " file navigation
 nnoremap <leader>F  :Files<CR>
-nnoremap <leader>ff :Files ../<Space>
+nnoremap <leader>ff :Files ../
 nnoremap <leader>fs :split<Space>
 nnoremap <leader>fv :vsplit<Space>
 " nnoremap <leader>ft :tabnew<Space>
@@ -570,10 +570,12 @@ nnoremap <leader>n :NERDTreeToggle<cr>
 
 " Insert Mode
 " Exit insert-mode
-imap <leader>i <Esc>
+" imap <leader>i <Esc>
 " Ctrl-e jump to the end of line in insert mode
 inoremap <C-e> <C-o>$ 
 
+" Insert quotes words separated by comma (AB,BC,CD -> "AB","BC","CD")
+nnoremap <leader>riq :%s/\([^,]\+\)/"\1"/g
 
 " ----------------------------------------------------------------------------
 " Vimux key bindings
