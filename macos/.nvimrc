@@ -450,12 +450,8 @@ nnoremap <leader>s  :update<cr>
 nnoremap <leader>wa :wa<cr>
 
 " Edit ~/.vimrc
-nnoremap <leader>rc :tabnew $MYVIMRC<cr>
-
-" Bind Ctrl+<movement> keys to move around the windows, instead of using
-" Ctrl+w + <movement>
-noremap <c-j> <c-w>j
-noremap <c-k> <c-w>k
+nnoremap <leader>rc :tabnew $MYVIMRC<cr> 
+" Bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement> noremap <c-j> <c-w>j noremap <c-k> <c-w>k
 noremap <c-l> <c-w>l
 noremap <c-h> <c-w>h
 
@@ -528,6 +524,9 @@ nnoremap <silent> <leader>h :noh<CR>
 
 " <leader>n | NERD Tree
 nnoremap <leader>n :NERDTreeToggle<cr>
+
+" Insert quotes words separated by comma (AB,BC,CD -> "AB","BC","CD")
+nnoremap <leader>riq :%s/\([^,]\+\)/"\1"/g
 
 " ----------------------------------------------------------------------------
 " Vimux key bindings
