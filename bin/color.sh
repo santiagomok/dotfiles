@@ -52,9 +52,19 @@ for color in "${!FOREGROUND_COLORS[@]}"; do
     echo -ne "${FOREGROUND_COLORS[$color]}${color}${NC}";
     echo " | ${FOREGROUND_COLORS[$color]}";
 done
+
 echo "---------------------------------------------------"
 echo "BACKGROUND COLORS:"	
 for color in "${!BACKGROUND_COLORS[@]}"; do
     echo -ne "${BACKGROUND_COLORS[$color]}${color}${NC}";
     echo " | ${BACKGROUND_COLORS[$color]}";
+done
+
+echo "---------------------------------------------------"
+echo "COLOR PALETTE:"
+for i in {0..255}; do  
+    printf "\x1b[38;5;${i}mcolor%-5i\x1b[0m" $i ; 
+    if ! (( ($i + 1 ) % 8 )); then 
+        echo ; 
+    fi ;
 done
