@@ -1,3 +1,4 @@
+# vim: set filetype=zsh :
 # ${PWD##*/}: trims path up to and including the last slash
 while [[ ${PWD} != '/' && ${PWD##*/} != "$1" ]]; do 
     cd ..; 

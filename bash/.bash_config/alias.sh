@@ -54,10 +54,8 @@ alias manpath="echo ${MANPATH} | tr -s ':' '\n' | uniq"
 # ------------------------------------------------------------------------------ 
 
 # TMUX 
-alias tmux="tmux -2"
-alias tm="tmux -2 a"
-alias tmc="tmux -2 new -s"
-alias tmr="tmux -2 a -t"
+alias tm="tmux new-session -ADs main"
+alias tmr="tmux a -t"
 alias tmk="tmux kill-session -t"
 alias tmls="tmux ls"
 alias ftm="_fzf_switch_tmux_session"
