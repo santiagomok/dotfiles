@@ -60,10 +60,10 @@ Plug 'tpope/vim-endwise'
 " Plug 'tpope/vim-commentary'
   " map  gc  <Plug>Commentary
   " nmap gcc <Plug>CommentaryLine
-Plug 'junegunn/vim-easy-align'
-vmap <Enter> <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
+" Plug 'junegunn/vim-easy-align'
+" vmap <Enter> <Plug>(EasyAlign)
+" nmap ga <Plug>(EasyAlign)
+" xmap ga <Plug>(EasyAlign)
 
 
 " Code
