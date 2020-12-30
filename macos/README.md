@@ -10,7 +10,7 @@ git clone git@github.com:santiagomok/dotfiles.git ~/local/dev/dotfiles
 
 Install [Homebrew](https://brew.sh)
 ```bash
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 # Install brew bundle command
 brew tap Homebrew/bundle
 # Install apps
