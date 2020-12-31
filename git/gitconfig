@@ -25,7 +25,6 @@
     mgs = 'merge --squash'
     promote = !$ZSH/bin/git-promote
     rank-contributors = !$ZSH/bin/git-rank-contributors
-    rv = remote -v
     rso = remote show origin
     rsu = remote show upstream
     reset = reset HEAD

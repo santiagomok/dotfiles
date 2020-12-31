@@ -4,10 +4,11 @@
 #
 # ------------------------------------------------------------------------------ 
 # RC editing
-alias brc="v ${HOME}/.bashrc"
-alias trc="v ${HOME}/.tmux.conf" 
-alias vrc="v ${HOME}/.vimrc" 
-alias zrc="v ${HOME}/.zsh_config/alias.zsh" 
+alias brc="$EDITOR ${HOME}/.bashrc"
+alias grc="$EDITOR ${HOME}/.gitconfig"
+alias trc="$EDITOR ${HOME}/.tmux.conf" 
+alias vrc="$EDITOR ${HOME}/.vimrc" 
+alias zrc="$EDITOR ${HOME}/.config/zsh/alias.zsh" 
 
 # ------------------------------------------------------------------------------ 
 # SHELL
@@ -17,13 +18,14 @@ alias lsl="ls -alF | grep -e '->'"
 alias lsh="ls -ald .*"
 alias datemd="date +%b%d"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
-alias l="less"
+alias l="less -R"
 alias py="python3"
+alias du="du -csh $@ | sort -h"
 
 # GREP
 alias grep="grep --color=auto"
 alias rg="rg --line-number --no-heading --ignore-case"
-alias rgdev="rg -i -n -t{c,cpp,make,java,py,tcl,json,perl,protobuf,sh,swig,xml}"
+alias rgc="rg -i -n -t{c,cpp,make,java,py,tcl,json,perl,protobuf,sh,swig,xml}"
 
 # ------------------------------------------------------------------------------ 
 # PATH
@@ -36,7 +38,7 @@ alias ..3="cd ../../.."
 
 # Print each PATH entry on a separate line
 alias path="echo ${PATH} | tr -s ':' '\n' | uniq" 
-alias manpath="echo ${MANPATH} | tr -s ':' '\n' | uniq"
+alias manpath="manpath | tr -s ':' '\n' | uniq"
 
 # ------------------------------------------------------------------------------ 
 
@@ -74,12 +76,5 @@ alias llfs='find_by_size(){ find . -type f -size "$1" -exec ls --color --classif
 # download audio only
 alias ytda="youtube-dl -i --extract-audio --audio-format mp3"
 alias ytdaf="youtube-dl -i --extract-audio --audio-format mp3 -a"
-# ------------------------------------------------------------------------------ 
-
-# SSH
-# Pipe my public key to my clipboard.
-alias cb="pbcopy"
-alias pubkey="more ~/.ssh/id_rsa.pub | cb | echo '=> Public key copied to pasteboard.'"
-
 # ------------------------------------------------------------------------------ 
 
