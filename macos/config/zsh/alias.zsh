@@ -53,6 +53,7 @@ alias ftm="_fzf_switch_tmux_session"
 # GIT
 alias g="git"
 alias ga="git add"
+alias gdi="git difftool"
 alias gs="git status"
 alias gr="git remote -v"
 alias gll='_fzf_git_log'

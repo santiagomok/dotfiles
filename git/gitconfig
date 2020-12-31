@@ -57,13 +57,13 @@
 [merge]
     tool = nvim
 [mergetool]
-    prompt = false
+    prompt = true
 [diff]
-    tool = vimdiff
+    tool = nvimdiff
 	algorithm = histogram
 [difftool]
-    prompt = false
-[difftool "vimdiff"]
-    cmd = vim -d "$LOCAL" "$REMOTE"
+    prompt = true
+[difftool "nvimdiff"]
+    cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
 [advice]
 	waitingForEditor = false

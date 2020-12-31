@@ -28,3 +28,5 @@ autoload -Uz $config_path/function/**/*
 [ -f $config_path/export.zsh ]      && source "$config_path/export.zsh"
 [ -f $config_path/alias.zsh ]       && source "$config_path/alias.zsh"
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
