@@ -10,9 +10,11 @@ brew 'fasd'
 brew 'fd'
 brew 'fzf'
 brew 'git'
+brew 'htop'
 brew 'python3'
 brew 'ripgrep'
 brew 'tmux'
+
 #brew 'stow'
 #brew 'zsh'
 

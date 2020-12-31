@@ -7,6 +7,8 @@ macos/config/vim/bundle
 macos/config/vim/plugged
 macos/config/vim/view
 macos/config/vim/.netrwhist
+macos/config/ssh/id_*
+macos/config/ssh/known_hosts
 macos/config/tmux/plugins
 tmux/.tmux/plugins
 *.lock.json
