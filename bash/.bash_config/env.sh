@@ -89,6 +89,7 @@ shopt -s checkwinsize # auto resize window size
 shopt -s nocaseglob # case-insensitive globbing
 #shopt -s globstar # **/*.txt globstar recursive pattern in file and directory expansions
 shopt -s histappend # append to bash history file, rather than overwrite
+shopt -s direxpand # replace directory name with the results of word expansion
 
 export HISTCONTROL='erasedups:ignoreboth'
 export HISTSIZE=5000

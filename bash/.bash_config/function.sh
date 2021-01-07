@@ -48,12 +48,12 @@ vim_term_debug() {
 #}
 
 # v - open files in ~/.viminfo
-v() {
+_viminfo() {
   local files
   files=$(grep '^>' ~/.viminfo | cut -c3- |
           while read line; do
             [ -f "${line/\~/$HOME}" ] && echo "$line"
-          done | fzf-tmux -d -m -q "$*" -1) && $EDITOR ${files//\~/$HOME}
+          done | fzf -d -m -q "$*" -1) && $EDITOR ${files//\~/$HOME}
 }
 
 # ftags - search ctags

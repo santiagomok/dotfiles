@@ -153,6 +153,8 @@ Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
+Plug 'vimwiki/vimwiki'
+
 " Rust
 " Plug 'rust-lang/rust.vim'
 
@@ -322,6 +324,11 @@ if has_key(g:plugs, 'coc.nvim')
 endif
 
 
+" Wiki
+let g:vimwiki_list = [{'path': '~/.local/wiki/site'
+                    \, 'path_html': '~/.local/wiki/html'
+                    \, 'syntax': 'markdown'
+                    \, 'ext': '.md'}]
 " }}}
 
 " ============================================================================
