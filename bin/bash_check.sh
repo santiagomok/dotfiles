@@ -90,6 +90,12 @@ read -p "Are you sure you want to merge 'develop' into 'staging'? (Y/n)" -n 1 -r
 echo # new line
 
 if [[ $REPLY =~ ^[Yy]$ ]]; then 
-    echo REPLY is $REPLY
+    echo REPLY is $REPLY\n
 fi
+
+function _call_func() {
+   echo This is how function is defined.
+}
+
+_call_func
 set +x

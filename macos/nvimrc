@@ -60,10 +60,10 @@ Plug 'tpope/vim-endwise'
 " Plug 'tpope/vim-commentary'
   " map  gc  <Plug>Commentary
   " nmap gcc <Plug>CommentaryLine
-Plug 'junegunn/vim-easy-align'
-vmap <Enter> <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
+" Plug 'junegunn/vim-easy-align'
+" vmap <Enter> <Plug>(EasyAlign)
+" nmap ga <Plug>(EasyAlign)
+" xmap ga <Plug>(EasyAlign)
 
 
 " Code
@@ -159,10 +159,10 @@ Plug 'chrisbra/unicode.vim', { 'for': 'journal' }
 
 " Version control
 " Plug 'ngemily/vim-vp4'
-" Plug 'tpope/vim-fugitive'
-  " nmap     <Leader>g :Gstatus<CR>gg<c-n>
-  " nnoremap <Leader>d :Gdiff<CR>
-" Plug 'junegunn/gv.vim'
+Plug 'tpope/vim-fugitive'
+  nmap     <Leader>g :Gstatus<CR>gg<c-n>
+  nnoremap <Leader>d :Gdiff<CR>
+Plug 'junegunn/gv.vim'
   " function! s:gv_expand()
     " let line = getline('.')
     " GV --name-status

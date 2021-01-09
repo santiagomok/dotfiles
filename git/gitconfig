@@ -25,7 +25,6 @@
     mgs = 'merge --squash'
     promote = !$ZSH/bin/git-promote
     rank-contributors = !$ZSH/bin/git-rank-contributors
-    rv = remote -v
     rso = remote show origin
     rsu = remote show upstream
     reset = reset HEAD
@@ -58,13 +57,13 @@
 [merge]
     tool = nvim
 [mergetool]
-    prompt = false
+    prompt = true
 [diff]
-    tool = vimdiff
+    tool = nvimdiff
 	algorithm = histogram
 [difftool]
-    prompt = false
-[difftool "vimdiff"]
-    cmd = vim -d "$LOCAL" "$REMOTE"
+    prompt = true
+[difftool "nvimdiff"]
+    cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
 [advice]
 	waitingForEditor = false

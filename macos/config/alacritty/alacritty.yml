@@ -35,8 +35,8 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-   x: 6
-   y: 2
+   x: 0
+   y: 0
 
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
@@ -98,9 +98,8 @@ font:
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
     # family: 'SF Mono'
-    family: Roboto Mono for Powerline
-
     # The `style` can be specified to pick a specific face.
+    family: Roboto Mono for Powerline
     style: Regular
 
   # Bold font face
@@ -110,9 +109,7 @@ font:
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
     family: Roboto Mono for Powerline
-
-    # The `style` can be specified to pick a specific face.
-    #style: Bold
+    style: Bold
 
   # Italic font face
   italic:
@@ -572,7 +569,7 @@ selection:
   save_to_clipboard: false
 
 # Allow terminal applications to change Alacritty's window title.
-dynamic_title: true
+# dynamic_title: true
 
 #cursor:
   # Cursor style

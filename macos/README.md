@@ -10,11 +10,12 @@ git clone git@github.com:santiagomok/dotfiles.git ~/local/dev/dotfiles
 
 Install [Homebrew](https://brew.sh)
 ```bash
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-# Install brew bundle command
-brew tap Homebrew/bundle
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 # Install apps
 brew bundle ~/local/dev/dotfiles/macos/Brewfile
+
+# Install config files
+macos/install.sh
 
 # Configure dotfiles
 stow -v macos/.stow*
@@ -24,7 +25,7 @@ stow -v macos tmux git gdb
 Install VIM Plugin 
 ```bash
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-vim +PlugInstall
+nvim +PlugInstall
 ```
 
 # Install Powerline and Fonts
