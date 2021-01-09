@@ -9,7 +9,7 @@
 | fe          | Search and vim edit file found with fzf                          |
 | fge         | Grep for pattern and vim edit file found with fzf                |
 | fs          | Switch to selected (with fzf) tmux session                       |
-| rgcode      | Grep for pattern in source code {cpp,java,python,tcl,etc..}      |
+| rgdev       | Grep for pattern in source code {cpp,java,python,tcl,etc..}      |
 
 
 ## GDB Dashboard
