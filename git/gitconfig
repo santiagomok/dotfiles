@@ -67,3 +67,5 @@
     cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
 [advice]
 	waitingForEditor = false
+[pull]
+	rebase = false
