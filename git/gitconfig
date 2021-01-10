@@ -69,3 +69,5 @@
 	waitingForEditor = false
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
+[pull]
+	rebase = false

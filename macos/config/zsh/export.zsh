@@ -4,9 +4,9 @@
 
 # ------------------------------------------------------------------------------ 
 
-export LOCALPATH="$HOME/local"
-export PATH="$LOCALPATH/bin:$PATH"
-export MANPATH="$LOCALPATH/share/man:`manpath`"
+export LD="$HOME/local"
+export PATH="$LD/bin:$PATH"
+export MANPATH="$LD/share/man:`manpath`"
 
 # ------------------------------------------------------------------------------ 
 
@@ -20,14 +20,11 @@ export LC_ALL=en_US.UTF-8
 # ------------------------------------------------------------------------------ 
 
 # Go
-export GOPATH="$LOCALPATH"
-# export GOROOT="$(brew --prefix)/opt/go/libexec"
-# export PATH="$PATH:$GOROOT/bin:$GOPATH"
+export GOPATH="$LD"
 
 # Rust
-export RUSTUP_HOME="$LOCALPATH"
-export CARGO_HOME="$LOCALPATH"
-# export PATH="$PATH:$CARGO_HOME/bin"
+export RUSTUP_HOME="$LD"
+export CARGO_HOME="$LD"
 
 #Qt
 # export PATH="$PATH:$(brew --prefix)/opt/qt/bin"
