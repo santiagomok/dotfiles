@@ -3,9 +3,9 @@
 	name = Santiago Mok
 	email = santiago.mok@gmail.com
 [include]
-    path = ~/.gitconfig.local
-[hub]
-    protocol = https
+    path = ~/.gitconfig.work
+#[hub]
+#    protocol = https
 [alias]
     bv = branch -vv
     bd = branch -d
@@ -67,3 +67,5 @@
     cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
 [advice]
 	waitingForEditor = false
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
