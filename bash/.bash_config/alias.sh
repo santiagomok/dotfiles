@@ -9,9 +9,6 @@ if [ -x /usr/bin/dircolors ]; then
     eval "`dircolors -b`"
     alias ls='ls --color=auto'
     alias ll="ls --color=always -alh"
-elif [ "$PLATFORM" = Darwin ]; then
-    alias ls='ls -G'
-    alias ll="ls -G -alh"
 fi
 
 
@@ -63,6 +60,7 @@ alias ftm="_fzf_switch_tmux_session"
 # TOOL
 alias g="git"
 alias ga="git add"
+alias gdi="git difftool"
 alias gs="git status"
 alias gr="git remote -v"
 alias gfs="gnome-open"
@@ -85,30 +83,14 @@ alias export_cc_var="export CC=`which gcc`; export CXX=`which g++`"
 alias llfs='find_by_size(){ find . -type f -size "$1" -exec ls --color --classify --human-readable -l {} \; ; }; find_by_size'
 
 alias gll='fzf_git_log'
-
-# download audio only
-alias ytda="youtube-dl -i --extract-audio --audio-format mp3"
-alias ytdaf="youtube-dl -i --extract-audio --audio-format mp3 -a"
 # ------------------------------------------------------------------------------ 
 
 # SSH
 # Pipe my public key to my clipboard.
 alias cb="xclip"
-[ "$PLATFORM" = Darwin ] && alias cb="pbcopy"
-alias pubkey="more ~/.ssh/id_rsa.pub | cb | echo '=> Public key copied to pasteboard.'"
+alias cb_pubkey="more ~/.ssh/id_rsa.pub | cb | echo '=> Public key copied to pasteboard.'"
 
 # ------------------------------------------------------------------------------ 
-
-# grc overides for ls
-#   Made possible through contributions from generous benefactors like
-#   `brew install coreutils`
-#if $(gls &>/dev/null)
-#then
-#  alias ls="gls -F --color"
-#  alias l="gls -lAh --color"
-#  alias ll="gls -l --color"
-#  alias la='gls -A --color'
-#fi
 
 # ------------------------------------------------------------------------------ 
 
