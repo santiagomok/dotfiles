@@ -86,7 +86,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 Plug 'octol/vim-cpp-enhanced-highlight'
 
-" Plug 'ajh17/VimCompletesMe'
+Plug 'ackyshake/VimCompletesMe'
 
 Plug 'natebosch/vim-lsc'
     " vim-lsc settings
