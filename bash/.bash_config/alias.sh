@@ -58,11 +58,16 @@ alias tmls="tmux ls"
 alias ftm="_fzf_switch_tmux_session"
 
 # TOOL
-alias g="git"
-alias ga="git add"
-alias gdi="git difftool"
-alias gs="git status"
-alias gr="git remote -v"
+alias g   ="git"
+alias ga  ="git add"
+alias gci ="git commit -m"
+alias gdi ="git difftool"
+alias gl  ="git pull"
+alias gp  ="git push"
+alias gpp ="git push; git pull"
+alias gr  ="git remote -v"
+alias gs  ="git status"
+
 alias gfs="gnome-open"
 
 # ViM
