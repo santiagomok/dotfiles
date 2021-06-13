@@ -6,7 +6,8 @@
 # RC editing
 alias brc="$EDITOR ${HOME}/.bashrc"
 alias grc="$EDITOR ${HOME}/.gitconfig"
-alias trc="$EDITOR ${HOME}/.tmux.conf" 
+alias trc="$EDITOR ${HOME}/.config/alacritty/alacritty.yml"
+alias tmrc="$EDITOR ${HOME}/.tmux.conf" 
 alias vrc="$EDITOR ${HOME}/.vimrc" 
 alias zrc="$EDITOR ${HOME}/.config/zsh/alias.zsh" 
 
@@ -41,6 +42,10 @@ alias path="echo ${PATH} | tr -s ':' '\n' | uniq"
 alias manpath="manpath | tr -s ':' '\n' | uniq"
 
 # ------------------------------------------------------------------------------ 
+# G++/CLANG/MAKE
+alias m="g++ -std=c++17"
+alias mc="clang++ -std=c++17"
+alias mk="make -j"
 
 # TMUX 
 alias tm="tmux new-session -ADs main"

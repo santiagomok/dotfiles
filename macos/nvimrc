@@ -64,7 +64,8 @@ Plug 'tpope/vim-endwise'
 " vmap <Enter> <Plug>(EasyAlign)
 " nmap ga <Plug>(EasyAlign)
 " xmap ga <Plug>(EasyAlign)
-
+" Plug 'rstacruz/vim-closer'
+Plug 'jiangmiao/auto-pairs'
 
 " Code
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
@@ -85,6 +86,8 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
   augroup END
 
 Plug 'octol/vim-cpp-enhanced-highlight'
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
 
 Plug 'ajh17/VimCompletesMe'
 
@@ -203,7 +206,8 @@ endif
 if has('nvim')
     let base16colorspace=256  " Access colors present in 256 colorspace
     " colorscheme base16-monokai
-    colorscheme base16-helios
+    " colorscheme base16-helios
+    colorscheme base16-nord
 else
     if !has("gui_running")
     set t_Co=256
@@ -219,6 +223,12 @@ else
     set background=dark
     colorscheme solarized8
 endif
+
+" if exists('g:lightline')
+let g:lightline = {
+    \ 'colorscheme': 'nord',
+    \ }
+" endif
 
 "" Highlight chars that go over the 120-column limit, trucate at 120 chars
 "highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white

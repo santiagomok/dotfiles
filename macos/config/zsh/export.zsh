@@ -26,8 +26,12 @@ export GOPATH="$LD"
 export RUSTUP_HOME="$LD"
 export CARGO_HOME="$LD"
 
-#Qt
-# export PATH="$PATH:$(brew --prefix)/opt/qt/bin"
+# Qt
+export PATH="$PATH:$(brew --prefix)/opt/qt/bin"
+export LDFLAGS="-L/usr/local/opt/qt/lib"
+export CPPFLAGS="-I/usr/local/opt/qt/include"
+export PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig"
+
 
 # ------------------------------------------------------------------------------ 
 
