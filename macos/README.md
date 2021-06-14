@@ -36,6 +36,8 @@ nvim +PlugInstall
   - update vi keybinding ~/.slimzsh/keys.zsh "bindkey -v"
 
 ## Fonts
+### Current 
+- [Source Code Pro](https://fonts.google.com/specimen/Source+Code+Pro)
 ### [Powerline Fonts](https://github.com/powerline/fonts)
 - clone: git clone https://github.com/powerline/fonts.git --depth=1 ~/local/theme/fonts
 - install: cd fonts && ./install.sh
@@ -44,10 +46,15 @@ nvim +PlugInstall
 - git clone https://github.com/martinlindhe/base16-iterm2.git ~/local/theme/base16-iterm2
 
 ## Theme
+### Current
+- [Nord](https://www.nordtheme.com)
 ### Tomorrow Night
 - git clone https://github.com/chriskempson/tomorrow-theme.git
 
-## iTerm2
+
+## Terminal Emulator
+### Alacritty
+### iTerm2
 Source: 
 Color: base16-tomorrow-night-256
 Font: Incosolata-dz for Powerline
@@ -62,3 +69,8 @@ sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
 
 macos/set-defaults.sh
 ```
+
+
+## References
+- XDG_CONFIG_HOME (linux to macOS)
+  https://stackoverflow.com/questions/3373948/equivalents-of-xdg-config-home-and-xdg-data-home-on-mac-os-x
