@@ -1,0 +1,9 @@
+# workspace.yml
+- first window:
+    layout: tiled
+    panes:
+      - first pane: sleep 1
+      - second pane: sleep 2
+      - third pane: |
+          sleep 3
+          sleep 4

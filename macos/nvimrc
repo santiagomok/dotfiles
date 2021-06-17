@@ -21,15 +21,15 @@ call plug#begin('~/.vim/plugged')
 " Color
 Plug 'edkolev/tmuxline.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'lifepillar/vim-solarized8'
+" Plug 'lifepillar/vim-solarized8'
 Plug 'chriskempson/base16-vim'
-Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'tomasr/molokai'
-Plug 'morhetz/gruvbox'
-  let g:gruvbox_contrast_dark = 'soft'
-Plug 'junegunn/seoul256.vim'
-Plug 'w0ng/vim-hybrid'
-Plug 'AlessandroYorba/Despacio'
+" Plug 'chriskempson/vim-tomorrow-theme'
+" Plug 'tomasr/molokai'
+" Plug 'morhetz/gruvbox'
+  " let g:gruvbox_contrast_dark = 'soft'
+" Plug 'junegunn/seoul256.vim'
+" Plug 'w0ng/vim-hybrid'
+" Plug 'AlessandroYorba/Despacio'
 " Plug 'guns/xterm-color-table.vim'
 Plug 'junegunn/vim-journal'
 
@@ -41,8 +41,8 @@ Plug 'junegunn/vim-journal'
 Plug 'junegunn/heytmux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'roxma/vim-tmux-clipboard'
-Plug 'melonmanchan/vim-tmux-resizer'
 Plug 'benmills/vimux'
+" Plug 'melonmanchan/vim-tmux-resizer'
 
 " Find
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -68,6 +68,8 @@ Plug 'tpope/vim-endwise'
 Plug 'jiangmiao/auto-pairs'
 
 " Code
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'neovim/nvim-lspconfig'
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 " Plug 'ctrlpvim/ctrlp.vim'
 " Plug 'sheerun/vim-polyglot'
