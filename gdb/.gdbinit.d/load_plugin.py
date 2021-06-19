@@ -22,5 +22,5 @@ def load_boost_pretty_printer():
     boost.register_printers(boost_version=(ver_major,ver_minor,0)) 
 
 if __name__ == "__main__":
-    load_quartus_pretty_printer()
+    #load_quartus_pretty_printer()
     load_boost_pretty_printer()

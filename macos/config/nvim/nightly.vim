@@ -1,7 +1,7 @@
-" vim: set foldmethod=marker foldlevel=0 nomodeline:
+" vim: set foldmethod=marker foldlevel=1 nomodeline:
 " ============================================================================
 " Santiago Mok (santiago.mok@gmail.com)
-" .nvimrc - NeoVim configuration file
+" nightly.vim - NeoVim configuration file
 
 let s:darwin = has('mac')
 
@@ -21,15 +21,15 @@ call plug#begin('~/.vim/plugged')
 " Color
 Plug 'edkolev/tmuxline.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'lifepillar/vim-solarized8'
+" Plug 'lifepillar/vim-solarized8'
 Plug 'chriskempson/base16-vim'
-Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'tomasr/molokai'
+" Plug 'chriskempson/vim-tomorrow-theme'
+" Plug 'tomasr/molokai'
 Plug 'morhetz/gruvbox'
   let g:gruvbox_contrast_dark = 'soft'
-Plug 'junegunn/seoul256.vim'
+" Plug 'junegunn/seoul256.vim'
 Plug 'w0ng/vim-hybrid'
-Plug 'AlessandroYorba/Despacio'
+" Plug 'AlessandroYorba/Despacio'
 " Plug 'guns/xterm-color-table.vim'
 Plug 'junegunn/vim-journal'
 
@@ -74,54 +74,50 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 Plug 'scrooloose/nerdcommenter'
 let g:NERDSpaceDelims = 1
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-  augroup nerd_loader
-    autocmd!
-    autocmd VimEnter * silent! autocmd! FileExplorer
-    autocmd BufEnter,BufNew *
-          \  if isdirectory(expand('<amatch>'))
-          \|   call plug#load('nerdtree')
-          \|   execute 'autocmd! nerd_loader'
-          \| endif
-  augroup END
+" Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+  " augroup nerd_loader
+    " autocmd!
+    " autocmd VimEnter * silent! autocmd! FileExplorer
+    " autocmd BufEnter,BufNew *
+          " \  if isdirectory(expand('<amatch>'))
+          " \|   call plug#load('nerdtree')
+          " \|   execute 'autocmd! nerd_loader'
+          " \| endif
+  " augroup END
 
-Plug 'octol/vim-cpp-enhanced-highlight'
+" Plug 'octol/vim-cpp-enhanced-highlight'
 
-Plug 'ackyshake/VimCompletesMe'
+" Plug 'ackyshake/VimCompletesMe'
 
-Plug 'natebosch/vim-lsc'
-    " vim-lsc settings
-    " ----------------------------------------------------------
-    set completeopt=menu,menuone,noinsert,noselect
-    set shortmess-=F
-    let g:lsc_server_commands = {
-    \ 'cpp': {
-    \    'command': 'ccls',
-    \    'message_hooks': {
-    \        'initialize': {
-    \            'initializationOptions': {'cache': {'directory': $HOME.'/.local/tmp/ccls'}},
-    \            'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(findfile('compile_commands.json', expand('%:p') . ';'), ':p:h'))}
-    \        },
-    \    },
-    \  },   
-    \}
-    let g:lsc_auto_map = {
-    \  'GoToDefinition': 'gd',
-    \  'FindReferences': 'gr',
-    \  'Rename': 'gR',
-    \  'ShowHover': 'K',
-    \  'FindCodeActions': 'ga',
-    \  'Completion': 'omnifunc',
-    \}
-    let g:lsc_enable_autocomplete  = v:true
-    let g:lsc_enable_diagnostics   = v:false
-    let g:lsc_reference_highlights = v:false
-    let g:lsc_trace_level          = 'off' 
+" Plug 'natebosch/vim-lsc'
+    " " vim-lsc settings
+    " " ----------------------------------------------------------
+    " set completeopt=menu,menuone,noinsert,noselect
+    " set shortmess-=F
+    " let g:lsc_server_commands = {
+    " \ 'cpp': {
+    " \    'command': 'ccls',
+    " \    'message_hooks': {
+    " \        'initialize': {
+    " \            'initializationOptions': {'cache': {'directory': $HOME.'/.local/tmp/ccls'}},
+    " \            'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(findfile('compile_commands.json', expand('%:p') . ';'), ':p:h'))}
+    " \        },
+    " \    },
+    " \  },   
+    " \}
+    " let g:lsc_auto_map = {
+    " \  'GoToDefinition': 'gd',
+    " \  'FindReferences': 'gr',
+    " \  'Rename': 'gR',
+    " \  'ShowHover': 'K',
+    " \  'FindCodeActions': 'ga',
+    " \  'Completion': 'omnifunc',
+    " \}
+    " let g:lsc_enable_autocomplete  = v:true
+    " let g:lsc_enable_diagnostics   = v:false
+    " let g:lsc_reference_highlights = v:false
+    " let g:lsc_trace_level          = 'off' 
     
-
-" if v:version >= 800
-    " Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
-" endif
 
 " Lint
 " Plug 'dense-analysis/ale'
@@ -176,6 +172,9 @@ Plug 'tpope/vim-fugitive'
   " autocmd! FileType GV nnoremap <buffer> <silent> + :call <sid>gv_expand()<cr>
 
 if has('nvim-0.5')
+    Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    let g:deoplete#enable_at_startup = 1
+    Plug 'shougo/deoplete-lsp'
     Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
     Plug 'neovim/nvim-lspconfig'
 endif
@@ -190,10 +189,12 @@ call plug#end()
 " FZF plugin
 set rtp+=~/.fzf/bin/fzf
 
-if v:version >= 800
-    packadd termdebug
-    let g:termdebug_wide=1
-endif
+let g:python3_host_prog='/p/psg/ctools/python/3.7.9/6/linux64/suse12/bin/python3'
+
+" if v:version >= 800
+    " packadd termdebug
+    " let g:termdebug_wide=1
+" endif
 
 " Lightline and colors setting
 "------------------------------------------------------------
@@ -281,56 +282,56 @@ autocmd vimrc FileType vim inoremap <buffer> <c-x><c-v> <c-r>=VimAwesomeComplete
 " ----------------------------------------------------------------------------
 " coc.nvim
 " ----------------------------------------------------------------------------
-if has_key(g:plugs, 'coc.nvim')
+" if has_key(g:plugs, 'coc.nvim')
     
-    " Some servers have issues with backup files, see #649
-    set nobackup
-    set nowritebackup
+    " " Some servers have issues with backup files, see #649
+    " set nobackup
+    " set nowritebackup
 
-    " You will have bad experience for diagnostic messages when it's default
-    " 4000.
-    set updatetime=300 
+    " " You will have bad experience for diagnostic messages when it's default
+    " " 4000.
+    " set updatetime=300 
 
-    " don't give |ins-completion-menu| messages
-    set shortmess+=c
+    " " don't give |ins-completion-menu| messages
+    " set shortmess+=c
 
-    " always show signcolumns
-    " set signcolumn=yes
+    " " always show signcolumns
+    " " set signcolumn=yes
 
-    function! s:check_back_space() abort
-        let col = col('.') - 1
-        return !col || getline('.')[col - 1]  =~# '\s'
-    endfunction
+    " function! s:check_back_space() abort
+        " let col = col('.') - 1
+        " return !col || getline('.')[col - 1]  =~# '\s'
+    " endfunction
 
-    inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+    " inoremap <silent><expr> <TAB>
+            " \ pumvisible() ? "\<C-n>" :
+            " \ <SID>check_back_space() ? "\<TAB>" :
+            " \ coc#refresh()
+    " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-    function! s:show_documentation()
-        if (index(['vim', 'help'], &filetype) >= 0)
-        execute 'h' expand('<cword>')
-        else
-        call CocAction('doHover')
-        endif
-    endfunction
+    " function! s:show_documentation()
+        " if (index(['vim', 'help'], &filetype) >= 0)
+        " execute 'h' expand('<cword>')
+        " else
+        " call CocAction('doHover')
+        " endif
+    " endfunction
 
-    nnoremap <silent> K :call <SID>show_documentation()<CR>
+    " nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-    let g:coc_global_extensions = ['coc-github', 'coc-yaml', 'coc-solargraph',
-        \ 'coc-r-lsp', 'coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-html',
-        \ 'coc-prettier', 'coc-eslint', 'coc-tsserver', 'coc-emoji', 'coc-java']
-    command! -nargs=0 Prettier :CocCommand prettier.formatFile
+    " let g:coc_global_extensions = ['coc-github', 'coc-yaml', 'coc-solargraph',
+        " \ 'coc-r-lsp', 'coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-html',
+        " \ 'coc-prettier', 'coc-eslint', 'coc-tsserver', 'coc-emoji', 'coc-java']
+    " command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-    let g:go_doc_keywordprg_enabled = 0
+    " let g:go_doc_keywordprg_enabled = 0
 
-    augroup coc-config
-        autocmd!
-        autocmd VimEnter * nmap <silent> gd <Plug>(coc-definition)
-        autocmd VimEnter * nmap <silent> g? <Plug>(coc-references)
-    augroup END
-endif
+    " augroup coc-config
+        " autocmd!
+        " autocmd VimEnter * nmap <silent> gd <Plug>(coc-definition)
+        " autocmd VimEnter * nmap <silent> g? <Plug>(coc-references)
+    " augroup END
+" endif
 
 
 " Wiki
@@ -551,9 +552,6 @@ vnoremap <leader>rw y:%s/<C-r>"/
 nnoremap <leader>cw :%s/\<<C-r><C-w>\>/<C-r><C-w>
 vnoremap <leader>cw y:%s/<C-r>"/<C-r>"
 
-" sort
-vnoremap <leader>st :sort<CR>
-
 " perforce
 nnoremap <leader>e :Vp4Edit<CR>
 nnoremap <leader>R :Vp4Revert<CR>
@@ -585,7 +583,10 @@ nnoremap <leader>dt a<C-R>=strftime('%m/%d/%Y')<CR><Esc>
 nnoremap <silent> <leader>h :noh<CR>
 
 " <leader>n | NERD Tree
-nnoremap <leader>n :NERDTreeToggle<cr>
+" nnoremap <leader>n :NERDTreeToggle<cr>
+
+" sort
+vnoremap <leader>st :sort<CR>
 
 " Insert Mode
 " Exit insert-mode
@@ -674,5 +675,12 @@ let g:netrw_preview         = 1     " vsplit preview
 "let g:netrw_alto            = 0     " control preview to topleft
 let g:netrw_winsize         = 25    " 25% of page
 let g:netrw_usetab          = 1
+
+" Load Lua scripts
+"------------------------------------------------------------
+lua << EOF
+-- require('lsp')
+require('treesitter')
+EOF
 
 " }}}

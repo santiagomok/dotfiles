@@ -3,3 +3,4 @@
 dashboard -layout stack variables !breakpoints !assembly !expressions !history !memory !registers !source !threads
 dashboard variables -style compact False
 dashboard stack -style limit 10
+# dashboard -enabled off
