@@ -21,14 +21,14 @@ call plug#begin('~/.vim/plugged')
 " Color
 Plug 'edkolev/tmuxline.vim'
 Plug 'itchyny/lightline.vim'
-" Plug 'lifepillar/vim-solarized8'
 Plug 'chriskempson/base16-vim'
-" Plug 'chriskempson/vim-tomorrow-theme'
-" Plug 'tomasr/molokai'
 Plug 'morhetz/gruvbox'
   let g:gruvbox_contrast_dark = 'soft'
 " Plug 'junegunn/seoul256.vim'
 Plug 'w0ng/vim-hybrid'
+" Plug 'lifepillar/vim-solarized8'
+" Plug 'chriskempson/vim-tomorrow-theme'
+" Plug 'tomasr/molokai'
 " Plug 'AlessandroYorba/Despacio'
 " Plug 'guns/xterm-color-table.vim'
 Plug 'junegunn/vim-journal'
@@ -69,21 +69,9 @@ Plug 'jiangmiao/auto-pairs'
 
 " Code
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-" Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'sheerun/vim-polyglot'
 
 Plug 'scrooloose/nerdcommenter'
 let g:NERDSpaceDelims = 1
-" Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-  " augroup nerd_loader
-    " autocmd!
-    " autocmd VimEnter * silent! autocmd! FileExplorer
-    " autocmd BufEnter,BufNew *
-          " \  if isdirectory(expand('<amatch>'))
-          " \|   call plug#load('nerdtree')
-          " \|   execute 'autocmd! nerd_loader'
-          " \| endif
-  " augroup END
 
 " Plug 'octol/vim-cpp-enhanced-highlight'
 
@@ -177,6 +165,7 @@ if has('nvim-0.5')
     Plug 'shougo/deoplete-lsp'
     Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
     Plug 'neovim/nvim-lspconfig'
+    Plug 'hrsh7th/nvim-compe'
 endif
 
 call plug#end()
@@ -189,12 +178,7 @@ call plug#end()
 " FZF plugin
 set rtp+=~/.fzf/bin/fzf
 
-let g:python3_host_prog='/p/psg/ctools/python/3.7.9/6/linux64/suse12/bin/python3'
-
-" if v:version >= 800
-    " packadd termdebug
-    " let g:termdebug_wide=1
-" endif
+let g:python3_host_prog='/usr/local/bin/python3'
 
 " Lightline and colors setting
 "------------------------------------------------------------
@@ -400,7 +384,7 @@ set nrformats=hex
 " saving, and swap files will keep you safe if your computer crashes.
 
 set hidden
-set relativenumber
+set norelativenumber
 augroup numbertoggle
     autocmd!
     " Set norelativenumber when in Insert mode
@@ -553,22 +537,9 @@ nnoremap <leader>cw :%s/\<<C-r><C-w>\>/<C-r><C-w>
 vnoremap <leader>cw y:%s/<C-r>"/<C-r>"
 
 " perforce
-nnoremap <leader>e :Vp4Edit<CR>
-nnoremap <leader>R :Vp4Revert<CR>
-nnoremap <leader>vp :Vp4
-
-" tag
-nnoremap <leader>] :CtrlPTag<CR>
-
-" ConqueGDB 
-nnoremap <leader>cg :ConqueGdb<Space>
-
-" <F10> Tagbar toogle
-if v:version >= 703
-  inoremap <F10> <esc>:TagbarToggle<cr>
-  nnoremap <F10> :TagbarToggle<cr>
-  let g:tagbar_sort = 0
-endif
+" nnoremap <leader>e :Vp4Edit<CR>
+" nnoremap <leader>R :Vp4Revert<CR>
+" nnoremap <leader>vp :Vp4
 
 " shift and selection
 vnoremap < <gv  " better indentation
@@ -581,9 +552,6 @@ nnoremap <leader>dt a<C-R>=strftime('%m/%d/%Y')<CR><Esc>
 
 " Remove highlighting after search
 nnoremap <silent> <leader>h :noh<CR>
-
-" <leader>n | NERD Tree
-" nnoremap <leader>n :NERDTreeToggle<cr>
 
 " sort
 vnoremap <leader>st :sort<CR>
@@ -621,7 +589,7 @@ endif
 " ----------------------------------------------------------------------------
 " <F2> | Paste toggle
 " ----------------------------------------------------------------------------
-set pastetoggle=<F2>
+" set pastetoggle=<F2>
 
 " ----------------------------------------------------------------------------
 " <F3> | Color scheme selector
@@ -675,12 +643,5 @@ let g:netrw_preview         = 1     " vsplit preview
 "let g:netrw_alto            = 0     " control preview to topleft
 let g:netrw_winsize         = 25    " 25% of page
 let g:netrw_usetab          = 1
-
-" Load Lua scripts
-"------------------------------------------------------------
-lua << EOF
--- require('lsp')
-require('treesitter')
-EOF
 
 " }}}
