@@ -13,7 +13,7 @@ function _link_to() {
     local link_name
     target=$1
     link_name=$2
-    # [[ -h $link_name ]] && rm -vf $link_name && echo -e "  |___ link removed ... OK" 
+    [[ -h $link_name ]] && rm -vf $link_name && echo -e "  |___ link removed ... OK" 
     [[ ! -h $link_name ]] && ln -svf $target $link_name && echo -e "  |___ link ... OK"
 }
 
@@ -22,9 +22,9 @@ function _link_to() {
 
 # _link_to /System/Volumes/Data/mnt/SynologyDS $HOME/
 
-_link_to $SRC/config                            $HOME/.config
-# _link_to $HOME/.config/zsh/zshrc              $HOME/.zshrc
-# _link_to $HOME/.config/tmux/tmux.conf         $HOME/.tmux.conf
+# _link_to $SRC/config                            $HOME/.config
+# _link_to $HOME/.config/zsh/zshrc                $HOME/.zshrc
+# _link_to $HOME/.config/tmux/tmux.conf           $HOME/.tmux.conf
 # _link_to $SRC/macos/nvimrc                    $HOME/.vimrc
 # _link_to $SRC/../git/gitconfig                $HOME/.gitconfig
 # _link_to $SRC/../git/gitignore                $HOME/.gitignore
