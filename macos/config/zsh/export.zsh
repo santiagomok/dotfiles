@@ -4,7 +4,7 @@
 
 # ------------------------------------------------------------------------------ 
 
-export LD="$HOME/local"
+export LD="$HOME/.local"
 export PATH="$LD/bin:$PATH"
 export MANPATH="$LD/share/man:`manpath`"
 
