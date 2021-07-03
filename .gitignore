@@ -3,6 +3,7 @@ gdb/.gdb_history
 macos/config/Qt*
 macos/config/ssh/id_*
 macos/config/ssh/known_hosts
+macos/config/theme
 macos/config/tmux/plugins
 macos/config/vim/.netrwhist
 macos/config/vim/autoload
