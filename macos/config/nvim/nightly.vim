@@ -16,7 +16,7 @@ augroup END
 " ============================================================================
 " PLUG PACKAGES {{{
 " ============================================================================
-call plug#begin('~/.vim/plugged')
+call plug#begin(stdpath('data').'/plugged')
 
 " Color
 Plug 'edkolev/tmuxline.vim'
@@ -116,16 +116,14 @@ Plug 'scrooloose/nerdcommenter'
     " nmap [a <Plug>(ale_previous_wrap)
 
 " Debug
-if has('nvim')
-    Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
-    Plug 'voldikss/vim-floaterm'
-    " floaterm key mappings
-    " ------------------------------------------------------------
-    let g:floaterm_keymap_new   = '<leader>fr'
-    let g:floaterm_keymap_prev  = '<leader>fp'
-    let g:floaterm_keymap_next  = '<leader>fn'
-    let g:floaterm_keymap_togle = '<leader>ft'
-endif
+Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
+Plug 'voldikss/vim-floaterm'
+" floaterm key mappings
+" ------------------------------------------------------------
+let g:floaterm_keymap_new   = '<leader>fr'
+let g:floaterm_keymap_prev  = '<leader>fp'
+let g:floaterm_keymap_next  = '<leader>fn'
+let g:floaterm_keymap_togle = '<leader>ft'
 
 " Go
 " Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
@@ -385,8 +383,7 @@ nnoremap <leader>s  :update<cr>
 nnoremap <leader>wa :wa<cr>
 
 " Edit ~/.vimrc
-" nnoremap <leader>vrc :tabnew $MYVIMRC<cr>
-nnoremap <leader>vrc :tabnew $HOME/.nvimrc<cr>
+nnoremap <leader>vrc :tabnew stdpath('config').'/nightly.vim'<cr>
 " disable recording
 nnoremap q <Nop>
 

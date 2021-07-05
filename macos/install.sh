@@ -22,12 +22,11 @@ function _link_to() {
 
 # _link_to /System/Volumes/Data/mnt/SynologyDS $HOME/
 
-# _link_to $SRC/config                            $HOME/.config
-# _link_to $HOME/.config/zsh/zshrc                $HOME/.zshrc
-# _link_to $HOME/.config/tmux/tmux.conf           $HOME/.tmux.conf
-# _link_to $SRC/macos/nvimrc                    $HOME/.vimrc
+# _link_to $SRC/config                          $HOME/.config
+# _link_to $HOME/.config/zsh/zshrc              $HOME/.zshrc
+# _link_to $HOME/.config/tmux/tmux.conf         $HOME/.tmux.conf
+# _link_to $HOME/.config/vim                    $HOME/.vim
+# _link_to $HOME/.config/vim/vimrc              $HOME/.vimrc
+# _link_to $HOME/.config/ssh                    $HOME/.ssh
 # _link_to $SRC/../git/gitconfig                $HOME/.gitconfig
 # _link_to $SRC/../git/gitignore                $HOME/.gitignore
-
-# _link_to $HOME/.config/vim                    $HOME/.vim
-# _link_to $HOME/.config/ssh                    $HOME/.ssh
