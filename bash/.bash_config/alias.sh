@@ -14,7 +14,7 @@ fi
 
 # RC editing
 alias brc="v ${HOME}/.bashrc"
-alias trc="v ${HOME}/.tmux.conf" 
+alias tmrc="v ${HOME}/.tmux.conf" 
 alias vrc="v ${HOME}/.vimrc" 
 
 # SHELL
@@ -26,7 +26,8 @@ alias sl="ls"
 alias datemd="date +%b%d"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias hc="history -c"
-alias l="less"
+alias l="bat"
+alias cat="bat --paging=never"
 alias py="python3"
 
 # GREP
@@ -71,11 +72,12 @@ alias gs="git status"
 alias gfs="gnome-open"
 
 # ViM
-alias v="VIMRUNTIME= nvim"
+alias v="$EDITOR"
+alias vd="$EDITOR -d"
 alias vf="_fzf_find_edit_file"
 alias vrg="_fzf_grep_edit_file"
 alias vgdb="_nvim_gdb_start"
-alias v0="v --noplugin"
+alias v0="$EDITOR --noplugin"
 alias vi="vim"
 # alias vi_plugin_install="source ${HOME}/github.com/santiagomok/dotfiles/install/vim.sh"
 # alias v0="vim -u NONE"

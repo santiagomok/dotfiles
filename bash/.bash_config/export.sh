@@ -3,15 +3,19 @@
 # ------------------------------------------------------------------------------ 
 
 # ------------------------------------------------------------------------------ 
+export HL="${HOME}/.local"
+export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_DATA_HOME="$HL/share"
 
-export PATH="${HOME}/.local/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="$HL/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="${HOME}/.yarn/bin:${HOME}/.config/yarn/global/node_modules/.bin:$PATH"
-export MANPATH="${HOME}/.local/share/man:/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
+export MANPATH="$HL/share/man:/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
 # ------------------------------------------------------------------------------ 
 
 # EDITOR 
-export EDITOR=nvim
+export EDITOR=nv
 export VISUAL=$EDITOR
 export TERM=xterm-256color
 export LANG=en_US.UTF-8
@@ -21,14 +25,14 @@ export LC_ALL=en_US.UTF-8
 
 # GOLANG
 if [ "$PLATFORM" = Linux ]; then
-    export GOPATH=${HOME}/.local/lib/go/packages
-    export GOROOT=${HOME}/.local/go
+    export GOPATH="$HL/lib/go/packages"
+    export GOROOT="$HL/go"
 fi
-export PATH=$PATH:$GOROOT/bin:${GOPATH}
+export PATH="$PATH:$GOROOT/bin:${GOPATH}"
 
 # RUST
-export CARGO_HOME="${HOME}/.local"
-export RUSTUP_HOME="${HOME}/.local"
+export CARGO_HOME="$HL"
+export RUSTUP_HOME="$HL"
 
 # ------------------------------------------------------------------------------ 
 

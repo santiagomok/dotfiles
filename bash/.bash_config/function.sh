@@ -88,7 +88,7 @@ _fzf_find_edit_file() {
     local file
     file="$(fd --type f ${1:-.} ${2:-.} | fzf --multi --exit-0 --select-1)"
     if [[ -n $file ]]; then
-        VIMRUNTIME= nvim -p $file
+        $EDITOR -p $file
     fi
 }
 
