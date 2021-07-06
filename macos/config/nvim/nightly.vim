@@ -16,22 +16,14 @@ augroup END
 " ============================================================================
 " PLUG PACKAGES {{{
 " ============================================================================
-call plug#begin('~/.vim/plugged')
+call plug#begin(stdpath('data').'/plugged')
 
 " Color
 Plug 'edkolev/tmuxline.vim'
+    let g:tmuxline_powerline_separators = 0
 Plug 'itchyny/lightline.vim'
 Plug 'chriskempson/base16-vim'
-Plug 'morhetz/gruvbox'
-  let g:gruvbox_contrast_dark = 'soft'
-" Plug 'junegunn/seoul256.vim'
 Plug 'w0ng/vim-hybrid'
-" Plug 'lifepillar/vim-solarized8'
-" Plug 'chriskempson/vim-tomorrow-theme'
-" Plug 'tomasr/molokai'
-" Plug 'AlessandroYorba/Despacio'
-" Plug 'guns/xterm-color-table.vim'
-Plug 'junegunn/vim-journal'
 
 " Distraction free editing
 " Plug 'junegunn/goyo.vim'
@@ -47,10 +39,11 @@ Plug 'benmills/vimux'
 " Find
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-let g:fzf_action = {
-    \ 'ctrl-t': 'tab split',
-    \ 'ctrl-s': 'split',
-    \ 'ctrl-l': 'vsplit' }
+    let g:fzf_action = {
+        \ 'ctrl-t': 'tab split',
+        \ 'ctrl-s': 'split',
+        \ 'ctrl-l': 'vsplit' }
+Plug 'ptzz/lf.vim'
 
 " Edit
 Plug 'rstacruz/vim-closer'
@@ -61,21 +54,23 @@ Plug 'tpope/vim-endwise'
   " map  gc  <Plug>Commentary
   " nmap gcc <Plug>CommentaryLine
 Plug 'junegunn/vim-easy-align'
-vmap <Enter> <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
+    vmap <Enter> <Plug>(EasyAlign)
+    nmap ga <Plug>(EasyAlign)
+    xmap ga <Plug>(EasyAlign)
 Plug 'jiangmiao/auto-pairs'
 
+" Notes
+" Plug 'junegunn/vim-journal'
+Plug 'vimwiki/vimwiki'
+Plug 'chrisbra/unicode.vim', { 'for': 'journal' }
+
+" Markdown
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 " Code
-Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-
 Plug 'scrooloose/nerdcommenter'
-let g:NERDSpaceDelims = 1
-
-" Plug 'octol/vim-cpp-enhanced-highlight'
-
-" Plug 'ackyshake/VimCompletesMe'
+    let g:NERDSpaceDelims = 1
 
 " Plug 'natebosch/vim-lsc'
     " " vim-lsc settings
@@ -121,32 +116,23 @@ let g:NERDSpaceDelims = 1
     " nmap [a <Plug>(ale_previous_wrap)
 
 " Debug
-if has('nvim')
-    Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
-    Plug 'voldikss/vim-floaterm'
-    " floaterm key mappings
-    " ------------------------------------------------------------
-    let g:floaterm_keymap_new   = '<leader>fr'
-    let g:floaterm_keymap_prev  = '<leader>fp'
-    let g:floaterm_keymap_next  = '<leader>fn'
-    let g:floaterm_keymap_togle = '<leader>ft'
-endif
+Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
+Plug 'voldikss/vim-floaterm'
+" floaterm key mappings
+" ------------------------------------------------------------
+let g:floaterm_keymap_new   = '<leader>fr'
+let g:floaterm_keymap_prev  = '<leader>fp'
+let g:floaterm_keymap_next  = '<leader>fn'
+let g:floaterm_keymap_togle = '<leader>ft'
 
 " Go
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-" Markdown
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-
-Plug 'vimwiki/vimwiki'
+" Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 " Rust
 " Plug 'rust-lang/rust.vim'
 
-Plug 'chrisbra/unicode.vim', { 'for': 'journal' }
-
 " Version control
-Plug 'ngemily/vim-vp4'
+" Plug 'ngemily/vim-vp4'
 Plug 'tpope/vim-fugitive'
   " nmap     <Leader>g :Gstatus<CR>gg<c-n>
   " nnoremap <Leader>d :Gdiff<CR>
@@ -161,11 +147,12 @@ Plug 'tpope/vim-fugitive'
 
 if has('nvim-0.5')
     Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    let g:deoplete#enable_at_startup = 1
+        let g:deoplete#enable_at_startup = 1
     Plug 'shougo/deoplete-lsp'
     Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/nvim-compe'
+    Plug 'camspiers/snap'
 endif
 
 call plug#end()
@@ -186,36 +173,18 @@ let g:python3_host_prog='/usr/local/bin/python3'
 "if has("gui_running")
 "	set lines=80 columns=130
 "endif
-"
-if has('termguicolors')
-    set termguicolors
-endif 
 
-if has('nvim')
-    let base16colorspace=256  " Access colors present in 256 colorspace
-    colorscheme base16-nord
-    " colorscheme base16-helios
-else
-    if !has("gui_running")
-    set t_Co=256
-    endif
-    " if exists('g:lightline')
-        " let g:lightline = {
-            " \ 'colorscheme': 'nord',
-            " \ }
-    " endif
-
-    " let g:solarized_termcolors=256
-    " let g:solarized_termtrans=1
-    set background=dark
-    colorscheme solarized8
-endif
+set termguicolors
+let base16colorspace=256  " Access colors present in 256 colorspace
+colorscheme base16-helios
+" colorscheme base16-default-dark
+" colorscheme base16-nord
 
 let g:lightline = {
-    \ 'colorscheme': 'nord',
+    \ 'colorscheme': 'Tomorrow_Night_Bright',
     \ }
 
-"" Highlight chars that go over the 120-column limit, trucate at 120 chars
+" Highlight chars that go over the 120-column limit, trucate at 120 chars
 "highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
 "match OverLength '\%121v.*'
 
@@ -263,61 +232,6 @@ endfunction
 
 autocmd vimrc FileType vim inoremap <buffer> <c-x><c-v> <c-r>=VimAwesomeComplete()<cr>
 
-" ----------------------------------------------------------------------------
-" coc.nvim
-" ----------------------------------------------------------------------------
-" if has_key(g:plugs, 'coc.nvim')
-    
-    " " Some servers have issues with backup files, see #649
-    " set nobackup
-    " set nowritebackup
-
-    " " You will have bad experience for diagnostic messages when it's default
-    " " 4000.
-    " set updatetime=300 
-
-    " " don't give |ins-completion-menu| messages
-    " set shortmess+=c
-
-    " " always show signcolumns
-    " " set signcolumn=yes
-
-    " function! s:check_back_space() abort
-        " let col = col('.') - 1
-        " return !col || getline('.')[col - 1]  =~# '\s'
-    " endfunction
-
-    " inoremap <silent><expr> <TAB>
-            " \ pumvisible() ? "\<C-n>" :
-            " \ <SID>check_back_space() ? "\<TAB>" :
-            " \ coc#refresh()
-    " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-    " function! s:show_documentation()
-        " if (index(['vim', 'help'], &filetype) >= 0)
-        " execute 'h' expand('<cword>')
-        " else
-        " call CocAction('doHover')
-        " endif
-    " endfunction
-
-    " nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-    " let g:coc_global_extensions = ['coc-github', 'coc-yaml', 'coc-solargraph',
-        " \ 'coc-r-lsp', 'coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-html',
-        " \ 'coc-prettier', 'coc-eslint', 'coc-tsserver', 'coc-emoji', 'coc-java']
-    " command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-    " let g:go_doc_keywordprg_enabled = 0
-
-    " augroup coc-config
-        " autocmd!
-        " autocmd VimEnter * nmap <silent> gd <Plug>(coc-definition)
-        " autocmd VimEnter * nmap <silent> g? <Plug>(coc-references)
-    " augroup END
-" endif
-
-
 " Wiki
 let g:vimwiki_list = [{'path': '~/.local/wiki/site'
                     \, 'path_html': '~/.local/wiki/html'
@@ -351,13 +265,6 @@ set smartcase
 set incsearch
 set hlsearch        
 set path+=**        " Searches current directory recursively.
-
-" Search color highlight
-" augroup color_overrirde
-    " autocmd!
-    " autocmd ColorScheme * highlight Search ctermfg=LightCyan
-                    " \   | highlight IncSearch ctermfg=Cyan
-" augroup END
 
 " Usability options
 "------------------------------------------------------------
@@ -476,8 +383,7 @@ nnoremap <leader>s  :update<cr>
 nnoremap <leader>wa :wa<cr>
 
 " Edit ~/.vimrc
-" nnoremap <leader>vrc :tabnew $MYVIMRC<cr>
-nnoremap <leader>vrc :tabnew $HOME/.nvimrc<cr>
+nnoremap <leader>vrc :tabnew stdpath('config').'/nightly.vim'<cr>
 " disable recording
 nnoremap q <Nop>
 
@@ -614,24 +520,8 @@ endfunction
 nnoremap <silent> <F3> :call <SID>rotate_colors()<cr>
 
 " Grepper
-noremap <leader>/ :Grepper<CR>
-noremap <leader>* :Grepper -cword -noprompt<CR>
-" nmap gs <plug>(GrepperOperator)
-" xmap gs <plug>(GrepperOperator)
-"" Search word under cursor from current directory recursively
-" map <F5> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
-" Vim-Grepper setting
-"------------------------------------------------------------
-let g:grepper           = {}
-let g:grepper.quickfix  = 1
-let g:grepper.open      = 1
-let g:grepper.switch    = 1
-let g:grepper.prompt    = 1
-let g:grepper.tools     = ['rg', 'git', 'grep', 'ack']
-let g:grepper.stop      = 500
-"let g:grepper.repo      = ['builtins.gmake']
-"let g:grepper.dir       = 'repo,file'
-let g:grepper.highlight = 1
+noremap <leader>/ :Rg<SPACE>
+noremap <leader>* :Rg<SPACE><C-r><C-w><CR> 
 
 " Netrw setting
 "------------------------------------------------------------
