@@ -15,7 +15,7 @@ fi
 # RC editing
 alias brc="v ${HOME}/.bashrc"
 alias tmrc="v ${HOME}/.tmux.conf" 
-alias vrc="v ${HOME}/.vimrc" 
+alias vrc="v ${XDG_CONFIG_HOME}/nvim/nightly.vim" 
 
 # SHELL
 alias passwd="yppasswd"

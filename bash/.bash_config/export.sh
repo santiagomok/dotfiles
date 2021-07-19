@@ -15,7 +15,7 @@ export MANPATH="$HL/share/man:/usr/local/man:/usr/local/mysql/man:/usr/local/git
 # ------------------------------------------------------------------------------ 
 
 # EDITOR 
-export EDITOR=nv
+export EDITOR=nvim
 export VISUAL=$EDITOR
 export TERM=xterm-256color
 export LANG=en_US.UTF-8
