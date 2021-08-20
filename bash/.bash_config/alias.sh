@@ -15,7 +15,7 @@ fi
 # RC editing
 alias brc="v ${HOME}/.bashrc"
 alias tmrc="v ${HOME}/.tmux.conf" 
-alias vrc="v ${XDG_CONFIG_HOME}/nvim/nightly.vim" 
+alias vrc="v ${XDG_CONFIG_HOME}/nvim/plug.vim" 
 
 # SHELL
 alias passwd="yppasswd"
@@ -92,10 +92,11 @@ alias llfs='find_by_size(){ find . -type f -size "$1" -exec ls --color --classif
 alias gll='fzf_git_log'
 # ------------------------------------------------------------------------------ 
 
-# SSH
-# Pipe my public key to my clipboard.
-alias cb="xclip"
-alias cb_pubkey="more ~/.ssh/id_rsa.pub | cb | echo '=> Public key copied to pasteboard.'"
+# Clipboard
+alias cb="xclip -selection clipboard"
+# SSH: pipe my public key to my clipboard.
+alias cp_pubkey="more ~/.ssh/id_rsa.pub | cb | echo '=> Public key copied to pasteboard.'"
+alias cpd='echo -en `pwd`/ | xclip -selection clipboard'
 
 # ------------------------------------------------------------------------------ 
 
