@@ -20,8 +20,13 @@ local utils = require('utils')
 -- utils.opt('w', 'number', true)
 -- utils.opt('w', 'relativenumber', true)
 -- utils.opt('o', 'clipboard','unnamed,unnamedplus')
-utils.opt('o', 'completeopt','menuone,noselect')
+-- utils.opt('o', 'completeopt','menuone,noselect')
 -- vim.o.completeopt = "menuone,noselect"
+
+-- help
+utils.map('n', '<F1>', '<cmd>Helptags<cr>')
+utils.map('n', '<F2>', '<cmd>Maps<cr>')
+utils.map('n', '<leader>H', '<cmd>History<cr>')
 
 -- Highlight on yank
 -- vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'

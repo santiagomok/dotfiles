@@ -1,7 +1,7 @@
 " vim: set foldmethod=marker foldlevel=1 nomodeline:
 " ============================================================================
 " Santiago Mok (santiago.mok@gmail.com)
-" nightly.vim - NeoVim configuration file
+" plugins.vim - NeoVim configuration file
 
 let s:darwin = has('mac')
 
@@ -25,10 +25,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'w0ng/vim-hybrid'
 
-" Distraction free editing
-" Plug 'junegunn/goyo.vim'
-" Plug 'junegunn/limelight.vim'
-
 " Tmux
 Plug 'junegunn/heytmux'
 Plug 'christoomey/vim-tmux-navigator'
@@ -44,19 +40,21 @@ Plug 'junegunn/fzf.vim'
         \ 'ctrl-s': 'split',
         \ 'ctrl-l': 'vsplit' }
 Plug 'ptzz/lf.vim'
+" Better Rg
+Plug 'jesseleite/vim-agriculture'
 
 " Edit
-Plug 'rstacruz/vim-closer'
+" Plug 'rstacruz/vim-closer'
+" Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-endwise'
 " Plug 'tpope/vim-commentary'
   " map  gc  <Plug>Commentary
   " nmap gcc <Plug>CommentaryLine
-Plug 'junegunn/vim-easy-align'
-    vmap <Enter> <Plug>(EasyAlign)
-    nmap ga <Plug>(EasyAlign)
-    xmap ga <Plug>(EasyAlign)
+" Plug 'junegunn/vim-easy-align'
+    " vmap <Enter> <Plug>(EasyAlign)
+    " nmap ga <Plug>(EasyAlign)
+    " xmap ga <Plug>(EasyAlign)
 Plug 'jiangmiao/auto-pairs'
 
 " Notes
@@ -72,51 +70,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'scrooloose/nerdcommenter'
     let g:NERDSpaceDelims = 1
 
-" Plug 'natebosch/vim-lsc'
-    " " vim-lsc settings
-    " " ----------------------------------------------------------
-    " set completeopt=menu,menuone,noinsert,noselect
-    " set shortmess-=F
-    " let g:lsc_server_commands = {
-    " \ 'cpp': {
-    " \    'command': 'ccls',
-    " \    'message_hooks': {
-    " \        'initialize': {
-    " \            'initializationOptions': {'cache': {'directory': $HOME.'/.local/tmp/ccls'}},
-    " \            'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(findfile('compile_commands.json', expand('%:p') . ';'), ':p:h'))}
-    " \        },
-    " \    },
-    " \  },   
-    " \}
-    " let g:lsc_auto_map = {
-    " \  'GoToDefinition': 'gd',
-    " \  'FindReferences': 'gr',
-    " \  'Rename': 'gR',
-    " \  'ShowHover': 'K',
-    " \  'FindCodeActions': 'ga',
-    " \  'Completion': 'omnifunc',
-    " \}
-    " let g:lsc_enable_autocomplete  = v:true
-    " let g:lsc_enable_diagnostics   = v:false
-    " let g:lsc_reference_highlights = v:false
-    " let g:lsc_trace_level          = 'off' 
-    
-
-" Lint
-" Plug 'dense-analysis/ale'
-    " ALE-cpp settings
-    " ------------------------------------------------------------
-    " let g:ale_cpp_ccls_init_options = {
-    " \   'cacheDirectory': '/p/psg/data/moksanti/tmp/ccls'
-    " \ }
-    " let g:ale_linters = {'cpp': ['gcc']}
-    " let g:ale_cpp_gcc_options="-std=c++14 -I$ACDS_SRC_ROOT/quartus/h -I$ACDS_DEST_ROOT/quartus/h -I$ACDS_DEST_ROOT/quartus/h/boost"
-    " let g:ale_lint_delay = 1000
-    " nmap ]a <Plug>(ale_next_wrap)
-    " nmap [a <Plug>(ale_previous_wrap)
-
 " Debug
-Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 Plug 'voldikss/vim-floaterm'
 " floaterm key mappings
 " ------------------------------------------------------------
@@ -132,7 +86,6 @@ let g:floaterm_keymap_togle = '<leader>ft'
 " Plug 'rust-lang/rust.vim'
 
 " Version control
-" Plug 'ngemily/vim-vp4'
 Plug 'tpope/vim-fugitive'
   " nmap     <Leader>g :Gstatus<CR>gg<c-n>
   " nnoremap <Leader>d :Gdiff<CR>
@@ -145,15 +98,28 @@ Plug 'tpope/vim-fugitive'
   " endfunction
   " autocmd! FileType GV nnoremap <buffer> <silent> + :call <sid>gv_expand()<cr>
 
-if has('nvim-0.5')
-    Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-        let g:deoplete#enable_at_startup = 1
-    Plug 'shougo/deoplete-lsp'
-    Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'hrsh7th/nvim-compe'
-    Plug 'camspiers/snap'
-endif
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'neovim/nvim-lspconfig'
+Plug 'camspiers/snap'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'ray-x/lsp_signature.nvim'
+
+" Completion
+Plug 'nvim-lua/completion-nvim'
+" Plug 'Shougo/ddc.vim'
+" Plug 'vim-denops/denops.vim'
+" Plug 'hrsh7th/nvim-cmp'
+" Plug 'hrsh7th/cmp-buffer'
+
+" DAP
+Plug 'szw/vim-maximizer'
+    let g:maximizer_default_mapping_key = '<F6>'
+Plug 'puremourning/vimspector'
+    let g:vimspector_enable_mappings = 'HUMAN'
+    " " The width in column of the left utility windows (variables, stack)
+    let g:vimspector_sidebar_width = 120
+    " " The height in rows of the output window
+    let g:vimspector_bottombar_height = 20
 
 call plug#end()
 
@@ -383,7 +349,7 @@ nnoremap <leader>s  :update<cr>
 nnoremap <leader>wa :wa<cr>
 
 " Edit ~/.vimrc
-nnoremap <leader>vrc :tabnew stdpath('config').'/nightly.vim'<cr>
+nnoremap <leader>vrc :tabnew stdpath('config').'/plugins.vim'<cr>
 " disable recording
 nnoremap q <Nop>
 
@@ -491,12 +457,6 @@ if has("nvim")
     au FileType fzf tunmap <Esc>
 endif
 
-
-" ----------------------------------------------------------------------------
-" <F2> | Paste toggle
-" ----------------------------------------------------------------------------
-" set pastetoggle=<F2>
-
 " ----------------------------------------------------------------------------
 " <F3> | Color scheme selector
 " ----------------------------------------------------------------------------
@@ -535,3 +495,16 @@ let g:netrw_winsize         = 25    " 25% of page
 let g:netrw_usetab          = 1
 
 " }}}
+" Completion {{{
+" " Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
+
+" Avoid showing message extra message when using completion
+set shortmess+=c
+
+" }}}
+

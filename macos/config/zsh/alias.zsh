@@ -6,10 +6,10 @@
 # RC editing
 alias brc="$EDITOR ${HOME}/.bashrc"
 alias grc="$EDITOR ${HOME}/.gitconfig"
-alias trc="$EDITOR ${HOME}/.config/alacritty/alacritty.yml"
+alias trc="$EDITOR ${XDG_CONFIG_HOME}/alacritty/alacritty.yml"
 alias tmrc="$EDITOR ${HOME}/.tmux.conf" 
-alias vrc="$EDITOR ${HOME}/.vimrc" 
-alias zrc="$EDITOR ${HOME}/.config/zsh/alias.zsh" 
+alias vrc="$EDITOR ${XDG_CONFIG_HOME}/nvim/plugins.vim" 
+alias zrc="$EDITOR ${XDG_CONFIG_HOME}/zsh/alias.zsh" 
 
 # ------------------------------------------------------------------------------ 
 # SHELL

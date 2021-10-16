@@ -4,6 +4,7 @@ local lspconfig = require('lspconfig')
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
     require'lsp_signature'.on_attach(client)
+    require'completion'.on_attach(client)
 
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -48,13 +49,13 @@ for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup { on_attach = on_attach }
 end
 
-USER = vim.fn.expand('$USER')
+-- USER = vim.fn.expand('$USER')
 
 -- ccls LSP
-lspconfig.ccls.setup {
-    init_options = {
-        cache = {
-            directory = '/tmp/ccls_cache';
-        };
-    }
-}
+-- lspconfig.ccls.setup {
+    -- init_options = {
+        -- cache = {
+            -- directory = '/tmp/ccls_cache';
+        -- };
+    -- }
+-- }

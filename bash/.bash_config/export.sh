@@ -3,14 +3,14 @@
 # ------------------------------------------------------------------------------ 
 
 # ------------------------------------------------------------------------------ 
-export HL="${HOME}/.local"
+export HOME_LOCAL="${HOME}/.local"
 export XDG_CACHE_HOME="${HOME}/.cache"
 export XDG_CONFIG_HOME="${HOME}/.config"
-export XDG_DATA_HOME="$HL/share"
+export XDG_DATA_HOME="$HOME_LOCAL/share"
 
-export PATH="$HL/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="$HOME_LOCAL/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="${HOME}/.yarn/bin:${HOME}/.config/yarn/global/node_modules/.bin:$PATH"
-export MANPATH="$HL/share/man:/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
+export MANPATH="$HOME_LOCAL/share/man:/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
 # ------------------------------------------------------------------------------ 
 
@@ -25,14 +25,14 @@ export LC_ALL=en_US.UTF-8
 
 # GOLANG
 if [ "$PLATFORM" = Linux ]; then
-    export GOPATH="$HL/lib/go/packages"
-    export GOROOT="$HL/go"
+    export GOPATH="$HOME_LOCAL/lib/go/packages"
+    export GOROOT="$HOME_LOCAL/go"
 fi
 export PATH="$PATH:$GOROOT/bin:${GOPATH}"
 
 # RUST
-export CARGO_HOME="$HL"
-export RUSTUP_HOME="$HL"
+export CARGO_HOME="$HOME_LOCAL"
+export RUSTUP_HOME="$HOME_LOCAL"
 
 # ------------------------------------------------------------------------------ 
 

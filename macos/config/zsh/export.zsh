@@ -4,9 +4,13 @@
 
 # ------------------------------------------------------------------------------ 
 
-export LD="$HOME/.local"
-export PATH="$LD/bin:$PATH"
-export MANPATH="$LD/share/man:`manpath`"
+export HOME_LOCAL="$HOME/.local"
+export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_DATA_HOME="$HOME_LOCAL/share"
+
+export PATH="$HOME_LOCAL/bin:$PATH"
+export MANPATH="$HOME_LOCAL/share/man:`manpath`"
 
 # ------------------------------------------------------------------------------ 
 
@@ -20,11 +24,11 @@ export LC_ALL=en_US.UTF-8
 # ------------------------------------------------------------------------------ 
 
 # Go
-export GOPATH="$LD"
+export GOPATH="$HOME_LOCAL"
 
 # Rust
-export RUSTUP_HOME="$LD"
-export CARGO_HOME="$LD"
+export RUSTUP_HOME="$HOME_LOCAL"
+export CARGO_HOME="$HOME_LOCAL"
 
 # Qt
 export PATH="$PATH:$(brew --prefix)/opt/qt/bin"
