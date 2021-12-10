@@ -1,0 +1,2 @@
+command script import /Users/santiago/Library/Python/3.8/lib/python/site-packages/voltron/entry.py
+settings set target.inline-breakpoint-strategy always
