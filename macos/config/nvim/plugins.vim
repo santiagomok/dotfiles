@@ -39,7 +39,7 @@ Plug 'junegunn/fzf.vim'
         \ 'ctrl-t': 'tab split',
         \ 'ctrl-s': 'split',
         \ 'ctrl-l': 'vsplit' }
-Plug 'ptzz/lf.vim'
+" Plug 'ptzz/lf.vim'
 " Better Rg
 Plug 'jesseleite/vim-agriculture'
 
@@ -70,14 +70,22 @@ Plug 'plasticboy/vim-markdown'
 Plug 'scrooloose/nerdcommenter'
     let g:NERDSpaceDelims = 1
 
+" DAP
+Plug 'puremourning/vimspector'
+  let g:vimspector_enable_mappings = 'HUMAN'
+  " The width in columns of the left utility windows (variables, stack)
+  let g:vimspector_sidebar_width = 120
+  " The height in rows of the output window 
+  let g:vimspector_bottombar_height = 20
+
 " Debug
 Plug 'voldikss/vim-floaterm'
 " floaterm key mappings
 " ------------------------------------------------------------
-let g:floaterm_keymap_new   = '<leader>fr'
-let g:floaterm_keymap_prev  = '<leader>fp'
-let g:floaterm_keymap_next  = '<leader>fn'
-let g:floaterm_keymap_togle = '<leader>ft'
+let g:floaterm_keymap_new   = '<leader>fn'
+let g:floaterm_keymap_prev  = '<leader>fm'
+let g:floaterm_keymap_next  = '<leader>f{'
+let g:floaterm_keymap_togle = '<leader>f}'
 
 " Go
 " Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
@@ -100,9 +108,10 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'neovim/nvim-lspconfig'
-Plug 'camspiers/snap'
+Plug 'hrsh7th/nvim-compe'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'ray-x/lsp_signature.nvim'
+" Plug 'camspiers/snap'
 
 " Completion
 Plug 'nvim-lua/completion-nvim'
@@ -114,12 +123,9 @@ Plug 'nvim-lua/completion-nvim'
 " DAP
 Plug 'szw/vim-maximizer'
     let g:maximizer_default_mapping_key = '<F6>'
-Plug 'puremourning/vimspector'
-    let g:vimspector_enable_mappings = 'HUMAN'
-    " " The width in column of the left utility windows (variables, stack)
-    let g:vimspector_sidebar_width = 120
-    " " The height in rows of the output window
-    let g:vimspector_bottombar_height = 20
+Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-tree.lua'
+
 
 call plug#end()
 
@@ -214,6 +220,7 @@ set shiftwidth=4    " Affect what happen for <<, >>, or == keys. Must be same as
 set expandtab       " Convert \t into spaces when used with softtabstop.
 set smartindent     " Automatically inserts one extra level of indentation in some cases.
 set shiftround
+set syntax=on
 
 " startline, Wrapping and scrolling
 "------------------------------------------------------------
@@ -263,6 +270,7 @@ augroup numbertoggle
     " Set norelativenumber when in Insert mode
     au BufEnter,FocusGained,InsertLeave * set relativenumber
     au BufLeave,FocusLost,InsertEnter   * set norelativenumber
+
 augroup END
 
 " Split options
@@ -338,6 +346,30 @@ augroup END
 autocmd Filetype json setlocal ts=2 sw=2 expandtab
 "}}}
 
+" Vimspector settings
+" ----------------------------------------------------------------------------
+function s:SetUpTerminal()
+  if !has_key( g:vimspector_session_windows, 'terminal' )
+    " There's a neovim bug which means that this doesn't work in neovim
+    return
+  endif
+  let terminal_win = g:vimspector_session_windows.terminal
+
+  " Make the terminal window at most 80 columns wide, ensuring there is enough
+  " sapce for our code window (80 columns) and the left bar (70 columns)
+
+  " Padding is 2 for the 2 vertical split markers and 2 for the sign column in
+  " the code window.
+  " let left_bar = 70
+  " let code = 80
+  " let padding = 4
+  " let cols = max( [ min( [ &columns - left_bar - code - padding, 80 ] ), 10 ] )
+  call win_gotoid( terminal_win )
+  set norelativenumber nonumber
+  " execute cols . 'wincmd |'
+endfunction
+
+
 " ============================================================================
 " KEY MAPPINGS {{{
 " ============================================================================
@@ -389,7 +421,6 @@ nnoremap <leader>F  :Files<CR>
 nnoremap <leader>ff :Files ../
 nnoremap <leader>fs :split<Space>
 nnoremap <leader>fv :vsplit<Space>
-" nnoremap <leader>ft :tabnew<Space>
 
 " explorer - [N]% of page
 nnoremap <leader>fe :15Lexplore<CR> 
@@ -437,6 +468,15 @@ inoremap <C-e> <C-o>$
 " Insert quotes words separated by comma (AB,BC,CD -> "AB","BC","CD")
 nnoremap <leader>riq :%s/\([^,]\+\)/"\1"/g
 
+" vimspector
+nmap <leader>dq :VimspectorReset<cr>
+nmap <leader><F1> <Plug>VimspectorUpFrame
+nmap <leader><F2> <Plug>VimspectorDownFrame
+" debug inspect word under cursor
+nmap <leader>d<space> <Plug>VimspectorBalloonEval
+xmap <leader>d<space> <Plug>VimspectorBalloonEval
+
+
 " ----------------------------------------------------------------------------
 " Vimux key bindings
 " ----------------------------------------------------------------------------
@@ -479,9 +519,17 @@ function! s:rotate_colors()
 endfunction
 nnoremap <silent> <F3> :call <SID>rotate_colors()<cr>
 
-" Grepper
-noremap <leader>/ :Rg<SPACE>
-noremap <leader>* :Rg<SPACE><C-r><C-w><CR> 
+" Grep
+" noremap <leader>/ :Rg<SPACE>
+" noremap <leader>* :Rg<SPACE><C-r><C-w><CR> 
+" vim-agriculture
+nmap <leader>/ <Plug>RgRawSearch
+vmap <leader>/ <Plug>RgRawVisualSelection
+nmap <leader>* <Plug>RgRawWordUnderCursor
+if executable("rg")
+  set grepprg=rg\ --vimgrep\ --smart-case\ --hidden
+  set grepformat=%f:%l:%c:%m
+endif
 
 " Netrw setting
 "------------------------------------------------------------

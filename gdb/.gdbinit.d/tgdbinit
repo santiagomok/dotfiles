@@ -1,4 +1,4 @@
- vim: filetype=python
+# vim: filetype=python
 python
 import libtmux
 import subprocess as sp
