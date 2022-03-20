@@ -28,5 +28,6 @@ function _link_to() {
 # _link_to $HOME/.config/vim                    $HOME/.vim
 # _link_to $HOME/.config/vim/vimrc              $HOME/.vimrc
 # _link_to $HOME/.config/ssh                    $HOME/.ssh
+# _link_to $HOME/.config/lldb/lldbinit          $HOME/.lldbinit
 # _link_to $SRC/../git/gitconfig                $HOME/.gitconfig
 # _link_to $SRC/../git/gitignore                $HOME/.gitignore
