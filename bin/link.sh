@@ -5,9 +5,6 @@ SCRIPT_DIR=$(dirname $SCRIPT_PATH)
 
 source ${SCRIPT_DIR}/color.sh
 
-RED=${FOREGROUND_COLORS[RED]}
-GREEN=${FOREGROUND_COLORS[GREEN]}
-
 function _link_to() {
     local target
     local link_name
