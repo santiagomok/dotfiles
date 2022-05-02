@@ -17,11 +17,6 @@ brew bundle ~/local/dev/dotfiles/macos/Brewfile
 # Install config files
 macos/install.sh
 
-# Configure dotfiles
-stow -v macos/.stow*
-stow -v macos tmux git gdb
-```
-
 Install VIM Plugin 
 ```bash
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -32,7 +27,7 @@ nvim +PlugInstall
 ## ZSH
 - Install slim-zsh: 
   - git clone --recursive https://github.com/changs/slimzsh.git ~/.slimzsh
-  - add to $HOME/.zshrc --> source "~/.slimzsh/slim.zsh"
+  - add to $HOME/.zshrc -> source "~/.slimzsh/slim.zsh"
   - update vi keybinding ~/.slimzsh/keys.zsh "bindkey -v"
 
 ## Fonts
@@ -44,22 +39,6 @@ nvim +PlugInstall
 - clean: cd .. && rm -rf fonts
 ### BASE16
 - git clone https://github.com/martinlindhe/base16-iterm2.git ~/local/theme/base16-iterm2
-
-## Theme
-### Current
-- [Nord](https://www.nordtheme.com)
-### Tomorrow Night
-- git clone https://github.com/chriskempson/tomorrow-theme.git
-
-
-## Terminal Emulator
-### Alacritty
-### iTerm2
-Source: 
-Color: base16-tomorrow-night-256
-Font: Incosolata-dz for Powerline
-Size: 12
-
 
 ## macOS defaults 
 ```bash
