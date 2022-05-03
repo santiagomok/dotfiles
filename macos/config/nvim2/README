@@ -1,0 +1,23 @@
+# NeoVim Lua Basics
+source: https://alpha2phi.medium.com/neovim-init-lua-e80f4f136030
+see ':h lua'
+
+## Global, Buffer, and Window Scoped Options
+see ':h vim.o'
+vim.o:   get or set EDITOR options
+vim.bo:  get or set BUFFER-scoped local-options
+vim.wo:  get or set WINDOW-scoped local-options
+
+## Lua-Vimscript Bridge 
+see ':h lua-vimscript' for defined interfaces to Vimscript and variables.
+vim.call:   invokes vim-funciton or user-function {func} with arguments {...}
+vim.cmd:    invokes an Ex command (the ":" commands, Vimscript statements)
+vim.fn:     invokes vim-function or user-function {func} with arguments {...}
+
+## Lua Vim Variables
+see ':h lua-vim-variables'
+vim.g:      global editor variables
+vim.b:      buffer-scoped variables
+vim.w:      window-scoped variables
+vim.t:      tabpage-scoped variables
+
