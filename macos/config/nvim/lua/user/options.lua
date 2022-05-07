@@ -72,5 +72,4 @@ vim.cmd 'filetype plugin indent on'
 -- Highlight on yank
 -- vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
 
-vim.g['python3_host_prog'] = '/p/psg/ctools/python/3.9.10/1/linux64/suse12/bin/python3'
-    
+vim.g['python3_host_prog'] = '/usr/local/bin/python3'
