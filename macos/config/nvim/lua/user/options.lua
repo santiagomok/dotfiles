@@ -1,11 +1,10 @@
 -- Line format
 vim.o.tabstop = 4      		-- Define <TAB> column width
-vim.o.softtabstop = 4   	-- Affect what happen when <TAB> or <BS> is pressed.
-vim.o.shiftwidth = 4    	-- Affect what happen for <<, >>, or == keys. Must be same as tabstop
+vim.o.softtabstop = 0   	-- Affect what happen when <TAB> or <BS> is pressed. (0 for 'tabstop', -1 for 'shiftwidth')
+vim.o.shiftwidth = 0    	-- Affect what happen for <<, >>, or == keys. Must be same as tabstop (0 for 'tabstop', -1 for 'shiftwidth')
 vim.o.expandtab = true      -- Convert \t into spaces when used with softtabstop.
 vim.o.smartindent = true 	-- Automatically inserts one extra level of indentation in some cases.
 vim.o.shiftround = true 
--- vim.o.syntax = true
 vim.o.termguicolors = true
 -- vim.o.title = true
 vim.o.wildmode = 'longest:full,full'
@@ -68,7 +67,10 @@ vim.o.showmode = false
 vim.o.autochdir = true 
 
 vim.cmd 'syntax enable'
-vim.cmd 'filetype plugin indent on'
+vim.cmd 'filetype plugin indent on' -- Allow auto-indenting depending on file type
+vim.cmd 'autocmd FileType lua   setlocal tabstop=2 softtabstop=2 shiftwidth=2'
+vim.cmd 'autocmd FileType json  setlocal tabstop=2 softtabstop=2 shiftwidth=2'
+vim.cmd 'autocmd FileType sh    setlocal tabstop=2 softtabstop=2 shiftwidth=2'
 -- Highlight on yank
 -- vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
 
