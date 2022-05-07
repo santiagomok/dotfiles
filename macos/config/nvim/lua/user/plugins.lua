@@ -3,7 +3,6 @@ local packer = require 'lib.packer-init'
 packer.startup(function(use)
   use { 'wbthomason/packer.nvim' } -- Let packer manage itself
 
-  use { 'christoomey/vim-tmux-navigator' }
   use { 'farmergreg/vim-lastplace' }
   use { 'tpope/vim-repeat' }
   use { 'tpope/vim-commentary' }
@@ -11,6 +10,29 @@ packer.startup(function(use)
   use { 'tpope/vim-eunuch' } -- Adds :Rename, :Move, :Delete
   use { 'tpope/vim-unimpaired' } -- Adds [b and other handy mappings
   -- use { 'tpope/vim-sleuth' } -- Indent autodetection with editorconfig support
+
+  use {
+    'junegunn/fzf.vim',
+    requires = {
+        {'junegunn/fzf', run = './install --all'},
+        {'jesseleite/vim-agriculture'}
+    },
+    config = function()
+        require('user.plugins.finder')
+    end
+  }
+
+  use { 
+    'christoomey/vim-tmux-navigator', -- <C-hjkl> navigation
+    requires = {
+        'roxma/vim-tmux-clipboard', -- clipboard copy between vim and tmux
+        'melonmanchan/vim-tmux-resizer', -- <M-hjkl> resize
+        'edkolev/tmuxline.vim' -- powerline status
+    },
+    config = function()
+        require("user.plugins.tmux")
+    end
+  }
 
   use {
     'windwp/nvim-autopairs',
