@@ -2,6 +2,7 @@ vim.cmd [[highlight BufferlineOffset guifg = '#80a0ff' guibg = '#21222C']]
 
 require('bufferline').setup {
   options = {
+    mode = "tabs", -- show tabpages
     indicator_icon = ' ',
     offsets = {
       {
