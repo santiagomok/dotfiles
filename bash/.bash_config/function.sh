@@ -33,11 +33,6 @@ function du10() {
     du -shx $1 | sort -rh | head -10
 }
 
-# ViM
-vim_term_debug() {
-    vim -c "Termdebug ${1:-}"
-}
-
 # Fuzzy 
 # fd - cd to selected directory
 #function fd() {
@@ -140,7 +135,3 @@ fzf_log() {
   git showtool $hash
 }
 
-_nvim_gdb_start() {
-    local debug_bin=$1 
-    v +'GdbStart gdb -q $debug_bin'
-}

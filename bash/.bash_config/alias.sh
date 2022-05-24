@@ -18,8 +18,9 @@ alias tmrc="v ${HOME}/.tmux.conf"
 alias vrc="v ${XDG_CONFIG_HOME}/nvim/plug.vim" 
 
 # ls -> exa
+alias l='exa'
 alias ls='exa'
-alias l='exa -1'
+alias l1='exa -1'
 alias ll='exa -l'
 alias lld='exa -l -d'
 alias tree='exa -T'
