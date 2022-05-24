@@ -10,6 +10,7 @@ macos/config/vim/autoload
 macos/config/vim/bundle
 macos/config/vim/plugged
 macos/config/vim/view
+macos/config/nvim/plugin/**
 tmux/.tmux/plugins
 vim/.nvim
 vim/.vim/.netrwbook

@@ -6,9 +6,8 @@
 # RC editing
 alias brc="$EDITOR ${HOME}/.bashrc"
 alias grc="$EDITOR ${HOME}/.gitconfig"
-alias trc="$EDITOR ${XDG_CONFIG_HOME}/alacritty/alacritty.yml"
 alias tmrc="$EDITOR ${HOME}/.tmux.conf" 
-alias vrc="$EDITOR ${XDG_CONFIG_HOME}/nvim/plugins.vim" 
+alias wrc="$EDITOR ${XDG_CONFIG_HOME}/wezterm/wezterm.lua"
 alias zrc="$EDITOR ${XDG_CONFIG_HOME}/zsh/alias.zsh" 
 
 # ------------------------------------------------------------------------------ 
@@ -30,6 +29,10 @@ alias rgc="rg -i -n -t{c,cpp,make,java,py,tcl,json,perl,protobuf,sh,swig,xml}"
 
 # ------------------------------------------------------------------------------ 
 # PATH
+alias cc='cd ${XDG_CONFIG_HOME}'
+alias ct='cd ${HOME}/Developer/tutorial'
+alias cw='cd ${HOME}/Developer'
+alias c.='cd ${HOME}/.dotfiles'
 alias fcd="_fzf_change_dir"
 alias mcd="_mcd"
 alias bcd="_bcd"

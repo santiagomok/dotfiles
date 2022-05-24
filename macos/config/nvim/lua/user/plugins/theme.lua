@@ -1,18 +1,18 @@
-local Plug = vim.fn['plug#']
+-- local Plug = vim.fn['plug#']
 
-Plug('itchyny/lightline.vim')
+-- Plug('itchyny/lightline.vim')
 
-Plug('chriskempson/base16-vim')
+-- Plug('chriskempson/base16-vim')
 
--- vim.cmd([[
-    -- " set termguicolors
-    -- " Access colors present in 256 colorspace
-    -- let base16colorspace=256  
-    -- colorscheme base16-helios
-    -- let g:lightline = {
-        -- \ 'colorscheme': 'Tomorrow_Night_Bright',
-        -- \ }
--- ]])
+vim.cmd([[
+    " set termguicolors
+    " Access colors present in 256 colorspace
+    let base16colorspace=256  
+    colorscheme base16-helios
+    " let g:lightline = {
+    "     \ 'colorscheme': 'Tomorrow_Night_Bright',
+    "     \ }
+]])
 -- colorscheme base16-default-dark
 -- colorscheme base16-nord
 
