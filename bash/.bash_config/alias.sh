@@ -5,11 +5,11 @@
 # ------------------------------------------------------------------------------ 
 
 # Colored ls
-if [ -x /usr/bin/dircolors ]; then
-    eval "`dircolors -b`"
-    alias ls='ls --color=auto'
-    alias ll="ls --color=always -alh"
-fi
+# if [ -x /usr/bin/dircolors ]; then
+    # eval "`dircolors -b`"
+    # alias ls='ls --color=auto'
+    # alias ll="ls --color=always -alh"
+# fi
 
 
 # RC editing
@@ -17,17 +17,25 @@ alias brc="v ${HOME}/.bashrc"
 alias tmrc="v ${HOME}/.tmux.conf" 
 alias vrc="v ${XDG_CONFIG_HOME}/nvim/plug.vim" 
 
+# ls -> exa
+alias ls='exa'
+alias l='exa -1'
+alias ll='exa -l'
+alias lld='exa -l -d'
+alias tree='exa -T'
+# alias sl="ls"
+# alias lsd="ls -l  | grep -e '^d'"
+# alias lsl="ls -al | grep -e '->'"
+# alias lsh="ls -ald .*"
+
+alias less="bat"
+alias cat="bat --paging=never"
+
 # SHELL
 alias passwd="yppasswd"
-alias lsd="ls -l  | grep -e '^d'"
-alias lsl="ls -al | grep -e '->'"
-alias lsh="ls -ald .*"
-alias sl="ls"
 alias datemd="date +%b%d"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias hc="history -c"
-alias l="bat"
-alias cat="bat --paging=never"
 alias py="python3"
 
 # GREP
@@ -41,9 +49,9 @@ alias rgdev="rg -i -n -t{c,cpp,make,java,py,tcl,json,perl,protobuf,sh,swig,xml}"
 alias fcd="_fzf_change_dir"
 alias mcd="_mcd"
 alias bcd="_bcd"
-alias ..="cd .."
-alias ..2="cd ../.."
-alias ..3="cd ../../.."
+alias b.="cd .."
+alias b..="cd ../.."
+alias b...="cd ../../.."
 
 # Print each PATH entry on a separate line
 alias path="echo ${PATH} | tr -s ':' '\n' | uniq" 
