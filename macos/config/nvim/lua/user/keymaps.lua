@@ -4,17 +4,19 @@ vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
 -- windows, tabs
-keymap('n', '<C-w><C-q>', '<cmd>qa<cr>')
+keymap('n', '<leader>WW', ':wqall<cr>')
+keymap('n', '<leader>QQ', ':qall<cr>')
+keymap('n', '<leader>TT', '<cmd>tabclose<cr>')
+keymap('n', '<leader>tt', '<cmd>tabnew<cr>')
 
 -- tab navigation
-keymap('n', '<leader>tt', '<cmd>tabnew<cr>')
-keymap('n', '<leader>TT', '<cmd>tabclose<cr>')
-keymap('n', '<A-{>', '<cmd>tabprevious<cr>')
-keymap('n', '<A-}>', '<cmd>tabnext<cr>')
-keymap('n', '<leader>tp', '<cmd>tabmove -1<cr>') -- move the tab page to the left
-keymap('n', '<leader>tn', '<cmd>tabmove +1<cr>') -- move the tab page to the right
-keymap('n', '<leader>t1', '<cmd>tabmove 0<cr>')  -- move the tab page to the beginning
-keymap('n', '<leader>t0', '<cmd>tabmove $<cr>')  -- move the tab page to the last
+-- see plugins/bufferline.lua
+-- keymap('n', '<A-{>', '<cmd>tabprevious<cr>')
+-- keymap('n', '<A-}>', '<cmd>tabnext<cr>')
+-- keymap('n', '<leader>tp', '<cmd>tabmove -1<cr>') -- move the tab page to the left
+-- keymap('n', '<leader>tn', '<cmd>tabmove +1<cr>') -- move the tab page to the right
+-- keymap('n', '<leader>t1', '<cmd>tabmove 0<cr>')  -- move the tab page to the beginning
+-- keymap('n', '<leader>t0', '<cmd>tabmove $<cr>')  -- move the tab page to the last
 
 --keymap('n', '<leader>vrc' ':tabnew \"stdpath(\'config\').\'/plug.vim\'\"<cr>')
 
@@ -41,14 +43,14 @@ keymap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', {expr = true})
 keymap('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
 
 -- Bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
--- keymap('n', '<C-h>', '<C-w>h')
--- keymap('n', '<C-j>', '<C-w>j')
--- keymap('n', '<C-k>', '<C-w>k')
--- keymap('n', '<C-l>', '<C-w>l')
-keymap('n', 'wh', '<C-w>h')
-keymap('n', 'wj', '<C-w>j')
-keymap('n', 'wk', '<C-w>k')
-keymap('n', 'wl', '<C-w>l')
+keymap('n', '<C-h>', '<C-w>h')
+keymap('n', '<C-j>', '<C-w>j')
+keymap('n', '<C-k>', '<C-w>k')
+keymap('n', '<C-l>', '<C-w>l')
+-- keymap('n', 'wh', '<C-w>h')
+-- keymap('n', 'wj', '<C-w>j')
+-- keymap('n', 'wk', '<C-w>k')
+-- keymap('n', 'wl', '<C-w>l')
 
 -- file
 keymap('n', '<leader>fw', '<cmd>!chmod u+w %:p<cr>')

@@ -47,3 +47,7 @@ require('bufferline').setup {
     },
   },
 }
+
+local keymap = require 'lib.utils'.keymap
+keymap('n', 't[', ':BufferLineCyclePrev<cr>', {noremap = true, silent = false})
+keymap('n', 't]', ':BufferLineCycleNext<cr>', {noremap = true, silent = true})
