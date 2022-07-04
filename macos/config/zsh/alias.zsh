@@ -36,9 +36,8 @@ alias c.='cd ${HOME}/.dotfiles'
 alias fcd="_fzf_change_dir"
 alias mcd="_mcd"
 alias bcd="_bcd"
-alias ..="cd .."
-alias ..2="cd ../.."
-alias ..3="cd ../../.."
+alias cd..="cd .."
+alias cd...="cd ../.."
 
 # Print each PATH entry on a separate line
 alias path="echo ${PATH} | tr -s ':' '\n' | uniq" 

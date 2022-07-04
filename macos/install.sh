@@ -21,19 +21,11 @@ sub_help () {
     echo
     echo "Commands:"
     echo "  help            This help message"
-    echo "  basepath        Create base paths (e.g. ~/local/bin ~/.config)"
     echo "  config          Link config files (e.g. ~/.zshrc -> ~/.config/zsh/zshrc)"
     echo 
     echo "Paths:"
     echo "  SCRIPT_DIR      $SCRIPT_DIR"
     echo
-}
-
-# ------------------------------------------------------------------------------ 
-sub_basepath() {
-    [[ ! -d $HOME/.local/bin ]]             && mkdir -p "$HOME/.local/bin"          && echo "${GREEN}mkdir $HOME/.local/bin ... OK${NC}" 
-    [[ ! -d $HOME/.local/share/man ]]       && mkdir -p "$HOME/.local/share/man"    && echo "${GREEN}mkdir $HOME/.local/share/man ... OK${NC}"
-    [[ ! -h $HOME/.config ]]                && _link_to ${SCRIPT_DIR}/config 	$HOME/.config
 }
 
 # ------------------------------------------------------------------------------ 
