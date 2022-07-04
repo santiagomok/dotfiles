@@ -13,8 +13,9 @@ return {
     -- color_scheme = 'OneHalfDark', 
 
     -- Font configuraiton
-    font = wezterm.font("JetBrains Mono", {weight="Bold"}),  -- default
-    -- font = wezterm.font('Source Code Pro', {weight="Bold"}), 
+    font = wezterm.font("JetBrains Mono", {weight="Regular"}),  -- default
+    -- font = wezterm.font('Source Code Pro', {weight="Regular"}), 
+    -- font = wezterm.font('FiraCode Nerd Font', {weight="Light"}), 
     font_size = 12.0, 
 
 }

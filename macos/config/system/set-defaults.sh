@@ -24,10 +24,10 @@ defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 #defaults write com.apple.dock wvous-bl-modifier -int 0
 
 # Set Directory Service Login Window Binding timeout (seconds)
-defaults write /Library/Preferences/com.apple.loginwindow DSBindTimeout -int 20
+#defaults write /Library/Preferences/com.apple.loginwindow DSBindTimeout -int 20
 # Turn OD debug mode - log at /var/log/opendirectoryd
-# odutil set log <debug|default>
+#odutil set log <debug|default>
 
 # Set Font smoothing value for non-retina
 # 0:off 1:light 2:medium 3:strong
-defaults -currentHost write -g AppleFontSmoothing -int 0 
+# defaults -currentHost write -g AppleFontSmoothing -int 0 

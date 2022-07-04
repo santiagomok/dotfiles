@@ -30,7 +30,11 @@ then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 # bash, zsh, git, gh, curl, neovim, vim, coreutils
-# brew bundle ~/local/dev/dotfiles/macos/Brewfile
+# brew bundle 
+
+# set default Shell
+dscl . -read /Users/$USER UserShell
+# sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
 
 # Generate SSH key and add to github
 ## SSH keygen: [Connecting to github with SSH](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh)

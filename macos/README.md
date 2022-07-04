@@ -1,12 +1,10 @@
 # MacOS
 
-
-
-## macOS defaults 
+## Bootstrap 
 ```bash
-# default Shell
-dscl . -read /Users/$USER UserShell
-sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
+setup.sh
+
+install.sh
 
 macos/set-defaults.sh
 ```

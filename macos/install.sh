@@ -43,6 +43,12 @@ sub_config () {
 }
 
 # ------------------------------------------------------------------------------ 
+
+# Test ssh connection over id_ed25519
+# ssh $USER@mac -i /home/$USER/.ssh/id_ed25519 -o PasswordAuthentication=no -vv
+
+
+# ------------------------------------------------------------------------------ 
 case $COMMAND_NAME in
     "" | "-h" | "--help")
         sub_help
