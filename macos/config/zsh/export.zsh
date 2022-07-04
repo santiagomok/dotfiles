@@ -4,6 +4,8 @@
 
 # ------------------------------------------------------------------------------ 
 
+# XDG_CONFIG_HOME (linux to macOS)
+# https://stackoverflow.com/questions/3373948/equivalents-of-xdg-config-home-and-xdg-data-home-on-mac-os-x
 export HOME_LOCAL="$HOME/.local"
 export XDG_CACHE_HOME="${HOME}/.cache"
 export XDG_CONFIG_HOME="${HOME}/.config"

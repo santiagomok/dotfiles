@@ -15,6 +15,6 @@ return {
     -- Font configuraiton
     font = wezterm.font("JetBrains Mono", {weight="Bold"}),  -- default
     -- font = wezterm.font('Source Code Pro', {weight="Bold"}), 
-    font_size = 14.0, 
+    font_size = 12.0, 
 
 }

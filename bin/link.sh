@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-SCRIPT_PATH=$( greadlink -f ${BASH_SOURCE[0]} || readlink -f ${BASH_SOURCE[0]} )
-SCRIPT_DIR=$(dirname $SCRIPT_PATH)
-
-source ${SCRIPT_DIR}/color.sh
+[[ -f $HOME/.local/bin/color.sh ]] && source $HOME/.local/bin/color.sh
 
 function _link_to() {
     local target

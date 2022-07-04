@@ -21,6 +21,7 @@ sub_help () {
     echo "  help            This help message"
     echo "  color           Show foreground and background colors" 
     echo "  palette         Show color palette" 
+    echo "  link            Link shell script to $HOME/local/bin" 
     echo 
     echo "Paths:"
     echo "  SCRIPT_DIR"     $SCRIPT_DIR
@@ -54,6 +55,12 @@ echo "FOREGROUND COLORS:"
         echo -ne "${BACKGROUND_COLORS[$color]}${color}${NC}";
         echo " | ${BACKGROUND_COLORS[$color]}";
     done
+}
+
+sub_link() {
+   ln -svf ${SCRIPT_DIR}/color.sh 		$HOME/local/bin/color.sh 
+   ln -svf ${SCRIPT_DIR}/link.sh 		$HOME/local/bin/link.sh
+   ln -svf ${SCRIPT_DIR}/normalize_path.sh 	$HOME/local/bin/normalize_path.sh
 }
 
 # ------------------------------------------------------------------------------ 

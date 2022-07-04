@@ -1,5 +1,5 @@
-# git clone --recursive https://github.com/changs/slimzsh.git ~/.slimzsh
-[ -f $HOME/.slimzsh/slim.zsh ]      && source "$HOME/.slimzsh/slim.zsh"
+# git clone --recursive https://github.com/changs/slimzsh.git ~/.config/slimzsh
+[ -f $HOME/.config/slimzsh/slim.zsh ]      && source "$HOME/.config/slimzsh/slim.zsh"
 
 # exit() {
 # # TMUX override builtin exit() function 

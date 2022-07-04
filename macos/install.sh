@@ -9,10 +9,11 @@ COMMAND_NAME=$1
 
 SCRIPT_PATH=$( greadlink -f ${BASH_SOURCE[0]} || readlink -f ${BASH_SOURCE[0]} )
 SCRIPT_DIR=$(dirname $SCRIPT_PATH)
+echo "$SCRIPT_DIR"
 
 # source normalize_path.sh
 # BIN_DIR=$(normalize_path ${SCRIPT_DIR}/../bin)
-source $SCRIPT_DIR/../bin/link.sh
+source $HOME/local/bin/link.sh
 
 # ------------------------------------------------------------------------------ 
 sub_help () {
@@ -20,7 +21,7 @@ sub_help () {
     echo
     echo "Commands:"
     echo "  help            This help message"
-    echo "  basepath        Link base paths (e.g. ~/.local/bin ~/.config)"
+    echo "  basepath        Create base paths (e.g. ~/local/bin ~/.config)"
     echo "  config          Link config files (e.g. ~/.zshrc -> ~/.config/zsh/zshrc)"
     echo 
     echo "Paths:"
@@ -32,19 +33,19 @@ sub_help () {
 sub_basepath() {
     [[ ! -d $HOME/.local/bin ]]             && mkdir -p "$HOME/.local/bin"          && echo "${GREEN}mkdir $HOME/.local/bin ... OK${NC}" 
     [[ ! -d $HOME/.local/share/man ]]       && mkdir -p "$HOME/.local/share/man"    && echo "${GREEN}mkdir $HOME/.local/share/man ... OK${NC}"
-    [[ ! -h $HOME/.config ]]                && _link_to ${SCRIPT_DIR}/config $HOME/.config
+    [[ ! -h $HOME/.config ]]                && _link_to ${SCRIPT_DIR}/config 	$HOME/.config
 }
 
 # ------------------------------------------------------------------------------ 
 sub_config () {
-    # _link_to $HOME/.config/zsh/zshrc              $HOME/.zshrc
-    # _link_to $HOME/.config/tmux/tmux.conf         $HOME/.tmux.conf
-    # _link_to $HOME/.config/vim                    $HOME/.vim
-    # _link_to $HOME/.config/vim/vimrc              $HOME/.vimrc
-    # _link_to $HOME/.config/ssh                    $HOME/.ssh
-    # _link_to $HOME/.config/lldb/lldbinit          $HOME/.lldbinit
-    _link_to $HOME/.config/git/gitconfig            $HOME/.gitconfig
-    _link_to $HOME/.config/git/gitignore            $HOME/.gitignore
+    _link_to $HOME/.config/zsh/zshrc              $HOME/.zshrc
+    _link_to $HOME/.config/tmux/tmux.conf         $HOME/.tmux.conf
+    _link_to $HOME/.config/vim                    $HOME/.vim
+    _link_to $HOME/.config/vim/vimrc              $HOME/.vimrc
+    _link_to $HOME/.config/ssh                    $HOME/.ssh
+    _link_to $HOME/.config/lldb/lldbinit          $HOME/.lldbinit
+    _link_to $HOME/.config/git/gitconfig          $HOME/.gitconfig
+    _link_to $HOME/.config/git/gitignore          $HOME/.gitignore
 
 # _link_to /System/Volumes/Data/mnt/SynologyDS $HOME/
 }
