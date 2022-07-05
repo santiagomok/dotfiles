@@ -58,9 +58,11 @@ echo "FOREGROUND COLORS:"
 }
 
 sub_link() {
-   ln -svf ${SCRIPT_DIR}/color.sh 		$HOME/local/bin/color.sh 
-   ln -svf ${SCRIPT_DIR}/link.sh 		$HOME/local/bin/link.sh
-   ln -svf ${SCRIPT_DIR}/normalize_path.sh 	$HOME/local/bin/normalize_path.sh
+   [[ ! -d $HOME/.local/bin ]] && echo "... mkdir $HOME/.local/bin" && mkdir -p $HOME/.local/bin
+
+   ln -svf ${SCRIPT_DIR}/color.sh 		$HOME/.local/bin/color.sh 
+   ln -svf ${SCRIPT_DIR}/link.sh 		$HOME/.local/bin/link.sh
+   ln -svf ${SCRIPT_DIR}/normalize_path.sh 	$HOME/.local/bin/normalize_path.sh
 }
 
 # ------------------------------------------------------------------------------ 

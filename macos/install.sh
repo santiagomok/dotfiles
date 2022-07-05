@@ -13,7 +13,7 @@ echo "$SCRIPT_DIR"
 
 # source normalize_path.sh
 # BIN_DIR=$(normalize_path ${SCRIPT_DIR}/../bin)
-source $HOME/local/bin/link.sh
+source $HOME/.local/bin/link.sh
 
 # ------------------------------------------------------------------------------ 
 sub_help () {
