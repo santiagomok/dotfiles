@@ -18,12 +18,15 @@ alias tmrc="v ${HOME}/.tmux.conf"
 alias vrc="v ${XDG_CONFIG_HOME}/nvim/plug.vim" 
 
 # ls -> exa
-alias l='exa'
+alias l='exa --group-directories-first'
 alias ls='exa'
-alias l1='exa -1'
-alias ll='exa -l'
-alias lld='exa -l -d'
-alias tree='exa -T'
+alias l1='l --oneline'
+alias ll='l --long --all --header'
+alias lld='ll --only-dirs'
+alias llr='ll --recurse'
+alias llg='ll --git'
+alias llh="ll | rg -e '->'"
+alias tree='exa --tree'
 # alias sl="ls"
 # alias lsd="ls -l  | grep -e '^d'"
 # alias lsl="ls -al | grep -e '->'"
