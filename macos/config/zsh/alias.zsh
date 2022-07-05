@@ -11,14 +11,25 @@ alias wrc="$EDITOR ${XDG_CONFIG_HOME}/wezterm/wezterm.lua"
 alias zrc="$EDITOR ${XDG_CONFIG_HOME}/zsh/alias.zsh" 
 
 # ------------------------------------------------------------------------------ 
+# ls -> exa
+alias l='exa --group-directories-first --icons'
+alias ls='exa'
+alias l1='l --oneline'
+alias ll='l --long --all --header'
+alias lld='ll --only-dirs'
+alias llr='ll --recurse'
+alias llg='ll --git'
+alias llh="ll | rg -e '->'"
+alias tree='exa --tree'
+
+alias less="bat"
+alias cat="bat --paging=never"
+
+# ------------------------------------------------------------------------------ 
 # SHELL
-alias ll="ls -alh"
-alias lsd="ls -alF  | grep -e '^d'"
-alias lsl="ls -alF | grep -e '->'"
-alias lsh="ls -ald .*"
+
 alias datemd="date +%b%d"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
-alias l="less -R"
 alias py="python3"
 alias du="du -csh $@ | sort -h"
 
@@ -32,12 +43,13 @@ alias rgc="rg -i -n -t{c,cpp,make,java,py,tcl,json,perl,protobuf,sh,swig,xml}"
 alias cc='cd ${XDG_CONFIG_HOME}'
 alias ct='cd ${HOME}/Developer/tutorial'
 alias cw='cd ${HOME}/Developer'
-alias c.='cd ${HOME}/.dotfiles'
+alias c.='cd ${HOME}/Developer/dotfiles'
 alias fcd="_fzf_change_dir"
 alias mcd="_mcd"
 alias bcd="_bcd"
-alias cd..="cd .."
-alias cd...="cd ../.."
+alias b.="cd .."
+alias b..="cd ../.."
+alias b...="cd ../../.."
 
 # Print each PATH entry on a separate line
 alias path="echo ${PATH} | tr -s ':' '\n' | uniq" 
