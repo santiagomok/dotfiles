@@ -6,7 +6,7 @@ setup.sh
 
 install.sh
 
-macos/set-defaults.sh
+config/system/set-defaults.sh
 ```
 
 
