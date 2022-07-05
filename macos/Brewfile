@@ -16,6 +16,7 @@ brew 'zsh'
 brew 'tree'
 brew 'wget'
 brew 'exa'
+brew 'svn'
 
 #brew 'youtube-dl'
 #brew 'z'
