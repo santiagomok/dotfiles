@@ -31,8 +31,9 @@ fi
 export PATH="$PATH:$GOROOT/bin:${GOPATH}"
 
 # RUST
-export CARGO_HOME="$HOME_LOCAL"
-export RUSTUP_HOME="$HOME_LOCAL"
+export CARGO_HOME="$HOME/.cargo"
+export RUSTUP_HOME="$HOME/.rustup"
+[[ -d "$CARGO_HOME/bin" ]] && export PATH="$PATH:$CARGO_HOME/bin"
 
 # ------------------------------------------------------------------------------ 
 
