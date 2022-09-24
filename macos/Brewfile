@@ -1,6 +1,7 @@
 
 # core apps
 brew 'coreutils'
+brew 'curl'
 brew 'bat'
 brew 'fasd'
 brew 'fd'
@@ -17,6 +18,9 @@ brew 'tree'
 brew 'wget'
 brew 'exa'
 brew 'svn'
+brew 'nvim'
+brew 'vim'
+brew 'gh'
 
 #brew 'youtube-dl'
 #brew 'z'
@@ -26,7 +30,7 @@ brew 'openssl'
 brew 'go'
 brew 'rust'
 brew 'llvm'
-# brew 'boost'
+brew 'boost'
 
 #brew 'cscope'
 #brew 'gdb'
