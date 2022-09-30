@@ -32,6 +32,9 @@ export GOPATH="$HOME_LOCAL"
 export RUSTUP_HOME="$HOME_LOCAL"
 export CARGO_HOME="$HOME_LOCAL"
 
+# boost
+export BOOST_ROOT=$(brew --prefix boost)/$(brew info --json boost | jq -r '.[0].installed[0].version')
+
 # Qt
 export PATH="$PATH:$(brew --prefix)/opt/qt/bin"
 export LDFLAGS="-L/usr/local/opt/qt/lib"
