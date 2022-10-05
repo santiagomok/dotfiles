@@ -33,14 +33,13 @@ export RUSTUP_HOME="$HOME_LOCAL"
 export CARGO_HOME="$HOME_LOCAL"
 
 # boost
-export BOOST_ROOT=$(brew --prefix boost)/$(brew info --json boost | jq -r '.[0].installed[0].version')
+export BOOST_ROOT=$(brew --prefix boost)
 
 # Qt
-export PATH="$PATH:$(brew --prefix)/opt/qt/bin"
-export LDFLAGS="-L/usr/local/opt/qt/lib"
-export CPPFLAGS="-I/usr/local/opt/qt/include"
-export PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig"
-
+# export PATH="$PATH:$(brew --prefix qt)/bin"
+# export LDFLAGS="-L/usr/local/opt/qt/lib"
+# export CPPFLAGS="-I/usr/local/opt/qt/include"
+# export PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig"
 
 # ------------------------------------------------------------------------------ 
 
