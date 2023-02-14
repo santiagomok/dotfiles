@@ -37,10 +37,12 @@ alias cat="bat --paging=never"
 
 # SHELL
 alias passwd="yppasswd"
-alias datemd="date +%b%d"
+alias dty="date +%y%m%d"
+alias dts="date +%b%d"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias hc="history -c"
 alias py="python3"
+# alias rdu="du -ch -d 3 . | sort -h | tee du_`dty`.txt"
 
 # GREP
 alias grep="grep -in --color=auto"

@@ -28,12 +28,12 @@ if [ "$PLATFORM" = Linux ]; then
     export GOPATH="$HOME_LOCAL/lib/go/packages"
     export GOROOT="$HOME_LOCAL/go"
 fi
-export PATH="$PATH:$GOROOT/bin:${GOPATH}"
+export PATH="$GOROOT/bin:${GOPATH}:$PATH"
 
 # RUST
 export CARGO_HOME="$HOME/.cargo"
 export RUSTUP_HOME="$HOME/.rustup"
-[[ -d "$CARGO_HOME/bin" ]] && export PATH="$PATH:$CARGO_HOME/bin"
+[[ -d "$CARGO_HOME/bin" ]] && export PATH="$CARGO_HOME/bin:$PATH"
 
 # ------------------------------------------------------------------------------ 
 
