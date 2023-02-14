@@ -11,7 +11,7 @@ export XDG_CACHE_HOME="${HOME}/.cache"
 export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_DATA_HOME="$HOME_LOCAL/share"
 
-export PATH="$HOME_LOCAL/bin:$PATH"
+export PATH="$HOME_LOCAL/bin:/opt/homebrew/bin:$PATH"
 export MANPATH="$HOME_LOCAL/share/man:`manpath`"
 
 # ------------------------------------------------------------------------------ 
@@ -32,12 +32,14 @@ export GOPATH="$HOME_LOCAL"
 export RUSTUP_HOME="$HOME_LOCAL"
 export CARGO_HOME="$HOME_LOCAL"
 
-# Qt
-export PATH="$PATH:$(brew --prefix)/opt/qt/bin"
-export LDFLAGS="-L/usr/local/opt/qt/lib"
-export CPPFLAGS="-I/usr/local/opt/qt/include"
-export PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig"
+# boost
+export BOOST_ROOT=$(brew --prefix boost)
 
+# Qt
+# export PATH="$PATH:$(brew --prefix qt)/bin"
+# export LDFLAGS="-L/usr/local/opt/qt/lib"
+# export CPPFLAGS="-I/usr/local/opt/qt/include"
+# export PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig"
 
 # ------------------------------------------------------------------------------ 
 

@@ -10,7 +10,7 @@ defaults write -g ApplePressAndHoldEnabled -bool false
 
 # Set a really fast key repeat.
 defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 25
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Show the ~/Library folder.
 chflags nohidden ~/Library
