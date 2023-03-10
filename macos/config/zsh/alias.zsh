@@ -44,6 +44,7 @@ alias cc='cd ${XDG_CONFIG_HOME}'
 alias ct='cd ${HOME}/Developer/tutorial'
 alias cw='cd ${HOME}/Developer'
 alias c.='cd ${HOME}/Developer/dotfiles'
+alias j="_fzf_fasd_change_dir"
 alias fcd="_fzf_change_dir"
 alias mcd="_mcd"
 alias bcd="_bcd"
