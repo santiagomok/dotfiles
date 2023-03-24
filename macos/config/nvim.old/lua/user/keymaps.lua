@@ -1,93 +1,98 @@
-local keymap = require 'lib.utils'.keymap
+-- [[ Configure key mappings ]]
+-- see `:help lua-vim.keymap.set`
+-- require Neovim>=0.7
+-- local vim.keymap.set = require 'lib.utils'.vim.keymap.set
 
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
--- windows, tabs
-keymap('n', '<leader>WW', ':wqall<cr>')
-keymap('n', '<leader>QQ', ':qall<cr>')
-keymap('n', '<leader>TT', '<cmd>tabclose<cr>')
-keymap('n', '<leader>tt', '<cmd>tabnew<cr>')
+-- quit
+vim.keymap.set('n', '<M-q>', ':q<cr>', { desc = 'Quit' })
+vim.keymap.set('n', '<M-Q><M-Q>', ':qa<cr>', { desc = 'Quit all'})
+-- save
+vim.keymap.set('n', '<M-w>', ':update<cr>', { desc = 'Write only changed buffers' })
+vim.keymap.set('n', '<M-W>', ':wall<cr>', { desc = 'Write all', silent = false })
+vim.keymap.set('n', '<M-W><M-Q>', ':wqall<cr>', { desc = 'Write all and quit', silent = false })
+-- session
+vim.keymap.set('n', '<leader>ws', ':mks ss.vim<cr>', { desc = 'Save session as ss.vim', silent = false})
+vim.keymap.set('n', '<leader>WS', ':mks! ss.vim<cr>', { desc= 'Save and overwrite ss.vim session', silent = false})
 
 -- tab navigation
--- see plugins/bufferline.lua
--- keymap('n', '<A-{>', '<cmd>tabprevious<cr>')
--- keymap('n', '<A-}>', '<cmd>tabnext<cr>')
--- keymap('n', '<leader>tp', '<cmd>tabmove -1<cr>') -- move the tab page to the left
--- keymap('n', '<leader>tn', '<cmd>tabmove +1<cr>') -- move the tab page to the right
--- keymap('n', '<leader>t1', '<cmd>tabmove 0<cr>')  -- move the tab page to the beginning
--- keymap('n', '<leader>t0', '<cmd>tabmove $<cr>')  -- move the tab page to the last
-
---keymap('n', '<leader>vrc' ':tabnew \"stdpath(\'config\').\'/plug.vim\'\"<cr>')
-
--- Split
-keymap('n', '<leader>ws', ':split<cr>')
-keymap('n', '<leader>vs', ':vsplit<cr>')
-keymap('n', '<C-Left>',    ':vertical resize -5<CR>')
-keymap('n', '<C-Right>',   ':vertical resize +5<CR>')
-keymap('n', '<C-Up>',      ':resize -5<CR>')
-keymap('n', '<C-Down>',    ':resize +5<CR>')
+vim.keymap.set('n', '<M-[>', ':tabprevious<cr>')
+vim.keymap.set('n', '<M-]>', ':tabnext<cr>')
+vim.keymap.set('n', '<M-1>', '1gt', { desc = 'Go to tab1' })
+vim.keymap.set('n', '<M-2>', '2gt', { desc = 'Go to tab2' })
+vim.keymap.set('n', '<M-3>', '3gt', { desc = 'Go to tab3' })
+vim.keymap.set('n', '<M-4>', '4gt', { desc = 'Go to tab4' })
+vim.keymap.set('n', '<M-5>', '5gt', { desc = 'Go to tab5' })
+vim.keymap.set('n', '<M-0>', ':tablast<cr>', { desc = 'Go to last tab' })
+vim.keymap.set('n', '<M-`>', 'g<Tab>', { desc = 'Go to last accessed tab' })
+vim.keymap.set('n', '<leader>tt', '<C-W>T', { desc = 'Split current buffer to new tab' })
+vim.keymap.set('n', '<leader>TT', ':tabclose<cr>', { desc = 'Close current tab' })
+vim.keymap.set('n', '<leader>tp', ':tabmove -1<cr>') -- move the tab page to the left
+vim.keymap.set('n', '<leader>tn', ':tabmove +1<cr>') -- move the tab page to the right
+vim.keymap.set('n', '<leader>t1', ':tabmove 0<cr>')  -- move the tab page to the beginning
+vim.keymap.set('n', '<leader>t0', ':tabmove $<cr>')  -- move the tab page to the last
 
 -- buffers navigation
-keymap('n', '<leader>bn',   ':bnext<CR>')
-keymap('n', '<leader>bp',   ':bprevious<CR>')
+vim.keymap.set('n', '<M-{>',   ':bprevious<cr>',  { desc = 'Go to previous buffer' })
+vim.keymap.set('n', '<M-}>',   ':bnext<cr>',      { desc = 'Go to next buffer' })
 
--- save
-keymap('n', '<leader>w', '<cmd>update<cr>')
-keymap('n', '<leader>wa', '<cmd>wa<cr>')
-keymap('n', '<leader>ss', '<cmd>mks ss.vim<cr>')
-keymap('n', '<leader>SS', '<cmd>mks! ss.vim<cr>')
+--vim.keymap.set('n', '<leader>vrc' ':tabnew \"stdpath(\'config\').\'/plug.vim\'\"<cr>')
+
+-- Split
+vim.keymap.set('n', '<leader>ss', ':split<cr>')
+vim.keymap.set('n', '<leader>vv', ':vsplit<cr>')
+vim.keymap.set('n', '<C-Left>',    ':vertical resize +5<cr>')
+vim.keymap.set('n', '<C-Right>',   ':vertical resize -5<cr>')
+vim.keymap.set('n', '<C-Up>',      ':resize -5<cr>')
+vim.keymap.set('n', '<C-Down>',    ':resize +5<cr>')
 
 -- navigation
-keymap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', {expr = true})
-keymap('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
+vim.keymap.set('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', {expr = true})
+vim.keymap.set('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
 
 -- Bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
-keymap('n', '<C-h>', '<C-w>h')
-keymap('n', '<C-j>', '<C-w>j')
-keymap('n', '<C-k>', '<C-w>k')
-keymap('n', '<C-l>', '<C-w>l')
--- keymap('n', 'wh', '<C-w>h')
--- keymap('n', 'wj', '<C-w>j')
--- keymap('n', 'wk', '<C-w>k')
--- keymap('n', 'wl', '<C-w>l')
+vim.keymap.set('n', '<C-h>', '<C-w>h')
+vim.keymap.set('n', '<C-j>', '<C-w>j')
+vim.keymap.set('n', '<C-k>', '<C-w>k')
+vim.keymap.set('n', '<C-l>', '<C-w>l')
+
+-- toggle [no]relativenumber
+vim.keymap.set('n', '<M-~>', ':set rnu!<cr>', { desc = 'Toggle relativenumber.' })
 
 -- file
-keymap('n', '<leader>fw', '<cmd>!chmod u+w %:p<cr>')
+vim.keymap.set('n', '<leader>fw', ':!chmod u+w %:p<cr>')
 
--- floaterm
-keymap('n', '<leader>mm', '<cmd>FloatermSend make DEBUG=1 -j8<cr>')
-keymap('n', '<leader>MM', '<cmd>FloatermSend make clean && make DEBUG=1 -j8<cr>')
+vim.keymap.set('v', '<', '<gv')  -- shit left indentation
+vim.keymap.set('v', '>', '>gv')  -- shit right indentation
+vim.keymap.set('', '<leader>a', 'ggVG')  -- select all
+vim.keymap.set('n', '<leader>V', '<c-v>') -- vertical visual selection
 
-keymap('v', '<', '<gv')  -- shit left indentation
-keymap('v', '>', '>gv')  -- shit right indentation
-keymap('', '<leader>a', 'ggVG')  -- select all
-keymap('n', '<leader>V', '<c-v>') -- vertical visual selection
-
-keymap('n', '<leader>h', ':noh<cr>', {silent = true}) -- remove highlighting after search
-keymap('n', 'q', '<nop>') -- disable recording
+vim.keymap.set('n', '<leader>h', ':noh<cr>', { desc = 'Clear highlighting after search'})
+vim.keymap.set('n', 'q', '<nop>', { desc = 'Disable recording' })
 
 -- date
-keymap('n', '<leader>dt', 'a<C-R>=strftime(\'%m/%d/%Y\')<cr><esc>')
+vim.keymap.set('n', '<leader>dt', 'a<C-R>=strftime(\'%m/%d/%Y\')<cr><esc>')
 
 -- sort
-keymap('v', '<leader>st', ':sort<cr>')
+vim.keymap.set('v', '<leader>st', ':sort<cr>')
 
 -- Insert Mode
 -- Exit insert-mode
 -- imap <leader>i <Esc>
 -- Ctrl-e jump to the end of line in insert mode
-keymap('i', '<C-e>', '<C-o>$')
+vim.keymap.set('i', '<C-e>', '<C-o>$')
 
 -- Insert quotes words separated by comma (AB,BC,CD -> "AB","BC","CD")
-keymap('n', '<leader>riq', ':%s/\\([^,]\\+\\)/"\\1"/g')
+vim.keymap.set('n', '<leader>riq', ':%s/\\([^,]\\+\\)/"\\1"/g')
 
 
 -- substitute
 -- replace the current word and all its occurrences
-keymap('n', '<leader>rw', ':%s/\\<<C-r><C-w>\\>//g<left><left>')
-keymap('v', '<leader>rw', 'y:%s/<C-r>"//g<left><left>')
+vim.keymap.set('n', '<leader>rw', ':%s/\\<<C-r><C-w>\\>//g<left><left>')
+vim.keymap.set('v', '<leader>rw', 'y:%s/<C-r>"//g<left><left>')
 
 -- replace the current word and all its occurrences pre-fill target word
-keymap('n', '<leader>cw', ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>')
-keymap('v', '<leader>cw', 'y:%s/<C-r>"/<C-r>"//g<left><left>')
+vim.keymap.set('n', '<leader>cw', ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>')
+vim.keymap.set('v', '<leader>cw', 'y:%s/<C-r>"/<C-r>"//g<left><left>')

@@ -1,10 +1,11 @@
 -- Line format
 vim.o.tabstop = 4      		-- Define <TAB> column width
-vim.o.softtabstop = 0   	-- Affect what happen when <TAB> or <BS> is pressed. (0 for 'tabstop', -1 for 'shiftwidth')
-vim.o.shiftwidth = 0    	-- Affect what happen for <<, >>, or == keys. Must be same as tabstop (0 for 'tabstop', -1 for 'shiftwidth')
+vim.o.softtabstop = 4   	-- Affect what happen when <TAB> or <BS> is pressed.
+vim.o.shiftwidth = 4    	-- Affect what happen for <<, >>, or == keys. Must be same as tabstop
 vim.o.expandtab = true      -- Convert \t into spaces when used with softtabstop.
 vim.o.smartindent = true 	-- Automatically inserts one extra level of indentation in some cases.
 vim.o.shiftround = true 
+-- vim.o.syntax = true
 vim.o.termguicolors = true
 -- vim.o.title = true
 vim.o.wildmode = 'longest:full,full'
@@ -22,7 +23,6 @@ vim.o.hlsearch  = true
 -- vim.o.path+=**        	-- Searches current directory recursively.
 
 -- Usability options
-vim.o.number = true
 vim.o.backspace = 'indent,eol,start'
 vim.o.wildignorecase = true
 vim.o.history = 10000
@@ -45,15 +45,38 @@ vim.o.clipboard = 'unnamed,unnamedplus' -- Make yank copy to the global system c
 -- " saving, and swap files will keep you safe if your computer crashes.
 -- 
 vim.o.hidden = true
--- set norelativenumber
--- " augroup numbertoggle
---     " autocmd!
---     " " Set norelativenumber when in Insert mode
---     " au BufEnter,FocusGained,InsertLeave * set relativenumber
---     " au BufLeave,FocusLost,InsertEnter   * set norelativenumber
--- 
--- " augroup END
---
+vim.o.number = true
+vim.o.relativenumber = true
+-- Toggle [no]relativenumber based on Normal or Insert mode
+-- vim.cmd [[
+-- augroup numbertoggle
+--   autocmd!
+--   autocmd BufEnter,FocusGained,InsertLeave,WinEnter  * if &nu && mode() != "i" | set rnu   | endif
+--   autocmd BufLeave,FocusLost,InsertEnter,WinLeave    * if &nu                  | set noru  | endif
+-- augroup END
+-- ]]
+local numberToggleGroup = vim.api.nvim_create_augroup('numbertoggle', { clear = true })
+vim.api.nvim_create_autocmd(
+  { 'BufEnter', 'FocusGained', 'InsertLeave', 'WinEnter' },
+  {
+    -- pattern = '*',
+    -- callback = function() vim.api.nvim_set_option('relativenumber', true) end,
+    command = "set relativenumber",
+    group = numberToggleGroup,
+    desc = 'Enable relative line number when the buffer is entered - in normal mode.'
+  }
+)
+vim.api.nvim_create_autocmd(
+  { 'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave' },
+  {
+    -- pattern = '*',
+    -- callback = function() vim.api.nvim_set_option('relativenumber', false) end,
+    command = "set norelativenumber",
+    group = numberToggleGroup,
+    desc = 'Disable relative line number when the buffer is exited - in insert mode.'
+  }
+)
+
 -- vim.o.confirm = true
 -- vim.o.backup = true
 -- vim.o.backupdir = vim.fn.stdpath 'data' .. '/backup//'
@@ -75,3 +98,4 @@ vim.cmd 'autocmd FileType sh    setlocal tabstop=2 softtabstop=2 shiftwidth=2'
 -- vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
 
 vim.g['python3_host_prog'] = '/usr/local/bin/python3'
+    
