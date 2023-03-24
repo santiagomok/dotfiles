@@ -1,0 +1,20 @@
+CompileFlags:
+  Add:
+  - -I/opt/homebrew/Cellar/gcc/12.2.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin22/12/../../../../../../include/c++/12
+  - -I/opt/homebrew/Cellar/gcc/12.2.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin22/12/../../../../../../include/c++/12/aarch64-apple-darwin22
+  - -I/opt/homebrew/Cellar/gcc/12.2.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin22/12/../../../../../../include/c++/12/backward
+  - -I/opt/homebrew/Cellar/gcc/12.2.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin22/12/include
+  - -I/opt/homebrew/Cellar/gcc/12.2.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin22/12/include-fixed
+  - -I/opt/homebrew/opt/boost
+  - -I/Library/Developer/CommandLineTools/SDKs/MacOSX13.sdk/usr/include
+  - -I/Library/Developer/CommandLineTools/SDKs/MacOSX13.sdk/System/Library/Frameworks
+  - -DLOCAL
+  - -Wall
+  - -O2
+  - -Wextra
+  - -Wshadow
+  - -Wconversion
+  - -Wfloat-equal
+  - -Wno-unused-const-variable
+  - -Wno-sign-conversion
+  - -std=c++17
