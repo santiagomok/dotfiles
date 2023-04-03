@@ -24,6 +24,10 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # ------------------------------------------------------------------------------ 
+# Cpp
+export BOOST_ROOT=$(brew --prefix boost)
+export FMT_ROOT=$(brew --prefix fmt)
+export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:$BOOST_ROOT/include:$FMT_ROOT/include"
 
 # Go
 export GOPATH="$HOME_LOCAL"
@@ -31,9 +35,6 @@ export GOPATH="$HOME_LOCAL"
 # Rust
 export RUSTUP_HOME="$HOME_LOCAL"
 export CARGO_HOME="$HOME_LOCAL"
-
-# boost
-export BOOST_ROOT=$(brew --prefix boost)
 
 # Qt
 # export PATH="$PATH:$(brew --prefix qt)/bin"
@@ -45,14 +46,23 @@ export BOOST_ROOT=$(brew --prefix boost)
 
 # FZF
 export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
-export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
-export FZF_DEFAULT_COMMAND='fd --type f --type d --hidden --follow --exclude .git'
+export FZF_ALT_C_OPTS="--preview 'bat -n --color=always {}'"
+# export FZF_DEFAULT_COMMAND='fd --type f --type d --hidden --follow --exclude .git'
+export FZF_DEFAULT_COMMAND='rg --files --hidden'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse-list --border'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-if [ -x ${HOME}/.vim/bundle/fzf.vim/bin/preview.sh ]; then
-    export FZF_CTRL_T_OPTS="--preview '${HOME}/.vim/bundle/fzf.vim/bin/preview.sh {} | head -200'"
-fi
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --header 'Press CTRL-Y to copy command into clipboard' --border"
+# Preview file content using bat (https://github.com/sharkdp/bat)
+export FZF_CTRL_T_OPTS="
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+# CTRL-/ to toggle small preview window to see the full command
+# CTRL-Y to copy the command into clipboard using pbcopy
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {}' --preview-window up:3:hidden:wrap
+  --bind 'ctrl-/:toggle-preview'
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"
 
 # ------------------------------------------------------------------------------ 
 
