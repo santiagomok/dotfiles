@@ -55,8 +55,12 @@ require('packer').startup(function(use)
     end,
   }
 
-  use { -- Additional text objects via treesitter
-    'nvim-treesitter/nvim-treesitter-textobjects',
+  use { 
+    'nvim-treesitter/nvim-treesitter-textobjects', -- Additional text objects via treesitter
+    'windwp/nvim-autopairs',
+    'windwp/nvim-ts-autotag',
+    'RRethy/nvim-treesitter-endwise',
+    -- 'JoosepAlviste/nvim-ts-context-commentstring',
     after = 'nvim-treesitter',
   }
 
@@ -119,7 +123,7 @@ require('nvim-treesitter.configs').setup {
   ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim' },
 
   highlight = { enable = true },
-  indent = { enable = true, disable = { 'python' } },
+  -- indent = { enable = true, disable = { 'python' } },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -171,6 +175,16 @@ require('nvim-treesitter.configs').setup {
       swap_previous = {
         ['<leader>A'] = '@parameter.inner',
       },
+    },
+
+    -- endwise
+    endwise = {
+      enable = true,
+    },
+
+    -- autotag
+    autotag = {
+      enable = true,
     },
   },
 }
@@ -318,6 +332,13 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+-- nvim-autopairs
+local npairs = require 'nvim-autopairs'
+npairs.setup {
+  check_ts = true,
+}
+npairs.add_rules(require 'nvim-autopairs.rules.endwise-lua')
 
 require('user.options')
 require('user.keymaps')

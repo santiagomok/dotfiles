@@ -8,7 +8,7 @@ vim.g.maplocalleader = ','
 
 -- quit
 vim.keymap.set('n', '<leader>q', ':q<cr>',      { desc = 'Quit' })
-vim.keymap.set('n', '<leader>QQ>', ':qa<cr>',   { desc = 'Quit all'})
+vim.keymap.set('n', '<leader>QQ', ':qa<cr>',   { desc = 'Quit all'})
 -- save
 vim.keymap.set('n', '<leader>w', ':update<cr>', { desc = 'Write only changed buffers' })
 vim.keymap.set('n', '<leader>W', ':wall<cr>',   { desc = 'Write all', silent = false })
