@@ -31,7 +31,8 @@ export LLVM_ROOT=$(brew --prefix llvm)
 export CPLUS_INCLUDE_PATH="$BOOST_ROOT/include:$FMT_ROOT/include:$LLVM_ROOT/include:$CPLUS_INCLUDE_PATH"
 # To use the bundled libc++ please add the following LDFLAGS:
 # For compilers to find llvm you may need to set:
-export LDFLAGS="-L${LLVM_ROOT}/lib:${LLVM_ROOT}/lib/c++ -Wl,-rpath,${LLVM_ROOT}/lib/c++"
+# export LDFLAGS="-L${LLVM_ROOT}/lib:${LLVM_ROOT}/lib/c++ -Wl,-rpath,${LLVM_ROOT}/lib/c++"
+#
 # If you need to have llvm first in your PATH, run:
 export PATH="$LLVM_ROOT/bin:$PATH"
 
@@ -47,8 +48,6 @@ export GOPATH="$HOME_LOCAL"
 # Rust
 export RUSTUP_HOME="$HOME_LOCAL"
 export CARGO_HOME="$HOME_LOCAL"
-
-
 
 # ------------------------------------------------------------------------------ 
 

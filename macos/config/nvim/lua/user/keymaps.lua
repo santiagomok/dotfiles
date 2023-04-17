@@ -18,8 +18,8 @@ vim.keymap.set('n', '<leader>ws', ':mks ss.vim<cr>',  { desc = 'Save session as 
 vim.keymap.set('n', '<leader>WS', ':mks! ss.vim<cr>', { desc= 'Save and overwrite ss.vim session', silent = false})
 
 -- tab navigation
-vim.keymap.set('n', '<M-[>', ':tabprevious<cr>')
-vim.keymap.set('n', '<M-]>', ':tabnext<cr>')
+-- vim.keymap.set('n', '<M-{>', ':tabprevious<cr>')
+-- vim.keymap.set('n', '<M-}>', ':tabnext<cr>')
 vim.keymap.set('n', '<M-1>', '1gt', { desc = 'Go to tab1' })
 vim.keymap.set('n', '<M-2>', '2gt', { desc = 'Go to tab2' })
 vim.keymap.set('n', '<M-3>', '3gt', { desc = 'Go to tab3' })
@@ -35,8 +35,8 @@ vim.keymap.set('n', '<leader>t1', ':tabmove 0<cr>')  -- move the tab page to the
 vim.keymap.set('n', '<leader>t0', ':tabmove $<cr>')  -- move the tab page to the last
 
 -- buffers navigation
-vim.keymap.set('n', '<M-{>',   ':bprevious<cr>',  { desc = 'Go to previous buffer' })
-vim.keymap.set('n', '<M-}>',   ':bnext<cr>',      { desc = 'Go to next buffer' })
+vim.keymap.set('n', '<M-[>',   ':bprevious<cr>',  { desc = 'Go to previous buffer' })
+vim.keymap.set('n', '<M-]>',   ':bnext<cr>',      { desc = 'Go to next buffer' })
 
 -- Split
 vim.keymap.set('n', '<leader>ss', ':split<cr>')

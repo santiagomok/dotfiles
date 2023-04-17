@@ -75,6 +75,16 @@ require('packer').startup(function(use)
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
 
+  -- Buffer line
+  use {
+    'akinsho/nvim-bufferline.lua',
+    requires = 'nvim-tree/nvim-web-devicons'
+    -- event = "BufReadPre",
+    -- config = function()
+    --   require("config.bufferline").setup()
+    -- end,
+  }
+
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
 
@@ -343,6 +353,7 @@ npairs.add_rules(require 'nvim-autopairs.rules.endwise-lua')
 require('user.options')
 require('user.keymaps')
 require('user.theme')
+require('user.bufferline')
 require('user.telescope')
 
 -- The line beneath this is called `modeline`. See `:help modeline`
