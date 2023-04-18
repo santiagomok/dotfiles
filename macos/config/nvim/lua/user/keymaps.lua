@@ -7,8 +7,8 @@ vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
 -- quit
-vim.keymap.set('n', '<leader>q', ':q<cr>',      { desc = 'Quit' })
-vim.keymap.set('n', '<leader>QQ', ':qa<cr>',   { desc = 'Quit all'})
+vim.keymap.set('n', '<leader>q', ':q<cr>',    { desc = 'Quit' })
+vim.keymap.set('n', '<leader>Q', ':qa<cr>',   { desc = 'Quit all'})
 -- save
 vim.keymap.set('n', '<leader>w', ':update<cr>', { desc = 'Write only changed buffers' })
 vim.keymap.set('n', '<leader>W', ':wall<cr>',   { desc = 'Write all', silent = false })
@@ -84,7 +84,9 @@ vim.keymap.set('i', '<C-e>', '<C-o>$')
 
 -- Insert quotes words separated by comma (AB,BC,CD -> "AB","BC","CD")
 vim.keymap.set('n', '<leader>riq', ':%s/\\([^,]\\+\\)/"\\1"/g')
-
+-- tpope/surround.vim
+vim.keymap.set('n', '<leader>""', 'ysiw"', { desc = 'Add double-quote surrounding word', remap = true })
+vim.keymap.set('n', "<leader>''", "ysiw'", { desc = 'Add single-quote surrounding word', remap = true })
 
 -- substitute
 -- replace the current word and all its occurrences

@@ -74,6 +74,7 @@ require('packer').startup(function(use)
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  use 'tpope/vim-surround' -- Add/Change/Delete surrounding '""' 
 
   -- Buffer line
   use {
@@ -90,6 +91,9 @@ require('packer').startup(function(use)
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
+
+  -- Reopen file to the last cursor position
+  use 'ethanholz/nvim-lastplace'
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -349,6 +353,12 @@ npairs.setup {
   check_ts = true,
 }
 npairs.add_rules(require 'nvim-autopairs.rules.endwise-lua')
+
+require'nvim-lastplace'.setup {
+  lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
+  lastplace_ignore_filetype = {"gitcommit", "gitrebase"},
+  lastplace_open_folds = true
+}
 
 require('user.options')
 require('user.keymaps')

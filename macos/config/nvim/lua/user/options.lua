@@ -40,6 +40,8 @@ vim.o.clipboard = 'unnamed,unnamedplus' -- Make yank copy to the global system c
 
 -- " set clipboard=exclude:.*  " Do not use X clipboard to speed up start up time
 -- set notimeout ttimeout ttimeoutlen=200 " Quickly time out on keycodes, but never time out on mappings
+-- vim.o.ttimeout = true
+-- vim.o.ttimeoutlen = 200
 -- set nrformats=hex
 -- 
 -- " One of the most important options to activate. Allows you to switch from an
