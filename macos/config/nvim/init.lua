@@ -35,12 +35,14 @@ require('packer').startup(function(use)
     },
   }
 
-  use {
-    'voldikss/vim-floaterm',
-    requires = {
-      'szw/vim-maximizer'
-    },
-  }
+  -- use {
+  --   'voldikss/vim-floaterm',
+  --   requires = {
+  --     'szw/vim-maximizer'
+  --   },
+  -- }
+  use { 'akinsho/toggleterm.nvim', tag = '*' } -- floating terminal
+  use 'szw/vim-maximizer' -- full screen
 
 
   use { -- Autocompletion
