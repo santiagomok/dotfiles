@@ -7,8 +7,8 @@ vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
 -- quit
-vim.keymap.set('n', '<leader>q', ':q<cr>',      { desc = 'Quit' })
-vim.keymap.set('n', '<leader>QQ>', ':qa<cr>',   { desc = 'Quit all'})
+vim.keymap.set('n', '<leader>q', ':q<cr>',    { desc = 'Quit' })
+vim.keymap.set('n', '<leader>Q', ':qa<cr>',   { desc = 'Quit all'})
 -- save
 vim.keymap.set('n', '<leader>w', ':update<cr>', { desc = 'Write only changed buffers' })
 vim.keymap.set('n', '<leader>W', ':wall<cr>',   { desc = 'Write all', silent = false })
@@ -18,8 +18,8 @@ vim.keymap.set('n', '<leader>ws', ':mks ss.vim<cr>',  { desc = 'Save session as 
 vim.keymap.set('n', '<leader>WS', ':mks! ss.vim<cr>', { desc= 'Save and overwrite ss.vim session', silent = false})
 
 -- tab navigation
-vim.keymap.set('n', '<M-[>', ':tabprevious<cr>')
-vim.keymap.set('n', '<M-]>', ':tabnext<cr>')
+-- vim.keymap.set('n', '<M-{>', ':tabprevious<cr>')
+-- vim.keymap.set('n', '<M-}>', ':tabnext<cr>')
 vim.keymap.set('n', '<M-1>', '1gt', { desc = 'Go to tab1' })
 vim.keymap.set('n', '<M-2>', '2gt', { desc = 'Go to tab2' })
 vim.keymap.set('n', '<M-3>', '3gt', { desc = 'Go to tab3' })
@@ -35,8 +35,8 @@ vim.keymap.set('n', '<leader>t1', ':tabmove 0<cr>')  -- move the tab page to the
 vim.keymap.set('n', '<leader>t0', ':tabmove $<cr>')  -- move the tab page to the last
 
 -- buffers navigation
-vim.keymap.set('n', '<M-{>',   ':bprevious<cr>',  { desc = 'Go to previous buffer' })
-vim.keymap.set('n', '<M-}>',   ':bnext<cr>',      { desc = 'Go to next buffer' })
+vim.keymap.set('n', '<M-[>',   ':bprevious<cr>',  { desc = 'Go to previous buffer' })
+vim.keymap.set('n', '<M-]>',   ':bnext<cr>',      { desc = 'Go to next buffer' })
 
 -- Split
 vim.keymap.set('n', '<leader>ss', ':split<cr>')
@@ -84,7 +84,9 @@ vim.keymap.set('i', '<C-e>', '<C-o>$')
 
 -- Insert quotes words separated by comma (AB,BC,CD -> "AB","BC","CD")
 vim.keymap.set('n', '<leader>riq', ':%s/\\([^,]\\+\\)/"\\1"/g')
-
+-- tpope/surround.vim
+vim.keymap.set('n', '<leader>""', 'ysiw"', { desc = 'Add double-quote surrounding word', remap = true })
+vim.keymap.set('n', "<leader>''", "ysiw'", { desc = 'Add single-quote surrounding word', remap = true })
 
 -- substitute
 -- replace the current word and all its occurrences

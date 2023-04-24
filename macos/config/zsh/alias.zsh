@@ -88,6 +88,10 @@ alias vi="vim"
 # alias v0="vim -u NONE"
 # alias vdebug="vim_term_debug"
 
+# Init zoxide and alias to ji if exists
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh --cmd j)"
+(( $+commands[zoxide] )) && alias ja="zoxide add"
+
 # CMAKE
 alias export_cc_var="export CC=`which gcc`; export CXX=`which g++`"
 

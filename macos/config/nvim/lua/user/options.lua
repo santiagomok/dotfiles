@@ -1,3 +1,6 @@
+-- [[ Setting options ]]
+-- See `:help vim.o`
+
 -- Line format
 vim.o.tabstop = 4      		-- Define <TAB> column width
 vim.o.softtabstop = 4   	-- Affect what happen when <TAB> or <BS> is pressed.
@@ -37,6 +40,8 @@ vim.o.clipboard = 'unnamed,unnamedplus' -- Make yank copy to the global system c
 
 -- " set clipboard=exclude:.*  " Do not use X clipboard to speed up start up time
 -- set notimeout ttimeout ttimeoutlen=200 " Quickly time out on keycodes, but never time out on mappings
+-- vim.o.ttimeout = true
+-- vim.o.ttimeoutlen = 200
 -- set nrformats=hex
 -- 
 -- " One of the most important options to activate. Allows you to switch from an
@@ -94,7 +99,19 @@ vim.cmd 'filetype plugin indent on' -- Allow auto-indenting depending on file ty
 vim.cmd 'autocmd FileType lua   setlocal tabstop=2 softtabstop=2 shiftwidth=2'
 vim.cmd 'autocmd FileType json  setlocal tabstop=2 softtabstop=2 shiftwidth=2'
 vim.cmd 'autocmd FileType sh    setlocal tabstop=2 softtabstop=2 shiftwidth=2'
+
 -- Highlight on yank
 -- vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})
+
 
 vim.g['python3_host_prog'] = '/usr/local/bin/python3'

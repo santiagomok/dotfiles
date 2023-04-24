@@ -35,12 +35,14 @@ require('packer').startup(function(use)
     },
   }
 
-  use {
-    'voldikss/vim-floaterm',
-    requires = {
-      'szw/vim-maximizer'
-    },
-  }
+  -- use {
+  --   'voldikss/vim-floaterm',
+  --   requires = {
+  --     'szw/vim-maximizer'
+  --   },
+  -- }
+  use { 'akinsho/toggleterm.nvim', tag = '*' } -- floating terminal
+  use 'szw/vim-maximizer' -- full screen
 
 
   use { -- Autocompletion
@@ -55,8 +57,12 @@ require('packer').startup(function(use)
     end,
   }
 
-  use { -- Additional text objects via treesitter
-    'nvim-treesitter/nvim-treesitter-textobjects',
+  use { 
+    'nvim-treesitter/nvim-treesitter-textobjects', -- Additional text objects via treesitter
+    'windwp/nvim-autopairs',
+    'windwp/nvim-ts-autotag',
+    'RRethy/nvim-treesitter-endwise',
+    -- 'JoosepAlviste/nvim-ts-context-commentstring',
     after = 'nvim-treesitter',
   }
 
@@ -70,12 +76,26 @@ require('packer').startup(function(use)
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  use 'tpope/vim-surround' -- Add/Change/Delete surrounding '""' 
+
+  -- Buffer line
+  use {
+    'akinsho/nvim-bufferline.lua',
+    requires = 'nvim-tree/nvim-web-devicons'
+    -- event = "BufReadPre",
+    -- config = function()
+    --   require("config.bufferline").setup()
+    -- end,
+  }
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
+
+  -- Reopen file to the last cursor position
+  use 'ethanholz/nvim-lastplace'
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -119,7 +139,7 @@ require('nvim-treesitter.configs').setup {
   ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim' },
 
   highlight = { enable = true },
-  indent = { enable = true, disable = { 'python' } },
+  -- indent = { enable = true, disable = { 'python' } },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -171,6 +191,16 @@ require('nvim-treesitter.configs').setup {
       swap_previous = {
         ['<leader>A'] = '@parameter.inner',
       },
+    },
+
+    -- endwise
+    endwise = {
+      enable = true,
+    },
+
+    -- autotag
+    autotag = {
+      enable = true,
     },
   },
 }
@@ -319,9 +349,23 @@ cmp.setup {
   },
 }
 
+-- nvim-autopairs
+local npairs = require 'nvim-autopairs'
+npairs.setup {
+  check_ts = true,
+}
+npairs.add_rules(require 'nvim-autopairs.rules.endwise-lua')
+
+require'nvim-lastplace'.setup {
+  lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
+  lastplace_ignore_filetype = {"gitcommit", "gitrebase"},
+  lastplace_open_folds = true
+}
+
 require('user.options')
 require('user.keymaps')
 require('user.theme')
+require('user.bufferline')
 require('user.telescope')
 
 -- The line beneath this is called `modeline`. See `:help modeline`

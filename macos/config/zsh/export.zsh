@@ -27,7 +27,20 @@ export LC_ALL=en_US.UTF-8
 # Cpp
 export BOOST_ROOT=$(brew --prefix boost)
 export FMT_ROOT=$(brew --prefix fmt)
-export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:$BOOST_ROOT/include:$FMT_ROOT/include"
+export LLVM_ROOT=$(brew --prefix llvm)
+export CPLUS_INCLUDE_PATH="$BOOST_ROOT/include:$FMT_ROOT/include:$LLVM_ROOT/include:$CPLUS_INCLUDE_PATH"
+# To use the bundled libc++ please add the following LDFLAGS:
+# For compilers to find llvm you may need to set:
+# export LDFLAGS="-L${LLVM_ROOT}/lib:${LLVM_ROOT}/lib/c++ -Wl,-rpath,${LLVM_ROOT}/lib/c++"
+#
+# If you need to have llvm first in your PATH, run:
+export PATH="$LLVM_ROOT/bin:$PATH"
+
+# Qt
+# export PATH="$PATH:$(brew --prefix qt)/bin"
+# export LDFLAGS="-L/usr/local/opt/qt/lib"
+# export CPPFLAGS="-I/usr/local/opt/qt/include"
+# export PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig"
 
 # Go
 export GOPATH="$HOME_LOCAL"
@@ -35,12 +48,6 @@ export GOPATH="$HOME_LOCAL"
 # Rust
 export RUSTUP_HOME="$HOME_LOCAL"
 export CARGO_HOME="$HOME_LOCAL"
-
-# Qt
-# export PATH="$PATH:$(brew --prefix qt)/bin"
-# export LDFLAGS="-L/usr/local/opt/qt/lib"
-# export CPPFLAGS="-I/usr/local/opt/qt/include"
-# export PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig"
 
 # ------------------------------------------------------------------------------ 
 
