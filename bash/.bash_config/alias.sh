@@ -82,6 +82,7 @@ alias gp="git push"
 alias gpp="git push; git pull"
 alias gr="git remote -v"
 alias gs="git status"
+alias gv="lazygit"
 
 alias gfs="gnome-open"
 
