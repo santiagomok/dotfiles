@@ -7,26 +7,27 @@ vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
 -- quit
-vim.keymap.set('n', '<leader>q', ':q<cr>',    { desc = 'Quit' })
-vim.keymap.set('n', '<leader>Q', ':qa<cr>',   { desc = 'Quit all'})
+vim.keymap.set('n', '<leader>q', ':q<cr>', { desc = 'Quit' })
+vim.keymap.set('n', '<leader>QQ', ':qa<cr>', { desc = 'Quit all'})
 -- save
 vim.keymap.set('n', '<leader>w', ':update<cr>', { desc = 'Write only changed buffers' })
-vim.keymap.set('n', '<leader>W', ':wall<cr>',   { desc = 'Write all', silent = false })
+vim.keymap.set('n', '<leader>W', ':wall<cr>', { desc = 'Write all', silent = false })
 vim.keymap.set('n', '<leader>WQ', ':wqall<cr>', { desc = 'Write all and quit', silent = false })
 -- session
-vim.keymap.set('n', '<leader>ws', ':mks ss.vim<cr>',  { desc = 'Save session as ss.vim', silent = false})
+vim.keymap.set('n', '<leader>ws', ':mks ss.vim<cr>', { desc = 'Save session as ss.vim', silent = false})
 vim.keymap.set('n', '<leader>WS', ':mks! ss.vim<cr>', { desc= 'Save and overwrite ss.vim session', silent = false})
 
--- tab navigation
--- vim.keymap.set('n', '<M-{>', ':tabprevious<cr>')
--- vim.keymap.set('n', '<M-}>', ':tabnext<cr>')
-vim.keymap.set('n', '<M-1>', '1gt', { desc = 'Go to tab1' })
-vim.keymap.set('n', '<M-2>', '2gt', { desc = 'Go to tab2' })
-vim.keymap.set('n', '<M-3>', '3gt', { desc = 'Go to tab3' })
-vim.keymap.set('n', '<M-4>', '4gt', { desc = 'Go to tab4' })
-vim.keymap.set('n', '<M-5>', '5gt', { desc = 'Go to tab5' })
-vim.keymap.set('n', '<M-0>', ':tablast<cr>', { desc = 'Go to last tab' })
-vim.keymap.set('n', '<M-`>', 'g<Tab>', { desc = 'Go to last accessed tab' })
+-- tab navigation with SUPER-KEY (CMD in mac OS)
+vim.keymap.set('n', '<C-j>', function() print("Test Meta + j key") end, {desc = "Meta + j key test"})
+vim.keymap.set('n', '<C-[>', ':tabprevious<cr>')
+vim.keymap.set('n', '<C-]>', ':tabnext<cr>')
+vim.keymap.set('n', '<C-1>', '1gt', { desc = 'Go to tab1' })
+vim.keymap.set('n', '<C-2>', '2gt', { desc = 'Go to tab2' })
+vim.keymap.set('n', '<C-3>', '3gt', { desc = 'Go to tab3' })
+vim.keymap.set('n', '<C-4>', '4gt', { desc = 'Go to tab4' })
+vim.keymap.set('n', '<C-5>', '5gt', { desc = 'Go to tab5' })
+vim.keymap.set('n', '<C-0>', ':tablast<cr>', { desc = 'Go to last tab' })
+vim.keymap.set('n', '<D-`>', 'g<Tab>', { desc = 'Go to last accessed tab' })
 vim.keymap.set('n', '<leader>tt', '<C-W>T', { desc = 'Split current buffer to new tab' })
 vim.keymap.set('n', '<leader>TT', ':tabclose<cr>', { desc = 'Close current tab' })
 vim.keymap.set('n', '<leader>tp', ':tabmove -1<cr>') -- move the tab page to the left
@@ -35,8 +36,10 @@ vim.keymap.set('n', '<leader>t1', ':tabmove 0<cr>')  -- move the tab page to the
 vim.keymap.set('n', '<leader>t0', ':tabmove $<cr>')  -- move the tab page to the last
 
 -- buffers navigation
-vim.keymap.set('n', '<M-[>',   ':bprevious<cr>',  { desc = 'Go to previous buffer' })
-vim.keymap.set('n', '<M-]>',   ':bnext<cr>',      { desc = 'Go to next buffer' })
+vim.keymap.set('n', '<M-{>',   ':bprevious<cr>',  { desc = 'Go to previous buffer' })
+vim.keymap.set('n', '<M-}>',   ':bnext<cr>',      { desc = 'Go to next buffer' })
+
+--vim.keymap.set('n', '<leader>vrc' ':tabnew \"stdpath(\'config\').\'/plug.vim\'\"<cr>')
 
 -- Split
 vim.keymap.set('n', '<leader>ss', ':split<cr>')
@@ -67,7 +70,7 @@ vim.keymap.set('v', '>', '>gv')  -- shit right indentation
 vim.keymap.set('', '<leader>a', 'ggVG')  -- select all
 vim.keymap.set('n', '<leader>V', '<c-v>') -- vertical visual selection
 
-vim.keymap.set({'n', 'v'}, '<leader>h', ':noh<cr>', { desc = 'Clear highlighting after search'})
+vim.keymap.set('n', '<leader>h', ':noh<cr>', { desc = 'Clear highlighting after search'})
 vim.keymap.set('n', 'q', '<nop>', { desc = 'Disable recording' })
 
 -- date
@@ -84,9 +87,7 @@ vim.keymap.set('i', '<C-e>', '<C-o>$')
 
 -- Insert quotes words separated by comma (AB,BC,CD -> "AB","BC","CD")
 vim.keymap.set('n', '<leader>riq', ':%s/\\([^,]\\+\\)/"\\1"/g')
--- tpope/surround.vim
-vim.keymap.set('n', '<leader>""', 'ysiw"', { desc = 'Add double-quote surrounding word', remap = true })
-vim.keymap.set('n', "<leader>''", "ysiw'", { desc = 'Add single-quote surrounding word', remap = true })
+
 
 -- substitute
 -- replace the current word and all its occurrences
@@ -96,10 +97,3 @@ vim.keymap.set('v', '<leader>rw', 'y:%s/<C-r>"//g<left><left>')
 -- replace the current word and all its occurrences pre-fill target word
 vim.keymap.set('n', '<leader>cw', ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>')
 vim.keymap.set('v', '<leader>cw', 'y:%s/<C-r>"/<C-r>"//g<left><left>')
-
--- vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
--- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
