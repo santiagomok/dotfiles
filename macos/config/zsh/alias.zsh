@@ -11,16 +11,16 @@ alias wrc="$EDITOR ${XDG_CONFIG_HOME}/wezterm/wezterm.lua"
 alias zrc="$EDITOR ${XDG_CONFIG_HOME}/zsh/alias.zsh" 
 
 # ------------------------------------------------------------------------------ 
-# ls -> exa
-alias l='exa --group-directories-first --icons'
-alias ls='exa'
+# ls -> lsd
+alias l='lsd --group-directories-first'
+alias ls='lsd'
 alias l1='l --oneline'
 alias ll='l --long --all --header'
 alias lld='ll --only-dirs'
 alias llr='ll --recurse'
 alias llg='ll --git'
 alias llh="ll | rg -e '->'"
-alias tree='exa --tree'
+alias tree='lsd --tree'
 
 alias less="bat"
 alias cat="bat --paging=never"
