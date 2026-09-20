@@ -81,6 +81,8 @@ alias gll='_fzf_git_log'
 
 # VIM
 alias v="nvim"
+# see :h $NVIM_APPNAME -- plugin migration
+alias vv="NVIM_APPNAME=nvim-vim-pack nvim" 
 alias vf="_fzf_find_edit_file"
 alias vrg="_fzf_grep_edit_file"
 alias vgdb="_nvim_gdb_start"
