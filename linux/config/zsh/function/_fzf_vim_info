@@ -1,0 +1,8 @@
+# Function: _fzf_vim_info
+# Open files in ~/.viminfo
+
+local files
+files=$(grep '^>' ~/.viminfo | cut -c3- |
+        while read line; do
+        [ -f "${line/\~/$HOME}" ] && echo "$line"
+        done | fzf-tmux -d -m -q "$*" -1) && vim ${files//\~/$HOME}

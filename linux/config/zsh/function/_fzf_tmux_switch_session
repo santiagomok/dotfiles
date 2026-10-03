@@ -1,0 +1,16 @@
+# function: _fzf_tmux_switch_session 
+  
+local session
+session=$(tmux list-sessions -F "#{session_name}" | \
+        fzf --height 40% --reverse --query="$1" --select-1 --exit-0) \
+        && tmux switch-client -t "$session"
+
+# Open FZF to select session?
+#_fzf_tmux_change_session() {
+#  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+#  if [ $1 ]; then
+#     tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
+#  fi
+#  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
+#}
+

@@ -1,0 +1,16 @@
+# function: _fzf_open_or_edit_file
+# Modified version where you can press
+#   - CTRL-O to open with `open` command,
+#   - CTRL-E or Enter key to open with the $EDITOR
+
+local out file key
+IFS=$'\n' read -d '' -r -a out < <(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)
+key=${out[0]}
+file=${out[1]}
+if [ -n "$file" ]; then
+if [ "$key" = ctrl-o ]; then
+    open "$file"
+else
+    ${EDITOR:-vim} "$file"
+fi
+fi

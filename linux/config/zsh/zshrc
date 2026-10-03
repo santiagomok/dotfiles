@@ -1,0 +1,42 @@
+# git clone --recursive https://github.com/changs/slimzsh.git ~/.config/slimzsh
+[ -f $HOME/.config/slimzsh/slim.zsh ]      && source "$HOME/.config/slimzsh/slim.zsh"
+
+# exit() {
+# # TMUX override builtin exit() function 
+    # if [[ -z $TMUX ]]; then
+        # builtin exit
+        # return 
+    # fi
+
+    # panes=$(tmux list-panes | wc -l)
+    # windows=$(tmux list-windows | wc -l)
+    # count=$(($panes + $windows - 1))
+    # if [ $count -eq 1 ]; then
+        # tmux detach
+    # else
+        # builtin exit
+    # fi
+# }
+
+# Base16 Shell
+# git clone https://github.com/chriskempson/base16-shell.git ~/.config/theme/base16-shell
+# BASE16_SHELL="$HOME/.config/base16-shell/"
+# [ -n "$PS1" ] && \
+#     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+#         source "$BASE16_SHELL/profile_helper.sh"
+        
+# base16_default-dark
+# base16_helios
+# base16_onedark
+
+# Local config
+config_path="${HOME}/.config/zsh"
+
+fpath=( "$config_path/function" $fpath )
+autoload -Uz $config_path/function/**/* 
+
+[ -f $config_path/export.zsh ]      && source "$config_path/export.zsh"
+[ -f $config_path/alias.zsh ]       && source "$config_path/alias.zsh"
+
+[ -f $config_path/../fzf/key-bindings.zsh ] && source $config_path/../fzf/key-bindings.zsh
+
