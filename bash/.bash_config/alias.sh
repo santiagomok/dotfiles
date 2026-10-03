@@ -43,6 +43,8 @@ alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias hc="history -c"
 alias py="python3"
 # alias rdu="du -ch -d 3 . | sort -h | tee du_`dty`.txt"
+alias dur="dust -prRH -z 20M"
+alias du="dust -prRH"
 
 # GREP
 alias grep="grep -in --color=auto"
@@ -64,6 +66,9 @@ alias path="echo ${PATH} | tr -s ':' '\n' | uniq"
 alias manpath="echo ${MANPATH} | tr -s ':' '\n' | uniq"
 
 # ------------------------------------------------------------------------------ 
+
+# CURSOR
+alias ca="arc shell cursor_cli -- WAYLAND_DISPLAY=cursor-osc52 PATH="$HOME/.local/bin/cursor-osc52:$PATH" cursor-agent"
 
 # TMUX 
 alias tm="tmux new-session -ADs _dev"

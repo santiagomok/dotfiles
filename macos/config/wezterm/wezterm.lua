@@ -37,4 +37,25 @@ config.keys = {
   -- { key = '2', mods = 'ALT', action = act.ActivateTab(1) },
 }
 
+config.mouse_bindings = {
+  -- Paste from the system clipboard on middle-click, even when the
+  -- application (e.g. tmux with `mouse on`) has mouse reporting enabled.
+  {
+    event = { Down = { streak = 1, button = 'Middle' } },
+    mods = 'NONE',
+    action = wezterm.action.PasteFrom 'Clipboard',
+    mouse_reporting = true,
+  },
+  {
+    event = { Down = { streak = 1, button = 'Middle' } },
+    mods = 'NONE',
+    action = wezterm.action.PasteFrom 'Clipboard',
+  },
+  {
+    event = { Down = { streak = 1, button = 'Middle' } },
+    mods = 'SHIFT',
+    action = wezterm.action.PasteFrom 'Clipboard',
+  },
+}
+
 return config

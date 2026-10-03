@@ -94,3 +94,6 @@ export HISTSIZE=5000
 export HISTFILESIZE=5000
 export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S:"
 bind Space:magic-space # !!<SPACE> expand to last command
+
+# limit /tmp/.core dump files size: 2GB
+ulimit -c $((2*1024*1024))   # units are KB → 2097152
