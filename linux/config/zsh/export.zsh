@@ -11,40 +11,35 @@ export XDG_CACHE_HOME="${HOME}/.cache"
 export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_DATA_HOME="$HOME_LOCAL/share"
 
-export PATH="$HOME_LOCAL/bin:/opt/homebrew/bin:$HOME_LOCAL/src/context-osx-64/tex/texmf-osx-arm64/bin:$PATH"
-export MANPATH="$HOME_LOCAL/share/man:`manpath`"
+export PATH="$HOME_LOCAL/bin:$PATH"
+# export MANPATH="$HOME_LOCAL/share/man:`manpath`"
 
 # ------------------------------------------------------------------------------ 
 
 # EDITOR 
 export EDITOR=nvim
 export VISUAL=$EDITOR
+export TERM=wezterm
 # export TERM=xterm-256color
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+# export LANG=en_US.UTF-8
+# export LC_ALL=en_US.UTF-8
 
 # ------------------------------------------------------------------------------ 
 # Cpp
-export BOOST_ROOT=$(brew --prefix boost)
-export FMT_ROOT=$(brew --prefix fmt)
-export LLVM_ROOT=$(brew --prefix llvm)
-export QT_ROOT=$(brew --prefix qt)
-export CPLUS_INCLUDE_PATH="$BOOST_ROOT/include:$FMT_ROOT/include:$LLVM_ROOT/include:$QT_ROOT/include"
+# export BOOST_ROOT=$(brew --prefix boost)
+# export FMT_ROOT=$(brew --prefix fmt)
+# export LLVM_ROOT=$(brew --prefix llvm)
+# export QT_ROOT=$(brew --prefix qt)
+# export CPLUS_INCLUDE_PATH="$BOOST_ROOT/include:$FMT_ROOT/include:$LLVM_ROOT/include:$QT_ROOT/include"
 # To use the bundled libc++ please add the following LDFLAGS:
 # For compilers to find llvm you may need to set:
 # export LDFLAGS="-L${LLVM_ROOT}/lib:${LLVM_ROOT}/lib/c++ -Wl,-rpath,${LLVM_ROOT}/lib/c++"
 #
 # If you need to have llvm first in your PATH, run:
-export PATH="$LLVM_ROOT/bin:$PATH"
-
-# Qt
-export PATH="$PATH:$QT_ROOT/bin"
-export LDFLAGS="-L$QT_ROOT/lib"
-# export CPPFLAGS="-I$QT_ROOT/include"
-#export PKG_CONFIG_PATH="$QT_ROOT/lib/pkgconfig"
+# export PATH="$LLVM_ROOT/bin:$PATH"
 
 # Go
-export GOPATH="$HOME_LOCAL"
+# export GOPATH="$HOME_LOCAL"
 
 # Rust
 export RUSTUP_HOME="$HOME_LOCAL"

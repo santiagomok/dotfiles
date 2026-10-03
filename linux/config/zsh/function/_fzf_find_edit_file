@@ -1,0 +1,9 @@
+# function _fzf_find_edit_file()
+# editor open with fuzzy find 
+# fd --type f $1=<pattern> $2=<path>
+
+local file
+file="$(fd --type f ${1:-.} ${2:-.} | fzf --multi --exit-0 --select-1)"
+if [[ -n $file ]]; then
+    nvim -p $file
+fi

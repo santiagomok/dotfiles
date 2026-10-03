@@ -20,10 +20,11 @@ alias lld='ll --only-dirs'
 alias llr='ll --recurse'
 alias llg='ll --git'
 alias llh="ll | rg -e '->'"
-alias tree='lsd --tree'
+alias lt='lsd --tree'
 
-alias less="bat"
-alias cat="bat --paging=never"
+alias fd="fdfind"
+alias less="batcat"
+alias cat="batcat --paging=never"
 
 # ------------------------------------------------------------------------------ 
 # SHELL
@@ -38,12 +39,17 @@ alias grep="grep --color=auto"
 alias rg="rg --line-number --no-heading --ignore-case"
 alias rgc="rg -i -n -t{c,cpp,make,java,py,tcl,json,perl,protobuf,sh,swig,xml}"
 
+# Remote
+# alias ssc='ssh -t sc "tmux new-session -ADs _dev"'
+alias ssc='ssh -t sc "tmux new-session -ADs _dev"'
+
+
 # ------------------------------------------------------------------------------ 
 # PATH
-alias cc='cd ${XDG_CONFIG_HOME}'
-alias ct='cd ${HOME}/Developer/tutorial'
-alias cw='cd ${HOME}/Developer'
-alias c.='cd ${HOME}/Developer/dotfiles'
+# alias cc='cd ${XDG_CONFIG_HOME}'
+# alias ct='cd ${HOME}/Developer/tutorial'
+# alias cw='cd ${HOME}/Developer'
+# alias c.='cd ${HOME}/developer/dotfiles'
 alias j="_fzf_fasd_change_dir"
 alias fcd="_fzf_change_dir"
 alias mcd="_mcd"

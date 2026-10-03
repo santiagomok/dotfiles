@@ -1,0 +1,7 @@
+# function: _fzf_git_log
+# Display compact log list in fuzzy finder
+
+git ll --color=always "$@" | \
+     fzf --ansi --no-sort --height 100% \
+         --preview "echo {} | grep -o '[a-f0-9]\{7\}' | \
+         head -1 |xargs -I@ sh -c 'git show --color=always @'"

@@ -1,0 +1,15 @@
+# function: _fzf_change_dir() 
+# cd to selected directory
+
+local dir
+dir=$(fd --type d --hidden --follow --exclude .git . ${1:-.} 2> /dev/null | \
+        fzf -i +m) \
+        && cd $dir
+
+# Use find 
+#function fd() {
+#  local dir
+#  dir=$(find ${1:-.} -path '*/\.*' -prune \
+#                  -o -type d -print 2> /dev/null | fzf +m) &&
+#  cd "$dir"
+#}

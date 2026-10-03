@@ -1,0 +1,2 @@
+-- Lua configurations
+require("settings")

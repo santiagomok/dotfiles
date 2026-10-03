@@ -1,0 +1,5 @@
+ps -ef | { 
+    read -r;
+    echo "$REPLY";
+    grep --color=auto "$@"
+}

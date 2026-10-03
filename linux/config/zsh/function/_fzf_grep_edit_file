@@ -1,0 +1,9 @@
+# function _fzf_grep_edit_file
+# search in file and open selected file@line
+#   $1 + $2: filename + line-number
+
+local file
+file="$(rg --no-heading --vimgrep $@ | fzf -0 -1 | awk -F: '{print $1 " +" $2}')"
+if [[ -n $file ]]; then
+    vim $file
+fi

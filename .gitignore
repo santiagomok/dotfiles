@@ -1,4 +1,4 @@
-*.lock.json
+**/*.lock.json
 gdb/.gdb_history
 macos/config/base16-shell
 macos/config/gh
