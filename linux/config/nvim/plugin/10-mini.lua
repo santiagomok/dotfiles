@@ -15,5 +15,12 @@ require('mini.surround').setup()
 require('mini.snippets').setup()
 require('mini.fuzzy').setup()
 
+require('mini.statusline').setup()
+require('mini.tabline').setup({ show_icons = false })
+require('mini.misc').setup()
+MiniMisc.setup_restore_cursor()
+
+keymap.set('n', '<F11>', function() MiniMisc.zoom() end, 'Toggle maximize window')
+
 
 

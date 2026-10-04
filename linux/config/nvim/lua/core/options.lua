@@ -40,28 +40,37 @@ vim.opt.showcmd = true           	-- Show partial commands in the last line of t
 -- provider; the built-in OSC 52 paste waits for a reply WezTerm never sends,
 -- so yank appears to hang.
 --
--- y / p stay on the unnamed register. TextYankPost also writes that yank to
--- the Windows clipboard with OSC 52 (copy only, no query).
--- gy / gp / gP in keymaps.lua use the + register: OSC 52 copy, PowerShell paste.
+-- y / Y in keymaps.lua write the + register (OSC 52 copy) and the unnamed
+-- register, so a following p pastes the same text without querying the clipboard.
+-- y / gp / gP use the + register: OSC 52 copy, PowerShell paste.
 local osc52_copy = require('vim.ui.clipboard.osc52').copy('+')
 
-local function paste_windows()
-  local content = vim.fn.system({
-    'powershell.exe',
-    '-NoLogo',
-    '-NoProfile',
-    '-NonInteractive',
-    '-Command',
-    '[Console]::Out.Write(((Get-Clipboard -Raw) -replace "`r", ""))',
-  })
-  if vim.v.shell_error ~= 0 or content == '' then
-    return {}
-  end
-  local regtype = content:sub(-1) == '\n' and 'V' or 'v'
-  if regtype == 'V' then
-    content = content:sub(1, -2)
-  end
-  return { vim.split(content, '\n', { plain = true }), regtype }
+-- local function paste_windows()
+--   local content = vim.fn.system({
+--     'powershell.exe',
+--     '-NoLogo',
+--     '-NoProfile',
+--     '-NonInteractive',
+--     '-Command',
+--     '[Console]::Out.Write(((Get-Clipboard -Raw) -replace "`r", ""))',
+--   })
+--   if vim.v.shell_error ~= 0 or content == '' then
+--     return {}
+--   end
+--   local regtype = content:sub(-1) == '\n' and 'V' or 'v'
+--   if regtype == 'V' then
+--     content = content:sub(1, -2)
+--   end
+--   return { vim.split(content, '\n', { plain = true }), regtype }
+-- end
+
+-- OSC 52 can push a yank out to the Windows clipboard, but this SSH/tmux
+-- session never answers an OSC 52 read. Do not set `clipboard=unnamedplus`:
+-- that makes `p` call the paste provider, and an empty reply pastes nothing
+-- even though `y` just filled the unnamed register.
+-- `y` is mapped to `"+y` in keymaps.lua so a yank still reaches the clipboard.
+local function paste_last_yank()
+  return vim.fn.getreg('"', 1, true), vim.fn.getregtype('"')
 end
 
 vim.g.clipboard = {
@@ -71,22 +80,11 @@ vim.g.clipboard = {
     ['*'] = osc52_copy,
   },
   paste = {
-    ['+'] = paste_windows,
-    ['*'] = paste_windows,
+    ['+'] = paste_last_yank,
+    ['*'] = paste_last_yank,
   },
   cache_enabled = 0,
 }
-
-vim.api.nvim_create_autocmd('TextYankPost', {
-  group = vim.api.nvim_create_augroup('YankToWindowsClipboard', { clear = true }),
-  desc = 'Mirror a normal yank to the Windows clipboard via WezTerm OSC 52',
-  callback = function()
-    if vim.v.event.operator ~= 'y' or vim.v.event.regname ~= '' then
-      return
-    end
-    pcall(osc52_copy, vim.v.event.regcontents)
-  end,
-}) 
 
 -- " set clipboard=exclude:.*  " Do not use X clipboard to speed up start up time
 -- set notimeout ttimeout ttimeoutlen=200 " Quickly time out on keycodes, but never time out on mappings

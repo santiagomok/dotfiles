@@ -21,21 +21,32 @@ keymap.set('n', '<leader>WS', ':mks! ss.vim<cr>', 'Save and overwrite ss.vim ses
 -- Tabs
 keymap.set('n', '[t', vim.cmd.tabprevious, 'Navigate to previous tab page')
 keymap.set('n', ']t', vim.cmd.tabnext, 'Navigate to next tab page')
+keymap.set('n', '<M-{>', ':tabprevious<cr>', 'Navigate to previous tab page')
+keymap.set('n', '<M-}>', ':tabnext<cr>', 'Navigate to next tab page')
 keymap.set('n', '[1', '1gt', 'Go to tab1')
+keymap.set('n', '<M-1>', '1gt', 'Go to tab1')
+keymap.set('n', '<M-2>', '2gt', 'Go to tab2')
+keymap.set('n', '<M-3>', '3gt', 'Go to tab3')
+keymap.set('n', '<M-4>', '4gt', 'Go to tab4')
+keymap.set('n', '<M-5>', '5gt', 'Go to tab5')
+keymap.set('n', '<M-0>', ':tablast<cr>', 'Go to last tab')
 keymap.set('n', '[`', 'g<Tab>', 'Go to last accessed tab')
+keymap.set('n', '<M-`>', 'g<Tab>', 'Go to last accessed tab')
 -- keymap.set('n', '[0', ':tablast<cr>', 'Go to last tab')
 keymap.set('n', '<leader>tt', '<C-W>T', 'Split current buffer to new tab')
 keymap.set('n', '<leader>TT', vim.cmd.tabclose, 'Close current tab')
--- keymap.set('n', '<leader>tp', ':tabmove -1<cr>') -- move the tab page to the left
--- keymap.set('n', '<leader>tn', ':tabmove +1<cr>') -- move the tab page to the right
--- keymap.set('n', '<leader>t1', ':tabmove 0<cr>')  -- move the tab page to the beginning
--- keymap.set('n', '<leader>t0', ':tabmove $<cr>')  -- move the tab page to the last
+keymap.set('n', '<leader>tp', ':tabmove -1<cr>', 'Move the tab page to the left')
+keymap.set('n', '<leader>tn', ':tabmove +1<cr>', 'Move the tab page to the right')
+keymap.set('n', '<leader>t1', ':tabmove 0<cr>', 'Move the tab page to the beginning')
+keymap.set('n', '<leader>t0', ':tabmove $<cr>', 'Move the tab page to the last')
 
 -- Buffers
 keymap.set('n', '<C-E>', "<cmd>edit #<cr>", 'Edit alternate file')
 keymap.set('n', '<leader>bd', "<cmd>silent %bdelete<bar>edit #<bar>bdelete #<cr>'\"", "Close all buffers but current one")
 keymap.set('n', '[b', vim.cmd.bprevious, 'Navigate to previous buffer')
 keymap.set('n', ']b', vim.cmd.bnext,    'Navigate to next buffer')
+keymap.set('n', '<M-[>', ':bprevious<cr>', 'Go to previous buffer')
+keymap.set('n', '<M-]>', ':bnext<cr>', 'Go to next buffer')
 
 -- Split
 keymap.set('n', '<leader>ss', ':split<cr>')
@@ -63,16 +74,17 @@ keymap.set('n', '<leader>fw', ':!chmod u+w %:p<cr>', 'Open file for write')
 
 keymap.set('v', '<', '<gv', 'Shit left indentation')
 keymap.set('v', '>', '>gv', 'Shit right indentation')
-keymap.set('', '<leader>a', 'ggVG', 'Select all')
+keymap.set('', '<leader>A', 'ggVG', 'Select all')
 keymap.set('n', '<leader>V', '<c-v>', 'Vertical visual selection')
 
 keymap.set('n', '<leader>h', vim.cmd.noh, 'Clear highlighting after search')
 keymap.set('n', 'q', '<nop>', 'Disable recording')
 
--- y/p use the unnamed register. These talk to the Windows clipboard (+ register).
-keymap.set({ "n", "x" }, "gy", '"+y', "Yank to Windows clipboard")
-keymap.set({ "n", "x" }, "gp", '"+p', "Paste Windows clipboard after cursor")
-keymap.set({ "n", "x" }, "gP", '"+P', "Paste Windows clipboard before cursor")
+-- y writes the + register (OSC 52) and the unnamed register, so p pastes the same text.
+-- gp / gP read the Windows clipboard through PowerShell.
+keymap.set({ 'n', 'x' }, 'y', '"+y', 'Yank to clipboard')
+keymap.set('n', 'Y', '"+yy', 'Yank line to clipboard')
+keymap.set({ "n", "x" }, "P", '"+P', "Paste clipboard before cursor")
 
 -- date
 keymap.set('n', '<leader>dt', 'a<C-R>=strftime(\'%m/%d/%Y\')<cr><esc>')

@@ -24,7 +24,7 @@ require('mini.completion').setup({
 -- Modern 0.12 Mason / LSP Hooking
 require('mason').setup()
 require('mason-lspconfig').setup({
-  ensure_installed = { "lua_ls" },
+  ensure_installed = { "lua_ls", "clangd", "pyright" },
 })
 
 -- Register capabilities so servers know mini.completion is managing the UI
@@ -33,7 +33,7 @@ vim.lsp.config('*', {
 })
 
 -- 4. Launch your servers natively
-vim.lsp.enable('lua_ls')
+vim.lsp.enable({ 'lua_ls', 'clangd', 'pyright' })
 
 -- Keymaps
 -- The modern, structured alternative using mini's companion module
@@ -50,6 +50,8 @@ map_multistep('i', '<BS>',    { 'minipairs_bs' }) -- Maps to your <C-y> logic
 
 -- Configure the diagnostic engine logic (No visual layout clutter needed here)
 vim.diagnostic.config({
+  virtual_text = false,
+  severity_sort = true,
   -- set rounded borders for diagnostics without a function hack
   float = { border = "rounded" },
   -- update_in_insert = true, -- Check errors instantly as you type
