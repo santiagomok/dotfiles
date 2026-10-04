@@ -2,10 +2,6 @@
 [user]
 	name = Santiago Mok
 	email = santiago.mok@gmail.com
-[include]
-    path = ~/.gitconfig.work
-#[hub]
-#    protocol = https
 [alias]
     bv = branch -vv
     bd = branch -d
@@ -57,7 +53,7 @@
 [merge]
     tool = nvim
 [mergetool]
-    prompt = true
+    prompt = false
 [diff]
     tool = nvimdiff
 	algorithm = histogram
