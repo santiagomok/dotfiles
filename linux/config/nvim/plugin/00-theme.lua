@@ -3,4 +3,11 @@ vim.pack.add({
 })
 
 -- Color Theme
-require('onedark').load({ style = 'darker' })
+require('onedark').setup({
+  -- highlights = {
+  --   Comment = { fg = '#ffffff', fmt = 'none' },
+  -- },
+  style = 'darker',
+})
+
+require('onedark').load()
