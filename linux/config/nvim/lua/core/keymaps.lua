@@ -10,6 +10,7 @@ opt.setglobal('maplocalleader', ',')
 -- quit
 keymap.set('n', '<leader>q', ':q<cr>', 'Quit')
 keymap.set('n', '<leader>Q', ':qa<cr>', 'Quit all')
+keymap.set('n', '<leader>R', ':restart<cr>', 'Restart')
 -- save
 keymap.set('n', '<leader>w', ':update<cr>', 'Write only changed buffers')
 keymap.set('n', '<leader>W', ':wall<cr>',   'Write all')
