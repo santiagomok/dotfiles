@@ -40,8 +40,8 @@ alias rg="rg --line-number --no-heading --ignore-case"
 alias rgc="rg -i -n -t{c,cpp,make,java,py,tcl,json,perl,protobuf,sh,swig,xml}"
 
 # Remote
-# alias ssc='ssh -t sc "tmux new-session -ADs _dev"'
-alias ssc='ssh -t sc "tmux new-session -ADs _dev"'
+alias ssc="ssh sc"
+alias ssc_tm="ssh -t sc 'tmux new-session -ADs _dev'"
 
 
 # ------------------------------------------------------------------------------ 
