@@ -97,3 +97,27 @@ bind Space:magic-space # !!<SPACE> expand to last command
 
 # limit /tmp/.core dump files size: 2GB
 ulimit -c $((2*1024*1024))   # units are KB → 2097152
+
+# -----------------------------------------------------------------------------
+# Conditionally set TERM for WezTerm & SSH (Safely handles tmux, VNC, & Cursor)
+# -----------------------------------------------------------------------------
+
+# Only check for upgrading to "wezterm" if we are NOT inside a tmux session
+if [ -z "$TMUX" ]; then
+    # Default to standard terminal type for all sessions up front
+    export TERM="xterm-256color"
+
+    # Validate it's a real SSH line or direct WezTerm host
+    if [ -n "$SSH_TTY" ] || [ "$TERM_PROGRAM" = "WezTerm" ]; then
+        # Ensure we aren't inside a Cursor/VSCode backend or a local VNC desktop
+        if [ -z "$VSCODE_IPC_HOOK_CLI" ] && [ "$TERM_PROGRAM" != "vscode" ] && { [ -z "$DISPLAY" ] || [ -n "$SSH_TTY" ]; }; then
+            
+            # Upgrade to wezterm ONLY if the terminfo profile is compiled and available
+            if [ -d "$HOME/.terminfo/w" ] || infocmp wezterm >/dev/null 2>&1; then
+                export TERM=wezterm
+                export COLORTERM=truecolor
+            fi
+
+        fi
+    fi
+fi

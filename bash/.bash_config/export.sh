@@ -8,18 +8,17 @@ export XDG_CACHE_HOME="${HOME}/.cache"
 export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_DATA_HOME="$HOME_LOCAL/share"
 
-export PATH="$HOME_LOCAL/bin:/usr/local/bin:/usr/local/sbin:$PATH"
-export PATH="${HOME}/.yarn/bin:${HOME}/.config/yarn/global/node_modules/.bin:$PATH"
-export MANPATH="$HOME_LOCAL/share/man:/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
+export PATH="$HOME_LOCAL/bin:$PATH"
+#export PATH="$HOME_LOCAL/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+# export PATH="${HOME}/.yarn/bin:${HOME}/.config/yarn/global/node_modules/.bin:$PATH"
+# export MANPATH="$HOME_LOCAL/share/man:/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
+export LD_LIBRARY_PATH="$HOME_LOCAL/lib:$LD_LIBRARY_PATH"
 # ------------------------------------------------------------------------------ 
 
 # EDITOR 
 export EDITOR="nvim.sh"
 export VISUAL=$EDITOR
-export TERM=tmux-256color
-# export LANG=en_US.UTF-8
-# export LC_ALL=en_US.UTF-8
 
 # ------------------------------------------------------------------------------ 
 
@@ -28,7 +27,7 @@ if [ "$PLATFORM" = Linux ]; then
     export GOPATH="$HOME_LOCAL/lib/go/packages"
     export GOROOT="$HOME_LOCAL/go"
 fi
-export PATH="$GOROOT/bin:${GOPATH}/bin:$PATH"
+# export PATH="$GOROOT/bin:${GOPATH}/bin:$PATH"
 
 # RUST
 export CARGO_HOME="$HOME/.cargo"

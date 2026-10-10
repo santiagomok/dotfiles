@@ -68,7 +68,8 @@ alias manpath="echo ${MANPATH} | tr -s ':' '\n' | uniq"
 # ------------------------------------------------------------------------------ 
 
 # CURSOR
-alias ca="arc shell cursor_cli -- WAYLAND_DISPLAY=cursor-osc52 PATH="$HOME/.local/bin/cursor-osc52:$PATH" cursor-agent"
+alias rcc="arc shell cursor_cli"
+alias ca="WAYLAND_DISPLAY=cursor-osc52 PATH='$HOME/.local/bin/cursor-osc52:$PATH' cursor-agent"
 
 # TMUX 
 alias tm="tmux new-session -ADs _dev"
@@ -98,7 +99,7 @@ alias vf="_fzf_find_edit_file"
 alias vrg="_fzf_grep_edit_file"
 alias v0="$EDITOR --noplugin"
 alias vi="vim"
-alias vv="$HOME/.local/bin/nvim-0.12.6.sh"
+alias vv="$HOME/.local/bin/nvim-0.10.4.sh"
 # alias vgdb="_nvim_gdb_start"
 # alias vi_plugin_install="source ${HOME}/github.com/santiagomok/dotfiles/install/vim.sh"
 # alias v0="vim -u NONE"
