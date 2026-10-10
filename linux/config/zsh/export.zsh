@@ -4,6 +4,15 @@
 
 # ------------------------------------------------------------------------------ 
 
+# GUI Scaling
+# export GDK_SCALE=1.5
+# export QT_SCALE_FACTOR=1.5
+# Manually load Xresources if an X-server connection exists
+if [ -n "$DISPLAY" ] && [ -f "$HOME/.Xresources" ]; then
+    xrdb -merge "$HOME/.Xresources"
+fi
+
+
 # XDG_CONFIG_HOME (linux to macOS)
 # https://stackoverflow.com/questions/3373948/equivalents-of-xdg-config-home-and-xdg-data-home-on-mac-os-x
 export HOME_LOCAL="$HOME/.local"
@@ -19,10 +28,7 @@ export PATH="$HOME_LOCAL/bin:$PATH"
 # EDITOR 
 export EDITOR=nvim
 export VISUAL=$EDITOR
-export TERM=wezterm
-# export TERM=xterm-256color
-# export LANG=en_US.UTF-8
-# export LC_ALL=en_US.UTF-8
+export TERM=xterm-256color
 
 # ------------------------------------------------------------------------------ 
 # Cpp

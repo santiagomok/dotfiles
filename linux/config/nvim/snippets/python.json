@@ -1,0 +1,15 @@
+{
+  "Python Main Guard": {
+    "prefix": "main",
+    "body": [
+      "def main():",
+      "    ${0:pass}",
+      "",
+      "",
+      "if __name__ == \"__main__\":",
+      "    main()"
+    ],
+    "description": "Boilerplate for a standard Python script entry point"
+  }
+}
+

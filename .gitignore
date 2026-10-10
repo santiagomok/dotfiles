@@ -20,3 +20,4 @@ vim/.nvim
 vim/.vim/.netrwbook
 vim/.vim/.netrwhist
 vim/.vim/bundle/
+linux/config/wezterm/terminfo/

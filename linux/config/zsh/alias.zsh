@@ -40,8 +40,8 @@ alias rg="rg --line-number --no-heading --ignore-case"
 alias rgc="rg -i -n -t{c,cpp,make,java,py,tcl,json,perl,protobuf,sh,swig,xml}"
 
 # Remote
-# alias ssc='ssh -t sc "tmux new-session -ADs _dev"'
-alias ssc='ssh -t sc "tmux new-session -ADs _dev"'
+alias ssc="ssh sc"
+alias ssc_tm="ssh -t sc 'tmux new-session -ADs _dev'"
 
 
 # ------------------------------------------------------------------------------ 
@@ -88,7 +88,7 @@ alias gll='_fzf_git_log'
 # VIM
 alias v="nvim"
 # see :h $NVIM_APPNAME -- plugin migration
-alias vv="NVIM_APPNAME=nvim-vim-pack nvim" 
+# alias vv="NVIM_APPNAME=nvim-vim-pack nvim" 
 alias vf="_fzf_find_edit_file"
 alias vrg="_fzf_grep_edit_file"
 alias vgdb="_nvim_gdb_start"

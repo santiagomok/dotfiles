@@ -58,25 +58,9 @@ require('mini.files').setup({
 --     },
 })
 
--- Mini.files Keymaps to open and toggle the file explorer
-vim.keymap.set('n', 'fm', function()
-    if not MiniFiles.close() then
-        MiniFiles.open(vim.api.nvim_buf_get_name(0))
-    end
-end, { desc = "Toggle mini.files (Current File)" })
-
-vim.keymap.set('n', 'fM', function()
-    if not MiniFiles.close() then
-        MiniFiles.open(vim.fn.getcwd())
-    end
-end, { desc = "Toggle mini.files (Root Directory)" })
-
--- Mini.pick
--- require('mini.pick').setup()
-require('mini.pick').setup({
-  window = {
-    config = function()
-      -- 1. Get total screen dimensions
+-- Mini.files Window Config
+local window_config = function()
+      -- Get total screen dimensions
       local screen_height = vim.o.lines - vim.o.cmdheight
       local screen_width = vim.o.columns
       -- This makes it take up roughly 60% of your screen height and width
@@ -95,38 +79,84 @@ require('mini.pick').setup({
         style = 'minimal',
         border = 'rounded', -- Clean looking border for centered floating modals
       }
-    end,
+end
+
+-- Mini.files Keymaps to open and toggle the file explorer
+vim.keymap.set('n', 'fm', function()
+    if not MiniFiles.close() then
+        MiniFiles.open(vim.api.nvim_buf_get_name(0))
+    end
+end, { desc = "Toggle mini.files (Current File)" })
+
+vim.keymap.set('n', 'fM', function()
+    if not MiniFiles.close() then
+        MiniFiles.open(vim.fn.getcwd())
+    end
+end, { desc = "Toggle mini.files (Root Directory)" })
+
+-- Mini.pick
+-- require('mini.pick').setup()
+require('mini.pick').setup({
+  window = {
+    config = window_config,
   },
+  source = {
+    -- Automatically turn previews ON bye default every Layout search
+    preview = function(buf_id, item)
+      require('mini.pick').default_preview(buf_id, item)
+    end,
+  }
 })
 
---
--- -- Mini.extra
+-- Mini.extra
 require("mini.extra").setup()
---
--- -- Mini.extra Keymap
-vim.keymap.set("n", "<leader>fe", MiniExtra.pickers.explorer, { desc = "Pick directory to open in mini.files" })
 
---
--- -- Mappings
-keymap.set("n", "<Leader><Space>",  MiniPick.builtin.files, "Find files")
-keymap.set("n", "<Leader>fb",       MiniPick.builtin.buffers, "Find buffers")
-keymap.set("n", "<Leader>fk", MiniExtra.pickers.keymaps, "Find keymaps")
+-- Helper function to find the project root dynamically
+local function find_project_root()
+  -- Begin crawling upward from the active file's folder (fallback to current dir)
+  local current_dir = vim.fn.expand('%:p:h')
+  if current_dir == '' then
+    current_dir = vim.fn.getcwd()
+  end
+
+  -- Traverse upward to the system root "/" or "C:\"
+  while current_dir and current_dir ~= vim.fs.dirname(current_dir) do
+    -- Case 1: Check if the folder itself is named "p4"
+    if vim.fs.basename(current_dir) == "p4" then
+      return current_dir
+    end
+
+    -- Case 2 & 3: Check if the folder contains a .github or .vscode child
+    local has_git = vim.loop.fs_stat(current_dir .. '/.git')
+    local has_vscode = vim.loop.fs_stat(current_dir .. '/.vscode')
+
+    if has_git or has_vscode then
+      return current_dir
+    end
+
+    -- Move up one directory level
+    current_dir = vim.fs.dirname(current_dir)
+  end
+
+  -- Fallback if no matching parents or indicators are found
+  return os.getenv('ACDS_SRC_ROOT') or '..'
+end
+
+
+-- Keymaps
+keymap.set('n', '<leader>F',  MiniPick.builtin.files, 'Find files')
+keymap.set('n', '<leader>ff', function() 
+    local root_path = find_project_root() 
+    MiniPick.builtin.files(nil, { source = { cwd = root_path } })
+end, 'Find files from Root (.github/.vscode/p4) or ACDS_SRC_ROOT')
+
+keymap.set("n", "<leader>fe", MiniExtra.pickers.explorer, "Pick directory to open in mini.files")
 keymap.set("n", "<Leader>fs", MiniExtra.pickers.spellsuggest, "Find spelling")
-
-keymap.set('n', '<leader>F', MiniPick.builtin.files, 'Find files')
-keymap.set('n', '<leader>ff', function()
-  local path = os.getenv('ACDS_SRC_ROOT') or '..'
-  MiniPick.builtin.files({}, { source = { cwd = path } })
-end, 'Find files from ACDS_SRC_ROOT or ..')
-keymap.set('n', '<leader>H', MiniExtra.pickers.oldfiles, 'Find recently opened files')
-keymap.set('n', '<leader>B', MiniPick.builtin.buffers, 'List buffers')
-keymap.set('n', '<leader>/', MiniPick.builtin.grep_live, 'Live grep')
-keymap.set('n', '<leader>*', function()
-  MiniPick.builtin.grep({ pattern = vim.fn.expand('<cword>') })
-end, 'Grep word under cursor')
-keymap.set('n', '<leader>?', function()
-  MiniExtra.pickers.buf_lines({ scope = 'current' })
-end, 'Fuzzy search in current buffer')
+keymap.set('n', '<leader>H',  MiniExtra.pickers.oldfiles, 'Find recently opened files')
+keymap.set('n', '<leader>B',  MiniPick.builtin.buffers, 'List buffers')
+keymap.set('n', '<leader>/',  MiniPick.builtin.grep_live, 'Live grep')
+keymap.set('n', '<leader>*', function() MiniPick.builtin.grep({ pattern = vim.fn.expand('<cword>') }) end, 'Grep word under cursor')
+keymap.set('n', '<leader>?', function() MiniExtra.pickers.buf_lines({ scope = 'current' }) end, 'Fuzzy search in current buffer')
 keymap.set('n', '<leader>sd', MiniExtra.pickers.diagnostic, 'Search diagnostics')
 keymap.set('n', '<F1>', MiniPick.builtin.help, 'Search help')
 keymap.set('n', '<F2>', MiniExtra.pickers.keymaps, 'List keymaps')
