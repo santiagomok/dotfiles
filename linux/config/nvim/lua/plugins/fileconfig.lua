@@ -1,5 +1,5 @@
 -- Config and keymap navigation for file explorer 
--- require 10-mini.lua - mini.nvim (mini.files, mini.pick, mini.extra)
+-- require mini.lua - mini.nvim (mini.files, mini.pick, mini.extra)
 
 -- Mini.files
 -- require('mini.files').setup()
@@ -109,49 +109,19 @@ require('mini.pick').setup({
 })
 
 -- Mini.extra
-require("mini.extra").setup()
+require('mini.extra').setup()
 
--- Helper function to find the project root dynamically
-local function find_project_root()
-  -- Begin crawling upward from the active file's folder (fallback to current dir)
-  local current_dir = vim.fn.expand('%:p:h')
-  if current_dir == '' then
-    current_dir = vim.fn.getcwd()
-  end
-
-  -- Traverse upward to the system root "/" or "C:\"
-  while current_dir and current_dir ~= vim.fs.dirname(current_dir) do
-    -- Case 1: Check if the folder itself is named "p4"
-    if vim.fs.basename(current_dir) == "p4" then
-      return current_dir
-    end
-
-    -- Case 2 & 3: Check if the folder contains a .github or .vscode child
-    local has_git = vim.loop.fs_stat(current_dir .. '/.git')
-    local has_vscode = vim.loop.fs_stat(current_dir .. '/.vscode')
-
-    if has_git or has_vscode then
-      return current_dir
-    end
-
-    -- Move up one directory level
-    current_dir = vim.fs.dirname(current_dir)
-  end
-
-  -- Fallback if no matching parents or indicators are found
-  return os.getenv('ACDS_SRC_ROOT') or '..'
-end
-
+local find_project_root = require('plugins.project')
 
 -- Keymaps
 keymap.set('n', '<leader>F',  MiniPick.builtin.files, 'Find files')
 keymap.set('n', '<leader>ff', function() 
     local root_path = find_project_root() 
     MiniPick.builtin.files(nil, { source = { cwd = root_path } })
-end, 'Find files from Root (.github/.vscode/p4) or ACDS_SRC_ROOT')
+end, 'Find files from Root (.github/.vscode/p4) or ../..')
 
-keymap.set("n", "<leader>fe", MiniExtra.pickers.explorer, "Pick directory to open in mini.files")
-keymap.set("n", "<Leader>fs", MiniExtra.pickers.spellsuggest, "Find spelling")
+keymap.set('n', '<leader>fe', MiniExtra.pickers.explorer, 'Pick directory to open in mini.files')
+keymap.set('n', '<Leader>fs', MiniExtra.pickers.spellsuggest, 'Find spelling')
 keymap.set('n', '<leader>H',  MiniExtra.pickers.oldfiles, 'Find recently opened files')
 keymap.set('n', '<leader>B',  MiniPick.builtin.buffers, 'List buffers')
 keymap.set('n', '<leader>/',  MiniPick.builtin.grep_live, 'Live grep')
