@@ -6,11 +6,4 @@ require("core.tmux")
 require("core.cursor")
 
 -- Load Plugins
-require('plugins.theme')
-require('plugins.mini')
-require('plugins.lspconfig')
--- require('plugins.fileconfig')
-require('plugins.fzf')
-require('plugins.treesitter')
-require('plugins.perforce')
-require('plugins.terminal')
+require('plugins')

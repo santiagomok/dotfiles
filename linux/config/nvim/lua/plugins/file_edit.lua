@@ -1,4 +1,4 @@
-local find_project_root = require('plugins.project')
+local get_project_root = require('plugins.project')
 
 -- Prompt shows only the last `n` directories of the picker cwd.
 local function prompt_last_dirs(dir, n)
@@ -15,10 +15,6 @@ local function files_picker(opts)
   require('fzf-lua').files(opts)
 end
 
-vim.pack.add({ 
-    { src = 'https://github.com/ibhagwan/fzf-lua' },
-})
-
 require('fzf-lua').setup({
   grep = {
     -- rg collects the lines. grep / grep_project / grep_cword then fuzzy-match them in fzf.
@@ -27,31 +23,50 @@ require('fzf-lua').setup({
   },
 })
 
+-- Keymaps
 keymap.set('n', '<leader>F', function()
   files_picker()
 end, 'Fzf-lua Find Files')
 
 keymap.set('n', '<leader>ff', function()
-  files_picker({ cwd = find_project_root() })
+  files_picker({ cwd = get_project_root() })
 end, 'Find files from Root (.github/.vscode/p4) or ../..')
+
+keymap.set('n', '<leader>T', function()
+  require('fzf-lua').tabs()
+end, 'Fuzzy search tabs')
 
 keymap.set('n', '<leader>B', function()
   require('fzf-lua').buffers()
-end, 'Fzf-lua Buffers')
+end, 'Fuzzy search buffers')
 
 keymap.set('n', '<leader>/', function()
-  require('fzf-lua').grep_project()
-end, 'Fuzzy search (rg)')
+  require('fzf-lua').grep_project({ cwd = get_project_root() })
+end, 'Fuzzy search project')
 
 keymap.set('n', '<leader>?', function()
   require('fzf-lua').blines()
-end, 'Fuzzy Search Current Buffer')
+end, 'Fuzzy search current buffer')
 
 keymap.set('n', '<leader>*', function()
   require('fzf-lua').grep_cword()
-end, 'Grep word under cursor')
+end, 'Fuzzy search word under cursor')
+
+keymap.set('n', '<leader>H', function()
+  require('fzf-lua').search_history()
+end, 'Fuzzy search history')
 
 keymap.set('n', '<F2>', function()
   require('fzf-lua').keymaps()
 end, 'List keymaps')
 
+-- Perforce
+vim.g.vp4_perforce_executable = 'p4q'
+
+keymap.set('n', '<leader><C-e>', ':Vp4Edit<cr>', 'p4 edit current file')
+keymap.set('n', '<leader><C-c>', ':Vp4Change<cr>', 'p4 change description')
+keymap.set('n', '<leader><C-R>', ':Vp4Revert<cr>', 'p4 revert current file')
+keymap.set('n', '<F7>', ':Vp4Diff ', 'p4 diff current file')
+keymap.set('n', '<F8>', ':Vp4Shelve<cr>', 'p4 shelve current file')
+keymap.set('n', '<F9>', ':Vp4Filelog<cr>', 'p4 filelog current file')
+keymap.set('n', '<leader>PP', ':Vp4', 'run p4 command')

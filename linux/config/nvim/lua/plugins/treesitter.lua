@@ -2,10 +2,10 @@
 -- c, lua, markdown, markdown_inline, query, vim, and vimdoc.
 -- nvim-treesitter installs parsers and queries for everything else,
 -- plus the experimental indent queries.
-vim.pack.add({
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
-  { src = 'https://github.com/windwp/nvim-ts-autotag' },
-})
+-- vim.pack.add({
+--   { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
+--   { src = 'https://github.com/windwp/nvim-ts-autotag' },
+-- })
 
 require('nvim-treesitter').install({
   'bash', 'c', 'cpp', 'json', 'lua', 'make', 'markdown', 'python',

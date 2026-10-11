@@ -111,12 +111,12 @@ require('mini.pick').setup({
 -- Mini.extra
 require('mini.extra').setup()
 
-local find_project_root = require('plugins.project')
+local get_project_root = require('plugins.project')
 
 -- Keymaps
 keymap.set('n', '<leader>F',  MiniPick.builtin.files, 'Find files')
 keymap.set('n', '<leader>ff', function() 
-    local root_path = find_project_root() 
+    local root_path = get_project_root() 
     MiniPick.builtin.files(nil, { source = { cwd = root_path } })
 end, 'Find files from Root (.github/.vscode/p4) or ../..')
 

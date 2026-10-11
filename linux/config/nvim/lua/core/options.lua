@@ -5,8 +5,6 @@ vim.opt.shiftwidth = 4    	-- Affect what happen for <<, >>, or == keys. Must be
 vim.opt.expandtab = true      -- Convert \t into spaces when used with softtabstop.
 vim.opt.smartindent = true 	-- Automatically inserts one extra level of indentation in some cases.
 vim.opt.shiftround = true
--- vim.opt.syntax = true
-vim.opt.termguicolors = true
 -- vim.opt.title = true
 vim.opt.wildmode = 'longest:full,full'
 vim.opt.wrap = true          -- Enable line wrapping
@@ -136,7 +134,7 @@ vim.opt.redrawtime = 10000        -- Allow more time for loading syntax on large
 vim.opt.showmode = false
 -- vim.opt.completeopt = "menuone,noselect"
 -- vim.opt.fillchars = 'eob: '
---
+
 -- Automatically change the current directory to the file editing
 vim.opt.autochdir = true 
 
