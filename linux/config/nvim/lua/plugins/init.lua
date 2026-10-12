@@ -26,9 +26,9 @@ vim.pack.add(plugins)
 -- end
 
 -- Load Plugins
-require('theme')
-require('text_edit')
-require('file_edit')
-require('lspconfig')
--- require('fileconfig')
-require('treesitter')
+require('plugins.theme')
+require('plugins.text_edit')
+require('plugins.file_edit')
+require('plugins.lspconfig')
+-- require('plugins.fileconfig')
+require('plugins.treesitter')
