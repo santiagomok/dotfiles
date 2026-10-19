@@ -128,7 +128,10 @@ config.keys = {
 
   -- Fast config reload shortcut
   { key = 'r', mods = 'CTRL|SHIFT', action = wezterm.action.ReloadConfiguration },
-
+  
+  -- SSH to SC domain
+  { key = 'F2', action = wezterm.action.SendString 'ssh sc\n' },
+  
   -- Toggle window masimize
   { 
     key = 'F11',
@@ -183,24 +186,24 @@ config.keys = {
       -- command = { domain = { DomainName = 'SSH:sc' } },
     -- },
   -- },
-  -- Bind C-[ to F13 for tmux 'previous-window' keybind
+  -- Bind C-[ to 'M-p' for tmux 'previous-window' keybind
   {
     key = '[',
     mods = 'CTRL',
     action = wezterm.action.SendString '\x1bp',
   },
   -- Intercept Ctrl+Alt+[ locally and inject it into the SSH pipe
-  {
-    key = '[',
-    modifiers = 'CTRL|ALT',
-    action = wezterm.action.SendString '\x1b\x1b[', 
-  },
+  -- {
+    -- key = '[',
+    -- mods = 'CTRL|ALT',
+    -- action = wezterm.action.SendString '\x1b\x1b[', 
+  -- },
   -- Intercept Ctrl+Alt+] locally and inject it into the SSH pipe
-  {
-    key = ']',
-    modifiers = 'CTRL|ALT',
-    action = wezterm.action.SendString '\x1b\x1b]', 
-  },
+  -- {
+    -- key = ']',
+    -- mods = 'CTRL|ALT',
+    -- action = wezterm.action.SendString '\x1b\x1b]', 
+  -- },
 }
 
 
