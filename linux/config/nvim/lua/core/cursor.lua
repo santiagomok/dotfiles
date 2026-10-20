@@ -1,37 +1,46 @@
--- Copy a visual selection into the tmux paste buffer, then paste it into the next pane.
+-- Send a file:line reference for the visual selection to the next tmux pane.
 -- ------
 -- Usage
 -- ------
 -- 1. Set up a split tmux layout with Neovim on the left and cursor chat open on the right.
 -- 2. Inside Neovim, press v or V to highlight the lines of code you want to ask Cursor about.
 -- 3. Press your leader key followed by cc (e.g., ,cc).
--- 4. The snippet, with file and line markers, is loaded into the tmux paste buffer and pasted into the next pane.
+-- 4. "path:start-end" is yanked to the clipboard, loaded into the tmux paste buffer, and pasted into the next pane.
+--
+-- <C-y> only yanks "path:line" (Normal) or "path:start-end" (Visual) to the clipboard.
 
-vim.keymap.set('x', '<leader>cc', function()
-  -- A Lua visual mapping runs after Visual mode ends. '< and '> are set;
-  -- line("v") is not. visualmode() is the last selection type (v, V, or block).
-  local start_pos = vim.fn.getpos("'<")
-  local end_pos = vim.fn.getpos("'>")
-  local lines = vim.fn.getregion(start_pos, end_pos, { type = vim.fn.visualmode() })
-  local selection_text = table.concat(lines, '\n')
-  if selection_text == '' then
-    vim.notify('No visual selection to copy', vim.log.levels.WARN)
+-- Lua mappings run like <Cmd>, so Visual mode is still active and line('v') is the other end.
+local function yank_file_lines()
+  local path = vim.fn.expand('%:p')
+  if path == '' then
+    vim.notify('No file name to yank', vim.log.levels.WARN)
+    return nil
+  end
+
+  local start_line = vim.fn.line('.')
+  local end_line = start_line
+  if vim.fn.mode():find('[vV\22]') then
+    start_line = math.min(vim.fn.line('v'), end_line)
+    end_line = math.max(vim.fn.line('v'), end_line)
+    vim.api.nvim_feedkeys(vim.keycode('<Esc>'), 'nx', false)
+  end
+
+  local lines = start_line == end_line and tostring(start_line) or (start_line .. '-' .. end_line)
+  local text = path .. ':' .. lines
+  vim.fn.setreg('+', text)
+  vim.fn.setreg('"', text)
+  vim.notify('Yanked ' .. text)
+  return text
+end
+
+local function yank_file_lines_to_tmux_pane()
+  local text = yank_file_lines()
+  if not text then
     return
   end
 
-  local file = vim.fn.expand('%:.')
-  local start_line = math.min(start_pos[2], end_pos[2])
-  local end_line = math.max(start_pos[2], end_pos[2])
-  local payload = string.format(
-    '--- From %s (Lines %d-%d) ---\n%s\n--- End Context ---\n',
-    file,
-    start_line,
-    end_line,
-    selection_text
-  )
-
-  -- Stdin avoids the shell, so newlines and quotes in the selection stay intact.
-  local loaded = vim.fn.system({ 'tmux', 'load-buffer', '-' }, payload)
+  -- Stdin avoids the shell, so the path stays intact.
+  local loaded = vim.fn.system({ 'tmux', 'load-buffer', '-' }, text)
   if vim.v.shell_error ~= 0 then
     vim.notify('tmux load-buffer failed:\n' .. loaded, vim.log.levels.ERROR)
     return
@@ -46,5 +55,9 @@ vim.keymap.set('x', '<leader>cc', function()
     return
   end
 
-  vim.notify(string.format('Sent lines %d-%d to the next tmux pane', start_line, end_line))
-end, { desc = 'Send visual selection to tmux paste buffer' })
+  vim.notify('Sent ' .. text .. ' to the next tmux pane')
+end
+
+vim.keymap.set({ 'n', 'x' }, '<C-y>', yank_file_lines, { desc = 'Yank filename and line number to clipboard' })
+
+vim.keymap.set('x', '<leader>cc', yank_file_lines_to_tmux_pane , { desc = 'Send file:line reference to the next tmux pane' })

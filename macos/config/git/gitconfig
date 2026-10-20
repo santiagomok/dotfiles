@@ -38,7 +38,7 @@
     ui = auto
 [core]
     excludesfile = ~/.gitignore
-    editor = nvim
+    editor = nvim.sh
     # pager = diff-so-fancy | less --tabs=4 -RFX
 	autocrlf = input
 [apply]
@@ -58,9 +58,9 @@
     tool = nvimdiff
 	algorithm = histogram
 [difftool]
-    prompt = true
+    prompt = false
 [difftool "nvimdiff"]
-    cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+    cmd = $EDITOR -d \"$LOCAL\" \"$REMOTE\"
 [advice]
 	waitingForEditor = false
 # [url "ssh://git@github.com/"]

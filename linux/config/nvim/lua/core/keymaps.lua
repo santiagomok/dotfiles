@@ -22,8 +22,8 @@ keymap.set('n', '<leader>WS', ':mks! ss.vim<cr>', 'Save and overwrite ss.vim ses
 -- Tabs
 keymap.set('n', '[t', vim.cmd.tabprevious, 'Navigate to previous tab page')
 keymap.set('n', ']t', vim.cmd.tabnext, 'Navigate to next tab page')
-keymap.set('n', '<M-{>', ':tabprevious<cr>', 'Navigate to previous tab page')
-keymap.set('n', '<M-}>', ':tabnext<cr>', 'Navigate to next tab page')
+keymap.set('n', '<M-[>', ':tabprevious<cr>', 'Navigate to previous tab page')
+keymap.set('n', '<M-]>', ':tabnext<cr>', 'Navigate to next tab page')
 keymap.set('n', '[1', '1gt', 'Go to tab1')
 keymap.set('n', '<M-1>', '1gt', 'Go to tab1')
 keymap.set('n', '<M-2>', '2gt', 'Go to tab2')
@@ -46,8 +46,8 @@ keymap.set('n', '<C-E>', "<cmd>edit #<cr>", 'Edit alternate file')
 keymap.set('n', '<leader>bd', "<cmd>silent %bdelete<bar>edit #<bar>bdelete #<cr>'\"", "Close all buffers but current one")
 keymap.set('n', '[b', vim.cmd.bprevious, 'Navigate to previous buffer')
 keymap.set('n', ']b', vim.cmd.bnext,    'Navigate to next buffer')
-keymap.set('n', '<M-[>', ':bprevious<cr>', 'Go to previous buffer')
-keymap.set('n', '<M-]>', ':bnext<cr>', 'Go to next buffer')
+keymap.set('n', '<S-Tab>', ':bprevious<cr>', 'Go to previous buffer')
+keymap.set('n', '<Tab>', ':bnext<cr>', 'Go to next buffer')
 
 -- Split
 keymap.set('n', '<leader>ss', ':split<cr>')
@@ -86,6 +86,35 @@ keymap.set('n', 'q', '<nop>', 'Disable recording')
 keymap.set({ 'n', 'x' }, 'y', '"+y', 'Yank to clipboard')
 keymap.set('n', 'Y', '"+yy', 'Yank line to clipboard')
 keymap.set({ "n", "x" }, "P", '"+P', "Paste clipboard before cursor")
+
+-- <C-y> copies "path:line" or "path:start-end" for a visual selection.
+local function yank_file_lines()
+  local path = vim.fn.expand('%:p')
+  if path == '' then
+    vim.api.nvim_echo({ { 'No file name to yank', 'WarningMsg' } }, false, {})
+    return
+  end
+
+  local start_line, end_line
+  if vim.fn.mode():find('[vV\22]') then
+    start_line = vim.fn.line('v')
+    end_line = vim.fn.line('.')
+    if start_line > end_line then
+      start_line, end_line = end_line, start_line
+    end
+  else
+    start_line = vim.fn.line('.')
+    end_line = start_line
+  end
+
+  local lines = start_line == end_line and tostring(start_line) or (start_line .. '-' .. end_line)
+  local text = path .. ':' .. lines
+  vim.fn.setreg('+', text)
+  vim.fn.setreg('"', text)
+  vim.api.nvim_echo({ { 'Yanked ' .. text } }, false, {})
+end
+
+keymap.set({ 'n', 'x' }, '<C-y>', yank_file_lines, 'Yank filename and line number to clipboard')
 
 -- date
 keymap.set('n', '<leader>dt', 'a<C-R>=strftime(\'%m/%d/%Y\')<cr><esc>')

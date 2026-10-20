@@ -48,7 +48,7 @@ require('bufferline').setup({
     mode = 'tabs', -- Switches the bar from showing buffers to showing native Vim tabs
     themable = true,
     show_buffer_icons = true,
-    separator_style = 'thin',
+    separator_style = 'slant',
   }
 })
 -- require('mini.tabline').setup({ show_icons = true }) 
@@ -56,7 +56,31 @@ require('bufferline').setup({
 require('mini.statusline').setup()
 
 -- Toggle Terminal
+local term_origin = {}
+
+vim.api.nvim_create_autocmd('WinLeave', {
+  group = vim.api.nvim_create_augroup('ToggleTermOrigin', { clear = true }),
+  desc = 'Remember cursor/view of the last non-terminal window',
+  callback = function()
+    if vim.bo.buftype ~= 'terminal' then
+      term_origin = { win = vim.api.nvim_get_current_win(), view = vim.fn.winsaveview() }
+    end
+  end,
+})
+
+-- on_close runs before toggleterm closes the window, so defer the restore
+local function restore_term_origin()
+  vim.schedule(function()
+    local origin = term_origin
+    if origin.win and vim.api.nvim_win_is_valid(origin.win) then
+      vim.api.nvim_set_current_win(origin.win)
+      vim.fn.winrestview(origin.view)
+    end
+  end)
+end
+
 require('toggleterm').setup({
+  on_close = restore_term_origin,
   size = 20,
   open_mapping = [[<C-t>]],
   hide_numbers = true,

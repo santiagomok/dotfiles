@@ -40,13 +40,17 @@ keymap.set('n', '<leader>B', function()
   require('fzf-lua').buffers()
 end, 'Fuzzy search buffers')
 
-keymap.set('n', '<leader>/', function()
-  require('fzf-lua').grep_project({ cwd = get_project_root() })
-end, 'Fuzzy search project')
-
-keymap.set('n', '<leader>?', function()
+keymap.set('n', '<leader><space>', function()
   require('fzf-lua').blines()
 end, 'Fuzzy search current buffer')
+
+keymap.set('n', '<leader>/', function()
+  require('fzf-lua').grep_project({ cwd = vim.fs.dirname(vim.api.nvim_buf_get_name(0)) })
+end, 'Fuzzy search current directory of active file')
+
+keymap.set('n', '<leader>?', function()
+  require('fzf-lua').grep_project({ cwd = get_project_root() })
+end, 'Fuzzy search project')
 
 keymap.set('n', '<leader>*', function()
   require('fzf-lua').grep_cword()
