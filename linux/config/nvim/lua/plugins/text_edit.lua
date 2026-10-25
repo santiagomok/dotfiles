@@ -101,8 +101,10 @@ local function map_move_end(key_next, key_prev, capture, desc)
 end
 
 -- Wire up the exact equivalents matching mini.ai keys
-map_move_start("]c", "[c", "@class.outer", "class")
-map_move_end("]C", "[C", "@class.outer", "class")
+if not vim.wo.diff then
+    map_move_start("]c", "[c", "@class.outer", "class")
+    map_move_end("]C", "[C", "@class.outer", "class")
+end
 map_move_start("]f", "[f", "@function.outer", "function")
 map_move_end("]F", "[F", "@function.outer", "function")
 map_move_start("]b", "[b", "@block.outer", "block")
