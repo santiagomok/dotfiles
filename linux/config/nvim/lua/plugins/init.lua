@@ -16,6 +16,7 @@ local plugins = {
   { src = 'folke/lazydev.nvim' },
 -- -- treesitter
   { src = 'nvim-treesitter/nvim-treesitter', version = 'main' },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects'},
   { src = 'windwp/nvim-ts-autotag' },
 }
 
@@ -30,5 +31,5 @@ require('plugins.theme')
 require('plugins.text_edit')
 require('plugins.file_edit')
 require('plugins.lspconfig')
--- require('plugins.fileconfig')
+-- require('fileconfig')
 require('plugins.treesitter')
