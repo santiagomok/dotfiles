@@ -16,6 +16,7 @@ local plugins = {
   { src = 'folke/lazydev.nvim' },
 -- -- treesitter
   { src = 'nvim-treesitter/nvim-treesitter', version = 'main' },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects'},
   { src = 'windwp/nvim-ts-autotag' },
 }
 
