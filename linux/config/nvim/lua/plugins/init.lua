@@ -1,23 +1,27 @@
 -- lua/plugins.lua
+
+local function github(repo)
+  return { src = "https://github.com/" .. repo }
+end
+
 local plugins = {
 -- theme
-  { src = "https://github.com/navarasu/onedark.nvim" },
-  { src = "https://github.com/nvim-mini/mini.nvim" },
-  { src = 'https://github.com/ibhagwan/fzf-lua' },
-  { src = "https://github.com/akinsho/bufferline.nvim" },
-  { src = 'https://github.com/akinsho/toggleterm.nvim' },
+  github('navarasu/onedark.nvim'),
+  github('nvim-mini/mini.nvim'),
+  github('ibhagwan/fzf-lua'),
+  github('akinsho/bufferline.nvim'),
+  github('akinsho/toggleterm.nvim'),
 -- file edit
-  { src = 'https://github.com/ibhagwan/fzf-lua' },
-  { src = 'ngemily/vim-vp4' },
+  github('ngemily/vim-vp4'),
 -- lspconfig
-  { src = 'neovim/nvim-lspconfig' },
-  { src = 'mason-org/mason.nvim' },
-  { src = 'mason-org/mason-lspconfig.nvim' },
-  { src = 'folke/lazydev.nvim' },
--- -- treesitter
-  { src = 'nvim-treesitter/nvim-treesitter', version = 'main' },
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects'},
-  { src = 'windwp/nvim-ts-autotag' },
+  github('neovim/nvim-lspconfig'),
+  github('mason-org/mason.nvim'),
+  github('mason-org/mason-lspconfig.nvim'),
+  github('folke/lazydev.nvim'),
+-- treesitter
+  github('nvim-treesitter/nvim-treesitter'),
+  github('nvim-treesitter/nvim-treesitter-textobjects'),
+  github('windwp/nvim-ts-autotag'), 
 }
 
 vim.pack.add(plugins)
@@ -32,4 +36,3 @@ require('plugins.text_edit')
 require('plugins.file_edit')
 require('plugins.lspconfig')
 -- require('plugins.fileconfig')
-require('plugins.treesitter')

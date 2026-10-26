@@ -1,9 +1,3 @@
--- vim.pack.add({
---   'https://github.com/navarasu/onedark.nvim',
---   'https://github.com/akinsho/bufferline.nvim',
---   'https://github.com/nvim-mini/mini.nvim',
--- })
-
 -- Enable 24-bit True Color
 vim.opt.termguicolors = true
 
@@ -54,6 +48,11 @@ require('bufferline').setup({
 -- require('mini.tabline').setup({ show_icons = true }) 
 
 require('mini.statusline').setup()
+
+require('mini.misc').setup()
+MiniMisc.setup_restore_cursor()
+keymap.set('n', '<leader>Z', function() MiniMisc.zoom() end, 'Toggle maximize window')
+
 
 -- Toggle Terminal
 local term_origin = {}
@@ -124,3 +123,4 @@ local lazygit = Terminal:new({ cmd = 'lazygit', hidden = true })
 keymap.set('n', '<C-g>', function()
   lazygit:toggle()
 end, 'Toggle lazygit')
+

@@ -3,17 +3,11 @@
 -- load plugin
 require('mini.pairs').setup()
 require('mini.surround').setup()
-
---
-require('mini.snippets').setup()
 require('mini.fuzzy').setup()
-
-require('mini.misc').setup()
-MiniMisc.setup_restore_cursor()
+require('nvim-ts-autotag').setup()
 
 -- Configure mini.snippets to scan runtime paths for language snippets
 local gen_loader = require('mini.snippets').gen_loader
-
 require('mini.snippets').setup({
   snippets = {
     -- This natively loads the Python snippets packaged inside friendly-snippets
@@ -27,9 +21,14 @@ require('mini.snippets').setup({
   }
 })
 
+-- Neovim 0.12 ships the treesitter engine and parsers/queries for
+-- c, lua, markdown, markdown_inline, query, vim, and vimdoc.
+-- nvim-treesitter installs parsers and queries for everything else,
+-- plus the experimental indent queries.
 
-keymap.set('n', '<leader>Z', function() MiniMisc.zoom() end, 'Toggle maximize window')
-
+require('nvim-treesitter').install({
+  'bash', 'c', 'cpp', 'json', 'lua', 'make', 'markdown', 'python',
+})
 
 local ai = require('mini.ai')
 ai.setup({
@@ -59,21 +58,30 @@ ai.setup({
       a = { '@conditional.outer', '@loop.outer' },
       i = { '@conditional.inner', '@loop.inner' },
     }),
-
   },
 })
 
--- Optional: enable jump setting globally for the move module if supported by your version
--- (allowing you to jump back with <C-o> and forward with <C-i>),
-local status_ok, move_config = pcall(require, "nvim-treesitter-textobjects")
-if status_ok and type(move_config.setup) == "function" then
-  move_config.setup({
-    move = {
-      set_jumps = true,
-    },
-  })
-end
+-- .v buffers are filetype verilog; the main-branch parser is systemverilog.
+-- Uncomment the install name above and this register when that parser is wanted:
+-- vim.treesitter.language.register('systemverilog', 'verilog')
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('TreesitterStart', { clear = true }),
+  desc = 'Highlight with the built-in treesitter engine when a parser is installed',
+  callback = function(args)
+    local lang = vim.treesitter.language.get_lang(args.match) or args.match
+    if not vim.treesitter.language.add(lang) then
+      return
+    end
+    vim.treesitter.start(args.buf, lang)
+    if args.match == 'python' then
+      return
+    end
+    vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})
 
+
+-- set_jumps defaults to true, so these motions land in the jumplist (<C-o>/<C-i>).
 local move = require("nvim-treesitter-textobjects.move")
 
 local function map_move_start(key_next, key_prev, capture, desc)
@@ -110,12 +118,4 @@ map_move_end("]F", "[F", "@function.outer", "function")
 map_move_start("]b", "[b", "@block.outer", "block")
 map_move_end("]B", "[B", "@block.outer", "block")
 map_move_start("]a", "[a", "@parameter.inner", "argument")
-
--- Handles multi-capture for loops and conditionals under one shortcut
-vim.keymap.set({ "n", "x", "o" }, "]o", function()
-  move.goto_next_start({ "@conditional.outer", "@loop.outer" }, "textobjects")
-end, { desc = "Go to next conditional/loop" })
-
-vim.keymap.set({ "n", "x", "o" }, "[o", function()
-  move.goto_previous_start({ "@conditional.outer", "@loop.outer" }, "textobjects")
-end, { desc = "Go to previous conditional/loop" })
+map_move_start("]o", "[o", { "@conditional.outer", "@loop.outer" }, "conditional/loop")
