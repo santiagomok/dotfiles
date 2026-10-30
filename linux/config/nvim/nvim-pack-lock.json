@@ -4,6 +4,10 @@
       "rev": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3",
       "src": "https://github.com/akinsho/bufferline.nvim"
     },
+    "codecompanion.nvim": {
+      "rev": "052ad5ade662ea3e3a6b99bc39a6bf3ce1c42892",
+      "src": "https://github.com/olimorris/codecompanion.nvim"
+    },
     "fzf-lua": {
       "rev": "48d7c3db291a2c7c1825905c227a6bc81c83b837",
       "src": "https://github.com/ibhagwan/fzf-lua"
@@ -11,6 +15,10 @@
     "lazydev.nvim": {
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "folke/lazydev.nvim"
+    },
+    "lsp-progress-notify.nvim": {
+      "rev": "eae716086ed94021b9861dbe066b8df96c798e43",
+      "src": "https://github.com/nicholasxjy/lsp-progress-notify.nvim"
     },
     "mason-lspconfig.nvim": {
       "rev": "49b16d699f9ca83184330c6eb886737a27f23bdd",
@@ -36,10 +44,6 @@
       "rev": "5c7b0263797dfd1bd6202f2b219f3b53a80b2187",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
-    "nvim-treesitter-textobjects": {
-      "rev": "5c7b0263797dfd1bd6202f2b219f3b53a80b2187",
-      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
-    },
     "nvim-ts-autotag": {
       "rev": "d7220b55e16ed3c04e88086256def5d282429493",
       "src": "windwp/nvim-ts-autotag"
@@ -47,6 +51,10 @@
     "onedark.nvim": {
       "rev": "df4792accde9db0043121f32628bcf8e645d9aea",
       "src": "https://github.com/navarasu/onedark.nvim"
+    },
+    "plenary.nvim": {
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "toggleterm.nvim": {
       "rev": "9a88eae817ef395952e08650b3283726786fb5fb",

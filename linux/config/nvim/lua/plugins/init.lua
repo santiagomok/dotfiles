@@ -18,10 +18,14 @@ local plugins = {
   github('mason-org/mason.nvim'),
   github('mason-org/mason-lspconfig.nvim'),
   github('folke/lazydev.nvim'),
+  github('nicholasxjy/lsp-progress-notify.nvim'),
 -- treesitter
   github('nvim-treesitter/nvim-treesitter'),
   github('nvim-treesitter/nvim-treesitter-textobjects'),
   github('windwp/nvim-ts-autotag'), 
+-- AI Code Assist
+  github('nvim-lua/plenary.nvim'),
+  github('olimorris/codecompanion.nvim'),
 }
 
 vim.pack.add(plugins)
